@@ -25,8 +25,8 @@ behavior, `cd` to the appropriate directory before starting serve.
 == Advanced Options
 
 The serve command automatically binds to 0.0.0.0 (localhost) and uses port
-3000. To serve files over a different IP (that is bound to your computer) or
-port you can specify those options on the command line:
+3000 by default. To serve files over a different IP (that is bound to your
+computer) or port specify those options on the command line:
 
   $ serve 4000               # a custom port
 
