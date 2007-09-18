@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+
+lib = File.dirname(__FILE__) + '/../lib'
+if File.file?(lib + '/serve/version.rb')
+  $LOAD_PATH << lib
+else
+  require 'rubygems'
+  gem 'serve'
+end
+require 'serve'
+
+args = ARGV.join(' ')
+args.gsub!(%r{http://}, '')
+args = args.split(/[ :]/).compact
+
+help = args.delete('--help') || args.delete('-h') || false
+environment = args.delete('production') || args.delete('test') || args.delete('test') || 'development'
+port = args.pop || 3000
+address = args.pop || '0.0.0.0'
+script = Dir.pwd + '/script/server'
+
+if args.size > 0
+  puts "invalid arguments"
+  puts ""
+  help = true
+end
+
+if help
+  puts "usage:"
+  puts "  #{File.basename($0)} [port] [environment]"
+  puts "  #{File.basename($0)} [address:port] [environment]"
+  puts "  "
+  puts "  Starts a WEBrick server on the specified address and port with its document "
+  puts "  root set to the current working directory. By default the command uses "
+  puts "  0.0.0.0 for the address and 3000 for the port. If the file script/server "
+  puts "  exists the script will start that instead with the specified environment or "
+  puts "  the development environment if none is specified."
+else
+  unless File.file?(script) and File.executable?(script)
+    server = Serve::Server.new(
+      :Port => port,
+      :BindAddress => address,
+      :DocumentRoot => Dir.pwd,
+      :DirectoryIndex => %w(index.html index.txt index.text index.haml index.textile index.markdown),
+      :AppendExtensions => %w(html txt text haml textile markdown)
+    )
+    trap("INT") { server.shutdown }
+    server.start
+  else
+    system "#{script} -p #{port} -b #{address} -e #{environment}"
+  end
+end
