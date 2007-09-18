@@ -1,8 +1,8 @@
 require 'serve/version'
 require 'webrick/extensions'
 
-module Serve
-  class FileTypeHandler < WEBrick::HTTPServlet::AbstractServlet
+module Serve #:nodoc:
+  class FileTypeHandler < WEBrick::HTTPServlet::AbstractServlet #:nodoc:
 
     def self.extension(extension)
       WEBrick::HTTPServlet::FileHandler.add_handler(extension, self)
@@ -40,7 +40,7 @@ module Serve
 
   end
 
-  class TextileHandler < FileTypeHandler
+  class TextileHandler < FileTypeHandler #:nodoc:
     extension 'textile'
 
     def parse(string)
@@ -49,7 +49,7 @@ module Serve
     end
   end
 
-  class MarkdownHandler < FileTypeHandler
+  class MarkdownHandler < FileTypeHandler #:nodoc:
     extension 'markdown'
 
     def parse(string)
@@ -58,7 +58,7 @@ module Serve
     end
   end
 
-  class HamlHandler < FileTypeHandler
+  class HamlHandler < FileTypeHandler #:nodoc:
     extension 'haml'
 
     def parse(string)
@@ -71,7 +71,7 @@ module Serve
     end
   end
 
-  class SassHandler < FileTypeHandler
+  class SassHandler < FileTypeHandler #:nodoc:
     extension 'sass'
 
     def parse(string)
@@ -88,7 +88,7 @@ module Serve
     end
   end
   
-  class Server < WEBrick::HTTPServer
+  class Server < WEBrick::HTTPServer #:nodoc:
   end
   
 end

@@ -1,6 +1,6 @@
 require 'webrick'
 
-module Serve
+module Serve #:nodoc:
   module FileHandlerExtensions
     
     def self.included(base)

@@ -1,7 +1,7 @@
-CHANGELOG
-LICENSE
+History.txt
+License.txt
 Manifest.txt
-README
+README.txt
 Rakefile
 config/hoe.rb
 config/requirements.rb
