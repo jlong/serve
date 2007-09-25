@@ -1,9 +1,17 @@
-# stubs for the website generation
-# To install the website framework:
-#   script/generate website
+desc 'Generate website files'
+task :website_generate => :ruby_env do
+  (Dir['website/**/*.txt'] - Dir['website/version*.txt']).each do |txt|
+    sh %{ #{RUBY_APP} script/txt2html #{txt} > #{txt.gsub(/txt$/,'html')} }
+  end
+end
 
-task :website_generate
+desc 'Upload website files to rubyforge'
+task :website_upload do
+  host = "#{rubyforge_username}@rubyforge.org"
+  remote_dir = "/var/www/gforge-projects/#{RUBYFORGE_PROJECT}/"
+  local_dir = 'website'
+  sh %{rsync -aCv #{local_dir}/ #{host}:#{remote_dir}}
+end
 
-task :website_upload
-
-task :website => :publish_docs
+desc 'Generate and upload website files'
+task :website => [:website_generate, :website_upload, :publish_docs]
