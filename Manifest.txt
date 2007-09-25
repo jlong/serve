@@ -3,10 +3,12 @@ License.txt
 Manifest.txt
 README.txt
 Rakefile
+bin/serve
 config/hoe.rb
 config/requirements.rb
 lib/serve.rb
 lib/serve/version.rb
+lib/webrick/extensions.rb
 log/debug.log
 script/destroy
 script/generate

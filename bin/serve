@@ -14,6 +14,7 @@ args.gsub!(%r{http://}, '')
 args = args.split(/[ :]/).compact
 
 help = args.delete('--help') || args.delete('-h') || false
+version = args.delete('--version') || args.delete('-v') || false
 environment = args.delete('production') || args.delete('test') || args.delete('test') || 'development'
 port = args.pop || 3000
 address = args.pop || '0.0.0.0'
@@ -25,16 +26,36 @@ if args.size > 0
   help = true
 end
 
-if help
-  puts "usage:"
-  puts "  #{File.basename($0)} [port] [environment]"
-  puts "  #{File.basename($0)} [address:port] [environment]"
+case
+when version
+  puts "Serve #{Serve.version}"
+when help
+  program = File.basename($0)
+  puts "Usage:"
+  puts "  #{program} [port] [environment]"
+  puts "  #{program} [address:port] [environment]"
+  puts "  #{program} [options]"
   puts "  "
+  puts "Description:"
   puts "  Starts a WEBrick server on the specified address and port with its document "
   puts "  root set to the current working directory. By default the command uses "
-  puts "  0.0.0.0 for the address and 3000 for the port. If the file script/server "
-  puts "  exists the script will start that instead with the specified environment or "
-  puts "  the development environment if none is specified."
+  puts "  0.0.0.0 for the address and 3000 for the port. This means that once the "
+  puts "  command has been started you can access the documents in the current "
+  puts "  directory with any Web browser at"
+  puts "  "
+  puts "    http://localhost:3000/"
+  puts "  "
+  puts "  If the Rails command script/server exists in the current directory the "
+  puts "  script will start that instead with the specified environment or the "
+  puts "  development environment if none is specified."
+  puts "  "
+  puts "  If the haml, redcloth, or bluecloth gems are installed the command can serve "
+  puts "  Haml, Sass, Textile, and Markdown for documents with haml, sass, textile, "
+  puts "  and markdown file extensions."
+  puts "  "
+  puts "Options:"
+  puts "  -h, --help      Show this message and quit."
+  puts "  -v, --version   Show the program version number and quit."
 else
   unless File.file?(script) and File.executable?(script)
     server = Serve::Server.new(

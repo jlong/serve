@@ -6,4 +6,8 @@ module Serve #:nodoc:
 
     STRING = [MAJOR, MINOR, TINY].join('.')
   end
+  
+  def self.version
+    VERSION::STRING
+  end
 end
