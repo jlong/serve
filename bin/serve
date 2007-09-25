@@ -41,7 +41,7 @@ when help
   puts "  root set to the current working directory. By default the command uses "
   puts "  0.0.0.0 for the address and 3000 for the port. This means that once the "
   puts "  command has been started you can access the documents in the current "
-  puts "  directory with any Web browser at"
+  puts "  directory with any Web browser at:"
   puts "  "
   puts "    http://localhost:3000/"
   puts "  "

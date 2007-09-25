@@ -1,3 +1,7 @@
-== 0.9.0 (September 17, 2007)
+== In the Hopper
+
+* Updated description and help text.
+
+== 0.9.0 (September 25, 2007)
 
 * Initial release

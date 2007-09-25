@@ -1,8 +1,9 @@
 == What is Serve?
 
-Serve is a small Ruby script that makes it easy to start up an HTTP server
-in any directory. This is ideal for everything from HTML prototyping to simple
-file sharing.
+Serve is a small Ruby script that makes it easy to start up a WEBrick server
+in any directory. Serve is ideal for HTML prototyping and simple file sharing.
+If the haml, redcloth, and bluecloth gems are installed serve can handle Haml,
+Sass, Textile, and Markdown (in addition to HTML).
 
 
 == Usage
