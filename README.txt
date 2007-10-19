@@ -56,7 +56,7 @@ It is recommended that you install serve via RubyGems:
 == License
 
 Serve is released under the MIT license and is copyright (c) John W. Long.
-A copy of the MIT license can be found in the link:License.txt file.
+A copy of the MIT license can be found in the License.txt file.
 
 
 Enjoy!
