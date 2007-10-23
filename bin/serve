@@ -62,8 +62,8 @@ else
       :Port => port,
       :BindAddress => address,
       :DocumentRoot => Dir.pwd,
-      :DirectoryIndex => %w(index.html index.txt index.text index.haml index.textile index.markdown),
-      :AppendExtensions => %w(html txt text haml textile markdown)
+      :DirectoryIndex => %w(index.html index.txt index.text index.haml index.textile index.markdown index.email index.redirect),
+      :AppendExtensions => %w(html txt text haml textile markdown email redirect)
     )
     trap("INT") { server.shutdown }
     server.start

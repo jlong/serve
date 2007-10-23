@@ -12,12 +12,16 @@ module Serve #:nodoc:
       super
       @script_filename = name
     end
-
+    
+    def process(req, res)
+      data = open(@script_filename){|io| io.read }
+      res['content-type'] = content_type
+      res.body = parse(data)
+    end
+    
     def do_GET(req, res)
       begin
-        data = open(@script_filename){|io| io.read }
-        res.body = parse(data)
-        res['content-type'] = content_type
+        process(req, res)
       rescue StandardError => ex
         raise
       rescue Exception => ex
@@ -106,7 +110,18 @@ module Serve #:nodoc:
       output << '</div><pre id="body" style="font-size: 110%; padding: 1em">'
       output << body
       output << '</pre></body></html>'
-      output.join("\n")      
+      output.join("\n")
+    end
+  end
+  
+  class RedirectHandler < FileTypeHandler  #:nodoc:
+    extension 'redirect'
+    
+    def process(req, res)
+      data = super
+      res['location'] = data.strip
+      res.body = ''
+      raise WEBrick::HTTPStatus::Found
     end
   end
   
