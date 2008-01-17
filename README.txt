@@ -52,13 +52,12 @@ with as an option on the command line:
 
 Serve presently does special processing for files with following extensions:
 
-  textile :: Evaluates the document as Textile (requires the Redcloth gem) 
-  markdown :: Evaluates the document as Markdown (requires the Bluecloth gem)
-  haml :: Evaluates the document as Haml (requires the Haml gem)
-  sass :: Evaluates the document as Sass (requires the Haml gem)
-  email :: Evaluates the document as if it is an e-mail message; the format
-    is identicle to a plain/text e-mail message's source
-  redirect :: Redirects to the URL contained in the document
+textile :: Evaluates the document as Textile (requires the Redcloth gem) 
+markdown :: Evaluates the document as Markdown (requires the Bluecloth gem)
+haml :: Evaluates the document as Haml (requires the Haml gem)
+sass :: Evaluates the document as Sass (requires the Haml gem)
+email :: Evaluates the document as if it is an e-mail message; the format is identicle to a plain/text e-mail message's source
+redirect :: Redirects to the URL contained in the document
 
 
 === Installation and Setup
