@@ -74,11 +74,11 @@ module Serve #:nodoc:
       layout = find_layout(@script_filename)
       if layout
         lines = IO.read(layout)
-        scope = Context.new(Dir.pwd, @script_filename, engine.options.dup)
-        rendered = engine.render(scope)
+        context = Context.new(Dir.pwd, @script_filename, engine.options.dup)
+        context.content = engine.render(context)
         layout_engine = Haml::Engine.new(lines, engine.options.dup)
-        layout_engine.render(scope) do
-          rendered
+        layout_engine.render(context) do |*args|
+          context.get_content_for(*args)
         end
       else
         engine.render
@@ -98,9 +98,35 @@ module Serve #:nodoc:
     end
     
     class Context
+      attr_accessor :content
+      
       def initialize(root, script_filename, engine_options)
         @root, @script_filename, @engine_options = root, script_filename, engine_options
       end
+      
+      # Content_for methods
+      
+      def content_for(symbol, &block)
+        set_content_for(symbol, capture_haml(&block))
+      end
+      
+      def content_for?(symbol)
+        !(get_content_for(symbol)).nil?
+      end
+      
+      def get_content_for(symbol = :content)
+        if symbol.to_s.intern == :content
+          @content
+        else
+          instance_variable_get("@content_for_#{symbol}") || instance_variable_get("@#{symbol}")
+        end
+      end
+      
+      def set_content_for(symbol, value)
+        instance_variable_set("@content_for_#{symbol}", value)
+      end
+      
+      # Render methods
       
       def render(options)
         partial = options.delete(:partial)
