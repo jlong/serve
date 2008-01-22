@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
 
 lib = File.dirname(__FILE__) + '/../lib'
+require 'rubygems'
 if File.file?(lib + '/serve/version.rb')
   $LOAD_PATH << lib
 else
-  require 'rubygems'
   gem 'serve'
 end
 require 'serve'

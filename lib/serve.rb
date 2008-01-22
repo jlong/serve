@@ -3,11 +3,11 @@ require 'webrick/extensions'
 
 module Serve #:nodoc:
   class FileTypeHandler < WEBrick::HTTPServlet::AbstractServlet #:nodoc:
-
+    
     def self.extension(extension)
       WEBrick::HTTPServlet::FileHandler.add_handler(extension, self)
     end
-
+    
     def initialize(server, name)
       super
       @script_filename = name
@@ -29,55 +29,110 @@ module Serve #:nodoc:
         raise WEBrick::HTTPStatus::InternalServerError, ex.message
       end
     end
-
+    
     alias do_POST do_GET
-
+    
     protected
-
+    
       def content_type
         'text/html'
       end
-    
+      
       def parse(string)
         string.dup
       end
-
+      
   end
-
+  
   class TextileHandler < FileTypeHandler #:nodoc:
     extension 'textile'
-
+    
     def parse(string)
       require 'redcloth'
       "<html><body>#{ RedCloth.new(string).to_html }</body></html>"
     end
   end
-
+  
   class MarkdownHandler < FileTypeHandler #:nodoc:
     extension 'markdown'
-
+    
     def parse(string)
       require 'bluecloth'
       "<html><body>#{ BlueCloth.new(string).to_html }</body></html>"
     end
   end
-
+  
   class HamlHandler < FileTypeHandler #:nodoc:
     extension 'haml'
-
+    
     def parse(string)
       require 'haml'
       engine = Haml::Engine.new(string,
         :attr_wrapper => '"',
         :filename => @script_filename
       )
-      engine.render 
+      layout = find_layout(@script_filename)
+      if layout
+        lines = IO.read(layout)
+        scope = Context.new(Dir.pwd, @script_filename, engine.options.dup)
+        rendered = engine.render(scope)
+        layout_engine = Haml::Engine.new(lines, engine.options.dup)
+        layout_engine.render(scope) do
+          rendered
+        end
+      else
+        engine.render
+      end
+    end
+    
+    def find_layout(filename)
+      root = Dir.pwd
+      path = filename[root.size..-1]
+      layout = nil
+      begin
+        path = File.dirname(path)
+        l = File.join(root, path, '_layout.haml')
+        layout = l if File.file?(l)
+      end until layout or path == "/"
+      layout
+    end
+    
+    class Context
+      def initialize(root, script_filename, engine_options)
+        @root, @script_filename, @engine_options = root, script_filename, engine_options
+      end
+      
+      def render(options)
+        partial = options.delete(:partial)
+        case
+        when partial
+          render_partial(partial)
+        else
+          raise "render options not supported #{options.inspect}"
+        end
+      end
+      
+      def render_partial(partial)
+        path = File.dirname(@script_filename)
+        if partial =~ %r{^/}
+          partial = partial[1..-1]
+          path = @root
+        end
+        filename = File.join(path, "_" + partial + ".haml")
+        if File.file?(filename)
+          lines = IO.read(filename)
+          engine = Haml::Engine.new(lines, @engine_options)
+          engine.render(self)
+        else
+          raise "File does not exist #{filename.inspect}"
+        end
+      end
     end
   end
-
+  
   class SassHandler < FileTypeHandler #:nodoc:
     extension 'sass'
-
+    
     def parse(string)
       require 'sass'
       engine = Sass::Engine.new(string,
@@ -86,7 +141,7 @@ module Serve #:nodoc:
       )
       engine.render 
     end
-
+    
     def content_type
       'text/css'
     end
