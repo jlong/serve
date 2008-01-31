@@ -1,3 +1,7 @@
+== 0.9.4 (January 31, 2008)
+
+* Small fix for calculating the partial name in render_partial.
+
 == 0.9.3 (January 23, 2008)
 
 * Added support for layouts and partials for HAML documents.

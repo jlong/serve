@@ -144,7 +144,7 @@ module Serve #:nodoc:
           partial = partial[1..-1]
           path = @root
         end
-        filename = File.join(path, "_" + partial + ".haml")
+        filename = partial_filename(File.join(path, partial))
         if File.file?(filename)
           lines = IO.read(filename)
           engine = Haml::Engine.new(lines, @engine_options)
@@ -152,6 +152,13 @@ module Serve #:nodoc:
         else
           raise "File does not exist #{filename.inspect}"
         end
+      end
+
+      def partial_filename(name)
+        path = File.dirname(name)
+        partial = File.basename(name)
+        partial = "_" + partial + ".haml"
+        File.join(path, partial)
       end
     end
   end
