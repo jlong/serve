@@ -75,7 +75,9 @@ module Serve #:nodoc:
       if layout
         lines = IO.read(layout)
         context = Context.new(Dir.pwd, @script_filename, engine.options.dup)
-        context.content = engine.render(context)
+        context.content = engine.render(context) do |*args|
+          context.get_content_for(*args)
+        end
         layout_engine = Haml::Engine.new(lines, engine.options.dup)
         layout_engine.render(context) do |*args|
           context.get_content_for(*args)
@@ -130,35 +132,45 @@ module Serve #:nodoc:
       
       def render(options)
         partial = options.delete(:partial)
+        template = options.delete(:template)
         case
         when partial
           render_partial(partial)
+        when template
+          render_template(template)
         else
           raise "render options not supported #{options.inspect}"
         end
       end
       
       def render_partial(partial)
+        render_template(partial, :partial => true)
+      end
+      
+      def render_template(template, options={})
         path = File.dirname(@script_filename)
-        if partial =~ %r{^/}
-          partial = partial[1..-1]
+        if template =~ %r{^/}
+          template = template[1..-1]
           path = @root
         end
-        filename = partial_filename(File.join(path, partial))
+        filename = template_filename(File.join(path, template), :partial => options.delete(:partial))
         if File.file?(filename)
           lines = IO.read(filename)
           engine = Haml::Engine.new(lines, @engine_options)
-          engine.render(self)
+          engine.render(self) do |*args|
+            get_content_for(*args)
+          end
         else
           raise "File does not exist #{filename.inspect}"
         end
       end
-
-      def partial_filename(name)
+      
+      def template_filename(name, options)
         path = File.dirname(name)
-        partial = File.basename(name)
-        partial = "_" + partial + ".haml"
-        File.join(path, partial)
+        template = File.basename(name)
+        template = "_" + template if options.delete(:partial)
+        template += ".haml" unless name =~ /\.haml$/
+        File.join(path, template)
       end
     end
   end

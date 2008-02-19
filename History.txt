@@ -1,3 +1,9 @@
+== 0.9.5 (February 19, 2008)
+
+* Added support for rendering other files with the following syntax:
+
+  render :template => "template_name"
+
 == 0.9.4 (January 31, 2008)
 
 * Small fix for calculating the partial name in render_partial.
