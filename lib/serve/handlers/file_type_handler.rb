@@ -1,8 +1,8 @@
 module Serve #:nodoc:
-  class FileTypeHandler < WEBrick::HTTPServlet::AbstractServlet #:nodoc:
+  class FileTypeHandler < ::WEBrick::HTTPServlet::AbstractServlet #:nodoc:
   
     def self.extension(extension)
-      WEBrick::HTTPServlet::FileHandler.add_handler(extension, self)
+      ::WEBrick::HTTPServlet::FileHandler.add_handler(extension, self)
     end
   
     def initialize(server, name)

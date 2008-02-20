@@ -6,7 +6,7 @@ module Serve #:nodoc:
       data = super
       res['location'] = data.strip
       res.body = ''
-      raise WEBrick::HTTPStatus::Found
+      raise ::WEBrick::HTTPStatus::Found
     end
   end
 end

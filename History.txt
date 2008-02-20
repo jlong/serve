@@ -1,5 +1,6 @@
-== 0.9.6
+== 0.9.6 (February 20, 2008)
 
+* Changed default port to 4000 so that serve plays nicely with Rails apps.
 * Rearranged source.
 
 == 0.9.5 (February 19, 2008)

@@ -15,7 +15,7 @@ At a command prompt all you need to type to start serve is:
 This will launch a WEBrick server which you can access from any Web browser at
 the following address:
 
-  http://localhost:3000
+  http://localhost:4000
 
 Once the server is going it will output a running log of its activity. To
 stop the server at any time, type CTRL+C at the command prompt. By default the
@@ -26,7 +26,7 @@ behavior, `cd` to the appropriate directory before starting serve.
 === Advanced Options
 
 The serve command automatically binds to 0.0.0.0 (localhost) and uses port
-3000 by default. To serve files over a different IP (that is bound to your
+4000 by default. To serve files over a different IP (that is bound to your
 computer) or port specify those options on the command line:
 
   $ serve 4000               # a custom port
@@ -70,11 +70,11 @@ It is recommended that you install serve via RubyGems:
 For more information, be sure to look through the documentation over at
 RubyForge:
 
-http://serve.rubyforge.org/
+* http://serve.rubyforge.org
 
 Or visit the project page here:
 
-http://rubyforge.org/projects/serve/
+* http://rubyforge.org/projects/serve
 
 
 === License
