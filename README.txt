@@ -1,7 +1,5 @@
 == Serve
 
-=== What is Serve?
-
 Serve is a small Ruby script that makes it easy to start up a WEBrick server
 in any directory. Serve is ideal for HTML prototyping and simple file sharing.
 If the haml, redcloth, and bluecloth gems are installed serve can handle Haml,
@@ -67,10 +65,22 @@ It is recommended that you install serve via RubyGems:
   $ sudo gem install serve
 
 
+=== More Information
+
+For more information, be sure to look through the documentation over at
+RubyForge:
+
+http://serve.rubyforge.org/
+
+Or visit the project page here:
+
+http://rubyforge.org/projects/serve/
+
+
 === License
 
-Serve is released under the MIT license and is copyright (c) John W. Long.
-A copy of the MIT license can be found in the License.txt file.
+Serve is released under the MIT license and is copyright (c) 2006-2007
+John W. Long. A copy of the MIT license can be found in the License.txt file.
 
 
 Enjoy!
