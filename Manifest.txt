@@ -7,11 +7,19 @@ bin/serve
 config/hoe.rb
 config/requirements.rb
 lib/serve.rb
+lib/serve/handlers/email_handler.rb
+lib/serve/handlers/file_type_handler.rb
+lib/serve/handlers/haml_handler.rb
+lib/serve/handlers/markdown_handler.rb
+lib/serve/handlers/redirect_handler.rb
+lib/serve/handlers/sass_handler.rb
+lib/serve/handlers/textile_handler.rb
 lib/serve/version.rb
-lib/webrick/extensions.rb
+lib/serve/webrick/extensions.rb
 log/debug.log
 script/destroy
 script/generate
+script/txt2html
 setup.rb
 spec/serve_spec.rb
 spec/spec.opts
@@ -19,4 +27,5 @@ spec/spec_helper.rb
 tasks/deployment.rake
 tasks/environment.rake
 tasks/rspec.rake
+tasks/undefine.rake
 tasks/website.rake

@@ -1,11 +1,11 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
-# Time to add your specs!
-# http://rspec.rubyforge.org/
-describe "Place your specs here" do
+describe "Serve" do
   
-  it "find this spec in spec directory" do
-    violated "Be sure to write your specs"
+  it "should register all of the file type handlers" do
+    handlers = ["cgi", "email", "haml", "markdown", "redirect", "rhtml", "sass", "textile"]
+    table = WEBrick::HTTPServlet::FileHandler::HandlerTable
+    table.keys.sort.should == handlers
   end
   
 end
