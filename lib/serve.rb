@@ -1,5 +1,6 @@
 require 'webrick'
 require 'serve/version'
+require 'serve/application'
 require 'serve/webrick/extensions'
 require 'serve/handlers/file_type_handler'
 require 'serve/handlers/textile_handler'
