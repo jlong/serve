@@ -20,6 +20,7 @@ module Serve
       when options[:help]
         puts help
       else
+        Dir.chdir(options[:root])
         if rails_app?
           run_rails_app
         else
@@ -40,7 +41,7 @@ module Serve
         :environment => extract_environment(args),
         :port => extract_port(args),
         :address => extract_address(args),
-        :document_root => extract_document_root(args)
+        :root => extract_root(args)
       }
       raise InvalidArgumentsError if args.size > 0
       options
@@ -54,17 +55,17 @@ module Serve
       program = File.basename($0)
       [
         "Usage:",
-        "  #{program} [port] [environment] [document root]",
-        "  #{program} [address:port] [environment] [document root]",
+        "  #{program} [port] [environment] [dir]",
+        "  #{program} [address:port] [environment] [dir]",
         "  #{program} [options]",
         "  ",
         "Description:",
         "  Starts a WEBrick server on the specified address and port with its document ",
         "  root set to the current working directory. (Optionally, you can specify the ",
-        "  document root as the last parameter.) By default the command uses 0.0.0.0 ",
-        "  for the address and 4000 for the port. This means that once the command has ",
-        "  been started you can access the documents in the current directory with ",
-        "  any Web browser at:",
+        "  directory as the last parameter.) By default the command uses 0.0.0.0 for ",
+        "  the address and 4000 for the port. This means that once the command has ",
+        "  been started you can access the documents in the current directory with any ",
+        "  Web browser at:",
         "  ",
         "    http://localhost:4000/",
         "  ",
@@ -109,18 +110,18 @@ module Serve
         args.delete(args.find {|a| /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.match(a) }) || '0.0.0.0'
       end
       
-      def extract_document_root(args)
+      def extract_root(args)
         args.each do |dir|
           if File.directory?(dir)
             args.delete(dir)
-            return dir
+            return File.expand_path(dir)
           end
         end
         Dir.pwd
       end
       
       def rails_script_server
-        @rails_server_script ||= options[:document_root] + '/script/server'
+        @rails_server_script ||= options[:root] + '/script/server'
       end
 
       def rails_app?
@@ -137,7 +138,7 @@ module Serve
         server = Serve::Server.new(
           :Port => options[:port],
           :BindAddress => options[:address],
-          :DocumentRoot => options[:document_root],
+          :DocumentRoot => options[:root],
           :DirectoryIndex => %w(index.html index.txt index.text index.haml index.textile index.markdown index.email index.redirect),
           :AppendExtensions => %w(html txt text haml textile markdown email redirect)
         )
