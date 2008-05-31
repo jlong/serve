@@ -35,14 +35,12 @@ module Serve
     
     def parse(args)
       args = normalize_args(args)
-      options = {
-        :help => extract_boolean(args, '-h', '--help'),
-        :version => extract_boolean(args, '-v', '--version'),
-        :environment => extract_environment(args),
-        :port => extract_port(args),
-        :address => extract_address(args),
-        :root => extract_root(args)
-      }
+      options[:help]        = extract_boolean(args, '-h', '--help')
+      options[:version]     = extract_boolean(args, '-v', '--version')
+      options[:environment] = extract_environment(args)
+      options[:root]        = extract_root(args)
+      options[:address]     = extract_address(args)
+      options[:port]        = extract_port(args)
       raise InvalidArgumentsError if args.size > 0
       options
     end
@@ -103,7 +101,7 @@ module Serve
       end
       
       def extract_port(args)
-        args.delete(args.find {|a| /^\d\d\d+$/.match(a) })
+        args.delete(args.find {|a| /^\d\d\d+$/.match(a) }) || (rails_app? ? 3000 : 4000)
       end
       
       def extract_address(args)
@@ -111,7 +109,7 @@ module Serve
       end
       
       def extract_root(args)
-        args.each do |dir|
+        args.reverse.each do |dir|
           if File.directory?(dir)
             args.delete(dir)
             return File.expand_path(dir)
@@ -129,12 +127,10 @@ module Serve
       end
       
       def run_rails_app
-        options[:port] ||= 3000
         system "#{rails_script_server} -p #{options[:port]} -b #{options[:address]} -e #{options[:environment]}"
       end
       
       def run_server
-        options[:port] ||= 4000
         server = Serve::Server.new(
           :Port => options[:port],
           :BindAddress => options[:address],
