@@ -55,8 +55,8 @@ module Serve
       program = File.basename($0)
       [
         "Usage:",
-        "  #{program} [port] [environment] [dir]",
-        "  #{program} [address:port] [environment] [dir]",
+        "  #{program} [port] [environment] [port]",
+        "  #{program} [address:port] [environment] [port]",
         "  #{program} [options]",
         "  ",
         "Description:",
@@ -123,7 +123,7 @@ module Serve
       def rails_script_server
         @rails_server_script ||= options[:root] + '/script/server'
       end
-
+      
       def rails_app?
         File.file?(rails_script_server) and File.executable?(rails_script_server)
       end
