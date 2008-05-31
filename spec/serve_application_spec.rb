@@ -11,7 +11,7 @@ describe Serve::Application do
       :environment => 'development',
       :port => nil,
       :address => '0.0.0.0',
-      :document_root => Dir.pwd
+      :root => Dir.pwd
     }
   end
   
@@ -56,9 +56,13 @@ describe Serve::Application do
     end
     
     it "should parse working directory" do
-      @app.parse([])[:document_root].should == Dir.pwd
+      @app.parse([])[:root].should == Dir.pwd
       dir = File.dirname(__FILE__)
-      @app.parse([dir])[:document_root].should == dir
+      @app.parse([dir])[:root].should == File.expand_path(dir)
+    end
+    
+    it "should not parse . as port but as working directory" do
+      @app.parse(["."]).should == @defopts.merge(:root => Dir.pwd)
     end
     
     it "should detect invalid arguments" do
