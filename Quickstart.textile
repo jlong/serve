@@ -99,6 +99,7 @@ One thing to note about the source that I gave you for the login page. I intenti
 
 Insert the following HTML into a file named "_layout.html" in the root directory of your prototype:
 
+<pre><code>
   <html>
     <head>
       <title><%= @title %></title>
@@ -108,6 +109,7 @@ Insert the following HTML into a file named "_layout.html" in the root directory
       <%= yield %>
     </body>
   </html>
+</code></pre>
 
 This layout includes a small amount of ERB(Embedded Ruby) to indicate the title of the web page and to insert the content of the page at the appropriate point.
 
