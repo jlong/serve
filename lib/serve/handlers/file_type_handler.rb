@@ -1,21 +1,24 @@
 module Serve #:nodoc:
   class FileTypeHandler < ::WEBrick::HTTPServlet::AbstractServlet #:nodoc:
   
-    def self.extension(extension)
-      ::WEBrick::HTTPServlet::FileHandler.add_handler(extension, self)
+    def self.extension(*extensions)
+      extensions.each do |extensions|
+        ::WEBrick::HTTPServlet::FileHandler.add_handler(extensions, self)
+      end
     end
-  
+    
+    
     def initialize(server, name)
       super
       @script_filename = name
     end
-  
+    
     def process(req, res)
       data = open(@script_filename){|io| io.read }
       res['content-type'] = content_type
       res.body = parse(data)
     end
-  
+    
     def do_GET(req, res)
       begin
         process(req, res)
@@ -26,15 +29,15 @@ module Serve #:nodoc:
         raise ::WEBrick::HTTPStatus::InternalServerError, ex.message
       end
     end
-  
+    
     alias do_POST do_GET
-  
+    
     protected
-  
+    
       def content_type
         'text/html'
       end
-    
+      
       def parse(string)
         string.dup
       end

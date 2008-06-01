@@ -136,7 +136,7 @@ module Serve
           :BindAddress => options[:address],
           :DocumentRoot => options[:root],
           :DirectoryIndex => %w(index.html index.txt index.text index.haml index.textile index.markdown index.email index.redirect),
-          :AppendExtensions => %w(html txt text haml textile markdown email redirect)
+          :AppendExtensions => %w(html txt text haml erb rhtml html.erb html.haml textile markdown email redirect)
         )
         trap("INT") { server.shutdown }
         server.start
