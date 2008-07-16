@@ -9,6 +9,13 @@ module Serve #:nodoc:
     
     def parse
       context = Context.new
+      view_helpers_file_path = Dir.pwd + '/view_helpers.rb'
+      if File.file?(view_helpers_file_path)
+        (class << context; self end).module_eval(File.read(view_helpers_file_path))
+        class << context
+          include ViewHelpers
+        end
+      end
       parser = Parser.new(context)
       context.content << parser.parse_file(@script_filename)
       layout = find_layout_for(@script_filename)
