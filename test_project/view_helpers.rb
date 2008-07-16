@@ -1,5 +1,5 @@
 module ViewHelpers
   def custom_method
-    "Changed Custom content"
+    "Request object: #{request.headers['user-agent']}"
   end
 end
