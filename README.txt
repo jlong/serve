@@ -52,10 +52,22 @@ Serve presently does special processing for files with following extensions:
 
 textile :: Evaluates the document as Textile (requires the Redcloth gem) 
 markdown :: Evaluates the document as Markdown (requires the Bluecloth gem)
+erb :: Experimental support for ERB is partial implemented
 haml :: Evaluates the document as Haml (requires the Haml gem)
 sass :: Evaluates the document as Sass (requires the Haml gem)
-email :: Evaluates the document as if it is an e-mail message; the format is identicle to a plain/text e-mail message's source
+email :: Evaluates the document as if it is an e-mail message; the format is identical to a plain/text e-mail message's source
 redirect :: Redirects to the URL contained in the document
+
+
+== View Helpers
+
+If you drop a file called view_helpers.rb in the root of a project, you can define custom helpers for your Haml and ERB views. Just declare the ViewHelpers module and begin declaring your helpers:
+
+  module ViewHelpers
+    def custom_method
+      "Request object: #{request.headers['user-agent']}"
+    end
+  end
 
 
 === Installation and Setup
@@ -76,10 +88,14 @@ Or visit the project page here:
 
 * http://rubyforge.org/projects/serve
 
+All development now takes place on GitHub:
+
+* http://github.com/jlong/serve
+
 
 === License
 
-Serve is released under the MIT license and is copyright (c) 2006-2007
+Serve is released under the MIT license and is copyright (c) 2006-2008
 John W. Long. A copy of the MIT license can be found in the License.txt file.
 
 

@@ -1,3 +1,8 @@
+== 0.9.7 (July 17, 2008)
+
+* Added experimental support for view helpers.
+* Added limited support for ERB. Layouts are not yet supported.
+
 == 0.9.6 (February 20, 2008)
 
 * Changed default port to 4000 so that serve plays nicely with Rails apps.
