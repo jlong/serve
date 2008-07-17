@@ -3,12 +3,22 @@ module Serve #:nodoc:
     extension 'erb', 'html.erb', 'rhtml', 'haml', 'html.haml'
     
     def process(req, res)
+      class << req
+        alias headers header
+      end
       res['content-type'] = content_type
-      res.body = parse
+      res.body = parse(req, res)
     end
     
-    def parse
-      context = Context.new
+    def parse(req, res)
+      context = Context.new(req, res)
+      view_helpers_file_path = Dir.pwd + '/view_helpers.rb'
+      if File.file?(view_helpers_file_path)
+        (class << context; self end).module_eval(File.read(view_helpers_file_path))
+        class << context
+          include ViewHelpers
+        end
+      end
       parser = Parser.new(context)
       context.content << parser.parse_file(@script_filename)
       layout = find_layout_for(@script_filename)
@@ -76,8 +86,10 @@ module Serve #:nodoc:
     
     class Context #:nodoc:
       attr_accessor :content, :parser
+      attr_reader :request, :response
       
-      def initialize
+      def initialize(req, res)
+        @request, @response = req, res
         @content = ''
       end
       
