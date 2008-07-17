@@ -1,6 +1,6 @@
 module Serve #:nodoc:
   class Handler < FileTypeHandler #:nodoc:
-    extension 'haml', 'erb', 'rhtml', 'html.erb', 'html.haml'
+    extension 'erb', 'html.erb', 'rhtml', 'haml', 'html.haml'
     
     def process(req, res)
       res['content-type'] = content_type

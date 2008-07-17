@@ -135,7 +135,7 @@ module Serve
           :Port => options[:port],
           :BindAddress => options[:address],
           :DocumentRoot => options[:root],
-          :DirectoryIndex => %w(index.html index.txt index.text index.haml index.textile index.markdown index.email index.redirect),
+          :DirectoryIndex => %w(index.html index.erb index.html.erb index.rhtml index.haml index.html.haml index.txt index.text index.textile index.markdown index.email index.redirect),
           :AppendExtensions => %w(html txt text haml erb rhtml html.erb html.haml textile markdown email redirect)
         )
         trap("INT") { server.shutdown }
