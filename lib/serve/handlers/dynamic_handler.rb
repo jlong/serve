@@ -33,11 +33,18 @@ module Serve #:nodoc:
       root = Dir.pwd
       path = filename[root.size..-1]
       layout = nil
-      begin
+      
+      until layout or path == "/"
         path = File.dirname(path)
-        l = File.join(root, path, '_layout.haml')
-        layout = l if File.file?(l)
-      end until layout or path == "/"
+        
+        possible_layouts = ['_layout.haml', '_layout.html.erb'].map do |l|
+          possible_layout = File.join(root, path, l)
+          File.file?(possible_layout) ? possible_layout : false
+        end
+        
+        layout = possible_layouts.detect {|o| o }
+      end 
+      
       layout
     end
     

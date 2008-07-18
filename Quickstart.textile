@@ -50,7 +50,7 @@ h3. Creating Our First Screen
 
 Now that we have the prototype directory set up, let's create our first page so that you can get a feel for how Serve works. This will be a simple HTML login page for our application.
 
-Insert the following HTML into an file named "login.html":
+Insert the following HTML into an file named "login.html.erb":
 
 <pre><code>
 <form action="/dashboard/" method="put">
@@ -96,7 +96,7 @@ Name                          Last modified         Size
 Parent Directory              2008/02/23 15:35      -
 images/                       2008/02/23 15:35      -
 javascripts/                  2008/02/23 15:35      -
-login.html                    2008/02/23 15:36      346
+login.html.erb                2008/02/23 15:36      346
 stylesheets/                  2008/02/23 15:35      -
 </pre>
 
@@ -111,7 +111,7 @@ h3. Layouts
 
 One thing to note about the source that I gave you for the login page. I intentionally left out the <html>, <head>, and <body> tags because they belong a layout---not the source file. Let's go ahead and create that layout now.
 
-Insert the following HTML into a file named "_layout.html" in the root directory of your prototype:
+Insert the following HTML into a file named "_layout.html.erb" in the root directory of your prototype:
 
 <pre><code>
 <html>
@@ -129,7 +129,7 @@ This layout includes a small amount of ERB(Embedded Ruby) to indicate the title 
 
 Embedded Ruby is delineated with the opening and closing sequence <% and %> respectively. Sequences that begin with an addition equals sign insert their output directly into the HTML. In this case we want to render the @title variable as the title in the head and as the first heading in the document body. The yield keyword is used to insert the content of the page at that point.
 
-We need to make one small change to our login page before continuing. Insert the following line at the top of login.html file:
+We need to make one small change to our login page before continuing. Insert the following line at the top of login.html.erb file:
 
 <pre>
 <% @title = "Login" %>
