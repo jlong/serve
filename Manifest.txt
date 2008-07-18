@@ -32,3 +32,9 @@ tasks/environment.rake
 tasks/rspec.rake
 tasks/undefine.rake
 tasks/website.rake
+test_project/_layout.haml
+test_project/erb/_layout.html.erb
+test_project/erb/index.html.erb
+test_project/test.haml
+test_project/test.html.erb
+test_project/view_helpers.rb
