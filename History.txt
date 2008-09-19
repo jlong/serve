@@ -1,3 +1,5 @@
+* Added support for content_for blocks in ERB. [jlong]
+
 == 0.9.8 (July 18, 2008)
 
 * Added experimental support for ERB layouts. [Lawjoskar]

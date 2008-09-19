@@ -51,7 +51,7 @@ module Serve #:nodoc:
     module ERB #:nodoc:
       class Engine #:nodoc:
         def initialize(string, options = {})
-          @erb = ::ERB.new(string, nil, '-')
+          @erb = ::ERB.new(string, nil, '-', '@erbout')
           @erb.filename = options[:filename]
         end
         
@@ -100,10 +100,32 @@ module Serve #:nodoc:
         @content = ''
       end
       
+      def _erbout
+        @erbout
+      end
+      
+      def capture_erb(&block)
+        buffer = _erbout
+        pos = buffer.length
+        block.call
+        
+        # extract the block 
+        data = buffer[pos..-1]
+        
+        # replace it in the original with empty string
+        buffer[pos..-1] = ''
+        
+        data
+      end
+      
       # Content_for methods
       
       def content_for(symbol, &block)
-        set_content_for(symbol, capture_haml(&block))
+        if @haml_buffer
+          set_content_for(symbol, capture_haml(&block))
+        else
+          set_content_for(symbol, capture_erb(&block))
+        end
       end
       
       def content_for?(symbol)
@@ -121,9 +143,9 @@ module Serve #:nodoc:
       def set_content_for(symbol, value)
         instance_variable_set("@content_for_#{symbol}", value)
       end
-    
+      
       # Render methods
-    
+      
       def render(options)
         partial = options.delete(:partial)
         template = options.delete(:template)

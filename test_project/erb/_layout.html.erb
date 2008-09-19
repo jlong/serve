@@ -2,9 +2,26 @@
 <html>
   <head>
     <title><%= @title %></title>
+    <style type="text/css">
+      #content {
+        float: left;
+        width: 70%;
+      }
+      #sidebar {
+        float: right;
+        width: 28%;
+      }
+    </style>
   </head>
   <body>
-    <h1><%= @title %></h1>
-    <%= yield %>
+    <div id="content">
+      <h1><%= @title %></h1>
+      <%= yield %>
+    </div>
+    <% if content_for?(:sidebar) %>
+      <div id="sidebar">
+        <%= yield :sidebar %>
+      </div>
+    <% end %>
   </body>
 </html>
