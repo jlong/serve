@@ -33,18 +33,14 @@ module Serve #:nodoc:
       root = Dir.pwd
       path = filename[root.size..-1]
       layout = nil
-      
       until layout or path == "/"
         path = File.dirname(path)
-        
-        possible_layouts = ['_layout.haml', '_layout.html.erb'].map do |l|
+        possible_layouts = ['_layout.haml', '_layout.html.haml', '_layout.erb', '_layout.html.erb'].map do |l|
           possible_layout = File.join(root, path, l)
           File.file?(possible_layout) ? possible_layout : false
         end
-        
-        layout = possible_layouts.detect {|o| o }
-      end 
-      
+        layout = possible_layouts.detect { |o| o }
+      end
       layout
     end
     
@@ -56,7 +52,12 @@ module Serve #:nodoc:
         end
         
         def render(context, &block)
-          @erb.result(context.instance_eval { binding })
+          # we have to keep track of the old erbout variable for nested renders
+          # because ERB#result will set it to an empty string before it renders
+          old_erbout = context.instance_variable_get('@erbout')
+          result = @erb.result(context.instance_eval { binding })
+          context.instance_variable_set('@erbout', old_erbout)
+          result
         end
       end
     end
@@ -104,6 +105,7 @@ module Serve #:nodoc:
         @erbout
       end
       
+      # This is extracted from Rails
       def capture_erb(&block)
         buffer = _erbout
         pos = buffer.length
