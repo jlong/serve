@@ -3,7 +3,7 @@
 Serve is a small Ruby script that makes it easy to start up a WEBrick server
 in any directory. Serve is ideal for HTML prototyping and simple file sharing.
 If the haml, redcloth, and bluecloth gems are installed serve can handle Haml,
-Sass, Textile, and Markdown (in addition to HTML).
+Sass, Textile, and Markdown (in addition to HTML and ERB).
 
 
 === Usage
@@ -52,7 +52,7 @@ Serve presently does special processing for files with following extensions:
 
 textile :: Evaluates the document as Textile (requires the Redcloth gem) 
 markdown :: Evaluates the document as Markdown (requires the Bluecloth gem)
-erb :: Experimental support for ERB is partial implemented
+erb :: Experimental support for ERB
 haml :: Evaluates the document as Haml (requires the Haml gem)
 sass :: Evaluates the document as Sass (requires the Haml gem)
 email :: Evaluates the document as if it is an e-mail message; the format is identical to a plain/text e-mail message's source
