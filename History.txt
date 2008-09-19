@@ -1,3 +1,4 @@
+== 0.9.9 (September 19, 2008)
 * Fixed ERB partial support. [jlong]
 * Added support for content_for blocks in ERB. [jlong]
 
