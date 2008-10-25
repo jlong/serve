@@ -5,7 +5,7 @@ module Serve
     attr_accessor :options
     
     def self.run(args = ARGV)
-      Application.new.run(args)
+      new.run(args)
     end
     
     def initialize

@@ -77,6 +77,8 @@ module Serve #:nodoc:
         engine = case File.extname(filename).sub(/^./, '').downcase
           when 'haml'
             require 'haml'
+            require 'sass'
+            require 'sass/plugin'
             Haml::Engine.new(lines, :attr_wrapper => '"', :filename => filename)
           when 'erb'
             require 'erb'
