@@ -1,3 +1,6 @@
+== 0.9.10 (October 25, 2008)
+* Updated to work with Haml 2.0.3. [jlong]
+
 == 0.9.9 (September 19, 2008)
 * Fixed ERB partial support. [jlong]
 * Added support for content_for blocks in ERB. [jlong]
