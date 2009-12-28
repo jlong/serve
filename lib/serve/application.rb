@@ -53,8 +53,9 @@ module Serve
       program = File.basename($0)
       [
         "Usage:",
-        "  #{program} [port] [environment] [port]",
-        "  #{program} [address:port] [environment] [port]",
+        "  #{program} [port] [environment] [directory]",
+        "  #{program} [address:port] [environment] [directory]",
+        "  #{program} [address] [port] [environment] [directory]",
         "  #{program} [options]",
         "  ",
         "Description:",
