@@ -27,11 +27,8 @@ Run 'rubyforge setup' to prepare your env for access to Rubyforge
   RUBYFORGE_USERNAME.replace @config["username"]
 end
 
+VERS = Serve.version
 
-REV = nil 
-# UNCOMMENT IF REQUIRED: 
-# REV = `svn info`.each {|line| if line =~ /^Revision:/ then k,v = line.split(': '); break v.chomp; else next; end} rescue nil
-VERS = Serve::VERSION::STRING + (REV ? ".#{REV}" : "")
 RDOC_OPTS = ['--quiet', '--title', 'serve documentation',
     "--opname", "index.html",
     "--line-numbers", 
@@ -47,7 +44,8 @@ end
 
 # Generate all the Rake tasks
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
-hoe = Hoe.new(GEM_NAME, VERS) do |p|
+hoe = Hoe.spec GEM_NAME do |p|
+  p.version = VERS
   p.author = AUTHOR 
   p.description = DESCRIPTION
   p.email = EMAIL
