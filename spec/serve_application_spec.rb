@@ -21,19 +21,19 @@ describe Serve::Application do
     end
     
     it "should parse with only the port" do
-      @app.parse(["2000"])[:port].should == "2000"
+      @app.parse(["2000"])[:port].should == 2000
     end
     
     it "should parse with the port and address" do
       @app.parse(["1.1.1.1", "2000"]).should ==
-        @defopts.update(:address => "1.1.1.1", :port=>"2000")
+        @defopts.update(:address => "1.1.1.1", :port=>2000)
       @app.parse(["1.1.1.1:2000"]).should ==
-        @defopts.update(:address => "1.1.1.1", :port=>"2000")
+        @defopts.update(:address => "1.1.1.1", :port=>2000)
     end
     
     it "should parse with the port, address, and protocol" do
       @app.parse(["http://1.1.1.1:2000"]).should ==
-        @defopts.update(:address => "1.1.1.1", :port=>"2000")
+        @defopts.update(:address => "1.1.1.1", :port=>2000)
     end
     
     it "should parse help" do
