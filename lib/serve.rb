@@ -1,7 +1,5 @@
-require 'webrick'
 require 'serve/version'
-require 'serve/application'
-require 'serve/webrick/extensions'
+require 'serve/file_resolver'
 require 'serve/handlers/file_type_handler'
 require 'serve/handlers/textile_handler'
 require 'serve/handlers/markdown_handler'
@@ -9,8 +7,4 @@ require 'serve/handlers/dynamic_handler'
 require 'serve/handlers/sass_handler'
 require 'serve/handlers/email_handler'
 require 'serve/handlers/redirect_handler'
-
-module Serve #:nodoc:
-  class Server < ::WEBrick::HTTPServer #:nodoc:
-  end
-end
+require 'serve/response_cache'

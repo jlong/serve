@@ -98,7 +98,8 @@ All development now takes place on GitHub:
 === License
 
 Serve is released under the MIT license and is copyright (c) 2007-2009
-John W. Long. A copy of the MIT license can be found in the LICENSE file.
+John W. Long and Adam I. Williams. A copy of the MIT license can be found in
+the LICENSE file.
 
 
 Enjoy!

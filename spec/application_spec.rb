@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
+require 'serve/application'
 
 describe Serve::Application do
   

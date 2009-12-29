@@ -1,24 +1,15 @@
 module Serve #:nodoc:
-  class Handler < FileTypeHandler #:nodoc:
+  class DynamicHandler < FileTypeHandler #:nodoc:
     extension 'erb', 'html.erb', 'rhtml', 'haml', 'html.haml'
     
-    def process(req, res)
-      class << req
-        alias headers header
-      end
-      res['content-type'] = content_type
-      res.body = parse(req, res)
+    def process(request, response)
+      response.headers['content-type'] = content_type
+      response.body = parse(request, response)
     end
     
-    def parse(req, res)
-      context = Context.new(req, res)
-      view_helpers_file_path = Dir.pwd + '/view_helpers.rb'
-      if File.file?(view_helpers_file_path)
-        (class << context; self end).module_eval(File.read(view_helpers_file_path))
-        class << context
-          include ViewHelpers
-        end
-      end
+    def parse(request, response)
+      context = Context.new(@root_path, request, response)
+      install_view_helpers(context)
       parser = Parser.new(context)
       context.content << parser.parse_file(@script_filename)
       layout = find_layout_for(@script_filename)
@@ -30,7 +21,7 @@ module Serve #:nodoc:
     end
     
     def find_layout_for(filename)
-      root = Dir.pwd
+      root = @root_path
       path = filename[root.size..-1]
       layout = nil
       until layout or path == "/"
@@ -42,6 +33,13 @@ module Serve #:nodoc:
         layout = possible_layouts.detect { |o| o }
       end
       layout
+    end
+    
+    def install_view_helpers(context)
+      view_helpers_file_path = @root_path + '/view_helpers.rb'
+      if File.file?(view_helpers_file_path)
+        context.metaclass.module_eval(File.read(view_helpers_file_path) + "\ninclude ViewHelpers", view_helpers_file_path)
+      end
     end
     
     module ERB #:nodoc:
@@ -98,8 +96,8 @@ module Serve #:nodoc:
       attr_accessor :content, :parser
       attr_reader :request, :response
       
-      def initialize(req, res)
-        @request, @response = req, res
+      def initialize(root_path, request, response)
+        @root_path, @request, @response = root_path, request, response
         @content = ''
       end
       
@@ -143,9 +141,21 @@ module Serve #:nodoc:
           instance_variable_get("@content_for_#{symbol}")
         end
       end
-    
+      
+      # View helper methods
+      
+      HTML_ESCAPE = { '&' => '&amp;',  '>' => '&gt;',   '<' => '&lt;', '"' => '&quot;' }
+      def html_escape(s)
+        s.to_s.gsub(/[&"><]/) { |special| HTML_ESCAPE[special] }
+      end
+      alias h html_escape
+      
       def set_content_for(symbol, value)
         instance_variable_set("@content_for_#{symbol}", value)
+      end
+      
+      def params
+        request.params
       end
       
       # Render methods
@@ -171,7 +181,7 @@ module Serve #:nodoc:
         path = File.dirname(parser.script_filename)
         if template =~ %r{^/}
           template = template[1..-1]
-          path = Dir.pwd
+          path = @root_path
         end
         filename = template_filename(File.join(path, template), :partial => options.delete(:partial))
         if File.file?(filename)

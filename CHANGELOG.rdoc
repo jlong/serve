@@ -1,5 +1,8 @@
 == edge
 
+* Added additional view helper methods and harmonized the API a bit [aiwilliams]
+* Added support for using Serve as a Rails plugin [aiwilliams]
+* Added support for rack [ntalbott]
 * Dropped Hoe and Newgem in favor of Jeweler
 
 == 0.9.10 (October 25, 2008)

@@ -1,46 +1,37 @@
 module Serve #:nodoc:
-  class FileTypeHandler < ::WEBrick::HTTPServlet::AbstractServlet #:nodoc:
-  
+  class FileTypeHandler #:nodoc:
+    def self.handlers
+      @handlers ||= {}
+    end
+    
     def self.extension(*extensions)
-      extensions.each do |extensions|
-        ::WEBrick::HTTPServlet::FileHandler.add_handler(extensions, self)
+      extensions.each do |ext|
+        FileTypeHandler.handlers[ext] = self
       end
     end
     
-    
-    def initialize(server, name)
-      super
-      @script_filename = name
-    end
-    
-    def process(req, res)
-      data = open(@script_filename){|io| io.read }
-      res['content-type'] = content_type
-      res.body = parse(data)
-    end
-    
-    def do_GET(req, res)
-      begin
-        process(req, res)
-      rescue StandardError => ex
-        raise
-      rescue Exception => ex
-        @logger.error(ex)
-        raise ::WEBrick::HTTPStatus::InternalServerError, ex.message
+    def self.find(path)
+      if ext = File.extname(path)
+        handlers[ext.sub(/\A\./, '')]
       end
     end
     
-    alias do_POST do_GET
+    def initialize(root_path, path)
+      @root_path = root_path
+      @script_filename = File.join(@root_path, path)
+    end
     
-    protected
+    def process(request, response)
+      response.headers['content-type'] = content_type
+      response.body = parse(open(@script_filename){|io| io.read })
+    end
     
-      def content_type
-        'text/html'
-      end
-      
-      def parse(string)
-        string.dup
-      end
+    def content_type
+      'text/html'
+    end
     
+    def parse(string)
+      string.dup
+    end
   end
 end

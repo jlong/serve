@@ -1,3 +1,9 @@
+require 'webrick'
+require 'active_support'
+require 'serve/webrick/extensions'
+require 'serve/webrick/servlet'
+require 'serve/webrick/server'
+
 module Serve
   class Application
     class InvalidArgumentsError < StandardError; end
@@ -132,12 +138,12 @@ module Serve
       end
       
       def run_server
-        server = Serve::Server.new(
+        extensions = Serve::WEBrick::Server.register_handlers
+        server = Serve::WEBrick::Server.new(
           :Port => options[:port],
           :BindAddress => options[:address],
           :DocumentRoot => options[:root],
-          :DirectoryIndex => %w(index.html index.erb index.html.erb index.rhtml index.haml index.html.haml index.txt index.text index.textile index.markdown index.email index.redirect),
-          :AppendExtensions => %w(html txt text haml erb rhtml html.erb html.haml textile markdown email redirect)
+          :DirectoryIndex => %w(index.html index.rhtml index.txt index.text) + extensions.collect {|ext| "index.#{ext}"}
         )
         trap("INT") { server.shutdown }
         server.start
