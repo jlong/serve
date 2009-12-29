@@ -1,13 +1,8 @@
 module Serve #:nodoc:
-  module VERSION #:nodoc:
-    MAJOR = 0
-    MINOR = 9
-    TINY  = 10
-    
-    STRING = [MAJOR, MINOR, TINY].join('.')
-  end
-  
   def self.version
-    VERSION::STRING
+    @version ||= begin
+      filename = File.join(File.dirname(__FILE__), '..', '..', 'VERSION')
+      IO.read(filename).strip
+    end
   end
 end

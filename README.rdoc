@@ -61,7 +61,9 @@ redirect :: Redirects to the URL contained in the document
 
 == View Helpers
 
-If you drop a file called view_helpers.rb in the root of a project, you can define custom helpers for your Haml and ERB views. Just declare the ViewHelpers module and begin declaring your helpers:
+If you drop a file called view_helpers.rb in the root of a project, you can
+define custom helpers for your Haml and ERB views. Just declare the
+ViewHelpers module and begin declaring your helpers:
 
   module ViewHelpers
     def custom_method
@@ -95,8 +97,8 @@ All development now takes place on GitHub:
 
 === License
 
-Serve is released under the MIT license and is copyright (c) 2006-2008
-John W. Long. A copy of the MIT license can be found in the License.txt file.
+Serve is released under the MIT license and is copyright (c) 2007-2009
+John W. Long. A copy of the MIT license can be found in the LICENSE file.
 
 
 Enjoy!

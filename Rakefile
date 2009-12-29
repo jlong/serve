@@ -1,13 +1,11 @@
-require 'config/requirements'
-require 'config/hoe' # setup Hoe + all gem configuration
+require 'rubygems'
+require 'rake'
 
-Dir['tasks/**/*.rake'].each { |rake| load rake }
+load 'tasks/jeweler.rake'
+load 'tasks/rdoc.rake'
+load 'tasks/rspec.rake'
+load 'tasks/undefine.rake'
 
-undefine_task %w(
-  default
-  test
-  test_deps
-  config_hoe
-)
+#Dir['tasks/**/*.rake'].each { |rake| load rake }
 
 task :default => :spec

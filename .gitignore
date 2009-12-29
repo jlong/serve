@@ -1,1 +1,10 @@
-pkgpkg/*docemail.txt
+.DS_Store
+*.tmproj
+tmtags
+*~
+\#*
+.\#*
+*.swp
+coverage
+rdoc
+pkg
