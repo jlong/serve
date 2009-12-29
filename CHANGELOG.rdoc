@@ -1,4 +1,4 @@
-== edge
+== 0.10.0
 
 * Added additional view helper methods and harmonized the API a bit [aiwilliams]
 * Added support for using Serve as a Rails plugin [aiwilliams]
