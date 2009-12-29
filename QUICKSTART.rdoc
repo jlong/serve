@@ -1,104 +1,91 @@
-h1. Getting Started with Serve
+= Getting Started with Serve
 
+
+<b>This is tutorial is incomplete. Help us finish it!</b>
 
 Serve is a rapid prototyping framework for Rails applications. It is designed to compliment Rails development and enforce a strict separation of concerns between designer and developer. Using Serve with Rails allows the designer to happily work in his own space creating an HTML prototype of the application, while the developer works on the Rails application and copies over HTML from the prototype as needed. This allows the designer to focus on presentation and flow while the developer can focus on the implementation.
 
 Let's have a look at how it all works.
 
 
-h3. Installation
+== Installation
 
 To get started we need to download and install the Ruby gem for Serve:
 
-<pre>
-% sudo gem install serve
-</pre>
+ $ sudo gem install serve
 
 After we've done that it's probably a good idea to install a couple of additional gems so that Serve will play nicely with HAML, Markdown, and Textile:
 
-<pre>
-% sudo gem install haml Bluecloth Redcloth
-</pre>
+ $ sudo gem install haml Bluecloth Redcloth
 
 
-h3. Project Directory Structure
+== Project Directory Structure
 
 Once we have everything installed the next thing to do is setup the project directory. I like to setup my projects with the following directory structure:
 
-<pre>
-artwork      # Logos and other identity design files go here
-mockups      # Fireworks or Photoshop web app mockups go here
-prototype    # The HTML prototype for the web app goes here
-application  # The actual Rails application is here
-</pre>
+artwork      :: Logos and other identity design files go here
+mockups      :: Fireworks or Photoshop web app mockups go here
+prototype    :: The HTML prototype for the web app goes here
+application  :: The actual Rails application is here
 
 Let's go ahead and create the directory for the prototype:
 
-  % mkdir prototype
+ $ mkdir prototype
 
 Rails apps generally store images, javascripts, and stylesheets in the top level directories by the same name. Let's go ahead and mirror those directories for our prototype:
 
-<pre>
-% cd prototype
-% mkdir images
-% mkdir javascripts
-% mkdir stylesheets
-</pre>
+ $ cd prototype
+ $ mkdir images
+ $ mkdir javascripts
+ $ mkdir stylesheets
 
-
-h3. Creating Our First Screen
+== Creating Our First Screen
 
 Now that we have the prototype directory set up, let's create our first page so that you can get a feel for how Serve works. This will be a simple HTML login page for our application.
 
 Insert the following HTML into an file named "login.html.erb":
 
-<pre><code>
-<form action="/dashboard/" method="put">
-  <p>
-    <label for="username">Username</label>
-    <input type="text" name="username" id="username" />
-  </p>
-  <p>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" />
-  </p>
-  <p>
-    <input type="submit" value="Login" />
-  </p>
-</form>
-</code></pre>
+ <form action="/dashboard/" method="put">
+   <p>
+     <label for="username">Username</label>
+     <input type="text" name="username" id="username" />
+   </p>
+   <p>
+     <label for="password">Password</label>
+     <input type="password" name="password" id="password" />
+   </p>
+   <p>
+     <input type="submit" value="Login" />
+   </p>
+ </form>
 
 
-h3. Starting Serve
+== Starting Serve
 
 To view our login page in a Web browser, we need to start up Serve in the directory where we are building the prototype:
 
-<pre>
-% cd prototype
-% serve
-[2008-02-23 15:19:05] INFO  WEBrick 1.3.1
-[2008-02-23 15:19:05] INFO  ruby 1.8.6 (2007-09-24) [universal-darwin9.0]
-[2008-02-23 15:19:05] INFO  Serve::Server#start: pid=5087 port=4000
-...
-</pre>
+ % cd prototype
+ % serve
+ [2008-02-23 15:19:05] INFO  WEBrick 1.3.1
+ [2008-02-23 15:19:05] INFO  ruby 1.8.6 (2007-09-24) [universal-darwin9.0]
+ [2008-02-23 15:19:05] INFO  Serve::Server#start: pid=5087 port=4000
+ ...
 
 Once you execute the `serve` command it will launch a mini Web server for the prototype and will output a noisy log of any activity. (To stop the command at any point simply switch back to the command line and press Ctrl+C.)
 
 By default the `serve` command automatically serves files from the directory that it is started in over port 4000 on your local machine. To access the the prototype in your Web browser go to:
 
-  http://localhost:4000
+ http://localhost:4000
 
 You should see a simple directory listing. It will look similar to this:
 
-<pre>
-Name                          Last modified         Size
-----------------------------------------------------------
-Parent Directory              2008/02/23 15:35      -
-images/                       2008/02/23 15:35      -
-javascripts/                  2008/02/23 15:35      -
-login.html.erb                2008/02/23 15:36      346
-stylesheets/                  2008/02/23 15:35      -
-</pre>
+ Name                          Last modified         Size
+ ----------------------------------------------------------
+ Parent Directory              2008/02/23 15:35      -
+ images/                       2008/02/23 15:35      -
+ javascripts/                  2008/02/23 15:35      -
+ login.html.erb                2008/02/23 15:36      346
+ stylesheets/                  2008/02/23 15:35      -
 
 Now navigate to the following URL:
 
@@ -107,23 +94,21 @@ Now navigate to the following URL:
 You should see the contents of the login page. Note that Serve allows you to refer to pages without their extension. This allows you to use URLs in your documents that correspond well to the URLs that Rails uses by default.
 
 
-h3. Layouts
+== Layouts
 
 One thing to note about the source that I gave you for the login page. I intentionally left out the <html>, <head>, and <body> tags because they belong a layout---not the source file. Let's go ahead and create that layout now.
 
 Insert the following HTML into a file named "_layout.html.erb" in the root directory of your prototype:
 
-<pre><code>
-<html>
-  <head>
-    <title><%= @title %></title>
-  </head>
-  <body>
-    <h1><%= @title %>/h1>
-    <%= yield %>
-  </body>
-</html>
-</code></pre>
+ <html>
+   <head>
+     <title><%= @title %></title>
+   </head>
+   <body>
+     <h1><%= @title %>/h1>
+     <%= yield %>
+   </body>
+ </html>
 
 This layout includes a small amount of ERB(Embedded Ruby) to indicate the title of the web page and to insert the content of the page at the appropriate point.
 
@@ -131,18 +116,14 @@ Embedded Ruby is delineated with the opening and closing sequence <% and %> resp
 
 We need to make one small change to our login page before continuing. Insert the following line at the top of login.html.erb file:
 
-<pre>
-<% @title = "Login" %>
-</pre>
+ <% @title = "Login" %>
 
 This will set the @title variable for the login page. Now, switch back to your Web browser and navigate to:
 
-<pre>
-http://localhost:4000/login/
-</pre>
+ http://localhost:4000/login/
 
 The page should now have a title and heading that both read "Login".
 
-h3. Content For
+== Content For
 
-h3. Partials
+== Partials
