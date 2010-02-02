@@ -16,7 +16,7 @@ To get started we need to download and install the Ruby gem for Serve:
 
 After we've done that it's probably a good idea to install a couple of additional gems so that Serve will play nicely with HAML, Markdown, and Textile:
 
- $ sudo gem install haml Bluecloth Redcloth
+ $ sudo gem install haml BlueCloth RedCloth
 
 
 == Project Directory Structure
