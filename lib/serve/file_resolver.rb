@@ -12,9 +12,11 @@ module Serve
       path = File.join(path) # path may be array
       return nil if path =~ /\.\./
       path = path.sub(%r{/\Z}, '')
-      if path =~ /\.css\Z/ && !File.file?(File.join(root, path))
-        sass_path = path.sub(/\.css\Z/, '.sass')
-        sass_path if File.file?(File.join(root, sass_path))
+      if path =~ /\.css\Z/ && !File.file?(File.join(root, path))  # if .css not found, try .scss, .sass:
+        alternates = %w{.scss .sass}.map { |ext| path.sub(/\.css\Z/, ext) }
+        sass_path = alternates.find do |p|
+          File.file?(File.join(root, p))
+        end
       elsif File.directory?(File.join(root, path))
         resolve(root, File.join(path, 'index'))
       else

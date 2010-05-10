@@ -55,6 +55,7 @@ markdown :: Evaluates the document as Markdown (requires the Bluecloth gem)
 erb :: Experimental support for ERB
 haml :: Evaluates the document as Haml (requires the Haml gem)
 sass :: Evaluates the document as Sass (requires the Haml gem)
+scss :: Evaluates the document as Scss (requires the Haml gem)
 email :: Evaluates the document as if it is an e-mail message; the format is identical to a plain/text e-mail message's source
 redirect :: Redirects to the URL contained in the document
 

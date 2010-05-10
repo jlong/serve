@@ -1,3 +1,5 @@
+* Add handling for .SCSS files with HAML/SASS 3.0 [nathany]
+
 == 0.10.0
 
 * Added additional view helper methods and harmonized the API a bit [aiwilliams]
