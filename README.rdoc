@@ -15,8 +15,6 @@ and layouts with either ERB or HAML.
 Serve can also handle SASS, Textile, and Markdown if the appropriate gems are
 installed.
 
-<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="600" height="470" id="viddler"><param name="movie" value="http://www.viddler.com/simple_on_site/53bf6942" /><param name="allowScriptAccess" value="always" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="fake=1"/><embed src="http://www.viddler.com/simple_on_site/53bf6942" width="600" height="470" type="application/x-shockwave-flash" allowScriptAccess="always" allowFullScreen="true" flashvars="fake=1" name="viddler" ></embed></object>
-
 
 == Usage
 
@@ -46,9 +44,6 @@ computer) or port specify those options on the command line:
   $ serve 192.168.1.6        # a custom IP
 
   $ serve 192.168.1.6:4000   # a custom IP and port
-
-
-== Rails Applications
 
 For your convenience if the file "script/server" exists in the current
 directory the serve command will start that instead of launching a WEBrick
@@ -94,22 +89,13 @@ It is recommended that you install serve via RubyGems:
 
 == More Information
 
-For more information, be sure to look through the documentation over at
-RubyForge:
+For more information, be sure to look through the documentation over on the wiki: http://wiki.github.com/jlong/serve/
 
-* http://serve.rubyforge.org
-
-Or visit the project page here:
-
-* http://rubyforge.org/projects/serve
-
-All development now takes place on GitHub:
-
-* http://github.com/jlong/serve
+All development takes place on GitHub: http://github.com/jlong/serve
 
 
 == License
 
-Serve is released under the MIT license and is copyright (c) 2007-2009
+Serve is released under the MIT license and is copyright (c) 2007-2010
 John W. Long and Adam I. Williams. A copy of the MIT license can be found in
 the LICENSE file.
