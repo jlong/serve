@@ -1,6 +1,8 @@
+* Added additional view helpers for escaping content, access to params and flash, and creating tags in code
+
 == 0.10.1
 
-* Add handling for .SCSS files with HAML/SASS 3.0 [nathany]
+* Added handling for .SCSS files with HAML/SASS 3.0 [nathany]
 
 == 0.10.0
 
