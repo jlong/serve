@@ -1,5 +1,4 @@
-Serve
-=====
+= Serve
 
 Serve is a small web server (based on WEBrick) that makes it easy to serve
 HTML, ERB, or HAML from any directory.
@@ -19,7 +18,7 @@ installed.
 <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="600" height="470" id="viddler"><param name="movie" value="http://www.viddler.com/simple_on_site/53bf6942" /><param name="allowScriptAccess" value="always" /><param name="allowFullScreen" value="true" /><param name="flashvars" value="fake=1"/><embed src="http://www.viddler.com/simple_on_site/53bf6942" width="600" height="470" type="application/x-shockwave-flash" allowScriptAccess="always" allowFullScreen="true" flashvars="fake=1" name="viddler" ></embed></object>
 
 
-## Usage
+== Usage
 
 At a command prompt all you need to type to start serve is:
 
@@ -36,7 +35,7 @@ serve command serves up files from the current directory. To change this
 behavior, `cd` to the appropriate directory before starting serve.
 
 
-## Advanced Options
+== Advanced Options
 
 The serve command automatically binds to 0.0.0.0 (localhost) and uses port
 4000 by default. To serve files over a different IP (that is bound to your
@@ -49,7 +48,7 @@ computer) or port specify those options on the command line:
   $ serve 192.168.1.6:4000   # a custom IP and port
 
 
-## Rails Applications
+== Rails Applications
 
 For your convenience if the file "script/server" exists in the current
 directory the serve command will start that instead of launching a WEBrick
@@ -59,7 +58,7 @@ with as an option on the command line:
   $ serve production         # start script/server in production mode
 
 
-## File Types
+== File Types
 
 Serve presently does special processing for files with following extensions:
 
@@ -73,7 +72,7 @@ email :: Evaluates the document as if it is an e-mail message; the format is ide
 redirect :: Redirects to the URL contained in the document
 
 
-## View Helpers
+== View Helpers
 
 If you drop a file called view_helpers.rb in the root of a project, you can
 define custom helpers for your Haml and ERB views. Just declare the
@@ -86,14 +85,14 @@ ViewHelpers module and begin declaring your helpers:
   end
 
 
-## Installation and Setup
+== Installation and Setup
 
 It is recommended that you install serve via RubyGems:
 
   $ sudo gem install serve
 
 
-## More Information
+== More Information
 
 For more information, be sure to look through the documentation over at
 RubyForge:
@@ -109,7 +108,7 @@ All development now takes place on GitHub:
 * http://github.com/jlong/serve
 
 
-## License
+== License
 
 Serve is released under the MIT license and is copyright (c) 2007-2009
 John W. Long and Adam I. Williams. A copy of the MIT license can be found in
