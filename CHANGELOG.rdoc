@@ -1,3 +1,5 @@
+== 0.10.1
+
 * Add handling for .SCSS files with HAML/SASS 3.0 [nathany]
 
 == 0.10.0
