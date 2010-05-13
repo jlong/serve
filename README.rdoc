@@ -89,7 +89,7 @@ It is recommended that you install serve via RubyGems:
 
 == More Information
 
-For more information, be sure to look through the documentation over on the wiki: http://wiki.github.com/jlong/serve/
+For more information, be sure to look through the documentation over on the wiki: http://wiki.github.com/jlong/serve
 
 All development takes place on GitHub: http://github.com/jlong/serve
 
