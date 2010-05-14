@@ -1,4 +1,6 @@
-* Added additional view helpers for escaping content, access to params and flash, and creating tags in code
+== edge
+
+* Added additional view helpers for escaping content, access to params and flash, and creating tags in code [jlong]
 
 == 0.10.1
 
@@ -9,7 +11,7 @@
 * Added additional view helper methods and harmonized the API a bit [aiwilliams]
 * Added support for using Serve as a Rails plugin [aiwilliams]
 * Added support for rack [ntalbott]
-* Dropped Hoe and Newgem in favor of Jeweler
+* Dropped Hoe and Newgem in favor of Jeweler [jlong]
 
 == 0.9.10 (October 25, 2008)
 

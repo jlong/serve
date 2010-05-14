@@ -31,7 +31,6 @@ module Serve #:nodoc:
     def json_escape(s)
       s.to_s.gsub(/[&"><]/) { |special| JSON_ESCAPE[special] }
     end
-    
     alias j json_escape
   end
   
