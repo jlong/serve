@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{serve}
-  s.version = "0.10.1"
+  s.version = "0.10.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["John W. Long", "Adam I. Williams"]
@@ -44,6 +44,7 @@ Gem::Specification.new do |s|
      "lib/serve/rails/serve_controller.rb",
      "lib/serve/response_cache.rb",
      "lib/serve/version.rb",
+     "lib/serve/view_helpers.rb",
      "lib/serve/webrick/extensions.rb",
      "lib/serve/webrick/server.rb",
      "lib/serve/webrick/servlet.rb",
