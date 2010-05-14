@@ -1,12 +1,13 @@
 == edge
 
+* Changed render helper to support passing the name of the partial as the first parameter to match the new Rails syntax [jlong]
 * Added additional view helpers for escaping content, access to params and flash, and creating tags in code [jlong]
 
-== 0.10.1
+== 0.10.1 (May 13, 2010)
 
 * Added handling for .SCSS files with HAML/SASS 3.0 [nathany]
 
-== 0.10.0
+== 0.10.0 (December 28, 2009)
 
 * Added additional view helper methods and harmonized the API a bit [aiwilliams]
 * Added support for using Serve as a Rails plugin [aiwilliams]

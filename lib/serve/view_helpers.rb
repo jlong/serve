@@ -102,8 +102,11 @@ module Serve #:nodoc:
   end
   
   module RenderHelpers
-    def render(options)
-      partial = options.delete(:partial)
+    def render(partial, options={})
+      if partial.is_a?(Hash)
+        options = options.merge(partial)
+        partial = options.delete(:partial)
+      end  
       template = options.delete(:template)
       case
       when partial
