@@ -2,7 +2,7 @@
 lib = File.dirname(__FILE__) + '/../lib'
 require 'rubygems'
 
-gem 'activesupport'
+gem 'activesupport', '= 2.3.5'
 require 'active_support'
 
 if File.file?(lib + '/serve/version.rb')

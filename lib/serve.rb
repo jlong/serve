@@ -1,3 +1,5 @@
+require 'active_support'
+
 require 'serve/version'
 require 'serve/file_resolver'
 require 'serve/handlers/file_type_handler'
@@ -8,3 +10,4 @@ require 'serve/handlers/sass_handler'
 require 'serve/handlers/email_handler'
 require 'serve/handlers/redirect_handler'
 require 'serve/response_cache'
+require 'serve/rack'

@@ -1,5 +1,3 @@
-require 'active_support'
-
 module Serve
   mattr_accessor :file_resolver
   

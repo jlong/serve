@@ -1,8 +1,5 @@
-require 'webrick'
 require 'active_support'
-require 'serve/webrick/extensions'
-require 'serve/webrick/servlet'
-require 'serve/webrick/server'
+require 'serve/rack'
 
 module Serve
   class Application
@@ -138,15 +135,18 @@ module Serve
       end
       
       def run_server
-        extensions = Serve::WEBrick::Server.register_handlers
-        server = Serve::WEBrick::Server.new(
-          :Port => options[:port],
-          :BindAddress => options[:address],
-          :DocumentRoot => options[:root],
-          :DirectoryIndex => %w(index.html index.rhtml index.txt index.text) + extensions.collect {|ext| "index.#{ext}"}
-        )
-        trap("INT") { server.shutdown }
-        server.start
+        root = options[:root]
+        app = Rack::Builder.new do
+          use Rack::CommonLogger
+          use Rack::ShowStatus
+          use Rack::ShowExceptions
+          run Rack::Cascade.new([
+            Serve::RackAdapter.new(root),
+            Rack::Directory.new(root)
+          ])
+        end
+        webrick = Rack::Handler.get('webrick')
+        webrick.run app, :Port => options[:port], :BindAddress => options[:address]
       end
   end
 end

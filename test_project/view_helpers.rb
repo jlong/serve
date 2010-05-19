@@ -1,5 +1,5 @@
 module ViewHelpers
   def custom_method
-    "Request object: #{request.headers['user-agent']}"
+    "Request object: #{h request}"
   end
 end

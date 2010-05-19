@@ -1,57 +1,50 @@
-require 'active_support'
-require 'serve'
 require 'rack'
 
 module Serve
-  class Rack
+  class Request < Rack::Request
+    def query
+      @query ||= Rack::Utils.parse_nested_query(query_string)
+    end
+    def protocol
+      scheme + "://"
+    end
+  end
+  class Response < Rack::Response
+  end
+  
+  class RackAdapter
+    
+    def initialize(root)
+      @root = root
+    end
+    
     def call(env)
-      path = Serve.resolve_file(Dir.pwd, env["PATH_INFO"])
-      return not_found unless path
-
-      ext = File.extname(path)[1..-1]
-      handler = Serve::FileTypeHandler.handlers[ext]
-      return no_handler(ext) unless handler
-
-      res = Response.new
-      handler.new(Dir.pwd, path).process(nil, res)
-      [200, res.headers, res.body]
-    rescue Exception => e
-      return html_response(500, %(
-<h1>Error!</h1>
-<h2>#{h(e.message)}</h2>
-<pre>
-#{h(e.backtrace.join("\n"))}
-</pre>))
+      request = Request.new(env)
+      response = Response.new()
+      process(request, response).to_a
     end
     
-    def no_handler(ext)
-      html_response(501, %(
-<h1>No handler</h1>
-
-<p>Don't know how to handle resources of type "#{h(ext)}".</p>))
-    end
-    
-    def not_found
-      html_response(404, %(
-<h1>Not Found</h1>
-
-<p>The requested resource was not found.</p>))
-    end
-    
-    def html_response(code, body)
-      [code, {"Content-Type" => "text/html"}, %(<html><head></head><body>#{body}</body></html>)]
-    end
-    
-    def h(input)
-      CGI.escapeHTML(input)
-    end
-    
-    class Response
-      attr_reader :headers
-      attr_accessor :body
-      def initialize
-        @headers = {}
+    def process(request, response)
+      path = Serve.resolve_file(@root, request.path)
+      if path
+        ext = File.extname(path)[1..-1]
+        handler = Serve::FileTypeHandler.handlers[ext]
+        if handler
+          handler.new(@root, path).process(request, response)
+          response
+        else
+          default(request, response)
+        end
+      else
+        default(request, response)
       end
     end
+    
+    def default(request, response)
+      response.status = 404
+      response.body = "Not found!"
+      response
+    end
+    
   end
 end
