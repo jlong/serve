@@ -1,15 +1,53 @@
+require 'active_support'
 require 'rack'
 
 module Serve
   class Request < Rack::Request
+    
     def query
       @query ||= Rack::Utils.parse_nested_query(query_string)
     end
+    
     def protocol
-      scheme + "://"
+      @scheme ||= scheme + "://"
     end
+    
+    def headers
+      @headers ||= Headers.new(@env)
+    end
+    
   end
+  
   class Response < Rack::Response
+  end
+  
+  # Borrowed from ActionDispatch in Rails
+  class Headers < Hash
+    extend ActiveSupport::Memoizable
+    
+    def initialize(*args)
+      if args.size == 1 && args[0].is_a?(Hash)
+        super()
+        update(args[0])
+      else
+        super
+      end
+    end
+    
+    def [](header_name)
+      if include?(header_name)
+        super
+      else
+        super(env_name(header_name))
+      end
+    end
+    
+    private
+      # Converts a HTTP header name to an environment variable name.
+      def env_name(header_name)
+        "HTTP_#{header_name.upcase.gsub(/-/, '_')}"
+      end
+      memoize :env_name
   end
   
   class RackAdapter

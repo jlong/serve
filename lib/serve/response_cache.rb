@@ -11,12 +11,12 @@ module Serve
       :use_x_sendfile => false
     }
     cattr_accessor :defaults
-
+    
     attr_accessor :directory, :expire_time, :default_extension, :perform_caching, :logger, :use_x_sendfile
     alias :page_cache_directory :directory
     alias :page_cache_extension :default_extension
     private :page_cache_directory, :page_cache_extension 
-
+    
     # Creates a ResponseCache object with the specified options.
     #
     # Options are as follows:
@@ -74,20 +74,20 @@ module Serve
     def response_cached?(path)
       perform_caching && !!read_metadata(path)
     end
-  
+    
     # Expires the cached response for the specified path.
     def expire_response(path)
       path = clean(path)
       expire_page(path)
     end
-
+    
     # Expires the entire cache.
     def clear
       Dir["#{directory}/*"].each do |f|
         FileUtils.rm_rf f
       end
     end
-
+    
     private
       # Ensures that path begins with a slash and remove extra slashes.
       def clean(path)
@@ -95,7 +95,7 @@ module Serve
         %r{^/?(.*?)/?$}.match(path)
         "/#{$1}"
       end
-
+      
       # Reads a cached response from disk and updates a response object.
       def read_response(path, response, request)
         file_path = page_cache_path(path)
@@ -137,26 +137,26 @@ module Serve
         }.to_yaml
         cache_page(metadata, response.body, path)
       end
-
+      
       def page_cache_path(path)
         path = (path.empty? || path == "/") ? "/_site-root" : URI.unescape(path)
         root_dir = File.expand_path(page_cache_directory)
         cache_path = File.expand_path(File.join(root_dir, path), root_dir)
         cache_path if cache_path.index(root_dir) == 0
       end
-
+      
       def expire_page(path)
         return unless perform_caching
-
+        
         if path = page_cache_path(path)
           File.delete("#{path}.yml") if File.exists?("#{path}.yml")
           File.delete("#{path}.data") if File.exists?("#{path}.data")
         end
       end
-
+      
       def cache_page(metadata, content, path)
         return unless perform_caching
-
+        
         if path = page_cache_path(path)
           FileUtils.makedirs(File.dirname(path))
           #dont want yml without data
