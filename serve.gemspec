@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{serve}
-  s.version = "0.10.2"
+  s.version = "0.11.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["John W. Long", "Adam I. Williams"]
-  s.date = %q{2010-05-13}
+  s.date = %q{2010-05-24}
   s.default_executable = %q{serve}
   s.description = %q{Serve is a small web server (based on WEBrick) that makes it easy to serve ERB or HAML from any directory. Serve is an ideal tool for building HTML prototypes of Rails applications. Serve can also handle SASS, Textile, and Markdown if the appropriate gems are installed.}
   s.email = %q{me@johnwlong.com}
@@ -45,25 +45,20 @@ Gem::Specification.new do |s|
      "lib/serve/response_cache.rb",
      "lib/serve/version.rb",
      "lib/serve/view_helpers.rb",
-     "lib/serve/webrick/extensions.rb",
-     "lib/serve/webrick/server.rb",
-     "lib/serve/webrick/servlet.rb",
      "rails/init.rb",
      "spec/application_spec.rb",
      "spec/response_cache_spec.rb",
-     "spec/serve_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/jlong/serve}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{Serve is a small web server that makes it easy to serve ERB or HAML from any directory.}
   s.test_files = [
     "spec/application_spec.rb",
      "spec/response_cache_spec.rb",
-     "spec/serve_spec.rb",
      "spec/spec_helper.rb"
   ]
 
@@ -71,15 +66,15 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<activesupport>, [">= 2.0.2"])
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<activesupport>, ["= 2.3.5"])
       s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
     else
-      s.add_dependency(%q<activesupport>, [">= 2.0.2"])
+      s.add_dependency(%q<activesupport>, ["= 2.3.5"])
       s.add_dependency(%q<rspec>, [">= 1.2.9"])
     end
   else
-    s.add_dependency(%q<activesupport>, [">= 2.0.2"])
+    s.add_dependency(%q<activesupport>, ["= 2.3.5"])
     s.add_dependency(%q<rspec>, [">= 1.2.9"])
   end
 end
