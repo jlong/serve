@@ -111,14 +111,14 @@ module Serve
         end
         response
       end
-
+      
       def client_has_cache?(metadata, request)
           return false unless request
           request_time = Time.httpdate(request.env["HTTP_IF_MODIFIED_SINCE"]) rescue nil
           response_time = Time.httpdate(metadata['headers']['Last-Modified']) rescue nil
           return request_time && response_time && response_time <= request_time
       end
-
+      
       # Writes a response to disk.
       def write_response(path, response)
         if response.cache_timeout

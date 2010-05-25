@@ -94,8 +94,8 @@ module Serve #:nodoc:
       value = params[key]
       return default if value.blank?
       case value.strip.downcase
-        when 'true', '1'  : true
-        when 'false', '0' :  false
+        when 'true', '1'  then true
+        when 'false', '0' then false
         else raise 'Invalid value'
       end
     end

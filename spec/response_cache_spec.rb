@@ -62,7 +62,7 @@ describe Serve::ResponseCache do
       @cache.cache_response(url, response)
       name = "#{@dir}/test/me.yml"
       File.exists?(name).should == true
-      file(name).should == "--- \nexpires: 2007-02-08 17:37:09 Z\nheaders: \n  Last-Modified: Tue, 27 Feb 2007 06:13:43 GMT\n" 
+      file(name).should match("expires: 2007-02-08 17:37:09 Z")
       data_name = "#{@dir}/test/me.data"
       file(data_name).should == "content" 
     end

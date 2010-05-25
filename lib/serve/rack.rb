@@ -3,7 +3,6 @@ require 'rack'
 
 module Serve
   class Request < Rack::Request
-    
     def query
       @query ||= Rack::Utils.parse_nested_query(query_string)
     end
@@ -15,10 +14,17 @@ module Serve
     def headers
       @headers ||= Headers.new(@env)
     end
-    
   end
   
   class Response < Rack::Response
+    def body=(value)
+      # needed for Ruby 1.9
+      if value.respond_to? :each
+        super(value)
+      else
+        super([value])
+      end
+    end
   end
   
   # Borrowed from ActionDispatch in Rails
@@ -51,7 +57,6 @@ module Serve
   end
   
   class RackAdapter
-    
     def initialize(root)
       @root = root
     end
@@ -83,6 +88,5 @@ module Serve
       response.body = "Not found!"
       response
     end
-    
   end
 end
