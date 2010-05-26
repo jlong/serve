@@ -1,4 +1,4 @@
-= Serve
+= Serve - A Rapid Prototyping Framework for Web Applications
 
 Serve is a small Rack-based web server that makes it easy to serve HTML, ERB, or HAML from any directory.
 
