@@ -163,7 +163,7 @@ ViewHelpers module and begin declaring your helpers:
 
 == More Information
 
-You can find more information about Serve, including a detailed ScreenCast, on
+You can find more information about Serve, including a detailed Screencast, on
 the GitHub wiki:
 
 http://wiki.github.com/jlong/serve
