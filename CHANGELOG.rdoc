@@ -1,5 +1,9 @@
 = Change Log
 
+== 0.11.2 (May 25, 2010) 
+
+* Add dependency on Rack to gemspec [jlong]
+
 == 0.11.1 (May 25, 2010) 
 
 * Added support for Ruby 1.9 [jlong]
