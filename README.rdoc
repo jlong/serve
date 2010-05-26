@@ -45,7 +45,7 @@ Some systems, like the Mac, may require that you type:
 
 If you are new to the command prompt see:
 
-  http://kb.iu.edu/data/amog.html
+http://kb.iu.edu/data/amog.html
 
 You may also want to google "command prompt windows" if you are on a PC or
 "command prompt osx" if you are on a Mac to find a simple tutorial.
@@ -166,11 +166,11 @@ ViewHelpers module and begin declaring your helpers:
 You can find more information about Serve, including a detailed ScreenCast, on
 the GitHub wiki:
 
-  http://wiki.github.com/jlong/serve
+http://wiki.github.com/jlong/serve
 
 All development takes place on GitHub:
 
-  http://github.com/jlong/serve
+http://github.com/jlong/serve
 
 
 == License
