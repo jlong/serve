@@ -5,13 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{serve}
-  s.version = "0.11.0"
+  s.version = "0.11.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["John W. Long", "Adam I. Williams"]
-  s.date = %q{2010-05-24}
+  s.date = %q{2010-05-25}
   s.default_executable = %q{serve}
-  s.description = %q{Serve is a small web server (based on WEBrick) that makes it easy to serve ERB or HAML from any directory. Serve is an ideal tool for building HTML prototypes of Rails applications. Serve can also handle SASS, Textile, and Markdown if the appropriate gems are installed.}
+  s.description = %q{Serve is a small Rack-based web server that makes it easy to serve ERB or HAML from any directory. Serve is an ideal tool for building HTML prototypes of Rails applications. Serve can also handle SASS, Textile, and Markdown if the appropriate gems are installed.}
   s.email = %q{me@johnwlong.com}
   s.executables = ["serve"]
   s.extra_rdoc_files = [
