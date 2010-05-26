@@ -1,5 +1,9 @@
 = Change Log
 
+== edge
+
+* Check for config.ru and use the `rackup` command instead if present.
+
 == 0.11.2 (May 25, 2010) 
 
 * Add dependency on Rack to gemspec [jlong]

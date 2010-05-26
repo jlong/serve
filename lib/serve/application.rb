@@ -24,8 +24,11 @@ module Serve
         puts help
       else
         Dir.chdir(options[:root])
-        if rails_app?
+        case
+        when rails_app?
           run_rails_app
+        when rack_app?
+          run_rack_app
         else
           run_server
         end
@@ -76,9 +79,14 @@ module Serve
         "  textile, and markdown file extensions.",
         "  ",
         "  If the Rails command script/server exists in the current directory the ",
-        "  script will start that instead with the specified environment or the ",
-        "  development environment if none is specified. Rails apps are started by ",
-        "  default on port 3000.",
+        "  script will start that instead.",
+        "  ",
+        "  If a Rack configuration file (config.ru) exists in the current directory the ",
+        "  script will start that using the rackup command.",
+        "  ",
+        "  A Rails or Rack app will start with the environment specified or the ",
+        "  development environment if none is specified. Rails and Rack apps are ",
+        "  started by default on port 3000.",
         "  ",
         "Options:",
         "  -h, --help      Show this message and quit.",
@@ -105,7 +113,7 @@ module Serve
       end
       
       def extract_port(args)
-        (args.delete(args.find {|a| /^\d\d\d*$/.match(a) }) || (rails_app? ? 3000 : 4000)).to_i
+        (args.delete(args.find {|a| /^\d\d\d*$/.match(a) }) || ((rails_app? or rack_app?) ? 3000 : 4000)).to_i
       end
       
       def extract_address(args)
@@ -132,6 +140,18 @@ module Serve
       
       def run_rails_app
         system "#{rails_script_server} -p #{options[:port]} -b #{options[:address]} -e #{options[:environment]}"
+      end
+      
+      def rack_config
+        @rack_config ||= options[:root] + '/config.ru'
+      end
+      
+      def rack_app?
+        File.file?(rack_config)
+      end
+      
+      def run_rack_app
+        system "rackup -p #{options[:port]} -o #{options[:address]} -E #{options[:environment]} #{rack_config}"
       end
       
       def run_server
