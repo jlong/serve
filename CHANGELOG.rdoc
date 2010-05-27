@@ -1,5 +1,9 @@
 = Change Log
 
+== 0.11.4 (May 27, 2010)
+
+* fixed image helper [jlong]
+
 == 0.11.3 (May 26, 2010) 
 
 * Check for config.ru and use the `rackup` command instead if present.

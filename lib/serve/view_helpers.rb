@@ -166,7 +166,7 @@ module Serve #:nodoc:
     end
     
     def image(name, options = {})
-      image_tag(append_image_extension("/images/admin/#{name}"), options)
+      image_tag(append_image_extension("/images/#{name}"), options)
     end
     
     def javascript_tag(content = nil, html_options = {})
