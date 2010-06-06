@@ -1,5 +1,9 @@
 = Change Log
 
+== 0.11.5 (June 5, 2010)
+
+* Add support for static asset processing (HTML, XML, etc..); directories with index.html files should now resolve. Yay! [jlong]
+
 == 0.11.4 (May 27, 2010)
 
 * fixed image helper [jlong]
