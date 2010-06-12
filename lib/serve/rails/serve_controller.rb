@@ -37,7 +37,7 @@ module Serve
         #
         def install_view_helpers(handler, view_helpers)
           controller = self
-          handler.metaclass.module_eval do
+          handler.singleton_class.module_eval do
             define_method :install_view_helpers do |context|
               super(context)
               # Make available to view helpers

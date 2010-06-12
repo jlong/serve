@@ -40,7 +40,7 @@ module Serve #:nodoc:
     def install_view_helpers(context)
       view_helpers_file_path = @root_path + '/view_helpers.rb'
       if File.file?(view_helpers_file_path)
-        context.metaclass.module_eval(File.read(view_helpers_file_path) + "\ninclude ViewHelpers", view_helpers_file_path)
+        context.singleton_class.module_eval(File.read(view_helpers_file_path) + "\ninclude ViewHelpers", view_helpers_file_path)
       end
     end
     

@@ -19,7 +19,7 @@ module Serve # :nodoc:
       end
       
       def define_find_cache(&block)
-        metaclass.module_eval do
+        singleton_class.module_eval do
           define_method :find_cache, &block
         end
       end
