@@ -8,3 +8,4 @@ tmtags
 coverage
 rdoc
 pkg
+.rvmrc
