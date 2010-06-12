@@ -1,7 +1,7 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
 require 'rubygems'
-gem 'activesupport', '= 2.3.5'
+gem 'activesupport'
 
 require 'serve'
 require 'spec'

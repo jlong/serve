@@ -1,4 +1,4 @@
-require 'active_support'
+require 'active_support/all'
 
 require 'serve/version'
 require 'serve/file_resolver'

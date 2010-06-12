@@ -8,7 +8,7 @@ begin
     gem.homepage = "http://github.com/jlong/serve"
     gem.authors = ["John W. Long", "Adam I. Williams"]
     gem.add_dependency 'rack', '= 1.1.0'
-    gem.add_dependency 'activesupport', '= 2.3.5'
+    gem.add_dependency 'activesupport', '>= 2.3.5'
     gem.add_development_dependency "rspec", ">= 1.2.9"
     gem.files = FileList["[A-Z]*", "{bin,lib,rails,spec}/**/*"].exclude("tmp")
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
