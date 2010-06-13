@@ -1,5 +1,9 @@
 = Change Log
 
+== 0.11.6 (June 13, 2010)
+
+* Support for activesupport 3.x [railsjedi]
+
 == 0.11.5 (June 5, 2010)
 
 * Add support for static asset processing (HTML, XML, etc..); directories with index.html files should now resolve. Yay! [jlong]
