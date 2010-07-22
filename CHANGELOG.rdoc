@@ -1,5 +1,10 @@
 = Change Log
 
+== 0.11.7 (July 22, 2010)
+
+* Use latest version of Rack
+* Use Mongrel instead of Webrick by default
+
 == 0.11.6 (June 13, 2010)
 
 * Support for activesupport 3.x [railsjedi]

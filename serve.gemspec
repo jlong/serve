@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{serve}
-  s.version = "0.11.6"
+  s.version = "0.11.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["John W. Long", "Adam I. Williams"]
-  s.date = %q{2010-06-13}
+  s.date = %q{2010-07-22}
   s.default_executable = %q{serve}
   s.description = %q{Serve is a small Rack-based web server that makes it easy to serve ERB or HAML from any directory. Serve is an ideal tool for building HTML prototypes of Rails applications. Serve can also handle SASS, Textile, and Markdown if the appropriate gems are installed.}
   s.email = %q{me@johnwlong.com}
@@ -70,16 +70,16 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rack>, ["= 1.1.0"])
+      s.add_runtime_dependency(%q<rack>, [">= 1.2.1"])
       s.add_runtime_dependency(%q<activesupport>, [">= 2.3.5"])
       s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
     else
-      s.add_dependency(%q<rack>, ["= 1.1.0"])
+      s.add_dependency(%q<rack>, [">= 1.2.1"])
       s.add_dependency(%q<activesupport>, [">= 2.3.5"])
       s.add_dependency(%q<rspec>, [">= 1.2.9"])
     end
   else
-    s.add_dependency(%q<rack>, ["= 1.1.0"])
+    s.add_dependency(%q<rack>, [">= 1.2.1"])
     s.add_dependency(%q<activesupport>, [">= 2.3.5"])
     s.add_dependency(%q<rspec>, [">= 1.2.9"])
   end
