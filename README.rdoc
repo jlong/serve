@@ -164,7 +164,8 @@ module and define your helper methods there:
     end
   end
 
-Helpers have full access to the request and response objects so you can
+Helpers have full access to the request and response objects so you can easily
+read and manipulate headers.
 
 
 == More Information
