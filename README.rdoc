@@ -106,7 +106,7 @@ Here is an example "config.ru" file:
   use Rack::ShowExceptions  # Nice looking errors
   
   # The project root directory
-  root = File.dirname(__FILE__)  
+  root = ::File.dirname(__FILE__)  
   
   # Rack Application
   run Rack::Cascade.new([
