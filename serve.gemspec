@@ -72,16 +72,22 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<rack>, [">= 1.2.1"])
       s.add_runtime_dependency(%q<activesupport>, [">= 2.3.5"])
+      s.add_runtime_dependency(%q<mongrel>)
+      s.add_runtime_dependency(%q<i18n>)
       s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
     else
       s.add_dependency(%q<rack>, [">= 1.2.1"])
       s.add_dependency(%q<activesupport>, [">= 2.3.5"])
       s.add_dependency(%q<rspec>, [">= 1.2.9"])
+      s.add_dependency(%q<mongrel>)
+      s.add_dependency(%q<il8n>)
     end
   else
     s.add_dependency(%q<rack>, [">= 1.2.1"])
     s.add_dependency(%q<activesupport>, [">= 2.3.5"])
     s.add_dependency(%q<rspec>, [">= 1.2.9"])
+    s.add_dependency(%q<mongrel>)
+    s.add_dependency(%q<il8n>)
   end
 end
 
