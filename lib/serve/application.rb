@@ -165,9 +165,21 @@ module Serve
             Rack::Directory.new(root)
           ])
         end
-        mongrel = Rack::Handler.get('mongrel')
-        mongrel.run app, :Port => options[:port], :Host => options[:address] do |server|
-          puts "Mongrel #{Mongrel::Const::MONGREL_VERSION} available at #{options[:address]}:#{options[:port]}"
+        begin
+          mongrel = Rack::Handler.get('mongrel')
+          mongrel.run app, :Port => options[:port], :Host => options[:address] do |server|
+            puts "Mongrel #{Mongrel::Const::MONGREL_VERSION} available at #{options[:address]}:#{options[:port]}"
+          end
+        rescue LoadError
+          begin
+            thin = Rack::Handler.get('thin')
+            thin.run app, :Port => options[:port], :Host => options[:address] do |server|
+              puts "Thin available at #{options[:address]}:#{options[:port]}"
+            end
+          rescue LoadError
+            puts 'Neither mongrel nor thin are installed. One of the two must be installed to use serve.'
+            raise
+          end
         end
       end
   end
