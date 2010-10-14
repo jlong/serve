@@ -18,6 +18,8 @@ module Serve
     def run(args = ARGV)
       @options = parse(args)
       case
+      when options[:create]
+      when options[:convert]
       when options[:version]
         puts version
       when options[:help]
@@ -41,6 +43,7 @@ module Serve
     
     def parse(args)
       args = normalize_args(args)
+      options[:create]      = extract_creation(args)
       options[:help]        = extract_boolean(args, '-h', '--help')
       options[:version]     = extract_boolean(args, '-v', '--version')
       options[:environment] = extract_environment(args)
@@ -63,6 +66,7 @@ module Serve
         "  #{program} [address:port] [environment] [directory]",
         "  #{program} [address] [port] [environment] [directory]",
         "  #{program} [options]",
+        "  #{program} [create] [name] [directory]"
         "  ",
         "Description:",
         "  Starts a WEBrick server on the specified address and port with its document ",
@@ -128,6 +132,20 @@ module Serve
           end
         end
         Dir.pwd
+      end
+      
+      def extract_creation(args)
+        args.delete('create')
+        args.reverse!
+        {
+         :name      => {args.first ? 'mockup' : args.pop }
+         :directory => {args.first ? Dir.pwd  : File.expand_path(args.pop) } 
+        }
+      end
+      
+      def extract_conversion(args)
+        args.delete('convert')
+        {:directory => {args.first ? Dir.pwd : File.expand_path(args.pop)} }
       end
       
       def rails_script_server
