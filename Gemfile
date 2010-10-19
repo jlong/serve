@@ -1,14 +1,14 @@
-source "http://gemcutter.org"
+source "http://rubygems.org"
 
-gem "jeweler"
-gem "rake"
-gem "rspec", "1.3.0"
-gem "rack", "1.1.0"
+gem 'jeweler',          '~> 1.4.0'
+gem 'rake',             '~> 0.8.7'
+gem 'rspec',            '~> 1.3.1'
+gem 'rack',             '~> 1.2.1'
 
 # activesupport 2.x
-# gem "activesupport", "2.3.5"
+# gem 'activesupport', '2.3.5'
 
-# activesupport 3.x
-gem "activesupport", ">= 3.0.0.beta"
-gem "tzinfo"
-gem "i18n"
+# activesupport 3.0.x
+gem 'activesupport',    '~> 3.0.1'
+gem 'tzinfo',           '~> 0.3.23'
+gem 'i18n',             '~> 0.4.1'
