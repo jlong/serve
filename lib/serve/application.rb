@@ -44,6 +44,7 @@ module Serve
     def parse(args)
       args = normalize_args(args)
       options[:create]      = extract_creation(args)
+      options[:convert]     = extract_conversion(args)
       options[:help]        = extract_boolean(args, '-h', '--help')
       options[:version]     = extract_boolean(args, '-v', '--version')
       options[:environment] = extract_environment(args)
@@ -67,6 +68,7 @@ module Serve
         "  #{program} [address] [port] [environment] [directory]",
         "  #{program} [options]",
         "  #{program} [create] [name] [directory]"
+        "  #{program} [convert] [directory]",
         "  ",
         "Description:",
         "  Starts a WEBrick server on the specified address and port with its document ",
