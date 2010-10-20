@@ -19,7 +19,11 @@ module Serve
       @options = parse(args)
       case
       when options[:create]
+        Serve::Project.new(options[:create]).create
+        # TODO: add a finish statement -> perhaps something similar to compasses
       when options[:convert]
+        Serve::Project.new(options[:convert]).convert
+        # TODO: add a finish statement -> perhaps something similar to compasses
       when options[:version]
         puts version
       when options[:help]
@@ -43,10 +47,10 @@ module Serve
     
     def parse(args)
       args = normalize_args(args)
-      options[:create]      = extract_creation(args)
-      options[:convert]     = extract_conversion(args)
       options[:help]        = extract_boolean(args, '-h', '--help')
       options[:version]     = extract_boolean(args, '-v', '--version')
+      options[:create]      = extract_creation(args)
+      options[:convert]     = extract_conversion(args)
       options[:environment] = extract_environment(args)
       options[:root]        = extract_root(args)
       options[:address]     = extract_address(args)
@@ -67,7 +71,7 @@ module Serve
         "  #{program} [address:port] [environment] [directory]",
         "  #{program} [address] [port] [environment] [directory]",
         "  #{program} [options]",
-        "  #{program} [create] [name] [directory]"
+        "  #{program} [create] [name] [directory]",
         "  #{program} [convert] [directory]",
         "  ",
         "Description:",
@@ -137,17 +141,21 @@ module Serve
       end
       
       def extract_creation(args)
-        args.delete('create')
-        args.reverse!
-        {
-         :name      => {args.first ? 'mockup' : args.pop }
-         :directory => {args.first ? Dir.pwd  : File.expand_path(args.pop) } 
-        }
+        if args.delete('create')
+          args.reverse!
+          {
+           :name      => (args.first ? args.pop : 'mockup'),
+           :directory => (args.first ? File.expand_path(args.pop) : Dir.pwd),
+           :framework => (args.first ? args.pop : nil)
+          }
+        end
       end
       
       def extract_conversion(args)
-        args.delete('convert')
-        {:directory => {args.first ? Dir.pwd : File.expand_path(args.pop)} }
+        if args.delete('convert')
+          {:directory => (args.first ? File.expand_path(args.pop) : Dir.pwd),
+           :framework => (args.first ? args.pop : nil) }
+        end
       end
       
       def rails_script_server
