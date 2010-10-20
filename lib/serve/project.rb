@@ -1,6 +1,6 @@
 #
-# Serve::Project.new('mockup', '.').create
-# Serve::Project.new('mockup', '.').convert
+# Serve::Project.new(options).create
+# Serve::Project.new(options).convert
 #
 #
 module Serve
@@ -8,11 +8,11 @@ module Serve
     attr_reader :name, :location, :framework
     
     
-    def initialize(name, location, framework=nil)
-      @name       = name
-      @location   = location ? File.join(File.expand_path(location), underscore(@name)) : File.join(Dir.pwd, underscore(@name))
+    def initialize(options)
+      @name       = options[:name]
+      @location   = build_location(options[:directory])
       @full_name  = git_config('user.name') || 'Your Full Name'
-      @framework  = framework # TODO: javascript framework to load (maybe use an array to load several at once)
+      @framework  = options[:framework]
     end
     
     
@@ -93,8 +93,8 @@ relative_assets       = true
       #
       def config_ru
         <<-CONFIG_RU
-gem 'active_support', '~> 2.3.8'
-gem 'serve',          '~> 0.11.7'
+gem 'activesupport',  '~> 3.0.1'
+gem 'serve',          '~> #{Serve.version}'
 
 require 'serve'
 require 'serve/rack'
@@ -157,6 +157,7 @@ pkg
 ## PROJECT::SPECIFIC
 *.gem
 .rvmrc
+.bundle
         IGNORE
       end
       
@@ -239,6 +240,16 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       def git_config(key)
         value = `git config #{key}`.chomp
         value.empty? ? nil : value
+      end
+      
+      
+      ##
+      # Build the target directory
+      #
+      def build_location(directory)
+        dir = File.expand_path(directory)
+        return dir unless @name
+        return File.join(dir, underscore(@name))
       end
     
 
