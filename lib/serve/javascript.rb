@@ -13,6 +13,9 @@ module Serve
     SCRIPTY_VERSION   = '1.8.3'
     MOOTOOLS          = '1.2.5'
     
+    FRAMEWORKS        = %w(jQuery jQueryUI MooTools Prototype Scriptaculous)
+    
+    
     # Initialize
     #
     # e.g.
@@ -38,10 +41,12 @@ module Serve
       when 'prototype'      then get('prototype')
       when 'scriptaculous'  then get('scriptaculous')
       else
-        false
+        puts "** #{framework} is not currently supported. **"
+        puts "Currently supporting the following JavaScript Frameworks:"
+        puts "#{FRAMEWORKS.join(', ')}"
       end
-      
     end
+    
     
     private
       

@@ -6,13 +6,15 @@ describe Serve::Application do
   before :each do
     @app = Serve::Application.new
     @defopts = {
-      :help => false,
-      :help => false,
-      :version => false,
-      :environment => 'development',
-      :port => 4000,
-      :address => '0.0.0.0',
-      :root => Dir.pwd
+      :help         => false,
+      :version      => false,
+      :environment  => 'development',
+      :port         => 4000,
+      :address      => '0.0.0.0',
+      :root         => Dir.pwd,
+      :convert      => nil,
+      :create       => nil#,
+      # :framework    => nil
     }
   end
   
@@ -61,6 +63,34 @@ describe Serve::Application do
       dir = File.dirname(__FILE__)
       @app.parse([dir])[:root].should == File.expand_path(dir)
     end
+    
+    it "should parse ceate" do
+      create = ['create', 'newapp', '/Users/user']
+      @app.parse(create)[:create][:name].should == 'newapp'
+      @app.parse(create)[:create][:directory].should == '/Users/user'
+      @app.parse(create)[:create][:framework].should be_nil
+    end
+    
+    it "should parse convert" do
+      convert = ['convert', '/Users/user']
+      @app.parse(convert)[:convert][:directory].should == '/Users/user'
+      @app.parse(convert)[:convert][:framework].should be_nil
+    end
+    
+    
+    it "should parse create with a javascript framework" do
+      create = ['create', 'newapp', '/Users/user', 'jquery']
+      @app.parse(create)[:create][:name].should == 'newapp'
+      @app.parse(create)[:create][:directory].should == '/Users/user'
+      @app.parse(create)[:create][:framework].should == 'jquery'
+    end
+    
+    it "should parse convert with a javascript framework" do
+      convert = ['convert', '/Users/user', 'mootools']
+      @app.parse(convert)[:convert][:directory].should == '/Users/user'
+      @app.parse(convert)[:convert][:framework].should == 'mootools'
+    end
+    
     
     it "should detect invalid arguments" do
       lambda { @app.parse(["--invalid"]) }.should raise_error(Serve::Application::InvalidArgumentsError)
