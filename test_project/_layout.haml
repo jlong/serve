@@ -1,0 +1,12 @@
+!!! Strict
+%html
+  %head
+    %title= @title
+    %link{:rel=>"stylesheet", :type=>"text/css", :href=>"/main.sass"}/
+    %style{:type=>"text/css"}
+      :sass
+        body
+          color: red
+  %body
+    %h1= @title
+    = yield
