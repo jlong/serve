@@ -6,6 +6,7 @@
 module Serve
   class Project
     attr_reader :name, :location, :framework
+    ACTIVESUPPORT_VERSION = '3.0.1'
     
     
     def initialize(options)
@@ -26,6 +27,7 @@ module Serve
       ['public/images', 'public/javascripts', 'public/stylesheets', 'sass'].each do |file|  
         make_dir_for(join_with_location(file)) 
       end
+      install_javascript_framework
     end
     
     
@@ -41,6 +43,7 @@ module Serve
       move_file('stylesheets', 'public/')
       move_file('javascripts', 'public/')
       move_file('src', 'sass')
+      install_javascript_framework
     end
     
     
@@ -60,6 +63,15 @@ module Serve
         create_file(join_with_location('compass.config'), compass_config)
         FileUtils.touch(join_with_location('README.mkd'))
         FileUtils.touch(join_with_location('tmp/restart.txt'))
+      end
+      
+      
+      ##
+      # Install a JavaScript Framework
+      #
+      def install_javascript_framework
+        return unless @framework
+        Serve::JavaScript.new(@location).install(@framework)
       end
       
       
@@ -93,7 +105,7 @@ relative_assets       = true
       #
       def config_ru
         <<-CONFIG_RU
-gem 'activesupport',  '~> 3.0.1'
+gem 'active_support', '~> #{ACTIVESUPPORT_VERSION}'
 gem 'serve',          '~> #{Serve.version}'
 
 require 'serve'

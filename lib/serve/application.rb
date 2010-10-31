@@ -153,6 +153,7 @@ module Serve
       
       def extract_conversion(args)
         if args.delete('convert')
+          args.reverse!
           {:directory => (args.first ? File.expand_path(args.pop) : Dir.pwd),
            :framework => (args.first ? args.pop : nil) }
         end
