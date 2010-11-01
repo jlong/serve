@@ -13,8 +13,7 @@ describe Serve::Application do
       :address      => '0.0.0.0',
       :root         => Dir.pwd,
       :convert      => nil,
-      :create       => nil#,
-      # :framework    => nil
+      :create       => nil
     }
   end
   
@@ -79,14 +78,14 @@ describe Serve::Application do
     
     
     it "should parse create with a javascript framework" do
-      create = ['create', 'newapp', '/Users/user', 'jquery']
+      create = ['create', 'newapp', '/Users/user', '-f', 'jquery']
       @app.parse(create)[:create][:name].should == 'newapp'
       @app.parse(create)[:create][:directory].should == '/Users/user'
       @app.parse(create)[:create][:framework].should == 'jquery'
     end
     
     it "should parse convert with a javascript framework" do
-      convert = ['convert', '/Users/user', 'mootools']
+      convert = ['convert', '/Users/user', '--framework', 'mootools']
       @app.parse(convert)[:convert][:directory].should == '/Users/user'
       @app.parse(convert)[:convert][:framework].should == 'mootools'
     end
