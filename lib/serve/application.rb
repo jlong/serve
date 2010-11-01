@@ -20,7 +20,7 @@ module Serve
       case
       when options[:create]
         Serve::Project.new(options[:create]).create
-        # TODO: add a finish statement -> perhaps something similar to compasses
+        puts " ~ A new serve project '#{options[:create][:name]}' has been created in #{options[:create][:directory]}."
       when options[:convert]
         Serve::Project.new(options[:convert]).convert
         # TODO: add a finish statement -> perhaps something similar to compasses
@@ -99,6 +99,7 @@ module Serve
         "  started by default on port 3000.",
         "  ",
         "Options:",
+        "  -f, --framework The name of the JavaScript Framework you'd like to include.",
         "  -h, --help      Show this message and quit.",
         "  -v, --version   Show the program version number and quit."
       ].join("\n")
@@ -140,22 +141,35 @@ module Serve
         Dir.pwd
       end
       
+      
+      def extract_framework(args, *opts)
+        framework = nil
+        opts.each do |opt|
+          framework = args.pop if args.delete(opt)
+        end
+        framework
+      end
+      
+
       def extract_creation(args)
         if args.delete('create')
+          framework = extract_framework(args, '-f', '--framework')
           args.reverse!
           {
+           :framework => framework,
            :name      => (args.first ? args.pop : 'mockup'),
-           :directory => (args.first ? File.expand_path(args.pop) : Dir.pwd),
-           :framework => (args.first ? args.pop : nil)
+           :directory => (args.first ? File.expand_path(args.pop) : Dir.pwd)
           }
         end
       end
       
       def extract_conversion(args)
         if args.delete('convert')
-          args.reverse!
-          {:directory => (args.first ? File.expand_path(args.pop) : Dir.pwd),
-           :framework => (args.first ? args.pop : nil) }
+          framework = extract_framework(args, '-f', '--framework')
+          {
+           :directory => (args.first ? File.expand_path(args.pop) : Dir.pwd),
+           :framework => framework 
+          }
         end
       end
       
