@@ -66,25 +66,34 @@ module Serve
     def help
       program = File.basename($0)
       [
+        "Serve is a rapid prototyping framework for Web applications. This is a basic ",
+        "help message containing pointers to more information.",
+        "  ",
         "Usage:",
+        "  #{program} -h/--help",
+        "  #{program} -v/--version",
         "  #{program} [port] [environment] [directory]",
         "  #{program} [address:port] [environment] [directory]",
         "  #{program} [address] [port] [environment] [directory]",
-        "  #{program} [options]",
-        "  #{program} [create] [name] [directory]",
-        "  #{program} [convert] [directory]",
+        "  #{program} command [arguments] [options]",
+        "  ",
+        "Examples:",
+        "  #{program}                   # start server on port 4000",
+        "  #{program} 2100              # start server on port 2100",
+        "  #{program} create mockups    # create a Serve project in mockups directory",
+        "  #{program} convert mockups   # convert a Compass project in mockups",
         "  ",
         "Description:",
-        "  Starts a WEBrick server on the specified address and port with its document ",
-        "  root set to the current working directory. (Optionally, you can specify the ",
+        "  Starts a web server on the specified address and port with its document root ",
+        "  set to the current working directory. (Optionally, you can specify the ",
         "  directory as the last parameter.) By default the command uses 0.0.0.0 for ",
         "  the address and 4000 for the port. This means that once the command has ",
         "  been started you can access the documents in the current directory with any ",
-        "  Web browser at:",
+        "  web browser at:",
         "  ",
         "    http://localhost:4000/",
         "  ",
-        "  If the haml, redcloth, or bluecloth gems are installed the command can serve ",
+        "  If the haml, redcloth, or bluecloth gems are installed the command can handle ",
         "  Haml, Sass, SCSS, Textile, and Markdown for documents with haml, sass, scss, ",
         "  textile, and markdown file extensions.",
         "  ",
@@ -92,16 +101,31 @@ module Serve
         "  script will start that instead.",
         "  ",
         "  If a Rack configuration file (config.ru) exists in the current directory the ",
-        "  script will start that using the rackup command.",
+        "  script will start that using the `rackup` command.",
         "  ",
         "  A Rails or Rack app will start with the environment specified or the ",
         "  development environment if none is specified. Rails and Rack apps are ",
         "  started by default on port 3000.",
         "  ",
+        "Additional Commands:",
+        "  In addition the functionality listed above the following commands are ",
+        "  supported by Serve.",
+        "  ",
+        "  create",
+        "    Creates a new Rack-based Serve project with support for Haml, Sass, and",
+        "    Compass with the appropriate directory structure and configuration files.",
+        "  ",
+        "  convert",
+        "    Converts an existing Compass project into a Rack-based Serve project.",
+        "   ",
         "Options:",
         "  -f, --framework The name of the JavaScript Framework you'd like to include.",
+        "                  (Only valid for the create and convert commands.)",
         "  -h, --help      Show this message and quit.",
-        "  -v, --version   Show the program version number and quit."
+        "  -v, --version   Show the program version number and quit.",
+        "  ",
+        "Further information:",
+        "  http://github.com/jlong/serve/blob/master/README.rdoc"
       ].join("\n")
     end
     
@@ -141,7 +165,6 @@ module Serve
         Dir.pwd
       end
       
-      
       def extract_framework(args, *opts)
         framework = nil
         opts.each do |opt|
@@ -150,7 +173,6 @@ module Serve
         framework
       end
       
-
       def extract_creation(args)
         if args.delete('create')
           framework = extract_framework(args, '-f', '--framework')
@@ -209,19 +231,25 @@ module Serve
           ])
         end
         begin
-          mongrel = Rack::Handler.get('mongrel')
-          mongrel.run app, :Port => options[:port], :Host => options[:address] do |server|
-            puts "Mongrel #{Mongrel::Const::MONGREL_VERSION} available at #{options[:address]}:#{options[:port]}"
+          # Try Thin
+          thin = Rack::Handler.get('thin')
+          thin.run app, :Port => options[:port], :Host => options[:address] do |server|
+            puts "Thin #{Thin::VERSION::STRING} available at http://#{options[:address]}:#{options[:port]}"
           end
         rescue LoadError
           begin
-            thin = Rack::Handler.get('thin')
-            thin.run app, :Port => options[:port], :Host => options[:address] do |server|
-              puts "Thin available at #{options[:address]}:#{options[:port]}"
+            # Then Mongrel
+            mongrel = Rack::Handler.get('mongrel')
+            mongrel.run app, :Port => options[:port], :Host => options[:address] do |server|
+              puts "Mongrel #{Mongrel::Const::MONGREL_VERSION} available at http://#{options[:address]}:#{options[:port]}"
             end
           rescue LoadError
-            puts 'Neither mongrel nor thin are installed. One of the two must be installed to use serve.'
-            raise
+            # Then WEBrick
+            puts "Install Mongrel or Thin for better performance."
+            webrick = Rack::Handler.get('webrick')
+            webrick.run app, :Port => options[:port], :Host => options[:address] do |server|
+              trap("INT") { server.shutdown }
+            end
           end
         end
       end
