@@ -1,8 +1,6 @@
 source "http://rubygems.org"
 
-gem 'jeweler',          '~> 1.4.0'
 gem 'rake',             '~> 0.8.7'
-gem 'rspec',            '~> 1.3.1'
 gem 'rack',             '~> 1.2.1'
 
 # activesupport 2.x
@@ -12,3 +10,9 @@ gem 'rack',             '~> 1.2.1'
 gem 'activesupport',    '~> 3.0.1'
 gem 'tzinfo',           '~> 0.3.23'
 gem 'i18n',             '~> 0.4.1'
+
+group :development do
+  gem 'jeweler',          '~> 1.4.0'
+  gem 'haml'
+  gem 'rspec',            '~> 1.3.1'
+end

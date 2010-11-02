@@ -4,7 +4,8 @@ GEM
     activesupport (3.0.1)
     gemcutter (0.6.1)
     git (1.2.5)
-    i18n (0.4.1)
+    haml (3.0.23)
+    i18n (0.4.2)
     jeweler (1.4.0)
       gemcutter (>= 0.1.0)
       git (>= 1.2.5)
@@ -22,6 +23,7 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport (~> 3.0.1)
+  haml
   i18n (~> 0.4.1)
   jeweler (~> 1.4.0)
   rack (~> 1.2.1)
