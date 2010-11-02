@@ -179,7 +179,7 @@ module Serve
           args.reverse!
           {
            :framework => framework,
-           :name      => (args.first ? args.pop : 'mockup'),
+           :name      => (args.first ? args.pop : 'mockups'),
            :directory => (args.first ? File.expand_path(args.pop) : Dir.pwd)
           }
         end

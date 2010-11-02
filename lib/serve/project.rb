@@ -24,8 +24,8 @@ module Serve
     #
     def create
       setup_base
-      ['public/images', 'public/javascripts', 'public/stylesheets', 'sass'].each do |file|  
-        make_dir_for(join_with_location(file)) 
+      ['public/images', 'public/javascripts', 'public/stylesheets', 'sass', 'views'].each do |file|  
+        make_path(join_with_location(file)) 
       end
       install_javascript_framework
     end
@@ -56,12 +56,12 @@ module Serve
       # and for an existing compass project.
       #
       def setup_base
-        ['tmp', 'views/layouts', 'public'].each { |file| make_dir_for(join_with_location(file)) }
-        create_file(join_with_location('config.ru'),      config_ru)
-        create_file(join_with_location('LICENSE'),        license)
-        create_file(join_with_location('.gitignore'),     gitignore)
-        create_file(join_with_location('compass.config'), compass_config)
-        FileUtils.touch(join_with_location('README.mkd'))
+        ['tmp', 'public'].each { |file| make_path(join_with_location(file)) }
+        create_file(join_with_location('config.ru'),       config_ru)
+        create_file(join_with_location('LICENSE'),         license)
+        create_file(join_with_location('.gitignore'),      gitignore)
+        create_file(join_with_location('compass.config'),  compass_config)
+        create_file(join_with_location('README.markdown'), readme)
         FileUtils.touch(join_with_location('tmp/restart.txt'))
       end
       
@@ -81,20 +81,7 @@ module Serve
       # TODO: move to a file and load it from here
       #
       def compass_config
-        <<-COMPASS_CONFIG
-http_path             = '/'
-http_stylesheets_path = '/stylesheets'
-http_images_path      = '/images'
-http_javascripts_path = '/javascripts'
-
-sass_dir              = 'sass'
-css_dir               = 'public/stylesheets'
-images_dir            = 'public/images'
-javascripts_dir       = 'public/javascripts'
-
-relative_assets       = true
-
-        COMPASS_CONFIG
+        read_template('compass_config')
       end
       
       
@@ -104,73 +91,14 @@ relative_assets       = true
       # creates the config for rackup
       #
       def config_ru
-        <<-CONFIG_RU
-gem 'active_support', '~> #{ACTIVESUPPORT_VERSION}'
-gem 'serve',          '~> #{Serve.version}'
-
-require 'serve'
-require 'serve/rack'
-
-require 'sass/plugin/rack'
-require 'compass'
-
-# The project root directory
-root = ::File.dirname(__FILE__)
-
-# Compass
-Compass.add_project_configuration(root + '/compass.config')
-Compass.configure_sass_plugin!
-
-# Rack Middleware
-use Rack::ShowStatus      # Nice looking 404s and other messages
-use Rack::ShowExceptions  # Nice looking errors
-use Sass::Plugin::Rack    # Compile Sass on the fly
-
-# Rack Application
-if ENV['SERVER_SOFTWARE'] =~ /passenger/i
-  # Passendger only needs the adapter
-  run Serve::RackAdapter.new(root + '/views')
-else
-  # We use Rack::Cascade and Rack::Directory on other platforms to handle static 
-  # assets
-  run Rack::Cascade.new([
-    Serve::RackAdapter.new(root + '/views'),
-    Rack::Directory.new(root + '/public')
-  ])
-end
-        CONFIG_RU
+        read_template('config_ru')
       end
       
       ##
       # Git ignore file
       #
       def gitignore
-        <<-IGNORE
-## MAC OS
-.DS_Store
-
-## TEXTMATE
-*.tmproj
-tmtags
-
-## EMACS
-*~
-\#*
-.\#*
-
-## VIM
-*.swp
-
-## PROJECT::GENERAL
-coverage
-rdoc
-pkg
-
-## PROJECT::SPECIFIC
-*.gem
-.rvmrc
-.bundle
-        IGNORE
+        read_template('gitignore')
       end
       
       
@@ -178,28 +106,25 @@ pkg
       # Project license
       #
       def license
-        <<-LICENSE
-Copyright (c) #{Time.now.year} #{@full_name}
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-        LICENSE
+        read_template('license')
+      end
+      
+      
+      ##
+      # Project README
+      #
+      #
+      def readme
+        read_template('readme')
+      end
+      
+      
+      ##
+      # Read and eval template
+      #
+      def read_template(name)
+        contents = IO.read(File.dirname(__FILE__) + "/templates/#{name}")
+        instance_eval("%{#{contents}}")
       end
       
       
@@ -214,7 +139,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
       ##
       # Make directory for a given path
       #
-      def make_dir_for(path)
+      def make_path(path)
         FileUtils.mkdir_p(path)
       end
       

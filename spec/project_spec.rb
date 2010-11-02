@@ -86,7 +86,7 @@ describe Serve::Project do
       end
       
       it "should have a README file" do
-        File.exists?(File.join(@mockup_file, 'README.mkd')).should be_true
+        File.exists?(File.join(@mockup_file, 'README.markdown')).should be_true
       end
       
       it "should have a restart file" do
