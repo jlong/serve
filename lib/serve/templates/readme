@@ -4,7 +4,7 @@ What is this?
 This is a simple HTML prototype written in HAML or ERB that is designed to be
 viewed with Serve.
 
-What is serve? Serve is a rapid prototyping framework for Rails applications.
+What is Serve? Serve is a rapid prototyping framework for Rails applications.
 It is designed to compliment Rails development and enforce a strict separation
 of concerns between designer and developer. Using Serve with Rails allows the
 designer to happily work in his own space creating an HTML prototype of the
