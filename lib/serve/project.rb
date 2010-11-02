@@ -24,7 +24,7 @@ module Serve
     #
     def create
       setup_base
-      ['public/images', 'public/javascripts', 'public/stylesheets', 'sass', 'views'].each do |file|  
+      ['public/images', 'public/javascripts', 'public/stylesheets', 'sass'].each do |file|  
         make_path(join_with_location(file)) 
       end
       install_javascript_framework
@@ -56,7 +56,7 @@ module Serve
       # and for an existing compass project.
       #
       def setup_base
-        ['tmp', 'public'].each { |file| make_path(join_with_location(file)) }
+        ['tmp', 'public', 'views'].each { |file| make_path(join_with_location(file)) }
         create_file(join_with_location('config.ru'),       config_ru)
         create_file(join_with_location('LICENSE'),         license)
         create_file(join_with_location('.gitignore'),      gitignore)
