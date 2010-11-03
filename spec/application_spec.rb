@@ -78,14 +78,14 @@ describe Serve::Application do
     
     
     it "should parse create with a javascript framework" do
-      create = ['create', 'newapp', '/Users/user', '-f', 'jquery']
+      create = ['create', 'newapp', '/Users/user', '-j', 'jquery']
       @app.parse(create)[:create][:name].should == 'newapp'
       @app.parse(create)[:create][:directory].should == '/Users/user'
       @app.parse(create)[:create][:framework].should == 'jquery'
     end
     
     it "should parse convert with a javascript framework" do
-      convert = ['convert', '/Users/user', '--framework', 'mootools']
+      convert = ['convert', '/Users/user', '--javascript', 'mootools']
       @app.parse(convert)[:convert][:directory].should == '/Users/user'
       @app.parse(convert)[:convert][:framework].should == 'mootools'
     end
