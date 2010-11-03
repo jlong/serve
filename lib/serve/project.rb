@@ -47,6 +47,7 @@ module Serve
       move_file 'javascripts', 'public/'
       move_file 'src', 'sass'
       install_javascript_framework
+      note_old_compass_config
     end
     
     
@@ -83,6 +84,22 @@ module Serve
         if @framework
           action 'installing', @framework
           Serve::JavaScript.new(@location).install(@framework)
+        end
+      end
+      
+      
+      ##
+      # Display note about old compass config if it exists
+      #
+      def note_old_compass_config
+        old_config = normalize_path(@location, 'config.rb')
+        if File.exists? old_config
+          puts ""
+          puts "============================================================================"
+          puts " Please Note: You still need to copy your unique settings from config.rb to "
+          puts " compass.config. Remove config.rb when you are finished."
+          puts "============================================================================"
+          puts ""
         end
       end
       
@@ -178,7 +195,8 @@ module Serve
         from_path = normalize_path(@location, from)
         to_path = normalize_path(@location, to)
         if File.exists? from_path
-          action "move", "#{@location}{#{from} => #{to}}"
+          to = to + from if to[-1..-1] == "/"
+          action "move", "#{@location}/{#{from} => #{to}}"
           FileUtils.mv from_path, to_path
         end
       end
