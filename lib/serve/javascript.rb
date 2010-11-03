@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'open-uri'
 
 module Serve
   class JavaScript
@@ -52,30 +53,31 @@ module Serve
       
       def get(framework)
         library_path = File.join(install_directory, "#{framework.tr('_', '-')}.js")
-        system("curl -o #{library_path} #{self.send(framework)}")
+        lines = open(self.send(framework + "_url")) { |io| io.read }
+        open(library_path, "w+") { |io| io.write(lines) }
       end
       
       def install_directory
         File.join(@directory, 'public/javascripts')
       end
       
-      def jquery
+      def jquery_url
         "#{GOOGLE_AJAX_APIS}/jquery/#{JQUERY_VERSION}/jquery.min.js"
       end
       
-      def jquery_ui
+      def jquery_ui_url
         "#{GOOGLE_AJAX_APIS}/jqueryui/#{JQUERY_UI_VERSION}/jquery-ui.min.js"
       end
       
-      def mootools
+      def mootools_url
         "#{GOOGLE_AJAX_APIS}/mootools/#{MOOTOOLS}/mootools-yui-compressed.js"
       end
       
-      def prototype
+      def prototype_url
         "#{GOOGLE_AJAX_APIS}/prototype/#{PROTOTYPE_VERSION}/prototype.js"
       end
       
-      def scriptaculous
+      def scriptaculous_url
         "#{GOOGLE_AJAX_APIS}/scriptaculous/#{SCRIPTACULOUS_VERSION}/scriptaculous.js"
       end
         
