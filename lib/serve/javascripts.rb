@@ -10,7 +10,7 @@ module Serve
     JQUERY_UI_VERSION     = '1'
     PROTOTYPE_VERSION     = '1'
     SCRIPTACULOUS_VERSION = '1'
-    MOOTOOLS              = '1'
+    MOOTOOLS_VERSION      = '1'
     
     JAVASCRIPT_FRAMEWORKS = %w(jquery jquery-ui mootools prototype scriptaculous)
     
@@ -47,7 +47,7 @@ module Serve
     end
     
     def mootools_url
-      "#{GOOGLE_AJAX_APIS}/mootools/#{MOOTOOLS}/mootools-yui-compressed.js"
+      "#{GOOGLE_AJAX_APIS}/mootools/#{MOOTOOLS_VERSION}/mootools-yui-compressed.js"
     end
     
     def prototype_url
