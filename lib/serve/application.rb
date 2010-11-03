@@ -20,10 +20,8 @@ module Serve
       case
       when options[:create]
         Serve::Project.new(options[:create]).create
-        puts " ~ A new serve project '#{options[:create][:name]}' has been created in #{options[:create][:directory]}."
       when options[:convert]
         Serve::Project.new(options[:convert]).convert
-        # TODO: add a finish statement -> perhaps something similar to compasses
       when options[:version]
         puts version
       when options[:help]

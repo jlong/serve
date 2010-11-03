@@ -1,17 +1,17 @@
+require 'pathname'
+require 'serve/out'
+
 #
 # Serve::Project.new(options).create
 # Serve::Project.new(options).convert
 #
-#
 module Serve
   class Project
     attr_reader :name, :location, :framework
-    ACTIVESUPPORT_VERSION = '3.0.1'
-    
     
     def initialize(options)
       @name       = options[:name]
-      @location   = build_location(options[:directory])
+      @location   = normalize_location(options[:directory], @name)
       @full_name  = git_config('user.name') || 'Your Full Name'
       @framework  = options[:framework]
     end
@@ -20,13 +20,16 @@ module Serve
     ##
     # Create
     #
-    # create a new serve mockup
+    # create a new Serve project
     #
     def create
       setup_base
-      ['public/images', 'public/javascripts', 'public/stylesheets', 'sass'].each do |file|  
-        make_path(join_with_location(file)) 
-      end
+      %w(
+        public/images
+        public/javascripts
+        public/stylesheets
+        sass
+      ).each { |path| make_path path } 
       install_javascript_framework
     end
     
@@ -39,15 +42,17 @@ module Serve
     #
     def convert
       setup_base
-      move_file('images', 'public/')
-      move_file('stylesheets', 'public/')
-      move_file('javascripts', 'public/')
-      move_file('src', 'sass')
+      move_file 'images', 'public/'
+      move_file 'stylesheets', 'public/'
+      move_file 'javascripts', 'public/'
+      move_file 'src', 'sass'
       install_javascript_framework
     end
     
     
     private
+      
+      include Serve::Out
       
       ##
       # Setup Base
@@ -56,13 +61,18 @@ module Serve
       # and for an existing compass project.
       #
       def setup_base
-        ['tmp', 'public', 'views'].each { |file| make_path(join_with_location(file)) }
-        create_file(join_with_location('config.ru'),       config_ru)
-        create_file(join_with_location('LICENSE'),         license)
-        create_file(join_with_location('.gitignore'),      gitignore)
-        create_file(join_with_location('compass.config'),  compass_config)
-        create_file(join_with_location('README.markdown'), readme)
-        FileUtils.touch(join_with_location('tmp/restart.txt'))
+        %w(
+          .
+          public
+          tmp
+          views
+        ).each { |path| make_path path }
+        create_file 'config.ru',       config_ru
+        create_file 'LICENSE',         license
+        create_file '.gitignore',      gitignore
+        create_file 'compass.config',  compass_config
+        create_file 'README.markdown', readme
+        create_empty_file 'tmp/restart.txt'
       end
       
       
@@ -70,69 +80,80 @@ module Serve
       # Install a JavaScript Framework
       #
       def install_javascript_framework
-        return unless @framework
-        Serve::JavaScript.new(@location).install(@framework)
+        if @framework
+          action 'installing', @framework
+          Serve::JavaScript.new(@location).install(@framework)
+        end
       end
       
       
       ##
-      # Compass config
-      #
-      # TODO: move to a file and load it from here
+      # Reads template for compass.config
       #
       def compass_config
-        read_template('compass_config')
+        read_template 'compass_config'
       end
       
       
       ##
-      # Config ru
-      #
-      # creates the config for rackup
+      # Reads template for config.ru
       #
       def config_ru
-        read_template('config_ru')
+        read_template 'config_ru'
       end
       
       ##
-      # Git ignore file
+      # Reads template for git ignore file
       #
       def gitignore
-        read_template('gitignore')
+        read_template 'gitignore'
       end
       
       
       ##
-      # Project license
+      # Reads template for project license
       #
       def license
-        read_template('license')
+        read_template 'license'
       end
       
       
       ##
-      # Project README
-      #
+      # Reads template for project README
       #
       def readme
-        read_template('readme')
+        read_template 'readme'
       end
       
       
       ##
-      # Read and eval template
+      # Read and eval a template by name
       #
       def read_template(name)
-        contents = IO.read(File.dirname(__FILE__) + "/templates/#{name}")
-        instance_eval("%{#{contents}}")
+        contents = IO.read(normalize_path(File.dirname(__FILE__), "templates", name))
+        instance_eval "%{#{contents}}"
       end
       
       
       ##
       # Create file
       #
-      def create_file(path, contents)
-        File.open(path, 'w+') { |f| f.puts contents }
+      def create_file(file, contents)
+        path = normalize_path(@location, file)
+        unless File.exists? path
+          action "create", path
+          File.open(path, 'w+') { |f| f.puts contents }
+        else
+          action "exists", path
+        end
+      end
+      
+      ##
+      # Create empty file
+      #
+      def create_empty_file(file)
+        path = normalize_path(@location, file)
+        FileUtils.touch(path)
       end
       
       
@@ -140,26 +161,26 @@ module Serve
       # Make directory for a given path
       #
       def make_path(path)
-        FileUtils.mkdir_p(path)
+        path = normalize_path(@location, path)
+        unless File.exists? path
+          action "create", path
+          FileUtils.mkdir_p(path)
+        else
+          action "exists", path
+        end
       end
       
       
       ##
-      # Move File
-      #
-      # e.g.
-      #   move_file('images', 'public/')
+      # Moves a file at @location + from => @location + to
       # 
       def move_file(from, to)
-        FileUtils.mv(File.join(@location, from), File.join(@location, to)) if File.exists?(File.join(@location, from))
-      end
-      
-      
-      ##
-      # Join paths together
-      #
-      def join_with_location(path)
-        File.join(@location, path)
+        from_path = normalize_path(@location, from)
+        to_path = normalize_path(@location, to)
+        if File.exists? from_path
+          action "move", "#{@location}{#{from} => #{to}}"
+          FileUtils.mv from_path, to_path
+        end
       end
       
       
@@ -183,12 +204,20 @@ module Serve
       ##
       # Build the target directory
       #
-      def build_location(directory)
-        dir = File.expand_path(directory)
-        return dir unless @name
-        return File.join(dir, underscore(@name))
+      def normalize_location(path, name = nil)
+        path = File.join(path, underscore(name)) if name
+        path = normalize_path(path)
+        path
       end
-    
-
+      
+      ##
+      # Normalize a path relative to the current working directory
+      #
+      def normalize_path(*paths)
+        path = File.join(*paths)
+        Pathname.new(File.expand_path(path)).relative_path_from(Pathname.new(Dir.pwd)).to_s
+      end
+      
+      
   end
 end

@@ -6,16 +6,25 @@ describe Serve::Project do
   
   describe "Creating a new serve project" do
     
+    class SilentOut
+      def puts(*args); end
+      def print(*args); end
+    end
+    
     before(:all) do
       @options = {
         :name       => 'test_mockup',
         :directory  => File.dirname(__FILE__),
         :framework  => 'jquery'
       }
+      
       @mockup       = Serve::Project.new(@options)
-      @mockup_file  = File.expand_path(File.join(File.dirname(__FILE__), @options[:name]))
+      @mockup.stdout = SilentOut.new
+      @mockup.stderr = SilentOut.new
+      
+      @mockup_file  = Pathname.new(File.expand_path(File.join(File.dirname(__FILE__), @options[:name]))).relative_path_from(Pathname.new(Dir.pwd)).to_s
     end
-  
+    
     after(:all) do
       FileUtils.rm_rf(@mockup_file)
     end
