@@ -16,12 +16,7 @@ module Serve
       @framework  = options[:framework]
     end
     
-    
-    ##
-    # Create
-    #
-    # create a new Serve project
-    #
+    # Create a new Serve project
     def create
       setup_base
       %w(
@@ -33,13 +28,7 @@ module Serve
       install_javascript_framework
     end
     
-    
-    ##
-    # Convert
-    #
-    # convert an existing compass project to a
-    # server project
-    #
+    # Convert an existing Compass project to a Serve project
     def convert
       setup_base
       move_file 'images', 'public/'
@@ -50,17 +39,11 @@ module Serve
       note_old_compass_config
     end
     
-    
     private
       
       include Serve::Out
       
-      ##
-      # Setup Base
-      #
-      # Files required for both a new server project
-      # and for an existing compass project.
-      #
+      # Files required for both a new server project and for an existing compass project.
       def setup_base
         %w(
           .
@@ -76,10 +59,7 @@ module Serve
         create_empty_file 'tmp/restart.txt'
       end
       
-      
-      ##
-      # Install a JavaScript Framework
-      #
+      # Install a JavaScript framework if one was specified
       def install_javascript_framework
         if @framework
           action 'installing', @framework
@@ -87,10 +67,7 @@ module Serve
         end
       end
       
-      
-      ##
       # Display note about old compass config if it exists
-      #
       def note_old_compass_config
         old_config = normalize_path(@location, 'config.rb')
         if File.exists? old_config
@@ -103,58 +80,38 @@ module Serve
         end
       end
       
-      
-      ##
-      # Reads template for compass.config
-      #
+      # Read template for compass.config
       def compass_config
         read_template 'compass_config'
       end
       
-      
-      ##
-      # Reads template for config.ru
-      #
+      # Read template for config.ru
       def config_ru
         read_template 'config_ru'
       end
       
-      ##
-      # Reads template for git ignore file
-      #
+      # Read template for .gitignore file
       def gitignore
         read_template 'gitignore'
       end
       
-      
-      ##
-      # Reads template for project license
-      #
+      # Read template for project license
       def license
         read_template 'license'
       end
       
-      
-      ##
-      # Reads template for project README
-      #
+      # Read template for project README
       def readme
         read_template 'readme'
       end
       
-      
-      ##
       # Read and eval a template by name
-      #
       def read_template(name)
         contents = IO.read(normalize_path(File.dirname(__FILE__), "templates", name))
         instance_eval "%{#{contents}}"
       end
       
-      
-      ##
-      # Create file
-      #
+      # Create a file with contents
       def create_file(file, contents)
         path = normalize_path(@location, file)
         unless File.exists? path
@@ -165,18 +122,14 @@ module Serve
         end
       end
       
-      ##
-      # Create empty file
-      #
+      # Create an empty file
       def create_empty_file(file)
         path = normalize_path(@location, file)
         FileUtils.touch(path)
       end
       
       
-      ##
-      # Make directory for a given path
-      #
+      # Make every directory in a given path
       def make_path(path)
         path = normalize_path(@location, path)
         unless File.exists? path
@@ -187,10 +140,7 @@ module Serve
         end
       end
       
-      
-      ##
-      # Moves a file at @location + from => @location + to
-      # 
+      # Move a file from => to (relative to the project location)
       def move_file(from, to)
         from_path = normalize_path(@location, from)
         to_path = normalize_path(@location, to)
@@ -201,41 +151,29 @@ module Serve
         end
       end
       
-      
-      ##
       # Convert dashes and spaces to underscores
-      #
       def underscore(string)
         string.gsub(/-|\s+/, '_')
       end
-      
-      
-      ##
-      # Grab data from the git config file if it exists
-      #
+            
+      # Grab data by key from the git config file if it exists
       def git_config(key)
         value = `git config #{key}`.chomp
         value.empty? ? nil : value
       end
       
-      
-      ##
-      # Build the target directory
-      #
+      # Normalize the path of the target directory
       def normalize_location(path, name = nil)
         path = File.join(path, underscore(name)) if name
         path = normalize_path(path)
         path
       end
       
-      ##
       # Normalize a path relative to the current working directory
-      #
       def normalize_path(*paths)
         path = File.join(*paths)
         Pathname.new(File.expand_path(path)).relative_path_from(Pathname.new(Dir.pwd)).to_s
       end
-      
       
   end
 end
