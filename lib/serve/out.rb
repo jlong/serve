@@ -27,7 +27,7 @@ module Serve #:nodoc:
       stderr.print(*args)
     end
     
-    def action(name, message)
+    def log_action(name, message)
       print " " * (12 - name.length)
       print name
       print "  "

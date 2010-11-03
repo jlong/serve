@@ -62,7 +62,7 @@ module Serve #:nodoc:
       # Install a JavaScript framework if one was specified
       def install_javascript_framework
         if @framework
-          action 'installing', @framework
+          log_action 'installing', @framework
           Serve::JavaScript.new(@location).install(@framework)
         end
       end
@@ -115,10 +115,10 @@ module Serve #:nodoc:
       def create_file(file, contents)
         path = normalize_path(@location, file)
         unless File.exists? path
-          action "create", path
+          log_action "create", path
           File.open(path, 'w+') { |f| f.puts contents }
         else
-          action "exists", path
+          log_action "exists", path
         end
       end
       
@@ -133,10 +133,10 @@ module Serve #:nodoc:
       def make_path(path)
         path = normalize_path(@location, path)
         unless File.exists? path
-          action "create", path
+          log_action "create", path
           FileUtils.mkdir_p(path)
         else
-          action "exists", path
+          log_action "exists", path
         end
       end
       
@@ -146,7 +146,7 @@ module Serve #:nodoc:
         to_path = normalize_path(@location, to)
         if File.exists? from_path
           to = to + from if to[-1..-1] == "/"
-          action "move", "#{@location}/{#{from} => #{to}}"
+          log_action "move", "#{@location}/{#{from} => #{to}}"
           FileUtils.mv from_path, to_path
         end
       end
