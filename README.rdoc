@@ -150,6 +150,10 @@ Serve project with the "convert" sub-command:
 This will rename and move a number of files for you and will turn your Compass
 project into a Serve project.
 
+Note that after upgrading a Compass project, you will no longer need to use
+the `compass watch` command to generate your stylesheets. Your stylesheets
+will be compiled on the fly with Serve.
+
 
 == File Types
 
