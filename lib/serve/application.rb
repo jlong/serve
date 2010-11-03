@@ -19,8 +19,10 @@ module Serve
       @options = parse(args)
       case
       when options[:create]
+        require 'serve/project'
         Serve::Project.new(options[:create]).create
       when options[:convert]
+        require 'serve/project'
         Serve::Project.new(options[:convert]).convert
       when options[:version]
         puts version
@@ -117,10 +119,10 @@ module Serve
         "    Converts an existing Compass project into a Rack-based Serve project.",
         "   ",
         "Options:",
-        "  -f, --framework The name of the JavaScript Framework you'd like to include.",
-        "                  (Only valid for the create and convert commands.)",
-        "  -h, --help      Show this message and quit.",
-        "  -v, --version   Show the program version number and quit.",
+        "  -j, --javascript  The name of the JavaScript Framework you'd like to use.",
+        "                    (Only valid for create and convert commands.)",
+        "  -h, --help        Show this message and quit.",
+        "  -v, --version     Show the program version number and quit.",
         "  ",
         "Further information:",
         "  http://github.com/jlong/serve/blob/master/README.rdoc"
@@ -163,7 +165,7 @@ module Serve
         Dir.pwd
       end
       
-      def extract_framework(args, *opts)
+      def extract_javascript_framework(args, *opts)
         framework = nil
         opts.each do |opt|
           framework = args.pop if args.delete(opt)
@@ -173,7 +175,7 @@ module Serve
       
       def extract_creation(args)
         if args.delete('create')
-          framework = extract_framework(args, '-f', '--framework')
+          framework = extract_javascript_framework(args, '-j', '--javascript')
           args.reverse!
           {
            :framework => framework,
@@ -185,7 +187,7 @@ module Serve
       
       def extract_conversion(args)
         if args.delete('convert')
-          framework = extract_framework(args, '-f', '--framework')
+          framework = extract_javascript_framework(args, '-j', '--javascript')
           {
            :directory => (args.first ? File.expand_path(args.pop) : Dir.pwd),
            :framework => framework 

@@ -1,5 +1,6 @@
 require 'pathname'
 require 'serve/out'
+require 'serve/javascripts'
 
 module Serve #:nodoc:
   #
@@ -25,7 +26,7 @@ module Serve #:nodoc:
         public/stylesheets
         sass
       ).each { |path| make_path path } 
-      install_javascript_framework
+      install_javascript_framework @framework
     end
     
     # Convert an existing Compass project to a Serve project
@@ -33,15 +34,21 @@ module Serve #:nodoc:
       setup_base
       move_file 'images', 'public/'
       move_file 'stylesheets', 'public/'
-      move_file 'javascripts', 'public/'
+      if File.directory? 'javascripts'
+        move_file 'javascripts', 'public/'
+      else
+        make_path 'public/javascripts'
+      end
       move_file 'src', 'sass'
-      install_javascript_framework
+      install_javascript_framework @framework
       note_old_compass_config
     end
     
     private
       
       include Serve::Out
+      
+      include Serve::JavaScripts
       
       # Files required for both a new server project and for an existing compass project.
       def setup_base
@@ -60,10 +67,21 @@ module Serve #:nodoc:
       end
       
       # Install a JavaScript framework if one was specified
-      def install_javascript_framework
-        if @framework
-          log_action 'installing', @framework
-          Serve::JavaScript.new(@location).install(@framework)
+      def install_javascript_framework(framework)
+        if framework
+          if valid_javascript_framework?(framework)
+            path = normalize_path(@location, "public/javascripts")
+            filename = javascript_filename(framework, path)
+            if File.exists? filename
+              log_action 'exists', filename
+            else
+              log_action 'install', filename
+              fetch_javascript framework, path
+            end
+          else
+            puts "*** #{framework} javascript framework not supported. ***"
+            puts "Supported frameworks: #{ supported_javascript_frameworks.join(', ') }"
+          end
         end
       end
       
