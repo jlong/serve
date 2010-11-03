@@ -2,6 +2,7 @@ GEM
   remote: http://rubygems.org/
   specs:
     activesupport (3.0.1)
+    diff-lcs (1.1.2)
     gemcutter (0.6.1)
     git (1.2.5)
     haml (3.0.23)
@@ -13,7 +14,16 @@ GEM
     json_pure (1.4.6)
     rack (1.2.1)
     rake (0.8.7)
-    rspec (1.3.1)
+    rspec (2.0.1)
+      rspec-core (~> 2.0.1)
+      rspec-expectations (~> 2.0.1)
+      rspec-mocks (~> 2.0.1)
+    rspec-core (2.0.1)
+    rspec-expectations (2.0.1)
+      diff-lcs (>= 1.1.2)
+    rspec-mocks (2.0.1)
+      rspec-core (~> 2.0.1)
+      rspec-expectations (~> 2.0.1)
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
     tzinfo (0.3.23)
@@ -23,10 +33,10 @@ PLATFORMS
 
 DEPENDENCIES
   activesupport (~> 3.0.1)
-  haml
-  i18n (~> 0.4.1)
+  haml (~> 3.0.23)
+  i18n (~> 0.4.2)
   jeweler (~> 1.4.0)
   rack (~> 1.2.1)
   rake (~> 0.8.7)
-  rspec (~> 1.3.1)
+  rspec (~> 2.0.1)
   tzinfo (~> 0.3.23)

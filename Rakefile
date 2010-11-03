@@ -6,6 +6,4 @@ load 'tasks/rdoc.rake'
 load 'tasks/rspec.rake'
 load 'tasks/undefine.rake'
 
-#Dir['tasks/**/*.rake'].each { |rake| load rake }
-
 task :default => :spec
