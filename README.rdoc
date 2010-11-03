@@ -91,51 +91,64 @@ as an option on the command line:
   serve production         # start script/server in production mode
 
 
-== Rack and Passenger
+== Creating a New Serve Project
 
-Advanced users may also want to run Serve as a Rack application. To do this
-you will need to create a "config.ru" file in the root of your Serve project.
-Here is an example "config.ru" file:
+For simple projects, you don't need to structure your files in a specific
+way. All ERB, Haml, and Sass files will be processed wherever they are found
+in the project root. But for more complex projects you may want to use Serve
+with a `config.ru` file so that you can take advantage of other Rack
+middleware and structure the project in a Rack compatible way.
 
-  #\ -p 4000
-  
-  gem 'activesupport/all'
-  gem 'serve'
-  
-  require 'serve'
-  require 'serve/rack'
-  
-  # Middleware
-  use Rack::ShowStatus      # Nice looking 404s and other messages
-  use Rack::ShowExceptions  # Nice looking errors
-  
-  # The project root directory
-  root = ::File.dirname(__FILE__)  
-  
-  # Rack Application
-  run Rack::Cascade.new([
-    Serve::RackAdapter.new(root),  # Handle ERB, HAML, and other Serve files
-    Rack::Directory.new(root)      # Directory listings and everything else
-  ])
+To create a new Rack-based Serve project in the "mockups" directory, type the
+following on the command line:
 
-Assuming that you have Rack installed, you will then be able to start your
-application with the `rackup` command. Type `rackup --help` for more
-information.
+  serve create mockups   # create a new project in the mockups directory
 
-If you would like to run Serve as a Rack application with Passenger you will
-need to create two additional directories: "tmp" and "public". In the temp
-directory put an empty "restart.txt" file. In the public directory put your
-static assets like images and javascripts (anything that does not require
-special processing by Serve). You may also want to replace the last four
-lines of "config.ru" with a single reference to the Serve::RackAdapter:
+This will create a new project with the following directory structure:
 
-  run Serve::RackAdapter.new(root)
+  mockups/
+    |
+    +-- config.ru          # Rack configuration file
+    |
+    +-- compass.config     # Compass configuration file
+    |
+    +-- public/            # Directories for static assets
+    |    |
+    |    +-- stylesheets/  # Compiled stylesheets
+    |    |
+    |    +-- images/
+    |    |
+    |    `-- javascripts/
+    |
+    +-- sass/              # Store Sass source files here
+    |
+    +-- tmp/               # Needed for Passenger (mod_passenger)
+    |    |
+    |    `-- restart.txt
+    |
+    `-- views/             # Store your ERB, Haml, etc. here
 
-By default, Passenger applications serve static assets from the "public"
-directory so there is no need to use the Rack::Directory application to handle
-those. If you need directory listings your Web server probably provides
-something specifically for this purpose and there is no need to rely on Rack
-for this.
+If you would like to generate the project with a specific JavaScript framework
+you can do so with the <tt>-j</tt> flag:
+
+  serve create mockups -j prototype
+
+Available frameworks are: <tt>jquery</tt>, <tt>jquery-ui</tt>,
+<tt>mootools</tt>, <tt>prototype</tt>, and <tt>scriptaculous</tt>.
+
+The `serve create` command can be executed multiple times or on an existing
+project without negative consequences.
+
+
+== Upgrading a Compass Project to a Serve Project
+
+If you are a Compass user you can convert an existing Compass project to a
+Serve project with the "convert" sub-command:
+
+  serve convert mockups
+
+This will rename and move a number of files for you and will turn your Compass
+project into a Serve project.
 
 
 == File Types
@@ -154,7 +167,7 @@ redirect :: Redirects to the URL contained in the document
 
 == View Helpers
 
-If you drop a file called "view_helpers.rb" in the root of a project, you can
+If you drop a file called "view_helpers.rb" in your views directory, you can
 define custom helpers for your Haml and ERB views. Just create a ViewHelpers
 module and define your helper methods there:
 
@@ -183,5 +196,5 @@ http://github.com/jlong/serve
 == License
 
 Serve is released under the MIT license and is copyright (c) 2007-2010
-John W. Long and Adam I. Williams. A copy of the MIT license can be found in 
-the LICENSE file.
+John W. Long and Adam I. Williams. Portions have been contributed by Robert
+Evans and others. A copy of the MIT license can be found in the LICENSE file.
