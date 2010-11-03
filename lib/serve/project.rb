@@ -26,6 +26,10 @@ module Serve #:nodoc:
         public/stylesheets
         sass
       ).each { |path| make_path path } 
+      create_file 'sass/application.sass', application_sass
+      create_file 'views/_layout.html.erb', layout
+      create_file 'views/hello.html.erb', hello
+      create_file 'views/view_helpers.rb', view_helpers
       install_javascript_framework @framework
     end
     
@@ -121,6 +125,26 @@ module Serve #:nodoc:
       # Read template for project README
       def readme
         read_template 'readme'
+      end
+      
+      # Read template for application.css
+      def application_sass
+        read_template 'application_sass'
+      end
+      
+      # Read template for layout
+      def layout
+        read_template 'layout'
+      end
+      
+      # Read template for hello.html.erb
+      def hello
+        read_template 'hello'
+      end
+      
+      # Read template for view_helpers.rb
+      def view_helpers
+        read_template 'view_helpers'
       end
       
       # Read and eval a template by name

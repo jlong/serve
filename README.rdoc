@@ -108,25 +108,33 @@ This will create a new project with the following directory structure:
 
   mockups/
     |
-    +-- config.ru          # Rack configuration file
+    +-- config.ru              # Rack configuration file
     |
-    +-- compass.config     # Compass configuration file
+    +-- compass.config         # Compass configuration file
     |
-    +-- public/            # Directories for static assets
+    +-- public/                # Directories for static assets
     |    |
-    |    +-- stylesheets/  # Compiled stylesheets
+    |    +-- stylesheets/      # Compiled stylesheets
     |    |
     |    +-- images/
     |    |
     |    `-- javascripts/
     |
-    +-- sass/              # Store Sass source files here
+    +-- sass/                  # Store Sass source files here
+    |    |
+    |    `-- application.sass  # Example Sass file for application
     |
-    +-- tmp/               # Needed for Passenger (mod_passenger)
+    +-- tmp/                   # Needed for Passenger (mod_passenger)
     |    |
     |    `-- restart.txt
     |
-    `-- views/             # Store your ERB, Haml, etc. here
+    `-- views/                 # Store your ERB, Haml, etc. here
+         |
+         +-- _layout.html.erb  # Example layout
+         |
+         +-- hello.html.erb    # Example view
+         |
+         `-- view_helpers.rb   # Example view helpers
 
 If you would like to generate the project with a specific JavaScript framework
 you can do so with the <tt>-j</tt> flag:

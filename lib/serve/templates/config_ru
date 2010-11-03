@@ -1,6 +1,6 @@
-#\ -p 4000
+#\\ -p 4000
 
-gem 'activesupport/all'
+gem 'activesupport'
 gem 'serve'
 
 require 'serve'
