@@ -6,14 +6,14 @@ module Serve
     attr_reader :directory
 
     # JavaScript Versions
-    GOOGLE_AJAX_APIS  = 'http://ajax.googleapis.com/ajax/libs'
-    JQUERY_VERSION    = '1.4.2'
-    JQUERY_UI_VERSION = '1.8.5'
-    PROTOTYPE_VERSION = '1.6.1.0'
-    SCRIPTY_VERSION   = '1.8.3'
-    MOOTOOLS          = '1.2.5'
+    GOOGLE_AJAX_APIS      = 'http://ajax.googleapis.com/ajax/libs'
+    JQUERY_VERSION        = '1.4.2'
+    JQUERY_UI_VERSION     = '1.8.5'
+    PROTOTYPE_VERSION     = '1.6.1.0'
+    SCRIPTACULOUS_VERSION = '1.8.3'
+    MOOTOOLS              = '1.2.5'
     
-    FRAMEWORKS        = %w(jQuery jQueryUI MooTools Prototype Scriptaculous)
+    FRAMEWORKS            = %w(jQuery jQueryUI MooTools Prototype Scriptaculous)
     
     
     # Initialize
@@ -54,7 +54,7 @@ module Serve
         library_path = File.join(install_directory, "#{framework.tr('_', '-')}.js")
         system("curl -o #{library_path} #{self.send(framework)}")
       end
-
+      
       def install_directory
         File.join(@directory, 'public/javascripts')
       end
@@ -76,7 +76,7 @@ module Serve
       end
       
       def scriptaculous
-        "#{GOOGLE_AJAX_APIS}/scriptaculous/#{SCRIPTY_VERSION}/scriptaculous.js"
+        "#{GOOGLE_AJAX_APIS}/scriptaculous/#{SCRIPTACULOUS_VERSION}/scriptaculous.js"
       end
         
   end
