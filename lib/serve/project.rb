@@ -1,12 +1,12 @@
 require 'pathname'
 require 'serve/out'
 
-#
-# Serve::Project.new(options).create
-# Serve::Project.new(options).convert
-#
-module Serve
-  class Project
+module Serve #:nodoc:
+  #
+  # Serve::Project.new(options).create
+  # Serve::Project.new(options).convert
+  #
+  class Project #:nodoc:
     attr_reader :name, :location, :framework
     
     def initialize(options)
