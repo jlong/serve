@@ -14,7 +14,7 @@ css_dir               = 'public/stylesheets'
 images_dir            = 'public/images'
 javascripts_dir       = 'public/javascripts'
 
-# Set to 'true' for easier debuging
+# Set to true for easier debugging
 line_comments         = false
 
 # CSS output style - :nested, :expanded, :compact, or :compressed
