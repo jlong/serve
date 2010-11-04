@@ -26,10 +26,11 @@ module Serve #:nodoc:
         public/stylesheets
         sass
       ).each { |path| make_path path } 
-      create_file 'sass/application.sass', application_sass
-      create_file 'views/_layout.html.erb', layout
-      create_file 'views/hello.html.erb', hello
-      create_file 'views/view_helpers.rb', view_helpers
+      create_file 'sass/application.sass',  read_template('application.sass')
+      create_file 'views/_layout.html.erb', read_template('_layout.html.erb')
+      create_file 'views/hello.html.erb',   read_template('hello.html.erb')
+      create_file 'views/view_helpers.rb',  read_template('view_helpers.rb')
+      create_file 'views/index.redirect',   read_template('index.redirect')
       install_javascript_framework @framework
     end
     
@@ -62,11 +63,11 @@ module Serve #:nodoc:
           tmp
           views
         ).each { |path| make_path path }
-        create_file 'config.ru',       config_ru
-        create_file 'LICENSE',         license
-        create_file '.gitignore',      gitignore
-        create_file 'compass.config',  compass_config
-        create_file 'README.markdown', readme
+        create_file 'config.ru',       read_template('config.ru')
+        create_file 'LICENSE',         read_template('LICENSE')
+        create_file '.gitignore',      read_template('gitignore')
+        create_file 'compass.config',  read_template('compass.config')
+        create_file 'README.markdown', read_template('README.markdown')
         create_empty_file 'tmp/restart.txt'
       end
       
@@ -102,51 +103,6 @@ module Serve #:nodoc:
         end
       end
       
-      # Read template for compass.config
-      def compass_config
-        read_template 'compass.config'
-      end
-      
-      # Read template for config.ru
-      def config_ru
-        read_template 'config.ru'
-      end
-      
-      # Read template for .gitignore file
-      def gitignore
-        read_template 'gitignore'
-      end
-      
-      # Read template for project license
-      def license
-        read_template 'LICENSE'
-      end
-      
-      # Read template for project README
-      def readme
-        read_template 'README.markdown'
-      end
-      
-      # Read template for application.css
-      def application_sass
-        read_template 'application.sass'
-      end
-      
-      # Read template for layout
-      def layout
-        read_template '_layout.html.erb'
-      end
-      
-      # Read template for hello.html.erb
-      def hello
-        read_template 'hello.html.erb'
-      end
-      
-      # Read template for view_helpers.rb
-      def view_helpers
-        read_template 'view_helpers.rb'
-      end
-      
       # Read and eval a template by name
       def read_template(name)
         contents = IO.read(normalize_path(File.dirname(__FILE__), "templates", name))
@@ -169,7 +125,6 @@ module Serve #:nodoc:
         path = normalize_path(@location, file)
         FileUtils.touch(path)
       end
-      
       
       # Make every directory in a given path
       def make_path(path)
