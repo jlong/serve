@@ -104,12 +104,12 @@ module Serve #:nodoc:
       
       # Read template for compass.config
       def compass_config
-        read_template 'compass_config'
+        read_template 'compass.config'
       end
       
       # Read template for config.ru
       def config_ru
-        read_template 'config_ru'
+        read_template 'config.ru'
       end
       
       # Read template for .gitignore file
@@ -119,32 +119,32 @@ module Serve #:nodoc:
       
       # Read template for project license
       def license
-        read_template 'license'
+        read_template 'LICENSE'
       end
       
       # Read template for project README
       def readme
-        read_template 'readme'
+        read_template 'README.markdown'
       end
       
       # Read template for application.css
       def application_sass
-        read_template 'application_sass'
+        read_template 'application.sass'
       end
       
       # Read template for layout
       def layout
-        read_template 'layout'
+        read_template '_layout.html.erb'
       end
       
       # Read template for hello.html.erb
       def hello
-        read_template 'hello'
+        read_template 'hello.html.erb'
       end
       
       # Read template for view_helpers.rb
       def view_helpers
-        read_template 'view_helpers'
+        read_template 'view_helpers.rb'
       end
       
       # Read and eval a template by name
