@@ -17,14 +17,20 @@ How do I install and run Serve?
 -------------------------------
 
 Serve is distributed as a gem to make it easy to get up and running. To
-install:
+install, type the following at the command prompt:
 
-     % sudo gem install serve
+    gem install serve
 
-This will startup serve on port 4000. You can now view the prototype in your
+(OSX and Unix users may need to prefix the command with `sudo`.)
+
+After Serve is installed, you can start it up in a given directory like this:
+
+    serve
+
+This will start Serve on port 4000. You can now view the prototype in your
 Web browser at this URL:
 
-     http://localhost:4000
+<http://localhost:4000>
 
 Click around. You will find that Serve enables you to prototype most
 functionality without writing a single line of backend code.
@@ -33,8 +39,8 @@ functionality without writing a single line of backend code.
 Rack and Passenger
 ------------------
 
-If you look around you will quickly notice that this is also a simple Rack
-application so it is easy to deploy it on Passenger or Rack it up with the
+Astute users may notice that this project is also a simple Rack application.
+This means that it is easy to deploy it on Passenger or rack it up with the
 `rackup` command. For more information about using Serve and Passenger see:
 
-http://bit.ly/serve-and-passenger
+<http://bit.ly/serve-and-passenger>
