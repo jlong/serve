@@ -1,5 +1,12 @@
 = Change Log
 
+== 1.0.0 (November 3, 2010)
+
+* Various tweaks and fixes [jlong]
+* Added `serve convert` command for converting Compass projects. [revans]
+* Added `serve create` command for bootstrapping projects. See README for details. Yay! [revans]
+* Added option to use Thin if Mongrel isn't installed [benatkin] 
+
 == 0.11.7 (July 22, 2010)
 
 * Use latest version of Rack
