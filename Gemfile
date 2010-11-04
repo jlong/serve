@@ -14,5 +14,6 @@ gem 'i18n',             '~> 0.4.2'
 group :development do
   gem 'jeweler',        '~> 1.4.0'
   gem 'haml',           '~> 3.0.23'
+  gem 'compass',        '~> 0.10.6'
   gem 'rspec',          '~> 2.0.1'
 end
