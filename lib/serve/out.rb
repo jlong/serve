@@ -27,11 +27,11 @@ module Serve #:nodoc:
     end
     
     def puts(*args)
-      stdout.puts(color_msg(:green, *args))
+      stdout.puts(*args)
     end
     
     def print(*args)
-      stderr.print(color_msg(:red, *args))
+      stderr.print(color_msg(:green, *args))
     end
     
     def log_action(name, message)
