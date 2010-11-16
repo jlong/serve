@@ -45,12 +45,12 @@ Some systems, like the Mac, may require that you type:
 
   sudo gem install serve
 
-If you are new to the command prompt see:
+If you are a Mac user and are new to the command prompt see:
 
-http://kb.iu.edu/data/amog.html
+http://wiseheartdesign.com/articles/2010/11/12/the-designers-guide-to-the-osx-command-prompt/
 
-You may also want to google "command prompt windows" if you are on a PC or
-"command prompt osx" if you are on a Mac to find a simple tutorial.
+Google "command prompt windows" if you are on a PC to find a simple
+tutorial.
 
 
 == Usage
