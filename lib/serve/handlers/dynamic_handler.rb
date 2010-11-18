@@ -51,7 +51,7 @@ module Serve #:nodoc:
           @erb.filename = options[:filename]
         end
         
-        def render(context, &block)
+        def render(context, locals, &block)
           # we have to keep track of the old erbout variable for nested renders
           # because ERB#result will set it to an empty string before it renders
           old_erbout = context.instance_variable_get('@erbout')
@@ -70,7 +70,7 @@ module Serve #:nodoc:
         @context.parser = self
       end
       
-      def parse_file(filename)
+      def parse_file(filename, locals={})
         old_script_filename = @script_filename
         @script_filename = filename
         lines = IO.read(filename)
@@ -86,7 +86,7 @@ module Serve #:nodoc:
           else
             raise 'extension not supported'
         end
-        result = engine.render(context) do |*args|
+        result = engine.render(context, locals) do |*args|
           context.get_content_for(*args)
         end
         @script_filename = old_script_filename
