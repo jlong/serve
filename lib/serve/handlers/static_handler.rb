@@ -14,6 +14,8 @@ module Serve #:nodoc:
           'application/rss+xml'
         when '.rdf'
           'application/rdf+xml'
+        when '.htc'
+          'text/x-component'
         else
           'text/html'
       end
