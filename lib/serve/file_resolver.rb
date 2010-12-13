@@ -3,7 +3,7 @@ module Serve
   
   class FileResolver
     cattr_accessor :alternate_extensions
-    self.alternate_extensions = %w(htm html txt text xml atom rss rdf haml erb rhtml html.erb html.haml textile markdown email redirect)
+    self.alternate_extensions = %w(htm html txt text xml atom rss rdf haml erb rhtml slim html.slim html.erb html.haml textile markdown email redirect)
     
     def resolve(root, path)
       return nil if path.nil?

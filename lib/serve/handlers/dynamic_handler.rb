@@ -2,7 +2,7 @@ require 'serve/view_helpers'
 
 module Serve #:nodoc:
   class DynamicHandler < FileTypeHandler #:nodoc:
-    extension 'erb', 'html.erb', 'rhtml', 'haml', 'html.haml'
+    extension 'erb', 'html.erb', 'rhtml', 'haml', 'html.haml', 'slim', 'html.slim'
     
     def process(request, response)
       response.headers['content-type'] = content_type
@@ -28,7 +28,11 @@ module Serve #:nodoc:
       layout = nil
       until layout or path == "/"
         path = File.dirname(path)
-        possible_layouts = ['_layout.haml', '_layout.html.haml', '_layout.erb', '_layout.html.erb'].map do |l|
+        possible_layouts = %w[erb haml slim].inject([]) do |pl, ext|
+          pl << "_layout.#{ext}"
+          pl << "_layout.html.#{ext}"
+          pl
+        end.map do |l|
           possible_layout = File.join(root, path, l)
           File.file?(possible_layout) ? possible_layout : false
         end
@@ -83,6 +87,9 @@ module Serve #:nodoc:
           when 'erb'
             require 'erb'
             ERB::Engine.new(lines, :filename => filename)
+          when 'slim'
+            require 'slim'
+            Slim::Template.new(filename)
           else
             raise 'extension not supported'
         end
