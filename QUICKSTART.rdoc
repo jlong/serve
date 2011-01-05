@@ -1,4 +1,4 @@
-= Getting Started with Serve
+= Serve Quickstart - Prototyping Rails Applications
 
 
 <b>This is tutorial is incomplete. Help us finish it!</b>
@@ -28,22 +28,71 @@ mockups      :: Fireworks or Photoshop web app mockups go here
 prototype    :: The HTML prototype for the web app goes here
 application  :: The actual Rails application is here
 
-Let's go ahead and create the directory for the prototype:
+Let's go ahead and setup the directory for the prototype. We'll use the `serve create` command to create the initial project directory and files:
 
- $ mkdir prototype
+ $ serve create prototype
 
-Rails apps generally store images, javascripts, and stylesheets in the top level directories by the same name. Let's go ahead and mirror those directories for our prototype:
+This should output:
 
- $ cd prototype
- $ mkdir images
- $ mkdir javascripts
- $ mkdir stylesheets
+ create  prototype
+ create  prototype/public
+ create  prototype/tmp
+ create  prototype/views
+ create  prototype/config.ru
+ create  prototype/LICENSE
+ create  prototype/.gitignore
+ create  prototype/compass.config
+ create  prototype/README.markdown
+ create  prototype/public/images
+ create  prototype/public/javascripts
+ create  prototype/public/stylesheets
+ create  prototype/sass
+ create  prototype/sass/application.sass
+ create  prototype/views/_layout.html.erb
+ create  prototype/views/hello.html.erb
+ create  prototype/views/view_helpers.rb
+ create  prototype/views/index.redirect
+
+You'll note that the `serve create` command creates a directory structure that is somewhat similar to a Rails project:
+
+  mockups/
+    |
+    +-- config.ru              # Rack configuration file
+    |
+    +-- compass.config         # Compass configuration file
+    |
+    +-- public/                # Directories for static assets
+    |    |
+    |    +-- stylesheets/      # Compiled stylesheets
+    |    |
+    |    +-- images/
+    |    |
+    |    `-- javascripts/
+    |
+    +-- sass/                  # Store Sass source files here
+    |    |
+    |    `-- application.sass  # Example Sass file for application
+    |
+    +-- tmp/                   # Needed for Passenger (mod_passenger)
+    |    |
+    |    `-- restart.txt
+    |
+    `-- views/                 # Store your ERB, Haml, etc. here
+         |
+         +-- _layout.html.erb  # Example layout
+         |
+         +-- hello.html.erb    # Example view
+         |
+         `-- view_helpers.rb   # Example view helpers
+
+Views and layouts for your prototype application belong in the "views" directory. The "public" directory is for static assets -- resources like images or javascripts that don't need server side processing. The "sass" directory is the place where you should store Sass source files (if you use those). Serve will automatically compile Sass and SCSS files stored here into <tt>public/stylesheets</tt> directory.
+
 
 == Creating Our First Screen
 
 Now that we have the prototype directory set up, let's create our first page so that you can get a feel for how Serve works. This will be a simple HTML login page for our application.
 
-Insert the following HTML into an file named "login.html.erb":
+In the "views" directory, create a file named "login.html.erb" and insert the following source code:
 
  <form action="/dashboard/" method="put">
    <p>
@@ -77,28 +126,18 @@ By default the `serve` command automatically serves files from the directory tha
 
  http://localhost:4000
 
-You should see a simple directory listing. It will look similar to this:
-
- Name                          Last modified         Size
- ----------------------------------------------------------
- Parent Directory              2008/02/23 15:35      -
- images/                       2008/02/23 15:35      -
- javascripts/                  2008/02/23 15:35      -
- login.html.erb                2008/02/23 15:36      346
- stylesheets/                  2008/02/23 15:35      -
-
 Now navigate to the following URL:
 
   http://localhost:4000/login/
 
-You should see the contents of the login page. Note that Serve allows you to refer to pages without their extension. This allows you to use URLs in your documents that correspond well to the URLs that Rails uses by default.
+You should see the contents of the login page. Note that Serve allows you to refer to pages without their extension. This allows you to use URLs in your documents that correspond to the URLs that Rails uses by default.
 
 
 == Layouts
 
-One thing to note about the source that I gave you for the login page. I intentionally left out the <html>, <head>, and <body> tags because they belong a layout---not the source file. Let's go ahead and create that layout now.
+One thing to note about the source that I gave you for the login page. I intentionally left out the <html>, <head>, and <body> tags because they belong a layout---not the source file. Let's go ahead and define that layout now.
 
-Insert the following HTML into a file named "_layout.html.erb" in the root directory of your prototype:
+Replace the contents of the file named "_layout.html.erb" in the "views" directory of your prototype with the following:
 
  <html>
    <head>
@@ -110,9 +149,9 @@ Insert the following HTML into a file named "_layout.html.erb" in the root direc
    </body>
  </html>
 
-This layout includes a small amount of ERB(Embedded Ruby) to indicate the title of the web page and to insert the content of the page at the appropriate point.
+This layout includes a small amount of ERB. ERB stands for Embedded Ruby. ERB allows you to embed Ruby code into a web page to dynamically render content. In our case, we are using it in the layout to indicate the title of the web page and to insert the content of the page at the appropriate point. You can use ERB in layout or view files.
 
-Embedded Ruby is delineated with the opening and closing sequence <% and %> respectively. Sequences that begin with an addition equals sign insert their output directly into the HTML. In this case we want to render the @title variable as the title in the head and as the first heading in the document body. The yield keyword is used to insert the content of the page at that point.
+Embedded Ruby is delineated with the opening and closing sequence <% and %> respectively. Sequences that begin with an addition equals sign insert their output directly into the HTML. In this case we want to render the @title variable as the title in the head and as the first heading in the document body. The `yield` keyword is used to insert the content of the page at that point.
 
 We need to make one small change to our login page before continuing. Insert the following line at the top of login.html.erb file:
 
@@ -124,8 +163,79 @@ This will set the @title variable for the login page. Now, switch back to your W
 
 The page should now have a title and heading that both read "Login".
 
-== Content For
+== Content regions with `content_for`
 
+Let's add a sidebar to the login page. To do this in a layout friendly way, we will use the `content_for` helper method to define the sidebar.
+
+Add the following code to the bottom of login.html.erb:
+
+ <% content_for :sidebar do %>
+   <h3>New Around Here?</h3>
+   <p>No problem! Just <a href="/signup/">create an account</a>.</p>
+ <% end %>
+
+This defines a new content region of the page that we can render wherever we want in the layout. The :sidebar symbol defines the name of the content region.
+
+Now to modify the layout to work with this new content region. In _layout.html.erb replace the code:
+
+ <h1><%= @title %>/h1>
+ <%= yield %>
+
+With the following:
+ 
+ <div id="content">
+   <h1><%= @title %>/h1>
+   <%= yield %>
+ </div>
+ <div id="sidebar">
+   <%= yield :sidebar %>
+ </div>
+
+This defines two new divs for the content and sidebar portions of the document. The first call to `yield` renders the content portion of a view (everything apart from regions defined by calls to `content_for`). The second call to `yield` passes the name of our content region as a symbol. When yield is called with a symbol, it renders the associated content region. In our case `yield :sidebar` causes Serve to render the content that we defined for the :sidebar region at that point in the layout.
+
+Now add a block for inline styles to the "head" of the layout:
+
+ <styles>
+   #content { float: left;  width: 60%; }
+   #sidebar { float: right; width: 40%; }
+ </styles>
+
+We could certainly put this in it's own file (in the public/stylesheets directory), but for the purposes of this demonstration, it works just as well in the head of the document.
+
+The full layout file should now look like this:
+
+ <html>
+   <head>
+     <title><%= @title %></title>
+     <styles>
+        #content { float: left;  width: 60%; }
+        #sidebar { float: right; width: 40%; }
+      </styles>
+   </head>
+   <body>
+     <<div id="content">
+       <h1><%= @title %>/h1>
+       <%= yield %>
+     </div>
+     <div id="sidebar">
+       <%= yield :sidebar %>
+     </div>
+   </body>
+ </html>
+
+Now switch back to your Web browser at:
+
+  http://localhost:4000/login/
+
+And check out the new multi-column layout on the login page.
 
 
 == Partials
+
+<%= render 'footer' %>
+
+== View Helpers
+
+view_helpers.rb
+
+This tutorial is incomplete. Patches are welcome!
