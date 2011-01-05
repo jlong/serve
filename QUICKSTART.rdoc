@@ -213,7 +213,7 @@ The full layout file should now look like this:
       </styles>
    </head>
    <body>
-     <<div id="content">
+     <div id="content">
        <h1><%= @title %>/h1>
        <%= yield %>
      </div>
