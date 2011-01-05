@@ -55,7 +55,7 @@ This should output:
 
 You'll note that the `serve create` command creates a directory structure that is somewhat similar to a Rails project:
 
-  mockups/
+  prototype/
     |
     +-- config.ru              # Rack configuration file
     |
