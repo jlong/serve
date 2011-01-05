@@ -49,6 +49,7 @@ Gem::Specification.new do |s|
      "lib/serve/rails/routing.rb",
      "lib/serve/rails/serve_controller.rb",
      "lib/serve/response_cache.rb",
+
      "lib/serve/templates/LICENSE",
      "lib/serve/templates/README.markdown",
      "lib/serve/templates/_layout.html.erb",
@@ -59,6 +60,7 @@ Gem::Specification.new do |s|
      "lib/serve/templates/hello.html.erb",
      "lib/serve/templates/index.redirect",
      "lib/serve/templates/view_helpers.rb",
+
      "lib/serve/version.rb",
      "lib/serve/view_helpers.rb",
      "rails/init.rb",
