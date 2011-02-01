@@ -177,6 +177,52 @@ email :: Evaluates the document as if it is an e-mail message; the format is ide
 redirect :: Redirects to the URL contained in the document
 
 
+== Layouts
+
+In Serve layouts work a little differently than they do in Rails. Because there are no
+controllers to derive layout names from, Serve relies on the directory structure to
+determine the layout associated with a specific view. Serve layouts are stored in
+"_layout.erb" or "_layout.haml" files. Serve searches for a layout file in the same
+directory as the view. If it fails to find one there, it traverses up the directory
+tree searching each parent directory until it finds the "nearest" layout.
+
+For example, assuming following directory structure:
+
+        views/
+         |
+  A)     +-- _layout.erb
+         |
+         +-- index.erb
+         |
+         +-- about/
+               |
+  B)           + _layout.erb
+               |
+               + index.erb
+
+For "views/about/index.erb" Serve will use layout B. If layout B did not exist,
+Serve would go up the directory tree and discover layout A which it would use to
+render the view.
+
+For "views/index.haml" Serve would immediately discover and use layout A.
+
+So Serve searches up the directory tree for the nearest layout file, and uses that
+file to render the view.
+
+
+== Partials
+
+Partials in Serve work much like they do in Rails. Prefix your partials with an
+underscore ("_") and use the <tt>render</tt> helper method in your views to render
+the partial:
+
+  <%= render "footer" %>
+
+Or,
+
+  <%= render "/shared/footer" %>
+
+
 == View Helpers
 
 If you drop a file called "view_helpers.rb" in your views directory, you can
