@@ -175,16 +175,16 @@ tree searching each parent directory until it finds the "nearest" layout.
 For example, assuming following directory structure:
 
         views/
-         |
-  A)     +-- _layout.erb
-         |
-         +-- index.erb
-         |
-         +-- about/
-               |
-  B)           + _layout.erb
-               |
-               + index.erb
+          |
+  A)      +-- _layout.erb
+          |
+          +-- index.erb
+          |
+          `-- about/
+                |
+  B)            +-- _layout.erb
+                |
+                `-- index.erb
 
 For "views/about/index.erb" Serve will use layout B. If layout B did not exist,
 Serve would go up the directory tree and discover layout A which it would use to
