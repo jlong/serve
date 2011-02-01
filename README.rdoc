@@ -163,20 +163,6 @@ the `compass watch` command to generate your stylesheets. Your stylesheets
 will be compiled on the fly with Serve.
 
 
-== File Types
-
-Serve presently does special processing for files with following extensions:
-
-textile :: Evaluates the document as Textile (requires the Redcloth gem) 
-markdown :: Evaluates the document as Markdown (requires the Bluecloth gem)
-erb :: Experimental support for ERB
-haml :: Evaluates the document as Haml (requires the Haml gem)
-sass :: Evaluates the document as Sass (requires the Haml gem)
-scss :: Evaluates the document as SCSS (requires the Haml gem)
-email :: Evaluates the document as if it is an e-mail message; the format is identical to a plain/text e-mail message's source
-redirect :: Redirects to the URL contained in the document
-
-
 == Layouts
 
 In Serve layouts work a little differently than they do in Rails. Because there are no
@@ -207,7 +193,9 @@ render the view.
 For "views/index.haml" Serve would immediately discover and use layout A.
 
 So Serve searches up the directory tree for the nearest layout file, and uses that
-file to render the view.
+file to render the view. This is convenient because it allows you to structure your
+Serve project in a way that allows entire "branches" of to share the same layout
+and "branches" lower down can override the layout used.
 
 
 == Partials
@@ -236,7 +224,61 @@ module and define your helper methods there:
   end
 
 Helpers have full access to the request and response objects so you can easily
-read and manipulate headers.
+read and manipulate headers or do other fancy tricks.
+
+Serve provides a number of stock helpers to make it easier for you to prototype
+Rails applications:
+
+  # Escape Helpers
+  html_escape(string)     # escape HTML in string
+  h(string)               # alias for html_escape
+  json_escape(string)     # escape invalid JSON characters in string
+  j(string)               # alias for json_escape
+  
+  # Content Helpers
+  capture_erb(&block)              # Capture a block inside of a view or layout
+  content_for(symbol, &block)      # Capture a block and store it by symbol
+  content_for?(symbol)             # Has content been captured for symbol?
+  get_content_for(symbol)          # Retrieve content for symbol (equivalent to `yield symbol`)
+  set_content_for(symbol, string)  # Set content for symbol to string
+  
+  # Flash Helpers
+  flash                   # fake flash for request
+  
+  # Param Helpers
+  params                  # access params for request
+  boolean_param(key)      # retrieve value of a boolean param (true/false)
+  
+  # Render Helpers
+  render(partial)         # Render a partial
+  
+  # Tag Helpers
+  content_tag(name, content, ...)  # a double HTML tag
+  tag(name, ...)                   # a single HTML tag
+  image_tag(src, ...)              # an HTML image tag
+  image(name, ...)                 # shorthand for standard image tag
+  javascript_tag(...)              # a javascript tag
+  link_to(name, href, ...)         # a link to name at href
+  link_to_function(name, ...)      # a link to a function
+  mail_to(email_address, ...)      # a mailto link
+
+For more information, see:
+
+https://github.com/jlong/serve/blob/master/lib/serve/view_helpers.rb
+
+
+== File Types
+
+Serve presently does special processing for files with following extensions:
+
+textile :: Evaluates the document as Textile (requires the Redcloth gem) 
+markdown :: Evaluates the document as Markdown (requires the Bluecloth gem)
+erb :: Experimental support for ERB
+haml :: Evaluates the document as Haml (requires the Haml gem)
+sass :: Evaluates the document as Sass (requires the Haml gem)
+scss :: Evaluates the document as SCSS (requires the Haml gem)
+email :: Evaluates the document as if it is an e-mail message; the format is identical to a plain/text e-mail message's source
+redirect :: Redirects to the URL contained in the document
 
 
 == More Information
