@@ -190,7 +190,7 @@ For "views/about/index.erb" Serve will use layout B. If layout B did not exist,
 Serve would go up the directory tree and discover layout A which it would use to
 render the view.
 
-For "views/index.haml" Serve would immediately discover and use layout A.
+For "views/index.erb" Serve would immediately discover and use layout A.
 
 So Serve searches up the directory tree for the nearest layout file, and uses that
 file to render the view. This is convenient because it allows you to structure your
