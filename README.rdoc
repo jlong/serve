@@ -230,10 +230,10 @@ Serve provides a number of stock helpers to make it easier for you to prototype
 Rails applications:
 
   # Escape Helpers
-  html_escape(string)     # escape HTML in string
-  h(string)               # alias for html_escape
-  json_escape(string)     # escape invalid JSON characters in string
-  j(string)               # alias for json_escape
+  html_escape(string)              # escape HTML in string
+  h(string)                        # alias for html_escape
+  json_escape(string)              # escape invalid JSON characters in string
+  j(string)                        # alias for json_escape
   
   # Content Helpers
   capture_erb(&block)              # Capture a block inside of a view or layout
@@ -243,14 +243,14 @@ Rails applications:
   set_content_for(symbol, string)  # Set content for symbol to string
   
   # Flash Helpers
-  flash                   # fake flash for request
+  flash                            # fake flash for request
   
   # Param Helpers
-  params                  # access params for request
-  boolean_param(key)      # retrieve value of a boolean param (true/false)
+  params                           # access params for request
+  boolean_param(key)               # retrieve value of a boolean param (true/false)
   
   # Render Helpers
-  render(partial)         # Render a partial
+  render(partial)                  # Render a partial
   
   # Tag Helpers
   content_tag(name, content, ...)  # a double HTML tag
