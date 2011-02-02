@@ -190,7 +190,8 @@ For "views/about/index.erb" Serve will use layout B. If layout B did not exist,
 Serve would go up the directory tree and discover layout A which it would use to
 render the view.
 
-For "views/index.erb" Serve would immediately discover and use layout A.
+For "views/index.erb" Serve would immediately discover and use layout A because it
+is in the same directory.
 
 So Serve searches up the directory tree for the nearest layout file, and uses that
 file to render the view. This is convenient because it allows you to structure your
@@ -269,7 +270,7 @@ https://github.com/jlong/serve/blob/master/lib/serve/view_helpers.rb
 
 == File Types
 
-Serve presently does special processing for files with following extensions:
+Serve does special processing for files with following extensions:
 
 textile :: Evaluates the document as Textile (requires the Redcloth gem) 
 markdown :: Evaluates the document as Markdown (requires the Bluecloth gem)
