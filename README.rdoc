@@ -1,7 +1,7 @@
 = Serve - A Rapid Prototyping Framework for Web Applications
 
 Serve is a small Rack-based web server that makes it easy to serve HTML, ERB,
-or HAML from any directory.
+HAML, or Slim templates from any directory.
 
 But Serve is much more than a simple web server.
 
@@ -30,8 +30,8 @@ MVC stack -- the views. Serve basically allows you to have a separate project
 just for designing the views for the application. When views are ready, they
 can be copied over from the prototype to the application almost as is. This
 process is eased since Serve has full support for partials and layouts with
-either ERB or HAML. Serve can also handle SASS, Textile, and Markdown if the
-appropriate libraries are installed.
+either ERB or HAML. Serve can also handle SASS, Slim, Textile, and Markdown
+if the appropriate libraries are installed.
 
 
 == Installation
@@ -276,6 +276,7 @@ textile :: Evaluates the document as Textile (requires the Redcloth gem)
 markdown :: Evaluates the document as Markdown (requires the Bluecloth gem)
 erb :: Experimental support for ERB
 haml :: Evaluates the document as Haml (requires the Haml gem)
+slim :: Evaluates the document using the Slim template language (requires the Slim gem)
 sass :: Evaluates the document as Sass (requires the Haml gem)
 scss :: Evaluates the document as SCSS (requires the Haml gem)
 email :: Evaluates the document as if it is an e-mail message; the format is identical to a plain/text e-mail message's source
