@@ -216,7 +216,7 @@ module Serve
       end
       
       def run_rack_app
-        system "rackup -p #{options[:port]} -o #{options[:address]} -E #{options[:environment]} #{rack_config}"
+        system "rackup -p #{options[:port]} -o #{options[:address]} -E #{options[:environment]} '#{rack_config}'"
       end
       
       def run_server
