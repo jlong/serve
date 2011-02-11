@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["John W. Long", "Adam I. Williams", "Robert Evans"]
-  s.date = %q{2010-11-03}
+  s.date = %q{2011-02-10}
   s.default_executable = %q{serve}
   s.description = %q{Serve is a small Rack-based web server that makes it easy to serve ERB or HAML from any directory. Serve is an ideal tool for building HTML prototypes of Rails applications. Serve can also handle SASS, Textile, and Markdown if the appropriate gems are installed.}
   s.email = %q{me@johnwlong.com}
@@ -49,7 +49,6 @@ Gem::Specification.new do |s|
      "lib/serve/rails/routing.rb",
      "lib/serve/rails/serve_controller.rb",
      "lib/serve/response_cache.rb",
-
      "lib/serve/templates/LICENSE",
      "lib/serve/templates/README.markdown",
      "lib/serve/templates/_layout.html.erb",
@@ -60,7 +59,6 @@ Gem::Specification.new do |s|
      "lib/serve/templates/hello.html.erb",
      "lib/serve/templates/index.redirect",
      "lib/serve/templates/view_helpers.rb",
-
      "lib/serve/version.rb",
      "lib/serve/view_helpers.rb",
      "rails/init.rb",
@@ -87,12 +85,14 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<rack>, ["~> 1.2.1"])
+      s.add_runtime_dependency(%q<tilt>, ["~> 1.2.2"])
       s.add_runtime_dependency(%q<activesupport>, ["~> 3.0.1"])
       s.add_runtime_dependency(%q<tzinfo>, ["~> 0.3.23"])
       s.add_runtime_dependency(%q<i18n>, ["~> 0.4.1"])
       s.add_development_dependency(%q<rspec>, ["~> 2.0.1"])
     else
       s.add_dependency(%q<rack>, ["~> 1.2.1"])
+      s.add_dependency(%q<tilt>, ["~> 1.2.2"])
       s.add_dependency(%q<activesupport>, ["~> 3.0.1"])
       s.add_dependency(%q<tzinfo>, ["~> 0.3.23"])
       s.add_dependency(%q<i18n>, ["~> 0.4.1"])
@@ -100,6 +100,7 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<rack>, ["~> 1.2.1"])
+    s.add_dependency(%q<tilt>, ["~> 1.2.2"])
     s.add_dependency(%q<activesupport>, ["~> 3.0.1"])
     s.add_dependency(%q<tzinfo>, ["~> 0.3.23"])
     s.add_dependency(%q<i18n>, ["~> 0.4.1"])

@@ -1,8 +1,19 @@
 require 'serve/view_helpers'
+require 'tilt'
 
 module Serve #:nodoc:
   class DynamicHandler < FileTypeHandler #:nodoc:
-    extension 'erb', 'html.erb', 'rhtml', 'haml', 'html.haml', 'slim', 'html.slim'
+    
+    def self.extensions
+      # Get extensions from Tilt, ugly but it works
+      @extensions ||= (Tilt.mappings.map { |k,v| ["#{k}", "html.#{k}"] } << ["slim", "html.slim"]).flatten
+    end
+    
+    def extensions
+      self.class.extensions
+    end
+    
+    extension *extensions
     
     def process(request, response)
       response.headers['content-type'] = content_type
@@ -28,11 +39,8 @@ module Serve #:nodoc:
       layout = nil
       until layout or path == "/"
         path = File.dirname(path)
-        possible_layouts = %w[erb haml slim].inject([]) do |pl, ext|
-          pl << "_layout.#{ext}"
-          pl << "_layout.html.#{ext}"
-          pl
-        end.map do |l|
+        possible_layouts = extensions.map do |ext|
+          l = "_layout.#{ext}"
           possible_layout = File.join(root, path, l)
           File.file?(possible_layout) ? possible_layout : false
         end
@@ -48,24 +56,6 @@ module Serve #:nodoc:
       end
     end
     
-    module ERB #:nodoc:
-      class Engine #:nodoc:
-        def initialize(string, options = {})
-          @erb = ::ERB.new(string, nil, '-', '@erbout')
-          @erb.filename = options[:filename]
-        end
-        
-        def render(context, &block)
-          # we have to keep track of the old erbout variable for nested renders
-          # because ERB#result will set it to an empty string before it renders
-          old_erbout = context.instance_variable_get('@erbout')
-          result = @erb.result(context.instance_eval { binding })
-          context.instance_variable_set('@erbout', old_erbout)
-          result
-        end
-      end
-    end
-    
     class Parser #:nodoc:
       attr_accessor :context, :script_filename
       
@@ -77,28 +67,28 @@ module Serve #:nodoc:
       def parse_file(filename)
         old_script_filename = @script_filename
         @script_filename = filename
-        lines = IO.read(filename)
-        engine = case File.extname(filename).sub(/^./, '').downcase
-          when 'haml'
-            require 'haml'
-            require 'sass'
-            require 'sass/plugin'
-            Haml::Engine.new(lines, :attr_wrapper => '"', :filename => filename)
-          when 'erb'
-            require 'erb'
-            ERB::Engine.new(lines, :filename => filename)
-          when 'slim'
-            require 'slim'
-            Slim::Template.new(filename)
-          else
-            raise 'extension not supported'
+        
+        ext = File.extname(filename).sub(/^\.html\.|^\./, '').downcase
+        
+        if ext == 'slim' # Ugly, but works
+          if Thread.list.size > 1
+            warn "WARN: serve autoloading 'slim' in a non thread-safe way; " +
+                 "explicit require 'slim' suggested."
+          end
+          require 'slim'  
         end
-        result = engine.render(context) do |*args|
+        
+        engine = Tilt[ext].new(filename, nil, :outvar => '@_out_buf')
+        
+        raise 'extension not supported' if engine.nil?
+        
+        engine.render(context) do |*args|
           context.get_content_for(*args)
         end
+      ensure
         @script_filename = old_script_filename
-        result
       end
+      
     end
     
     class Context #:nodoc:
@@ -108,10 +98,6 @@ module Serve #:nodoc:
       def initialize(root_path, request, response)
         @root_path, @request, @response = root_path, request, response
         @content = ''
-      end
-      
-      def _erbout
-        @erbout
       end
       
       include Serve::ViewHelpers

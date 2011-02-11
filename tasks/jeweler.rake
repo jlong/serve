@@ -9,6 +9,7 @@ begin
     gem.authors = ["John W. Long", "Adam I. Williams", "Robert Evans"]
     
     gem.add_dependency 'rack',              '~> 1.2.1'
+    gem.add_dependency 'tilt',              '~> 1.2.2'
     gem.add_dependency 'activesupport',     '~> 3.0.1'
     gem.add_dependency 'tzinfo',            '~> 0.3.23'
     gem.add_dependency 'i18n',              '~> 0.4.1'

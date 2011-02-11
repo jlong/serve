@@ -1,5 +1,5 @@
 module Serve #:nodoc:
-  # Many of the methods here have been extracted from Rails
+  # Many of the methods here have been extracted in some form from Rails
   
   module EscapeHelpers
     HTML_ESCAPE = { '&' => '&amp;',  '>' => '&gt;',   '<' => '&lt;', '"' => '&quot;' }
@@ -36,17 +36,12 @@ module Serve #:nodoc:
   
   module ContentHelpers
     def capture_erb(&block)
-      buffer = _erbout
-      pos = buffer.length
-      block.call
-      
-      # extract the block 
-      data = buffer[pos..-1]
-      
-      # replace it in the original with empty string
-      buffer[pos..-1] = ''
-      
-      data
+      buffer = ""
+      old_buffer, @out_var = @_out_var, buffer
+      yield
+      buffer
+    ensure
+      @out_var = old_buffer
     end
     
     def content_for(symbol, &block)
