@@ -12,6 +12,7 @@
           float: right
           width: 28%
   %body
+    = render "header", :locals => { :local_variable => "Local variables work!" }
     #content
       %h1= @title
       = yield

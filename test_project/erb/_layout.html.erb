@@ -14,6 +14,7 @@
     </style>
   </head>
   <body>
+    <%= render "header", :locals => { :local_variable => "Local variables work!" } %>
     <div id="content">
       <h1><%= @title %></h1>
       <%= yield %>
