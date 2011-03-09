@@ -105,7 +105,7 @@ module Serve #:nodoc:
       template = options.delete(:template)
       case
       when partial
-        render_partial(partial)
+        render_partial(partial, options)
       when template
         render_template(template)
       else
@@ -113,8 +113,8 @@ module Serve #:nodoc:
       end
     end
     
-    def render_partial(partial)
-      render_template(partial, :partial => true)
+    def render_partial(partial, options={})
+      render_template(partial, options.merge(:partial => true))
     end
     
     def render_template(template, options={})
@@ -125,7 +125,7 @@ module Serve #:nodoc:
       end
       filename = template_filename(File.join(path, template), :partial => options.delete(:partial))
       if File.file?(filename)
-        parser.parse_file(filename)
+        parser.parse_file(filename, options.delete(:locals))
       else
         raise "File does not exist #{filename.inspect}"
       end
