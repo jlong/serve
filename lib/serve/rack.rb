@@ -68,7 +68,7 @@ module Serve
     end
     
     def process(request, response)
-      path = Serve.resolve_file(@root, request.path)
+      path = Serve.resolve_filename(@root, request.path)
       if path
         ext = File.extname(path)[1..-1]
         handler = Serve::FileTypeHandler.handlers[ext]

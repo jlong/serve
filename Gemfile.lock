@@ -28,6 +28,7 @@ GEM
       rspec-expectations (~> 2.0.1)
     rubyforge (2.0.4)
       json_pure (>= 1.1.7)
+    tilt (1.2.2)
     tzinfo (0.3.23)
 
 PLATFORMS
@@ -42,4 +43,5 @@ DEPENDENCIES
   rack (~> 1.2.1)
   rake (~> 0.8.7)
   rspec (~> 2.0.1)
+  tilt (= 1.2.2)
   tzinfo (~> 0.3.23)
