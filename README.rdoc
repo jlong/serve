@@ -297,6 +297,6 @@ http://github.com/jlong/serve
 
 == License
 
-Serve is released under the MIT license and is copyright (c) 2007-2010
+Serve is released under the MIT license and is copyright (c) 2007-2011
 John W. Long and Adam I. Williams. Portions have been contributed by Robert
 Evans and others. A copy of the MIT license can be found in the LICENSE file.
