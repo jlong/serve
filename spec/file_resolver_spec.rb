@@ -46,6 +46,14 @@ describe Serve::FileResolver do
     FileUtils.rm(@root + full_path)
   end
   
+  it 'should resolve files without case sensitivity' do
+    resolve('HELLO').should == 'hello.html'
+  end
+  
+  it 'should resolve directories without case sensitivity' do
+    resolve('DIRECTORY').should == 'directory/index.html'
+  end
+  
   def resolve(name)
     Serve::FileResolver.instance.resolve(@root, name)
   end

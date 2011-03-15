@@ -32,7 +32,7 @@ module Serve
         if File.file?(full_path)
           path
         else
-          result = Dir.glob(full_path + ".*").first
+          result = Dir.glob(full_path + ".*", File::FNM_CASEFOLD).first
           result.sub(/^#{root}/, '').sub(/^\//, '') if result && File.file?(result)
         end
       end
