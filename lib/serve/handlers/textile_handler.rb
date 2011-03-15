@@ -1,4 +1,5 @@
 module Serve #:nodoc:
+  # TODO: Is the Textile handler needed now that we are using Tilt?
   class TextileHandler < FileTypeHandler #:nodoc:
     extension 'textile'
     

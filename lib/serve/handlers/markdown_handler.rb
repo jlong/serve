@@ -1,4 +1,5 @@
 module Serve #:nodoc:
+  # TODO: Is the Markdown handler needed now that we are using Tilt?
   class MarkdownHandler < FileTypeHandler #:nodoc:
     extension 'markdown'
     

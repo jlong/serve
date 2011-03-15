@@ -1,4 +1,5 @@
 module Serve #:nodoc:
+  # TODO: Is the Sass handler needed now that we are using Tilt?
   class SassHandler < FileTypeHandler #:nodoc:
     extension 'sass', 'scss'
     
