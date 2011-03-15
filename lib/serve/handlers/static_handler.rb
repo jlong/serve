@@ -1,4 +1,9 @@
 module Serve #:nodoc:
+  
+  # TODO: Figure out a way to remove the need for this handler. Right now
+  # Serve requires this in order to deliver these files with the right content
+  # type headers.
+  
   class StaticHandler < FileTypeHandler #:nodoc:
     extension 'txt', 'text', 'xml', 'atom', 'rss', 'rdf', 'css', 'htm', 'html'
     
