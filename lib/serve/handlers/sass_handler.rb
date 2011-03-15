@@ -1,5 +1,6 @@
 module Serve #:nodoc:
-  # TODO: Is the Sass handler needed now that we are using Tilt?
+  # The Sass handler seems to be necessar to keep Tilt from applying a layout
+  # to Sass files. Any one know how to turn this off?
   class SassHandler < FileTypeHandler #:nodoc:
     extension 'sass', 'scss'
     

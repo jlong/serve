@@ -10,8 +10,6 @@ end
 require 'serve/version'
 require 'serve/file_resolver'
 require 'serve/handlers/file_type_handler'
-require 'serve/handlers/textile_handler'
-require 'serve/handlers/markdown_handler'
 require 'serve/handlers/dynamic_handler'
 require 'serve/handlers/sass_handler'
 require 'serve/handlers/email_handler'
