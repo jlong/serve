@@ -46,11 +46,6 @@ describe Serve::FileResolver do
     FileUtils.rm(@root + full_path)
   end
   
-  it 'should resolve weird stuff' do
-    @root = File.dirname(__FILE__) + '/../test_project/'
-    resolve('test').should == 'test.haml'
-  end
-  
   def resolve(name)
     Serve::FileResolver.instance.resolve(@root, name)
   end
