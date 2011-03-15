@@ -19,7 +19,12 @@ Compass.configure_sass_plugin!
 # Rack Middleware
 use Rack::ShowStatus      # Nice looking 404s and other messages
 use Rack::ShowExceptions  # Nice looking errors
-use Sass::Plugin::Rack    # Compile Sass on the fly
+
+# Because Heroku doesn't allow you to write to the file system,
+# if you're not using Heroku in production this conditional won't be needed
+if ENV['RACK_ENV'] != "production"
+  use Sass::Plugin::Rack  # Compile Sass on the fly
+end
 
 # Rack Application
 if ENV['SERVER_SOFTWARE'] =~ /passenger/i
