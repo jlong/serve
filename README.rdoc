@@ -290,9 +290,9 @@ the GitHub wiki:
 
 http://wiki.github.com/jlong/serve
 
-All development takes place on GitHub:
+Have questions? Feel free to ask them on the mailing list:
 
-http://github.com/jlong/serve
+http://groups.google.com/group/serve-users
 
 
 == License
