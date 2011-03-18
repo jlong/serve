@@ -8,7 +8,7 @@ module Kernel
 end
 
 require 'serve/version'
-require 'serve/file_resolver'
+require 'serve/router'
 require 'serve/handlers/file_type_handler'
 require 'serve/handlers/dynamic_handler'
 require 'serve/handlers/sass_handler'

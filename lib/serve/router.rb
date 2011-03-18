@@ -1,11 +1,15 @@
 module Serve
-  class FileResolver
+  class Router
     
     def self.instance
-      @instance ||= FileResolver.new
+      @instance ||= Router.new
     end
     
-    # Resolve a path to a valid file name in root. Return nil if no
+    def self.resolve(*args)
+      instance.resolve(*args)
+    end
+    
+    # Resolve a path to a valid file name in root path. Return nil if no
     # file exists for that path.
     def resolve(root, path)
       path = normalize_path(path)
@@ -22,7 +26,7 @@ module Serve
         # It's a directory? Try a directory index.
         resolve(root, File.join(path, 'index'))
       when path.ends_with?('.css')
-        # CSS not found? try SCSS or Sass
+        # CSS not found? Try SCSS or Sass.
         alternates = %w{.scss .sass}.map { |ext| path.sub(/\.css\Z/, ext) }
         sass_path = alternates.find do |p|
           File.file?(File.join(root, p))
@@ -42,9 +46,5 @@ module Serve
         path unless path =~ /\.\./   # guard against evil paths
       end
       
-  end
-  
-  def self.resolve_filename(*args)
-    Serve::FileResolver.instance.resolve(*args)
   end
 end

@@ -1,8 +1,7 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
-require 'serve/handlers/dynamic_handler'
-require 'serve/file_resolver'
+require 'serve/router'
 
-describe Serve::FileResolver do
+describe Serve::Router do
   
   before do
     @root = File.dirname(__FILE__) + '/fixtures'
@@ -55,7 +54,7 @@ describe Serve::FileResolver do
   end
   
   def resolve(name)
-    Serve::FileResolver.instance.resolve(@root, name)
+    Serve::Router.resolve(@root, name)
   end
   
 end

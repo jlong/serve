@@ -93,7 +93,7 @@ module Serve
       # Process the request and response. Paths are transformed so that
       # URLs without extensions and directory indexes work.
       def process(request, response)
-        path = Serve.resolve_filename(@root, request.path_info)
+        path = Serve::Router.resolve(@root, request.path_info)
         if path
           # Fetch the file handler for a file with a given extension/
           ext = File.extname(path)[1..-1]
