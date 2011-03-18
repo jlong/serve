@@ -33,6 +33,7 @@ module Serve
         end      
       else
         # Still no luck? Check to see if a file with an extension exists by that name.
+        # TODO: Return a path with an extension based on priority, not just the first found.
         result = Dir.glob(full_path + ".*", File::FNM_CASEFOLD).first
         result.sub(/^#{root}/, '').sub(/^\//, '') if result && File.file?(result)
       end
