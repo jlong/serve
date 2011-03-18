@@ -1,17 +1,9 @@
 module Serve
-  class Router
-    
-    def self.instance
-      @instance ||= Router.new
-    end
-    
-    def self.resolve(*args)
-      instance.resolve(*args)
-    end
+  module Router
     
     # Resolve a path to a valid file name in root path. Return nil if no
     # file exists for that path.
-    def resolve(root, path)
+    def self.resolve(root, path)
       path = normalize_path(path)
       
       return if path.nil? # If it's not a valid path. Return nothing.
@@ -41,7 +33,7 @@ module Serve
     
     private
       
-      def normalize_path(path)
+      def self.normalize_path(path)
         path = File.join(path)       # path may be array
         path = path.sub(%r{/\Z}, '') # remove trailing slash
         path unless path =~ /\.\./   # guard against evil paths
