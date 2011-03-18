@@ -1,6 +1,9 @@
 module Serve #:nodoc:
+  
+  # TODO: Figure out how to remove the Sass Handler in favor of Tilt
   # The Sass handler seems to be necessary to keep Tilt from applying a layout
   # to Sass files. Any one know how to turn this Tilt feature off?
+  
   class SassHandler < FileTypeHandler #:nodoc:
     extension 'sass', 'scss'
     

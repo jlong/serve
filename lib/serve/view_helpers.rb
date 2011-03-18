@@ -44,6 +44,8 @@ module Serve #:nodoc:
       @out_var = old_buffer
     end
     
+    # TODO: Fix content_for so that it works with other template languages like slim
+    
     def content_for(symbol, &block)
       if @haml_buffer
         set_content_for(symbol, capture_haml(&block))

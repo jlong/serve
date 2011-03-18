@@ -21,7 +21,7 @@ module Serve
       end
       
       def resolve_path(path)
-        Serve.resolve_file(@root_path, path)
+        Serve.resolve_filename(@root_path, path)
       end
       
       def view_helpers
