@@ -1,6 +1,6 @@
 = Serve - A Rapid Prototyping Framework for Web Applications
 
-link:../artwork/logo-hifi-1.png
+link:artwork/logo-hifi-1.png
 
 Serve is a small Rack-based web server that makes it easy to serve HTML, ERB,
 HAML, or Slim templates from any directory.
