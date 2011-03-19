@@ -6,7 +6,7 @@ module Serve
     def self.resolve(root, path)
       path = normalize_path(path)
       
-      return if path.nil? # If it's not a valid path. Return nothing.
+      return if path.nil? # If it's not a valid path, return nothing.
       
       full_path = File.join(root, path)
       
