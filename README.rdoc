@@ -8,7 +8,7 @@ HAML, or Slim templates from any directory.
 But Serve is much more than a simple web server.
 
 Serve's primary purpose is to provide a rapid prototyping framework for Web
-applications (specifically Rails apps). It is designed to compliment web
+applications (specifically Rails apps). It is designed to complement web
 application development and enforce a strict separation of concerns between
 designer and developer. Using Serve allows the designer to work in a separate
 prototype project, while the developer can work on the actual application and
