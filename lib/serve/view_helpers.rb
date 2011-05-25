@@ -57,11 +57,11 @@ module Serve #:nodoc:
     
     def capture_erb(&block)
       buffer = ""
-      old_buffer, @out_var = @_out_var, buffer
+      old_buffer, @_out_buf = @_out_buf, buffer
       yield
       buffer
     ensure
-      @out_var = old_buffer
+      @_out_buf = old_buffer
     end
     alias capture_rhtml capture_erb
     

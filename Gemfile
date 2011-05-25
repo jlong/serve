@@ -13,4 +13,5 @@ group :development do
   gem 'haml',           '~> 3.1.1'
   gem 'sass',           '~> 3.1.1'
   gem 'compass',        '~> 0.11.1'
+  gem 'slim',           '~> 0.9.4'
 end
