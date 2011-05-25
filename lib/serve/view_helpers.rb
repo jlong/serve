@@ -64,6 +64,7 @@ module Serve #:nodoc:
       @_out_buf = old_buffer
     end
     alias capture_rhtml capture_erb
+    alias capture_erubis capture_erb
     
     def capture(&block)
       capture_method = "capture_#{script_extension}"

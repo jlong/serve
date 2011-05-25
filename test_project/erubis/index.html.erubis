@@ -1,0 +1,10 @@
+<% @title = "ERubis Template" %>
+
+<p>Hello World!</p>
+
+<%= custom_method %>
+
+<% content_for :sidebar do %>
+  <h3>Sidebar</h3>
+  <p>Just a test</p>
+<% end %>
