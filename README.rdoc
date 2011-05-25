@@ -3,7 +3,7 @@
 link:/downloads/jlong/serve/logo-hifi-1.png
 
 Serve is a small Rack-based web server that makes it easy to serve HTML, ERB,
-HAML, or Slim templates from any directory.
+Haml, or Slim templates from any directory.
 
 But Serve is much more than a simple web server.
 
@@ -32,7 +32,7 @@ MVC stack -- the views. Serve basically allows you to have a separate project
 just for designing the views for the application. When views are ready, they
 can be copied over from the prototype to the application almost as is. This
 process is eased since Serve has full support for partials and layouts with
-either ERB or HAML. Serve can also handle SASS, Slim, Textile, and Markdown
+either ERB or Haml. Serve can also handle SASS, Slim, Textile, and Markdown
 if the appropriate libraries are installed.
 
 
@@ -239,7 +239,7 @@ Rails applications:
   j(string)                        # alias for json_escape
   
   # Content Helpers
-  capture_erb(&block)              # Capture a block inside of a view or layout
+  capture(&block)                  # Capture a block inside of a view or layout
   content_for(symbol, &block)      # Capture a block and store it by symbol
   content_for?(symbol)             # Has content been captured for symbol?
   get_content_for(symbol)          # Retrieve content for symbol (equivalent to `yield symbol`)
@@ -276,7 +276,7 @@ Serve does special processing for files with following extensions:
 
 textile :: Evaluates the document as Textile (requires the Redcloth gem) 
 markdown :: Evaluates the document as Markdown (requires the Bluecloth gem)
-erb :: Experimental support for ERB
+erb :: Evaluates the document as ERB
 haml :: Evaluates the document as Haml (requires the Haml gem)
 slim :: Evaluates the document using the Slim template language (requires the Slim gem)
 sass :: Evaluates the document as Sass (requires the Haml gem)
