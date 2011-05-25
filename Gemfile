@@ -14,4 +14,6 @@ group :development do
   gem 'sass',           '~> 3.1.1'
   gem 'compass',        '~> 0.11.1'
   gem 'slim',           '~> 0.9.4'
+  gem 'rdiscount',      '~> 1.6.8'
+  gem 'RedCloth',       '~> 4.2.7'
 end
