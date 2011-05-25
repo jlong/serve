@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{serve}
-  s.version = "1.0.0"
+  s.version = "1.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["John W. Long", "Adam I. Williams", "Robert Evans"]
@@ -33,6 +33,7 @@ Gem::Specification.new do |s|
      "lib/serve/handlers/dynamic_handler.rb",
      "lib/serve/handlers/email_handler.rb",
      "lib/serve/handlers/file_type_handler.rb",
+     "lib/serve/handlers/less_handler.rb",
      "lib/serve/handlers/redirect_handler.rb",
      "lib/serve/handlers/sass_handler.rb",
      "lib/serve/javascripts.rb",

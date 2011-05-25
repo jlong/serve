@@ -1,10 +1,15 @@
 = Change Log
 
-== Edge
+== 1.1.0 (May 25, 2010)
 
-* Updated README [jlong]
+* Use latest versions of dependencies [jlong]
+* Added support for locals in partials [heikki]
+* Added limited support for Radius [jlong]
+* Added support for LESS [jlong]
+* Added support for ERubis [jlong]
 * Rewrote the way that Serve resolves file names [jlong]
-* Incorporated Tilt so that other template languages can be added with ease [jlong]
+* Incorporated Tilt so that other template languages can be added with ease. [jlong]
+* Added limited support for Slim [fleadope, jlong]
 
 == 1.0.0 (November 3, 2010)
 

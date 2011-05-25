@@ -16,4 +16,7 @@ group :development do
   gem 'slim',           '~> 0.9.4'
   gem 'rdiscount',      '~> 1.6.8'
   gem 'RedCloth',       '~> 4.2.7'
+  gem 'erubis',         '~> 2.7.0'
+  gem 'less',           '~> 1.2.21'
+  gem 'radius',         '~> 0.6.1'
 end
