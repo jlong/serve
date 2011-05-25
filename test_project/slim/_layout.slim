@@ -2,8 +2,16 @@ html
   head
     title= @title
     link rel="stylesheet" type="text/css" href="/main.sass"
-    scss:
-      body { color: blue; }
+    sass:
+      #content
+        float: left
+        width: 70%
+      #sidebar
+        float: right
+        width: 28%
   body
-    h1= @title
-    == yield
+    #content
+      h1= @title
+      == yield
+    - if content_for? :sidebar
+      #sidebar== yield :sidebar

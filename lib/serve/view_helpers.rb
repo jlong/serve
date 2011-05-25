@@ -35,23 +35,8 @@ module Serve #:nodoc:
   end
   
   module ContentHelpers
-    def capture_erb(&block)
-      buffer = ""
-      old_buffer, @out_var = @_out_var, buffer
-      yield
-      buffer
-    ensure
-      @out_var = old_buffer
-    end
-    
-    # TODO: Fix content_for so that it works with other template languages like slim
-    
     def content_for(symbol, &block)
-      if @haml_buffer
-        set_content_for(symbol, capture_haml(&block))
-      else
-        set_content_for(symbol, capture_erb(&block))
-      end
+      set_content_for(symbol, capture(&block))
     end
     
     def content_for?(symbol)
@@ -69,6 +54,35 @@ module Serve #:nodoc:
     def set_content_for(symbol, value)
       instance_variable_set("@content_for_#{symbol}", value)
     end
+    
+    def capture_erb(&block)
+      buffer = ""
+      old_buffer, @out_var = @_out_var, buffer
+      yield
+      buffer
+    ensure
+      @out_var = old_buffer
+    end
+    alias capture_rhtml capture_erb
+    
+    def capture(&block)
+      capture_method = "capture_#{script_extension}"
+      if respond_to? capture_method
+        send capture_method, &block
+      else
+        raise "Capture not supported for `#{script_extension}' template (#{engine_name})"
+      end
+    end
+    
+    private
+      
+      def engine_name
+        Tilt[script_extension].to_s
+      end
+      
+      def script_extension
+        parser.script_extension
+      end
   end
   
   module FlashHelpers

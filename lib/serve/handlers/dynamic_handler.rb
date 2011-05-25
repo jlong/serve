@@ -57,7 +57,7 @@ module Serve #:nodoc:
     end
     
     class Parser #:nodoc:
-      attr_accessor :context, :script_filename
+      attr_accessor :context, :script_filename, :script_extension, :engine
       
       def initialize(context)
         @context = context
@@ -65,7 +65,8 @@ module Serve #:nodoc:
       end
       
       def parse_file(filename)
-        old_script_filename = @script_filename
+        old_script_filename, old_script_extension, old_engine = @script_filename, @script_extension, @engine
+        
         @script_filename = filename
         
         ext = File.extname(filename).sub(/^\.html\.|^\./, '').downcase
@@ -78,15 +79,19 @@ module Serve #:nodoc:
           require 'slim'  
         end
         
-        engine = Tilt[ext].new(filename, nil, :outvar => '@_out_buf')
+        @script_extension = ext
         
-        raise 'extension not supported' if engine.nil?
+        @engine = Tilt[ext].new(filename, nil, :outvar => '@_out_buf')
         
-        engine.render(context) do |*args|
+        raise "#{ext} extension not supported" if @engine.nil?
+        
+        @engine.render(context) do |*args|
           context.get_content_for(*args)
         end
       ensure
         @script_filename = old_script_filename
+        @script_extension = old_script_extension
+        @engine = old_engine
       end
       
     end

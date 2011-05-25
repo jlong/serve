@@ -1,5 +1,11 @@
 = Change Log
 
+== Edge
+
+* Updated README [jlong]
+* Rewrote the way that Serve resolves file names [jlong]
+* Incorporated Tilt so that other template languages can be added with ease [jlong]
+
 == 1.0.0 (November 3, 2010)
 
 * Various tweaks and fixes [jlong]
