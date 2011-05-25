@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["John W. Long", "Adam I. Williams", "Robert Evans"]
-  s.date = %q{2011-02-10}
+  s.date = %q{2011-05-25}
   s.default_executable = %q{serve}
   s.description = %q{Serve is a small Rack-based web server that makes it easy to serve ERB or HAML from any directory. Serve is an ideal tool for building HTML prototypes of Rails applications. Serve can also handle SASS, Textile, and Markdown if the appropriate gems are installed.}
   s.email = %q{me@johnwlong.com}
@@ -30,25 +30,16 @@ Gem::Specification.new do |s|
      "bin/serve",
      "lib/serve.rb",
      "lib/serve/application.rb",
-     "lib/serve/file_resolver.rb",
      "lib/serve/handlers/dynamic_handler.rb",
      "lib/serve/handlers/email_handler.rb",
      "lib/serve/handlers/file_type_handler.rb",
-     "lib/serve/handlers/markdown_handler.rb",
      "lib/serve/handlers/redirect_handler.rb",
      "lib/serve/handlers/sass_handler.rb",
-     "lib/serve/handlers/static_handler.rb",
-     "lib/serve/handlers/textile_handler.rb",
      "lib/serve/javascripts.rb",
      "lib/serve/out.rb",
      "lib/serve/project.rb",
      "lib/serve/rack.rb",
-     "lib/serve/rails.rb",
-     "lib/serve/rails/configuration.rb",
-     "lib/serve/rails/mount.rb",
-     "lib/serve/rails/routing.rb",
-     "lib/serve/rails/serve_controller.rb",
-     "lib/serve/response_cache.rb",
+     "lib/serve/router.rb",
      "lib/serve/templates/LICENSE",
      "lib/serve/templates/README.markdown",
      "lib/serve/templates/_layout.html.erb",
@@ -63,8 +54,11 @@ Gem::Specification.new do |s|
      "lib/serve/view_helpers.rb",
      "rails/init.rb",
      "spec/application_spec.rb",
+     "spec/fixtures/directory/index.html",
+     "spec/fixtures/hello.html",
+     "spec/fixtures/stylesheets/application.sass",
      "spec/project_spec.rb",
-     "spec/response_cache_spec.rb",
+     "spec/router_spec.rb",
      "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/jlong/serve}
@@ -75,7 +69,7 @@ Gem::Specification.new do |s|
   s.test_files = [
     "spec/application_spec.rb",
      "spec/project_spec.rb",
-     "spec/response_cache_spec.rb",
+     "spec/router_spec.rb",
      "spec/spec_helper.rb"
   ]
 
@@ -84,27 +78,27 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rack>, ["~> 1.2.1"])
-      s.add_runtime_dependency(%q<tilt>, ["~> 1.2.2"])
-      s.add_runtime_dependency(%q<activesupport>, ["~> 3.0.1"])
-      s.add_runtime_dependency(%q<tzinfo>, ["~> 0.3.23"])
-      s.add_runtime_dependency(%q<i18n>, ["~> 0.4.1"])
-      s.add_development_dependency(%q<rspec>, ["~> 2.0.1"])
+      s.add_runtime_dependency(%q<rack>, ["~> 1.3.0"])
+      s.add_runtime_dependency(%q<tilt>, ["~> 1.3.1"])
+      s.add_runtime_dependency(%q<activesupport>, ["~> 3.0.7"])
+      s.add_runtime_dependency(%q<tzinfo>, ["~> 0.3.27"])
+      s.add_runtime_dependency(%q<i18n>, ["~> 0.6.0"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.6.0"])
     else
-      s.add_dependency(%q<rack>, ["~> 1.2.1"])
-      s.add_dependency(%q<tilt>, ["~> 1.2.2"])
-      s.add_dependency(%q<activesupport>, ["~> 3.0.1"])
-      s.add_dependency(%q<tzinfo>, ["~> 0.3.23"])
-      s.add_dependency(%q<i18n>, ["~> 0.4.1"])
-      s.add_dependency(%q<rspec>, ["~> 2.0.1"])
+      s.add_dependency(%q<rack>, ["~> 1.3.0"])
+      s.add_dependency(%q<tilt>, ["~> 1.3.1"])
+      s.add_dependency(%q<activesupport>, ["~> 3.0.7"])
+      s.add_dependency(%q<tzinfo>, ["~> 0.3.27"])
+      s.add_dependency(%q<i18n>, ["~> 0.6.0"])
+      s.add_dependency(%q<rspec>, ["~> 2.6.0"])
     end
   else
-    s.add_dependency(%q<rack>, ["~> 1.2.1"])
-    s.add_dependency(%q<tilt>, ["~> 1.2.2"])
-    s.add_dependency(%q<activesupport>, ["~> 3.0.1"])
-    s.add_dependency(%q<tzinfo>, ["~> 0.3.23"])
-    s.add_dependency(%q<i18n>, ["~> 0.4.1"])
-    s.add_dependency(%q<rspec>, ["~> 2.0.1"])
+    s.add_dependency(%q<rack>, ["~> 1.3.0"])
+    s.add_dependency(%q<tilt>, ["~> 1.3.1"])
+    s.add_dependency(%q<activesupport>, ["~> 3.0.7"])
+    s.add_dependency(%q<tzinfo>, ["~> 0.3.27"])
+    s.add_dependency(%q<i18n>, ["~> 0.6.0"])
+    s.add_dependency(%q<rspec>, ["~> 2.6.0"])
   end
 end
 

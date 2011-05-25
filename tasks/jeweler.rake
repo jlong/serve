@@ -8,13 +8,13 @@ begin
     gem.homepage = "http://github.com/jlong/serve"
     gem.authors = ["John W. Long", "Adam I. Williams", "Robert Evans"]
     
-    gem.add_dependency 'rack',              '~> 1.2.1'
-    gem.add_dependency 'tilt',              '~> 1.2.2'
-    gem.add_dependency 'activesupport',     '~> 3.0.1'
-    gem.add_dependency 'tzinfo',            '~> 0.3.23'
-    gem.add_dependency 'i18n',              '~> 0.4.1'
+    gem.add_dependency 'rack',              '~> 1.3.0'
+    gem.add_dependency 'tilt',              '~> 1.3.1'
+    gem.add_dependency 'activesupport',     '~> 3.0.7'
+    gem.add_dependency 'tzinfo',            '~> 0.3.27'
+    gem.add_dependency 'i18n',              '~> 0.6.0'
     
-    gem.add_development_dependency "rspec", "~> 2.0.1"
+    gem.add_development_dependency "rspec", "~> 2.6.0"
     
     gem.files = FileList["[A-Z]*", "{bin,lib,rails,spec}/**/*"].exclude("tmp")
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings

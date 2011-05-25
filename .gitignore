@@ -10,3 +10,4 @@ rdoc
 pkg
 .rvmrc
 .bundle
+test_project/.sass-cache/**
