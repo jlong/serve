@@ -64,7 +64,7 @@ module Serve #:nodoc:
         @context.parser = self
       end
       
-      def parse_file(filename)
+      def parse_file(filename, locals={})
         old_script_filename, old_script_extension, old_engine = @script_filename, @script_extension, @engine
         
         @script_filename = filename
@@ -85,7 +85,7 @@ module Serve #:nodoc:
         
         raise "#{ext} extension not supported" if @engine.nil?
         
-        @engine.render(context) do |*args|
+        @engine.render(context, locals) do |*args|
           context.get_content_for(*args)
         end
       ensure
