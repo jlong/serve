@@ -64,7 +64,7 @@ module Serve #:nodoc:
           views
         ).each { |path| make_path path }
         create_file 'config.ru',       read_template('config.ru')
-        create_file 'LICENSE',         read_template('LICENSE')
+        create_file 'LICENSE',         read_template('license')
         create_file '.gitignore',      read_template('gitignore')
         create_file 'compass.config',  read_template('compass.config')
         create_file 'README.markdown', read_template('README.markdown')
