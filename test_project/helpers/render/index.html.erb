@@ -1,0 +1,13 @@
+<% @title = "Render Tests" %>
+
+<p>Can we render a partial?</p>
+<%= render "partial.html.erb" %>
+
+<p>Can we render another template?</p>
+<%= render :template => "template.html.erb" %>
+
+<p>Can we render Haml inside of ERB?</p>
+<%= render "partial.html.erb" %>
+
+<p>Can we render Slim inside of Haml?</p>
+<%= render "partial.html.slim" %>
