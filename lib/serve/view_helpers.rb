@@ -178,7 +178,7 @@ module Serve #:nodoc:
     end
     
     def image(name, options = {})
-      image_tag(append_image_extension("/images/#{name}"), options)
+      image_tag(ensure_path(ensure_extension(name, 'png'), 'images'), options)
     end
     
     def javascript_tag(content = nil, html_options = {})
@@ -193,8 +193,7 @@ module Serve #:nodoc:
     end
     
     def link_to_function(name, *args, &block)
-      html_options = {}
-      html_options = args.pop if args.last.is_a? Hash
+      html_options = extract_options!(args)
       function = args[0] || ''
       onclick = "#{"#{html_options[:onclick]}; " if html_options[:onclick]}#{function}; return false;"
       href = html_options[:href] || '#'
@@ -243,6 +242,61 @@ module Serve #:nodoc:
         content_tag "a", name || email_address_obfuscated, html_options.merge({ "href" => "mailto:#{email_address}#{extras}" })
       end
     end
+
+    # Generates JavaScript script tags for the sources given as arguments.
+    #
+    # If the .js extension is not given, it will be appended to the source.
+    #
+    # Examples
+    #     javascript_include_tag 'application' # =>
+    #       <script src="/javascripts/application.js" type="text/javascript" />
+    #
+    #     javascript_include_tag 'https://cdn/jquery.js' # =>
+    #       <script src="https://cdn/jquery.js" type="text/javascript" />
+    #
+    #     javascript_include_tag 'application', 'books' # =>
+    #       <script src="/javascripts/application.js" type="text/javascript" />
+    #       <script src="/javascripts/books.js" type="text/javascript" />
+    #
+    def javascript_include_tag(*sources)
+      options = extract_options!(sources)
+
+      sources.map do |source|
+        content_tag('script', '', {
+          'type' => 'text/javascript',
+          'src' => ensure_path(ensure_extension(source, 'js'), 'javascripts')
+        }.merge(options))
+      end.join("\n")
+    end
+
+    # Generates stylesheet link tags for the sources given as arguments.
+    #
+    # If the .css extension is not given, it will be appended to the source.
+    #
+    # Examples
+    #     stylesheet_link_tag 'screen' # =>
+    #       <link href="/stylesheets/screen.css" media="screen" rel="stylesheet" type="text/css" />
+    #
+    #     stylesheet_link_tag 'print', :media => 'print' # =>
+    #       <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css" />
+    #
+    #     stylesheet_link_tag 'application', 'books', 'authors' # =>
+    #       <link href="/stylesheets/application.css" media="screen" rel="stylesheet" type="text/css" />
+    #       <link href="/stylesheets/books.css" media="screen" rel="stylesheet" type="text/css" />
+    #       <link href="/stylesheets/authors.css" media="screen" rel="stylesheet" type="text/css" />
+    #
+    def stylesheet_link_tag(*sources)
+      options = extract_options!(sources)
+
+      sources.map do |source|
+        tag('link', {
+          'rel' => 'stylesheet',
+          'type' => 'text/css',
+          'media' => 'screen',
+          'href' => ensure_path(ensure_extension(source, 'css'), 'stylesheets')
+        }.merge(options))
+      end.join("\n")
+    end
     
     private
       
@@ -267,13 +321,55 @@ module Serve #:nodoc:
           " #{attrs.sort * ' '}" unless attrs.empty?
         end
       end
-      
-      def append_image_extension(name)
-        unless name =~ /\.(.*?)$/
-          name + '.png'
-        else
-          name
+
+      # Ensures a proper extension is appended to the filename.
+      #
+      # If a URI with the http or https scheme name is given, it is assumed
+      # to be absolute and will not be altered.
+      #
+      # Examples
+      #     ensure_extension('screen', 'css') => 'screen.css'
+      #     ensure_extension('screen.css', 'css') => 'screen.css'
+      #     ensure_extension('jquery.min', 'js') => 'jquery.min.js'
+      #     ensure_extension('https://cdn/jquery', 'js') => 'https://cdn/jquery'
+      #
+      def ensure_extension(source, extension)
+        if source =~ /^https?:/ || source.end_with?(".#{extension}")
+          return source
         end
+
+        "#{source}.#{extension}"
+      end
+
+      # Ensures the proper path to the given source.
+      #
+      # If the source begins at the root of the public directory or is a URI
+      # with the http or https scheme name, it is assumed to be absolute and
+      # will not be altered.
+      #
+      # Examples
+      #     ensure_path('screen.css', 'stylesheets') => '/stylesheets/screen.css'
+      #     ensure_path('/screen.css', 'stylesheets') => '/screen.css'
+      #     ensure_path('http://cdn/jquery.js', 'javascripts') => 'http://cdn/jquery.js'
+      #
+      def ensure_path(source, path)
+        if source =~ /^(\/|https?)/
+          return source
+        end
+
+        File.join('', path, source)
+      end
+
+      # Returns a hash of options if they exist at the end of an array.
+      #
+      # This is useful when working with splats.
+      #
+      # Examples
+      #     extract_options!([1, 2, { :name => 'sunny' }]) => { :name => 'sunny' }
+      #     extract_options!([1, 2, 3]) => {}
+      #
+      def extract_options!(array)
+        array.last.instance_of?(Hash) ? array.pop : {}
       end
   end
   
