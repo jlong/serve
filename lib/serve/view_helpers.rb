@@ -178,7 +178,7 @@ module Serve #:nodoc:
     end
     
     def image(name, options = {})
-      image_tag(append_image_extension("/images/#{name}"), options)
+      image_tag(ensure_path(ensure_extension(name, 'png'), 'images'), options)
     end
     
     def javascript_tag(content = nil, html_options = {})
@@ -193,8 +193,7 @@ module Serve #:nodoc:
     end
     
     def link_to_function(name, *args, &block)
-      html_options = {}
-      html_options = args.pop if args.last.is_a? Hash
+      html_options = extract_options!(args)
       function = args[0] || ''
       onclick = "#{"#{html_options[:onclick]}; " if html_options[:onclick]}#{function}; return false;"
       href = html_options[:href] || '#'
@@ -320,14 +319,6 @@ module Serve #:nodoc:
             end
           end
           " #{attrs.sort * ' '}" unless attrs.empty?
-        end
-      end
-      
-      def append_image_extension(name)
-        unless name =~ /\.(.*?)$/
-          name + '.png'
-        else
-          name
         end
       end
 
