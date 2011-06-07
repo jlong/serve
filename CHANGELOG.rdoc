@@ -2,6 +2,7 @@
 
 == 1.1.1 (June 7, 2011)
 * Fix: Allow create command to work without Git. Closes #24. [jlong]
+* Add javascript and stylesheet include helpers [zaeleus]
 
 == 1.1.0 (May 25, 2010)
 
