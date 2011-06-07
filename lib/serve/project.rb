@@ -157,6 +157,8 @@ module Serve #:nodoc:
       def git_config(key)
         value = `git config #{key}`.chomp
         value.empty? ? nil : value
+      rescue
+        nil
       end
       
       # Normalize the path of the target directory
