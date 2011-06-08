@@ -229,8 +229,8 @@ module and define your helper methods there:
 Helpers have full access to the request and response objects so you can easily
 read and manipulate headers or do other fancy tricks.
 
-Serve provides a number of stock helpers to make it easier for you to prototype
-Rails applications:
+Serve provides a number of stock helpers to make it easier for you to 
+prototype Rails applications:
 
   # Escape Helpers
   html_escape(string)              # escape HTML in string
@@ -283,6 +283,24 @@ sass :: Evaluates the document as Sass (requires the Haml gem)
 scss :: Evaluates the document as SCSS (requires the Haml gem)
 email :: Evaluates the document as if it is an e-mail message; the format is identical to a plain/text e-mail message's source
 redirect :: Redirects to the URL contained in the document
+
+
+== Exporting A Serve Project
+
+The edge version of Serve now has limited support for exporting your Serve 
+project to HTML. To get started with the prerelease version:
+
+  gem install --pre serve
+
+To export your project, use the new "export" command:
+
+  serve export <project_dir>:<output_dir>
+
+Where <project_dir> is the path to the project and <output_dir> is the path to 
+the directory where you would like your HTML and CSS generated.
+
+Please note! This feature is in beta. If you have issues with this approach,
+please post them to the GitHub issue tracker.
 
 
 == More Information
