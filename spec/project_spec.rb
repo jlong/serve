@@ -18,7 +18,7 @@ describe Serve::Project do
         :framework  => 'jquery'
       }
       
-      @mockup       = Serve::Project.new(@options)
+      @mockup        = Serve::Project.new(@options)
       @mockup.stdout = SilentOut.new
       @mockup.stderr = SilentOut.new
       

@@ -1,5 +1,8 @@
 = Change Log
 
+== edge
+* Added an export command which allows you to convert a Serve site to static HTML. Closes #10. [jlong]
+
 == 1.1.1 (June 7, 2011)
 * Fix: Allow create command to work without Git. Closes #24. [jlong]
 * Add javascript and stylesheet include helpers [zaeleus]

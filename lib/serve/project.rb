@@ -1,5 +1,6 @@
-require 'pathname'
+require 'fileutils'
 require 'serve/out'
+require 'serve/path'
 require 'serve/javascripts'
 
 module Serve #:nodoc:
@@ -34,6 +35,10 @@ module Serve #:nodoc:
       install_javascript_framework @framework
     end
     
+    def self.create(options={})
+      new(options).create
+    end
+    
     # Convert an existing Compass project to a Serve project
     def convert
       setup_base
@@ -49,10 +54,14 @@ module Serve #:nodoc:
       note_old_compass_config
     end
     
+    def self.convert(options={})
+      new(options).convert
+    end
+    
     private
       
       include Serve::Out
-      
+      include Serve::Path
       include Serve::JavaScripts
       
       # Files required for both a new server project and for an existing compass project.
@@ -109,6 +118,14 @@ module Serve #:nodoc:
         instance_eval "%{#{contents}}"
       end
       
+      # Grab data by key from the git config file if it exists
+      def git_config(key)
+        value = `git config #{key}`.chomp
+        value.empty? ? nil : value
+      rescue
+        nil
+      end
+      
       # Create a file with contents
       def create_file(file, contents)
         path = normalize_path(@location, file)
@@ -148,19 +165,6 @@ module Serve #:nodoc:
         end
       end
       
-      # Convert dashes and spaces to underscores
-      def underscore(string)
-        string.gsub(/-|\s+/, '_')
-      end
-            
-      # Grab data by key from the git config file if it exists
-      def git_config(key)
-        value = `git config #{key}`.chomp
-        value.empty? ? nil : value
-      rescue
-        nil
-      end
-      
       # Normalize the path of the target directory
       def normalize_location(path, name = nil)
         path = File.join(path, underscore(name)) if name
@@ -168,10 +172,9 @@ module Serve #:nodoc:
         path
       end
       
-      # Normalize a path relative to the current working directory
-      def normalize_path(*paths)
-        path = File.join(*paths)
-        Pathname.new(File.expand_path(path)).relative_path_from(Pathname.new(Dir.pwd)).to_s
+      # Convert dashes and spaces to underscores
+      def underscore(string)
+        string.gsub(/-|\s+/, '_')
       end
       
   end

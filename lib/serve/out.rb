@@ -1,7 +1,11 @@
+require 'pathname'
+
 module Serve #:nodoc:
   
   # Utility methods for handling output to the terminal
   module Out #:nodoc:
+    
+    COLUMN_WIDTH = 12
     
     COLORS = {
       :clear  => 0,
@@ -31,12 +35,19 @@ module Serve #:nodoc:
     end
     
     def print(*args)
-      stderr.print(color_msg(:green, *args))
+      stderr.print(*args)
     end
     
     def log_action(name, message)
-      print " " * (12 - name.length)
-      print name
+      print " " * (COLUMN_WIDTH - name.length)
+      print color_msg(:green, name)
+      print "  "
+      puts message
+    end
+    
+    def log_error(name, message)
+      print " " * (COLUMN_WIDTH - name.length)
+      print color_msg(:red, name)
       print "  "
       puts message
     end
@@ -52,5 +63,7 @@ module Serve #:nodoc:
     def color(pigment)
       "\e[#{COLORS[pigment.to_sym]}m"
     end
+    
   end
+  
 end

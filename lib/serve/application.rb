@@ -20,10 +20,13 @@ module Serve
       case
       when options[:create]
         require 'serve/project'
-        Serve::Project.new(options[:create]).create
+        Serve::Project.create(options[:create])
       when options[:convert]
         require 'serve/project'
-        Serve::Project.new(options[:convert]).convert
+        Serve::Project.convert(options[:convert])
+      when options[:export]
+        require 'serve/export'
+        Serve.export(options[:export])
       when options[:version]
         puts version
       when options[:help]
@@ -49,8 +52,9 @@ module Serve
       args = normalize_args(args)
       options[:help]        = extract_boolean(args, '-h', '--help')
       options[:version]     = extract_boolean(args, '-v', '--version')
-      options[:create]      = extract_creation(args)
-      options[:convert]     = extract_conversion(args)
+      options[:create]      = extract_create(args)
+      options[:convert]     = extract_convert(args)
+      options[:export]      = extract_export(args)
       options[:environment] = extract_environment(args)
       options[:root]        = extract_root(args)
       options[:address]     = extract_address(args)
@@ -78,11 +82,12 @@ module Serve
         "  #{program} command [arguments] [options]",
         "  ",
         "Examples:",
-        "  #{program}                   # start Serve in current directory",
-        "  #{program} 2100              # start Serve on port 2100",
-        "  #{program} /path/to/project  # start Serve for a specific directory",
-        "  #{program} create mockups    # create a Serve project in mockups directory",
-        "  #{program} convert mockups   # convert a Compass project in mockups",
+        "  #{program}                       # launch server in current directory",
+        "  #{program} 2100                  # launch server on port 2100",
+        "  #{program} mockups               # launch server for mockups directory",
+        "  #{program} create mockups        # create a new project in mockups dir",
+        "  #{program} convert mockups       # convert a Compass project in mockups",
+        "  #{program} export mockups:output # export mockups to output dir",
         "  ",
         "Description:",
         "  Starts a web server on the specified address and port with its document root ",
@@ -174,7 +179,7 @@ module Serve
         framework
       end
       
-      def extract_creation(args)
+      def extract_create(args)
         if args.delete('create')
           framework = extract_javascript_framework(args, '-j', '--javascript')
           args.reverse!
@@ -186,12 +191,25 @@ module Serve
         end
       end
       
-      def extract_conversion(args)
+      def extract_convert(args)
         if args.delete('convert')
           framework = extract_javascript_framework(args, '-j', '--javascript')
           {
            :directory => (args.first ? File.expand_path(args.pop) : Dir.pwd),
            :framework => framework 
+          }
+        end
+      end
+      
+      def extract_export(args)
+        if args.delete('export')
+          input, output = (args.shift || '').split(':')
+          output = args.shift            if output.nil?
+          input, output = Dir.pwd, input if output.nil?
+          output = 'output'              if output.nil?
+          {
+            :input => input,
+            :output => output
           }
         end
       end

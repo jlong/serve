@@ -2,6 +2,7 @@ source "http://rubygems.org"
 
 gem 'rake',             '~> 0.9.0'
 gem 'rack',             '~> 1.3.0'
+gem 'rack-test',        '~> 0.6.0'
 gem 'tilt',             '~> 1.3.1'
 gem 'activesupport',    '~> 3.0.7'
 gem 'tzinfo',           '~> 0.3.27'
