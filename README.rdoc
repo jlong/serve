@@ -285,7 +285,7 @@ email :: Evaluates the document as if it is an e-mail message; the format is ide
 redirect :: Redirects to the URL contained in the document
 
 
-== Exporting A Serve Project
+== Exporting a Serve Project
 
 The edge version of Serve now has limited support for exporting your Serve 
 project to HTML. To get started with the prerelease version:
