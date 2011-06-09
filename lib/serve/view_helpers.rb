@@ -96,7 +96,7 @@ module Serve #:nodoc:
     
     # Key based access to query parameters. Keys can be strings or symbols.
     def params
-      @params ||= HashWithIndifferentAccess.new(request.query)
+      @params ||= request.params
     end
     
     # Extract the value for a bool param. Handy for rendering templates in

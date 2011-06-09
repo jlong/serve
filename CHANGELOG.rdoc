@@ -1,6 +1,7 @@
 = Change Log
 
 == edge
+* Modified params helper to work with POST params in addition to GET. Closes #19. [jlong]
 * Added an export command which allows you to convert a Serve site to static HTML. Closes #10. [jlong]
 
 == 1.1.1 (June 7, 2011)

@@ -4,8 +4,23 @@ require 'rack'
 module Serve
   class Request < Rack::Request
     # Returns a Hash of the query params for a request's URL.
-    def query
-      @query ||= Rack::Utils.parse_nested_query(query_string)
+    def get_params
+      @get_params ||= Rack::Utils.parse_nested_query(query_string)
+    end
+    alias query get_params
+    
+    # Returns a Hash of the query params for a posted form
+    def post_params
+      @post_params ||= form_data? ? Rack::Utils.parse_nested_query(body.read) : {}
+    end
+    
+    # Key based access to query parameters. Keys can be strings or symbols.
+    def params
+      @params ||= begin
+        hash = HashWithIndifferentAccess.new.update(get_params)
+        hash.update(post_params) if form_data?
+        hash
+      end
     end
     
     # Returns the protocol part of the URL for a request: "http://", "https://", etc.
