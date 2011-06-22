@@ -117,7 +117,7 @@ module Serve #:nodoc:
     def render(partial, options={})
       if partial.is_a?(Hash)
         options = options.merge(partial)
-        partial = options[:partial]
+        partial = options.delete(:partial)
       end  
       template = options.delete(:template)
       case
@@ -154,12 +154,12 @@ module Serve #:nodoc:
         path = File.dirname(name)
         template = File.basename(name)
         template = "_" + template if options[:partial]
-        template += extname(parser.script_filename) unless name =~ /\.html\.[a-z]*$/
+        template += extname(parser.script_filename) unless name =~ /\.[a-z]+$/
         File.join(path, template)
       end
       
       def extname(filename)
-        /(\.[a-z]{3,4}\.[a-z]*)$/.match(filename)
+        /(\.[a-z]+\.[a-z]+)$/.match(filename)
         $1 || File.extname(filename) || ''
       end
       

@@ -9,11 +9,11 @@ describe Serve::Application do
       :help         => false,
       :version      => false,
       :environment  => 'development',
-
+      
       :port         => 4000,
       :address      => '0.0.0.0',
       :root         => Dir.pwd,
-
+      
       :convert      => nil,
       :create       => nil,
       :export       => nil

@@ -70,7 +70,7 @@ describe Serve::Project do
       end
       
       it "should have a sass directory" do
-        File.exists?(File.join(@mockup_file, 'sass')).should be_true
+        File.exists?(File.join(@mockup_file, 'stylesheets')).should be_true
       end
       
       it "should have a tmp directory" do
@@ -87,10 +87,6 @@ describe Serve::Project do
       
       it "should have a compass.config file" do
         File.exists?(File.join(@mockup_file, 'compass.config')).should be_true
-      end
-      
-      it "should have a LICENSE file" do
-        File.exists?(File.join(@mockup_file, 'LICENSE')).should be_true
       end
       
       it "should have a dot gitignore file" do
