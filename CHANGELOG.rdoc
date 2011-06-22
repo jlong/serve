@@ -1,6 +1,9 @@
 = Change Log
 
 == edge
+* Updated project README and other files to be more friendly to new users [jlong]
+* Changed Sass directory name to "stylesheets" to be more consistent with Rails. [jlong]
+* Modified redirects so that only the last line is interpreted as the URL, everything else is ignored. This is useful for adding a comment at the beginning of the file. [jlong]
 * Modified params helper to work with POST params in addition to GET. Closes #19. [jlong]
 * Added an export command which allows you to convert a Serve site to static HTML. Closes #10. [jlong]
 

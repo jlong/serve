@@ -100,8 +100,9 @@ module Serve
         
         ensure_path to_path
         
-        url = IO.read(from_path).strip
-        contents = %{<html><head><meta http-equiv="refresh" content="0;#{url}" /></head></html>}
+        lines = IO.read(from_path).strip.split("\n")
+        url = lines.pop.strip
+        contents = %{<html><head><meta http-equiv="refresh" content="0;#{url}" /></head><body>#{lines.join("\n")}</body</html>}
         
         File.open(to_path, 'w+') { |f| f.puts contents }
         

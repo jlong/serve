@@ -25,13 +25,13 @@ module Serve #:nodoc:
         public/images
         public/javascripts
         public/stylesheets
-        sass
+        stylesheets
       ).each { |path| make_path path } 
-      create_file 'sass/application.sass',  read_template('application.sass')
-      create_file 'views/_layout.html.erb', read_template('_layout.html.erb')
-      create_file 'views/hello.html.erb',   read_template('hello.html.erb')
-      create_file 'views/view_helpers.rb',  read_template('view_helpers.rb')
-      create_file 'views/index.redirect',   read_template('index.redirect')
+      create_file 'stylesheets/application.scss',  read_template('application.scss')
+      create_file 'views/_layout.html.erb',        read_template('_layout.html.erb')
+      create_file 'views/hello.html.erb',          read_template('hello.html.erb')
+      create_file 'views/view_helpers.rb',         read_template('view_helpers.rb')
+      create_file 'views/index.redirect',          read_template('index.redirect')
       install_javascript_framework @framework
     end
     
@@ -49,7 +49,7 @@ module Serve #:nodoc:
       else
         make_path 'public/javascripts'
       end
-      move_file 'src', 'sass'
+      move_file 'src', 'stylesheets'
       install_javascript_framework @framework
       note_old_compass_config
     end
@@ -73,7 +73,6 @@ module Serve #:nodoc:
           views
         ).each { |path| make_path path }
         create_file 'config.ru',       read_template('config.ru')
-        create_file 'LICENSE',         read_template('LICENSE')
         create_file '.gitignore',      read_template('gitignore')
         create_file 'compass.config',  read_template('compass.config')
         create_file 'README.markdown', read_template('README.markdown')

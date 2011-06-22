@@ -3,7 +3,8 @@ module Serve #:nodoc:
     extension 'redirect'
     
     def process(request, response)
-      url = super.strip
+      lines = super.strip.split("\n")
+      url = lines.last.strip
       unless url =~ %r{^\w[\w\d+.-]*:.*}
         url = request.protocol + request.host_with_port + url
       end
