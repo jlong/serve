@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{serve}
-  s.version = "1.5.0.pre2"
+  s.version = "1.5.0.pre3"
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["John W. Long", "Adam I. Williams", "Robert Evans"]
-  s.date = %q{2011-06-08}
+  s.date = %q{2011-06-22}
   s.default_executable = %q{serve}
   s.description = %q{Serve is a small Rack-based web server that makes it easy to serve ERB or HAML from any directory. Serve is an ideal tool for building HTML prototypes of Rails applications. Serve can also handle SASS, Textile, and Markdown if the appropriate gems are installed.}
   s.email = %q{me@johnwlong.com}
@@ -43,10 +43,9 @@ Gem::Specification.new do |s|
      "lib/serve/project.rb",
      "lib/serve/rack.rb",
      "lib/serve/router.rb",
-     "lib/serve/templates/LICENSE",
      "lib/serve/templates/README.markdown",
      "lib/serve/templates/_layout.html.erb",
-     "lib/serve/templates/application.sass",
+     "lib/serve/templates/application.scss",
      "lib/serve/templates/compass.config",
      "lib/serve/templates/config.ru",
      "lib/serve/templates/gitignore",
