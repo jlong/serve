@@ -3,37 +3,24 @@
 link:/downloads/jlong/serve/logo-hifi-1.png
 
 Serve is a small Rack-based web server that makes it easy to serve HTML, ERB,
-Haml, or Slim templates from any directory.
+Haml, or a variety of template languages from any directory.
 
 But Serve is much more than a simple web server.
 
-Serve's primary purpose is to provide a rapid prototyping framework for Web
-applications (specifically Rails apps). It is designed to complement web
-application development and enforce a strict separation of concerns between
-designer and developer. Using Serve allows the designer to work in a separate
-prototype project, while the developer can work on the actual application and
-utilize resources from the prototype as needed. This allows the designer to
-focus on presentation and flow, while the developer can focus on
-implementation.
+Serve is meant to be a lightweight version of the Views part of the Rails MVC.
+This makes Serve an ideal framework for prototyping Rails applications or
+creating simple websites. Serve also has full support for Rails-style partials
+and layouts.
 
-This "Design First" approach can help a designer identify and fix a large
+If you use a "Design First" approach to Web application development, you may
+find Serve especially useful. Create a separate "prototype" project for your
+application (using Serve) and copy views over into actual application when
+they are ready to go. This workflow can allow the designer to focus on
+presentation and flow, while the developer can focus on implementation. One
+benefit to this approach is that the designer can identify and fix a large
 number of problems before a feature is ever touched by the developer. Once a
 feature has been completed in the prototype project it can also be estimated
 with a high degree of accuracy.
-
-A Serve prototype can work much like the finished application and be virtually
-indistinguishable. The only difference being that state is not saved as a user
-clicks around.
-
-Serve can be used alongside any Web development framework, but Rails
-developers will find it especially familiar. One way of thinking about Serve
-is that it is essentially a Rails application with only one part of the Rails
-MVC stack -- the views. Serve basically allows you to have a separate project
-just for designing the views for the application. When views are ready, they
-can be copied over from the prototype to the application almost as is. This
-process is eased since Serve has full support for partials and layouts with
-either ERB or Haml. Serve can also handle SASS, Slim, Textile, and Markdown
-if the appropriate libraries are installed.
 
 
 == Installation
@@ -47,7 +34,7 @@ Some systems, like the Mac, may require that you type:
 
   sudo gem install serve
 
-If you are a Mac user and are new to the command prompt see:
+If you are new to the command prompt and are a Mac user see:
 
 http://wiseheartdesign.com/articles/2010/11/12/the-designers-guide-to-the-osx-command-prompt/
 
@@ -122,9 +109,9 @@ This will create a new project with the following directory structure:
     |    |
     |    `-- javascripts/
     |
-    +-- sass/                  # Store Sass source files here
+    +-- stylesheets/           # Sass and SCSS source files
     |    |
-    |    `-- application.sass  # Example Sass file for application
+    |    `-- application.scss  # Example SCSS file for application
     |
     +-- tmp/                   # Needed for Passenger (mod_passenger)
     |    |
@@ -135,6 +122,8 @@ This will create a new project with the following directory structure:
          +-- _layout.html.erb  # Example layout
          |
          +-- hello.html.erb    # Example view
+         |
+         +-- index.redirect    # Example redirect
          |
          `-- view_helpers.rb   # Example view helpers
 
@@ -282,7 +271,7 @@ slim :: Evaluates the document using the Slim template language (requires the Sl
 sass :: Evaluates the document as Sass (requires the Haml gem)
 scss :: Evaluates the document as SCSS (requires the Haml gem)
 email :: Evaluates the document as if it is an e-mail message; the format is identical to a plain/text e-mail message's source
-redirect :: Redirects to the URL contained in the document
+redirect :: Redirects to the URL contained on the last line of the file
 
 
 == Exporting a Serve Project
@@ -294,25 +283,28 @@ project to HTML. To get started with the prerelease version:
 
 To export your project, use the new "export" command:
 
-  serve export <project_dir>:<output_dir>
+  serve export project:output
 
-Where <project_dir> is the path to the project and <output_dir> is the path to 
-the directory where you would like your HTML and CSS generated.
+Where "project" is the path to the project and "output" is the path to the
+directory where you would like your HTML and CSS generated.
 
 Please note! This feature is in beta. If you have issues with this approach,
 please post them to the GitHub issue tracker.
 
 
+== Mailing List
+
+Have questions? Please don't be ashamed to ask. Post them on the mailing list:
+
+http://groups.google.com/group/serve-users
+
+
 == More Information
 
-You can find more information about Serve, including a detailed Screencast, on
+You can find more information about Serve, including a detailed screencast, on
 the GitHub wiki:
 
 http://wiki.github.com/jlong/serve
-
-Have questions? Feel free to ask them on the mailing list:
-
-http://groups.google.com/group/serve-users
 
 
 == License
