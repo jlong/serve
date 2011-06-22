@@ -1,15 +1,13 @@
-= Serve - A Rapid Prototyping Framework for Web Applications
+= Serve - Easy ERB, Haml, and Sass
 
-link:../../downloads/jlong/serve/logo-hifi-1.png
+link:../../downloads/jlong/serve/logo-hifi-3.png
 
 Serve is a small Rack-based web server that makes it easy to serve HTML, ERB,
 Haml, or a variety of template languages from any directory.
 
-But Serve is much more than a simple web server.
-
 Serve is meant to be a lightweight version of the Views part of the Rails MVC.
 This makes Serve an ideal framework for prototyping Rails applications or
-creating simple websites. Serve also has full support for Rails-style partials
+creating simple websites. Serve has full support for Rails-style partials
 and layouts.
 
 If you use a "Design First" approach to Web application development, you may
