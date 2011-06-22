@@ -1,6 +1,5 @@
 #\\ -p 4000
 
-gem 'activesupport'
 gem 'serve'
 
 require 'serve'
@@ -13,6 +12,7 @@ root = ::File.dirname(__FILE__)
 # don't allow you to write to the file system on the fly (like Heroku).
 # Remove this conditional if you want to compile Sass in production.
 if ENV['RACK_ENV'] != 'production'
+  require 'sass'
   require 'sass/plugin/rack'
   require 'compass'
   

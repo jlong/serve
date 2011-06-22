@@ -1,6 +1,7 @@
 = Change Log
 
 == edge
+* Updated generated config.ru to require Sass. Closes #20. [jlong]
 * Updated project README and other files to be more friendly to new users [jlong]
 * Changed Sass directory name to "stylesheets" to be more consistent with Rails. [jlong]
 * Modified redirects so that only the last line is interpreted as the URL, everything else is ignored. This is useful for adding a comment at the beginning of the file. [jlong]
