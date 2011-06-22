@@ -117,7 +117,7 @@ module Serve #:nodoc:
     def render(partial, options={})
       if partial.is_a?(Hash)
         options = options.merge(partial)
-        partial = options.delete(:partial)
+        partial = options[:partial]
       end  
       template = options.delete(:template)
       case
@@ -140,7 +140,7 @@ module Serve #:nodoc:
         template = template[1..-1]
         path = @root_path
       end
-      filename = template_filename(File.join(path, template), :partial => options.delete(:partial))
+      filename = template_filename(File.join(path, template), :partial => options[:partial])
       if File.file?(filename)
         parser.parse_file(filename, options[:locals])
       else
@@ -153,15 +153,16 @@ module Serve #:nodoc:
       def template_filename(name, options)
         path = File.dirname(name)
         template = File.basename(name)
-        template = "_" + template if options.delete(:partial)
-        template += extname(parser.script_filename) unless name =~ /\.[a-z]{3,4}$/
+        template = "_" + template if options[:partial]
+        template += extname(parser.script_filename) unless name =~ /\.html\.[a-z]*$/
         File.join(path, template)
       end
       
       def extname(filename)
-        /(\.[a-z]{3,4}\.[a-z]{3,4})$/.match(filename)
+        /(\.[a-z]{3,4}\.[a-z]*)$/.match(filename)
         $1 || File.extname(filename) || ''
       end
+      
   end
   
   module TagHelpers

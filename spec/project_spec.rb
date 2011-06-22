@@ -13,6 +13,9 @@ describe Serve::Project do
     
     before(:all) do
       @options = {
+        :port         => 4000,
+        :address      => '0.0.0.0',
+        
         :name       => 'test_mockup',
         :directory  => File.dirname(__FILE__),
         :framework  => 'jquery'
