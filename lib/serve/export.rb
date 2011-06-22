@@ -41,7 +41,7 @@ module Serve
           files.reject! { |fn| fn =~ /view_helpers.rb$/} # remove view_helpers.rb
           @redirects, @public = files.partition { |fn| fn =~ %r{\.redirect$} }
         end
-        @views.reject! { |v| v =~ %r{_[^\/]+$} }        # remove partials
+        @views.reject! { |v| v =~ /(^_|\/_)/ }           # remove partials
       end
       
       def compile_compass_sass
