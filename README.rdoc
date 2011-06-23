@@ -281,7 +281,7 @@ project to HTML. To get started with the prerelease version:
 
 To export your project, use the new "export" command:
 
-  serve export project:output
+  serve export project output
 
 Where "project" is the path to the project and "output" is the path to the
 directory where you would like your HTML and CSS generated.

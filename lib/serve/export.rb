@@ -152,8 +152,9 @@ module Serve
       end
       
       def rackified?
-        @rackified ||= File.directory?("#{@input}/views") && File.directory?("#{@input}/public")
+        File.directory?("#{@input}/views") && File.directory?("#{@input}/public")
       end
+      
   end
   
   def self.export(options={})

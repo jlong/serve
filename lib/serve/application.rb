@@ -136,6 +136,7 @@ module Serve
     end
     
     private
+      
       def normalize_args(args)
         args = args.join(' ')
         args.gsub!(%r{http://}, '')
@@ -182,11 +183,12 @@ module Serve
       def extract_create(args)
         if args.delete('create')
           framework = extract_javascript_framework(args, '-j', '--javascript')
-          args.reverse!
+          name = args.shift
+          raise InvalidArgumentsError unless name
           {
            :framework => framework,
-           :name      => (args.first ? args.pop : 'mockups'),
-           :directory => (args.first ? File.expand_path(args.pop) : Dir.pwd)
+           :name      => name,
+           :directory => (args.last ? File.expand_path(args.shift) : Dir.pwd)
           }
         end
       end
@@ -203,10 +205,9 @@ module Serve
       
       def extract_export(args)
         if args.delete('export')
-          input, output = (args.shift || '').split(':')
-          output = args.shift            if output.nil?
+          input, output = args.shift, args.shift
           input, output = Dir.pwd, input if output.nil?
-          output = 'output'              if output.nil?
+          output ||= 'html'
           {
             :input => input,
             :output => output

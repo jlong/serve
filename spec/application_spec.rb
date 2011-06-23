@@ -5,7 +5,7 @@ describe Serve::Application do
   
   before :each do
     @app = Serve::Application.new
-    @defopts = {
+    @options = {
       :help         => false,
       :version      => false,
       :environment  => 'development',
@@ -21,83 +21,127 @@ describe Serve::Application do
   end
   
   describe "parsing" do
-    it "should parse no arguments" do
-      @app.parse([]).should == @defopts
+    
+    it "no arguments" do
+      parse('').should == @options
     end
     
-    it "should parse with only the port" do
-      @app.parse(["2000"])[:port].should == 2000
+    it "with only the port" do
+      parse('2000')[:port].should == 2000
     end
     
-    it "should parse with the port and address" do
-      @app.parse(["1.1.1.1", "2000"]).should ==
-        @defopts.update(:address => "1.1.1.1", :port=>2000)
-      @app.parse(["1.1.1.1:2000"]).should ==
-        @defopts.update(:address => "1.1.1.1", :port=>2000)
+    it "with the port and address" do
+      parse('1.1.1.1 2000').should == @options.update(:address => "1.1.1.1", :port=>2000)
+      parse('1.1.1.1:2000').should == @options.update(:address => "1.1.1.1", :port=>2000)
     end
     
-    it "should parse with the port, address, and protocol" do
-      @app.parse(["http://1.1.1.1:2000"]).should ==
-        @defopts.update(:address => "1.1.1.1", :port=>2000)
+    it "with the port, address, and protocol" do
+      parse('http://1.1.1.1:2000').should == @options.update(:address => "1.1.1.1", :port=>2000)
     end
     
-    it "should parse help" do
-      @app.parse([])[:help].should be_false
-      @app.parse(["-h"])[:help].should be_true
-      @app.parse(["--help"])[:help].should be_true
+    it "help" do
+      parse('')[:help].should be_false
+      parse('-h')[:help].should be_true
+      parse('--help')[:help].should be_true
     end
     
-    it "should parse version" do
-      @app.parse([])[:version].should be_false
-      @app.parse(["-v"])[:version].should be_true
-      @app.parse(["--version"])[:version].should be_true
+    it "version" do
+      parse('')[:version].should be_false
+      parse('-v')[:version].should be_true
+      parse('--version')[:version].should be_true
     end
     
-    it "should parse environment" do
-      @app.parse([])[:environment].should == "development"
-      @app.parse(["production"])[:environment].should == "production"
-      @app.parse(["test"])[:environment].should == "test"
-      @app.parse(["development"])[:environment].should == "development"
+    it "environment" do
+      parse('')[:environment].should == "development"
+      parse('production')[:environment].should == "production"
+      parse('test')[:environment].should == "test"
+      parse('development')[:environment].should == "development"
     end
     
-    it "should parse working directory" do
-      @app.parse([])[:root].should == Dir.pwd
+    it "working directory" do
+      parse('')[:root].should == Dir.pwd
       dir = File.dirname(__FILE__)
-      @app.parse([dir])[:root].should == File.expand_path(dir)
+      parse(dir)[:root].should == File.expand_path(dir)
     end
     
-    it "should parse ceate" do
-      create = ['create', 'newapp', '/Users/user']
-      @app.parse(create)[:create][:name].should == 'newapp'
-      @app.parse(create)[:create][:directory].should == '/Users/user'
-      @app.parse(create)[:create][:framework].should be_nil
+    describe "create" do
+      it "with standard arguments" do
+        params = parse('create newapp /Users/user')[:create]
+        params[:name].should == 'newapp'
+        params[:directory].should == '/Users/user'
+        params[:framework].should be_nil
+      end
+      
+      it "without parent directory" do
+        params = parse('create newapp')[:create]
+        params[:name].should == 'newapp'
+        params[:directory].should == Dir.pwd
+      end
+      
+      it "with no arguments" do
+        lambda { parse('create') }.should raise_error(Serve::Application::InvalidArgumentsError)
+      end
+      
+      it "with a javascript framework" do
+        params = parse('create newapp /Users/user -j jquery')[:create]
+        params[:name].should == 'newapp'
+        params[:directory].should == '/Users/user'
+        params[:framework].should == 'jquery'
+      end
     end
     
-    it "should parse convert" do
-      convert = ['convert', '/Users/user']
-      @app.parse(convert)[:convert][:directory].should == '/Users/user'
-      @app.parse(convert)[:convert][:framework].should be_nil
+    describe "convert" do
+      it "with standard arguments" do
+        params = parse('convert /Users/user')[:convert]
+        params[:directory].should == '/Users/user'
+        params[:framework].should be_nil
+      end
+      
+      it "with no arguments" do
+        params = parse('convert')[:convert]
+        params[:directory].should == Dir.pwd
+        params[:framework].should be_nil
+      end
+      
+      it "with a javascript framework" do
+        params = parse('convert /Users/user --javascript mootools')[:convert]
+        params[:directory].should == '/Users/user'
+        params[:framework].should == 'mootools'
+      end
     end
     
-    
-    it "should parse create with a javascript framework" do
-      create = ['create', 'newapp', '/Users/user', '-j', 'jquery']
-      @app.parse(create)[:create][:name].should == 'newapp'
-      @app.parse(create)[:create][:directory].should == '/Users/user'
-      @app.parse(create)[:create][:framework].should == 'jquery'
+    describe "export" do
+      it "with standard arguments" do
+        params = parse('export input output')[:export]
+        params[:input].should == 'input'
+        params[:output].should == 'output'
+      end
+      
+      it "export with just an output directory" do
+        params = parse('export output')[:export]
+        params[:input].should == Dir.pwd
+        params[:output].should == 'output'
+      end
+      
+      it "export with no arguments" do
+        params = parse('export')[:export]
+        params[:input].should == Dir.pwd
+        params[:output].should == 'html'
+      end
     end
     
-    it "should parse convert with a javascript framework" do
-      convert = ['convert', '/Users/user', '--javascript', 'mootools']
-      @app.parse(convert)[:convert][:directory].should == '/Users/user'
-      @app.parse(convert)[:convert][:framework].should == 'mootools'
+    it "with invalid arguments" do
+      lambda { parse('--invalid') }.should raise_error(Serve::Application::InvalidArgumentsError)
+      lambda { parse('invalid') }.should raise_error(Serve::Application::InvalidArgumentsError)
     end
     
+    private
     
-    it "should detect invalid arguments" do
-      lambda { @app.parse(["--invalid"]) }.should raise_error(Serve::Application::InvalidArgumentsError)
-      lambda { @app.parse(["invalid"]) }.should raise_error(Serve::Application::InvalidArgumentsError)
-    end
+      def parse(*args)
+        args = args.split(' ')
+        @app.parse(*args)
+      end
+
   end
   
   describe "running" do
