@@ -1,0 +1,87 @@
+$text-color: #333 !default;
+$bold-color: #000 !default;
+$light-color: #888 !default;
+
+$base-font: "Helvetica Neue", Hevetica, Arial, sans-serif !default;
+$system-font: Monaco, "Lucida Console", monospace !default;
+
+$line-height: 1.4;
+
+// Mix with "body" element to set basic font attributes
+@mixin body-typography {
+  color: $text-color;
+  font-family: $base-font;
+  font-size: 90%;
+  line-height: $line-height;
+}
+
+// Mix with content element to get styles for standard elements
+@mixin basic-typography {
+  strong {
+    font-weight: bold;
+    color: $bold-color;
+  }
+  
+  em {
+    font-style: italic;
+  }
+  
+  h1, h2, h3, h4, h4, h6 {
+    font-weight: normal;
+    color: $bold-color;
+  }
+  
+  h1 {
+    font-size: 200%;
+    font-weight: bold;
+    margin: 0.5em 0;
+  }
+  
+  h2 {
+    font-size: 170%;
+    font-style: italic;
+    margin: 1em 0;
+  }
+  
+  h3 {
+    font-weight: bold;
+    font-size: 140%;
+    margin: 1.25em 0 0.5em;
+  }
+  
+  h4 {
+    font-weight: bold;
+    font-size: 140%;
+    margin: 0.5em 0 -0.25em;
+  }
+  
+  p, ul, ol, pre, table {
+    margin: 1em 0;
+  }
+  
+  ul, ol {
+    padding-left: 2.25em;
+  }
+  ul {
+    list-style: disc;
+  }
+  ol {
+    list-style: decimal;
+  }
+  
+  pre {
+    font-family: $system-font;
+    color: invert($text-color);
+    background: $text-color;
+    padding: 1em;
+    
+    @include border-radius(8px);
+  }
+  
+  code, dfn, kbd, samp, tt {
+    font-family: $system-font;
+    background: #e5e5e5;
+    padding: 2px;
+    @include border-radius(3px);
+  }
+}

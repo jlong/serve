@@ -1,0 +1,96 @@
+$page-width: 940px;
+$banner-height: 190px;
+$banner-background-color: #973b12;
+
+body, html {
+  @include background-image(image-url('noise.png'), linear-gradient(center top, white ($banner-height + 1px), #dfd6cf ($banner-height + 1px), white ($banner-height + 200px)))
+}
+
+header[role=banner] {
+  text-align: center;
+  hgroup {
+    text-align: left;
+    width: $page-width;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+a[role=logo] {
+  display: block;
+  position: absolute;
+  top: 30px;
+  @include replace-text-with-dimensions('logo.png');
+}
+
+nav[role=navigation] {
+  background: #973b12;
+  @include background-image(radial-gradient(30% 50px, $banner-background-color, #642b0f 400px));
+  text-align: center;
+  
+  ul {
+    width: $page-width;
+    margin: 0 auto;
+    line-height: $banner-height - 30px;
+    height: $banner-height;
+    text-align: right;
+  }
+  
+  li {
+    display: inline;
+  }
+  
+  a {
+    font-size: 18px;
+    color: mix($banner-background-color, white, 40%);
+    text-decoration: none;
+    padding: 20px;
+    
+    @include text-shadow(rgba(black, 0.5) 0 1px 0);
+    
+    &:hover {
+      color: mix($banner-background-color, white, 20%);
+      text-decoration: underline;
+    }
+  }
+  
+  li.here {
+    a {
+      color: mix($banner-background-color, white, 20%);
+      font-weight: bold;
+      @include text-shadow(rgba(black, 0.75) 0 2px 0);
+    }
+  }
+  li.highlight {
+    a {
+      color: mix($banner-background-color, #fc3, 40%);
+    }
+  }
+}
+
+section[role=main] {
+  width: $page-width;
+  margin: 0 auto;
+  
+  article {
+    font-size: 110%;
+    background: white;
+    
+    @include border-radius(8px);
+    @include box-shadow(rgba(black, 0.5) 0 0 4px);
+    
+    position: relative;
+    padding: 40px 70px 60px;
+    
+    margin-top: -30px;
+  }
+}
+
+body > footer {
+  margin: 2em 0;
+  small {
+    display: block;
+    width: $page-width;
+    margin: 0 auto;
+  }
+}

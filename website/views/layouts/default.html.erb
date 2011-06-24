@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= @title %></title>
+    <link rel="stylesheet" href="/stylesheets/screen.css">
+    <% if @author %><meta name="author" content="<%= @author || "John W. Long" %>"><% end %>
+    <% if @description %><meta name="description" content="<%= @description %>"><% end %>
+    <% if @keywords %><meta name="description" content="<%= @keywords %>"><% end %>
+    <link rel="canonical" href="<%= absolute_url %>">
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <header role="banner">
+      <hgroup>
+        <a role="logo" href="/">
+          <h1>Serve</h1>
+          <h2>Delicious ERB, Haml + Sass</h2>
+        </a>
+      </hgroup>
+    </header>
+    <nav role="navigation">
+      <ul>
+        <li<%= ' class="here"' if selected? "home" %>><a href="/">Home</a></li>
+        <li<%= ' class="here"' if selected? "get-started" %>><a href="/get-started">Get&nbsp;Started</a></li>
+        <li<%= ' class="here"' if selected? "documentation" %>><a href="/documentation">Documentation</a></li>
+        <li class="highlight"><a href="http://github.com/jlong/serve">On&nbsp;GitHub&nbsp;&rarr;</a></li>
+      </ul>
+    </nav>
+    <section role="main">
+      <article>
+        <header><h1><%= @title %></h1></header>
+        <%= yield %>
+      </article>
+    </section>
+    <footer>
+      <small><p>Copyright &copy; <%= copyright_years 2011 %>, <a href="http://johnwlong.com">John W. Long</a>. Serve is open-source software.</p></small>
+    </footer>
+  </body>
+</html>

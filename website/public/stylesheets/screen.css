@@ -1,0 +1,237 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  color: #333333;
+  font-family: "Helvetica Neue", Hevetica, Arial, sans-serif;
+  font-size: 90%;
+  line-height: 1.4;
+}
+
+body, html {
+  background-image: url('../images/noise.png?1308891214'), -webkit-gradient(linear, 50% 0%, 50% 390, color-stop(48.974%, #ffffff), color-stop(48.974%, #dfd6cf), color-stop(100%, #ffffff));
+  background-image: url('../images/noise.png?1308891214'), -webkit-linear-gradient(center top, #ffffff 191px, #dfd6cf 191px, #ffffff 390px);
+  background-image: url('../images/noise.png?1308891214'), -moz-linear-gradient(center top, #ffffff 191px, #dfd6cf 191px, #ffffff 390px);
+  background-image: url('../images/noise.png?1308891214'), -o-linear-gradient(center top, #ffffff 191px, #dfd6cf 191px, #ffffff 390px);
+  background-image: url('../images/noise.png?1308891214'), linear-gradient(center top, #ffffff 191px, #dfd6cf 191px, #ffffff 390px);
+}
+
+header[role=banner] {
+  text-align: center;
+}
+header[role=banner] hgroup {
+  text-align: left;
+  width: 940px;
+  margin: 0 auto;
+  display: block;
+}
+
+a[role=logo] {
+  display: block;
+  position: absolute;
+  top: 30px;
+  text-indent: -119988px;
+  overflow: hidden;
+  text-align: left;
+  background-image: url('../images/logo.png?1308884622');
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  width: 322px;
+  height: 106px;
+}
+
+nav[role=navigation] {
+  background: #973b12;
+  background-image: -webkit-gradient(radial, 30% 50px, 0, 30% 50px, 400, color-stop(0%, #973b12), color-stop(100%, #642b0f));
+  background-image: -webkit-radial-gradient(30% 50px, #973b12, #642b0f 400px);
+  background-image: -moz-radial-gradient(30% 50px, #973b12, #642b0f 400px);
+  background-image: -o-radial-gradient(30% 50px, #973b12, #642b0f 400px);
+  background-image: radial-gradient(30% 50px, #973b12, #642b0f 400px);
+  text-align: center;
+}
+nav[role=navigation] ul {
+  width: 940px;
+  margin: 0 auto;
+  line-height: 160px;
+  height: 190px;
+  text-align: right;
+}
+nav[role=navigation] li {
+  display: inline;
+}
+nav[role=navigation] a {
+  font-size: 18px;
+  color: #d5b0a0;
+  text-decoration: none;
+  padding: 20px;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 1px 0;
+}
+nav[role=navigation] a:hover {
+  color: #ead7cf;
+  text-decoration: underline;
+}
+nav[role=navigation] li.here a {
+  color: #ead7cf;
+  font-weight: bold;
+  text-shadow: rgba(0, 0, 0, 0.75) 0 2px 0;
+}
+nav[role=navigation] li.highlight a {
+  color: #d59225;
+}
+
+section[role=main] {
+  width: 940px;
+  margin: 0 auto;
+}
+section[role=main] article {
+  font-size: 110%;
+  background: white;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -o-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -khtml-border-radius: 8px;
+  border-radius: 8px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.5) 0 0 4px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.5) 0 0 4px;
+  -o-box-shadow: rgba(0, 0, 0, 0.5) 0 0 4px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0 4px;
+  position: relative;
+  padding: 40px 70px 60px;
+  margin-top: -30px;
+}
+
+body > footer {
+  margin: 2em 0;
+}
+body > footer small {
+  display: block;
+  width: 940px;
+  margin: 0 auto;
+}
+
+section[role=main] strong {
+  font-weight: bold;
+  color: black;
+}
+section[role=main] em {
+  font-style: italic;
+}
+section[role=main] h1, section[role=main] h2, section[role=main] h3, section[role=main] h4, section[role=main] h4, section[role=main] h6 {
+  font-weight: normal;
+  color: black;
+}
+section[role=main] h1 {
+  font-size: 200%;
+  font-weight: bold;
+  margin: 0.5em 0;
+}
+section[role=main] h2 {
+  font-size: 170%;
+  font-style: italic;
+  margin: 1em 0;
+}
+section[role=main] h3 {
+  font-weight: bold;
+  font-size: 140%;
+  margin: 1.25em 0 0.5em;
+}
+section[role=main] h4 {
+  font-weight: bold;
+  font-size: 140%;
+  margin: 0.5em 0 -0.25em;
+}
+section[role=main] p, section[role=main] ul, section[role=main] ol, section[role=main] pre, section[role=main] table {
+  margin: 1em 0;
+}
+section[role=main] ul, section[role=main] ol {
+  padding-left: 2.25em;
+}
+section[role=main] ul {
+  list-style: disc;
+}
+section[role=main] ol {
+  list-style: decimal;
+}
+section[role=main] pre {
+  font-family: Monaco, "Lucida Console", monospace;
+  color: #cccccc;
+  background: #333333;
+  padding: 1em;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -o-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -khtml-border-radius: 8px;
+  border-radius: 8px;
+}
+section[role=main] code, section[role=main] dfn, section[role=main] kbd, section[role=main] samp, section[role=main] tt {
+  font-family: Monaco, "Lucida Console", monospace;
+  background: #e5e5e5;
+  padding: 2px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+}

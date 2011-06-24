@@ -1,0 +1,75 @@
+<% @title = "Getting started" %>
+
+<p>Getting started with Serve is easy. Because Serve is built with Ruby, you
+will need to have Ruby installed on your system. Mac OSX ships with Ruby. If
+you are on Windows you can install Ruby with
+<a href="http://rubyinstaller.org/">this easy installation package</a>.</p>
+
+<p>Once Ruby is installed, open up the <a href="http://wiseheartdesign.com/articles/2010/11/12/the-designers-guide-to-the-osx-command-prompt/">command prompt</a>, and type:</p>
+
+<pre>gem install serve</pre>
+
+
+<h3>Using the serve command</h3>
+
+<p>Serve ships with an easy to use command that makes it easy to turn any directory into into a browseable set of web pages.</p>
+
+<p>To use it, simply change to the project directory, and type <kbd>serve</kbd>:</p>
+
+<pre>~$ cd my-project
+~/my-project$ serve</pre>
+
+<p>This will start Serve up on your local box on port 4000. To view files with
+Serve, navigate to <a href="http://localhost:4000">http://localhost:4000</a>
+in your web browser.</p>
+
+<p>As you navigate around in your browser, Serve will print out a log of
+it&#8211;s activity on the command prompt. When you are ready to stop Serve type:
+<kbd>Ctrl+C</kbd>, or close the command prompt window.</p>
+
+
+<h3>Creating a new project</h3>
+
+<p>For simple projects, you don&#8217;t need to structure your files in a
+specific way. All ERB, Haml, and Sass files will be processed wherever they
+are found in the project root. But for more complex projects you may want to
+create a structured Serve project.</p>
+
+<p>To create a new Serve project in the &#8220;mockups&#8221; directory, type
+the following on the command line:</p>
+
+<pre>serve create mockups   # create a new project in the mockups directory</pre>
+
+<p>This will create a new project with the following directory structure:</p>
+
+<pre>mockups/
+  |
+  +-- config.ru              # Rack configuration file
+  |
+  +-- compass.config         # Compass configuration file
+  |
+  +-- public/                # Directories for static assets
+  |    |
+  |    +-- stylesheets/      # Compiled stylesheets
+  |    |
+  |    +-- images/
+  |    |
+  |    `-- javascripts/
+  |
+  +-- stylesheets/           # Sass and SCSS source files
+  |    |
+  |    `-- application.scss  # Example SCSS file for application
+  |
+  +-- tmp/                   # Needed for Passenger (mod_passenger)
+  |    |
+  |    `-- restart.txt
+  |
+  `-- views/                 # Store your ERB, Haml, etc. here
+       |
+       +-- _layout.html.erb  # Example layout
+       |
+       +-- hello.html.erb    # Example view
+       |
+       +-- index.redirect    # Example redirect
+       |
+       `-- view_helpers.rb   # Example view helpers</pre>
