@@ -88,6 +88,9 @@ section.three-column-grid {
     padding: 0 10px;
     width: 300px;
   }
+  > section:nth-child(3n+4) {
+    clear: both;
+  }
   
   &.features {
     font-size: 85%;

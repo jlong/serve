@@ -154,6 +154,9 @@ section.three-column-grid > section {
   padding: 0 10px;
   width: 300px;
 }
+section.three-column-grid > section:nth-child(3n+4) {
+  clear: both;
+}
 section.three-column-grid.features {
   font-size: 85%;
 }
