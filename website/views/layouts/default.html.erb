@@ -13,7 +13,7 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body role="homepage">
     <header role="banner">
       <hgroup>
         <a role="logo" href="/">
@@ -24,7 +24,6 @@
     </header>
     <nav role="navigation">
       <ul>
-        <li<%= ' class="here"' if selected? "home" %>><a href="/">Home</a></li>
         <li<%= ' class="here"' if selected? "get-started" %>><a href="/get-started">Get&nbsp;Started</a></li>
         <li<%= ' class="here"' if selected? "documentation" %>><a href="/documentation">Documentation</a></li>
         <li class="highlight"><a href="http://github.com/jlong/serve">On&nbsp;GitHub&nbsp;&rarr;</a></li>
@@ -32,12 +31,12 @@
     </nav>
     <section role="main">
       <article>
-        <header><h1><%= @title %></h1></header>
+        <header><h1><%= @page_title || @title %></h1></header>
         <%= yield %>
       </article>
     </section>
     <footer>
-      <small><p>Copyright &copy; <%= copyright_years 2011 %>, <a href="http://johnwlong.com">John W. Long</a>. Serve is open-source software.</p></small>
+      <small><p>Copyright &copy; <%= copyright_years 2011 %>, <a href="http://johnwlong.com">John W. Long</a>. Serve is open-source software. Which means it&#8217;s <em>completely free</em> for commercial and non-commercial use.</p></small>
     </footer>
   </body>
 </html>

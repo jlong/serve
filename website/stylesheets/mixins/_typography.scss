@@ -11,7 +11,7 @@ $line-height: 1.4;
 @mixin body-typography {
   color: $text-color;
   font-family: $base-font;
-  font-size: 90%;
+  font-size: 105%;
   line-height: $line-height;
 }
 
@@ -34,7 +34,8 @@ $line-height: 1.4;
   h1 {
     font-size: 200%;
     font-weight: bold;
-    margin: 0.5em 0;
+    margin: 1em 0;
+    line-height: $line-height * 0.8;
   }
   
   h2 {
@@ -51,8 +52,8 @@ $line-height: 1.4;
   
   h4 {
     font-weight: bold;
-    font-size: 140%;
-    margin: 0.5em 0 -0.25em;
+    font-size: 130%;
+    margin: 0.5em 0 -0.5em;
   }
   
   p, ul, ol, pre, table {
@@ -72,7 +73,7 @@ $line-height: 1.4;
   pre {
     font-family: $system-font;
     color: invert($text-color);
-    background: $text-color;
+    background: $text-color image-url('noise.png');
     padding: 1em;
     
     @include border-radius(8px);
@@ -80,7 +81,7 @@ $line-height: 1.4;
   
   code, dfn, kbd, samp, tt {
     font-family: $system-font;
-    background: #e5e5e5;
+    background: #e5e5e5 image-url('noise.png');
     padding: 2px;
     @include border-radius(3px);
   }

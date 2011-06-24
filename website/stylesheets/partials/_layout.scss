@@ -1,9 +1,12 @@
 $page-width: 940px;
-$banner-height: 190px;
+$banner-height: 160px;
 $banner-background-color: #973b12;
 
 body, html {
-  @include background-image(image-url('noise.png'), linear-gradient(center top, white ($banner-height + 1px), #dfd6cf ($banner-height + 1px), white ($banner-height + 200px)))
+  @include background-image(
+    image-url('noise.png'),
+    linear-gradient(center top, white ($banner-height + 1px), #dfd6cf ($banner-height + 1px), white ($banner-height + 200px), white 1000px)
+  );
 }
 
 header[role=banner] {
@@ -25,13 +28,16 @@ a[role=logo] {
 
 nav[role=navigation] {
   background: #973b12;
-  @include background-image(radial-gradient(30% 50px, $banner-background-color, #642b0f 400px));
+  @include background-image(
+    radial-gradient(25% 50px, $banner-background-color, darken($banner-background-color, 11) 400px),
+    linear-gradient(rgba(black, 0.1), rgba(black, 0.5))
+  );
   text-align: center;
   
   ul {
     width: $page-width;
     margin: 0 auto;
-    line-height: $banner-height - 30px;
+    line-height: $banner-height;
     height: $banner-height;
     text-align: right;
   }
@@ -71,26 +77,31 @@ nav[role=navigation] {
 section[role=main] {
   width: $page-width;
   margin: 0 auto;
+}
+section.three-column-grid {
+  margin: 2em -10px;
+  @include clearfix;
   
-  article {
-    font-size: 110%;
-    background: white;
-    
-    @include border-radius(8px);
-    @include box-shadow(rgba(black, 0.5) 0 0 4px);
-    
-    position: relative;
-    padding: 40px 70px 60px;
-    
-    margin-top: -30px;
+  > section {
+    float: left;
+    padding: 0 10px;
+    width: 300px;
+  }
+  
+  &.features {
+    font-size: 85%;
   }
 }
 
 body > footer {
+  font-size: 85%;
   margin: 2em 0;
   small {
     display: block;
     width: $page-width;
     margin: 0 auto;
+  }
+  em {
+    font-style: italic;
   }
 }

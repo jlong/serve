@@ -1,10 +1,59 @@
 <% @title = "Serve" %>
 <% @selected = "home" %>
 
-<p>Build websites with your favorite template languages.</p>
-
-<ul>
+<% @page_title = "Build websites with your favorite template languages." %>
+<ul class="features">
   <li>ERB, Haml, Markdown, Textile, and more!</li>
   <li>Views, partials &amp; layouts</li>
   <li>Perfect for Websites or HTML mockups</li>
 </ul>
+
+<div class="get-started"><a class="button large arrow" href="/get-started">Get Started</a></div>
+
+<section class="three-column-grid features">
+  <section>
+    <h4>Views, Partials &amp; Layouts</h4>
+    <p>Serve provides the equivalent of the Views part of the Rails MVC.
+      Partials and layouts make it possible to extract common parts of your
+      website into reusable chunks and templates. Use helper methods to
+      simplify complex logic.</p>
+  </section>
+  
+  <section>
+    <h4>Sass &amp; Compass, built in!</h4>
+    <p>Manage the chaos of your stylesheets with Sass and Compass! Sass adds
+      features like mixins and variables to CSS. Compass provides a
+      &#8220;standard library&#8221; of sorts or all manner of CSS wizardry.</p>
+  </section>
+  
+  <section>
+    <h4>Static or dynamic&#8201;&#8211;&#8201;Your choice</h4>
+    <p>Edit and tweak your websites on-the-fly with the Serve server. And when
+      you are ready to deploy, you have two options. Either export to a pure
+      HTML static site or deploy the source on any Ruby-friendly web host.</p>
+  </section>
+  
+  <section>
+    <h4>Great for Rails prototypes</h4>
+    <p>Since Serve uses plain text files, you can store a project in Git or any
+      other version control system. Combine it with Textile or Markdown and
+      you&#8211;ll achieve the perfect Content Management System for
+      developers.</p>
+  </section>
+  
+  <section>
+    <h4>Serve&#8201;+&#8201;Git&#8201;=&#8201;The Perfect CMS</h4>
+    <p>If you use a &#8220;Design First&#8201; workflow for your web apps you
+      can use Serve to build working HTML prototypes (or mockups) of the finished
+      application to test flow and design decisions, before turning it over to
+      the developers.</p>
+  </section>
+  
+  <section>
+    <h4>Made with Rack &amp; Tilt</h4>
+    <p>Serve uses Rack and Tilt under the covers. Rack makes it possible to
+      combine Serve with Rails or Sinatra. Tilt allows you to use Serve with
+      almost any Ruby-based Template library. ERB, Haml, Slim, Liquid,
+      Markdown, or Textile. Take your pick.</p>
+  </section>
+</section>

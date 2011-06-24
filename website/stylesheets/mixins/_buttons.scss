@@ -1,0 +1,41 @@
+@mixin button($color: white, $bg-color: #666, $font-size: 1em, $padding-x: $font-size, $padding-y: $font-size / 1.5) {
+  
+  color: mix($bg-color, $color, 15%);
+  border: 1px solid darken($bg-color, 7);
+  text-decoration: none;
+  
+  @include adjust-button-size($font-size, $padding-x, $padding-y);
+  
+  background-color: $bg-color;
+  @include background-image(linear-gradient(lighten($bg-color, 5), darken($bg-color, 7)));
+  @include background-clip(border-box);
+  
+  @include border-radius($font-size / 3);
+  @include box-shadow(adjust-color($bg-color, $saturation: 5, $lightness: 15) 0 1px 0 inset);
+  @include text-shadow(darken($bg-color, 30) 0 1px 0);
+  @include inline-block;
+  
+  &:visited { color: mix($bg-color, $color, 15%); }
+  
+  &:hover {
+    color: $color;
+    border-color: lighten($bg-color, 5);
+    
+    background-color: adjust-color($bg-color, $saturation: 5, $lightness: 5);
+    @include background-image(linear-gradient(adjust-color($bg-color, $saturation: -35, $lightness: 25), adjust-color($bg-color, $saturation: -5)));
+    
+    @include box-shadow(adjust-color($bg-color, $saturation: -30, $lightness: 50) 0 1px 0 inset);
+  }
+  
+  &:active {
+    background: darken($bg-color, 5);
+    @include box-shadow(none);
+  }
+  
+}
+
+@mixin adjust-button-size($font-size: nil, $padding-x: nil, $padding-y: nil) {
+  @if ($font-size != nil) {   font-size: $font-size;                       }
+  @if ($padding-x != nil) {   padding: 0 $padding-x;                       }
+  @if ($padding-y != nil) {   line-height: $font-size + ($padding-y * 2);  }
+}

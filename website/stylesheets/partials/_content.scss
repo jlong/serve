@@ -1,3 +1,48 @@
+$link-color: #bb3a08;
+$link-visited-color: #a72;
+$link-hover-color: #f66933;
+
+$button-color: adjust-color(green, $saturation: -15, $hue: -30deg);
+$button-text-color: white;
+
 section[role=main] {
+  
   @include basic-typography;
+  
+  a.button {
+    @include button($color: $button-text-color, $bg-color: $button-color);
+    @include adjust-button-size($font-size: 1.3em);
+  }
+  
+  ul.features {
+    font-size: 110%;
+    list-style-image: image-url('double-arrow-bullet.png');
+    li { margin: 0.5em 0; }
+  }
+  
+  div.get-started {
+    margin-top: 2em;
+  }
+  
+}
+
+section[role=main], body > footer {
+  a {
+    color: $link-color;
+    
+    &:visited { color: $link-visited-color; }
+    &:hover { color: $link-hover-color; text-decoration: none; }
+    
+    &.arrow {
+      &:after {
+        content: " »";
+        font-family: Georgia, Palatino, "Times New Roman", serif;
+        font-size: 160%;
+        line-height: 1;
+        font-weight: normal;
+        position: relative;
+        top: 0.05em;
+      }
+    }
+  }
 }
