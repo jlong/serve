@@ -144,6 +144,7 @@ section[role=main] {
 }
 
 section.three-column-grid {
+  clear: both;
   margin: 2em -10px;
   overflow: hidden;
   *zoom: 1;
@@ -155,6 +156,14 @@ section.three-column-grid > section {
 }
 section.three-column-grid.features {
   font-size: 85%;
+}
+
+div.featured-video {
+  margin-bottom: 4em;
+}
+div.featured-video object {
+  float: right;
+  margin: -2em 0 2em 10px;
 }
 
 body > footer {
@@ -202,7 +211,7 @@ section[role=main] h4 {
   font-size: 130%;
   margin: 0.5em 0 -0.5em;
 }
-section[role=main] p, section[role=main] ul, section[role=main] ol, section[role=main] pre, section[role=main] table {
+section[role=main] p, section[role=main] ul, section[role=main] ol, section[role=main] table {
   margin: 1em 0;
 }
 section[role=main] ul, section[role=main] ol {
@@ -219,6 +228,7 @@ section[role=main] pre {
   color: #cccccc;
   background: #333333 url('../images/noise.png?1308891214');
   padding: 1em;
+  margin: 1.5em 0;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   -o-border-radius: 8px;
@@ -272,7 +282,6 @@ section[role=main] a.button {
   display: inline-block;
   vertical-align: middle;
   *vertical-align: auto;
-  font-size: 1.3em;
 }
 section[role=main] a.button {
   *display: inline;
@@ -301,6 +310,18 @@ section[role=main] a.button:active {
   -o-box-shadow: none;
   box-shadow: none;
 }
+section[role=main] a.button.large {
+  font-size: 1.3em;
+}
+section[role=main] a.button.arrow:after {
+  content: " »";
+  font-family: Georgia, Palatino, "Times New Roman", serif;
+  font-size: 160%;
+  line-height: 1;
+  font-weight: normal;
+  position: relative;
+  top: 0.05em;
+}
 section[role=main] ul.features {
   font-size: 110%;
   list-style-image: url('../images/double-arrow-bullet.png?1308949835');
@@ -321,13 +342,4 @@ section[role=main] a:visited, body > footer a:visited {
 section[role=main] a:hover, body > footer a:hover {
   color: #f66933;
   text-decoration: none;
-}
-section[role=main] a.arrow:after, body > footer a.arrow:after {
-  content: " »";
-  font-family: Georgia, Palatino, "Times New Roman", serif;
-  font-size: 160%;
-  line-height: 1;
-  font-weight: normal;
-  position: relative;
-  top: 0.05em;
 }

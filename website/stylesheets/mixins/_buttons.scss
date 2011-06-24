@@ -39,3 +39,15 @@
   @if ($padding-x != nil) {   padding: 0 $padding-x;                       }
   @if ($padding-y != nil) {   line-height: $font-size + ($padding-y * 2);  }
 }
+
+@mixin append-button-character($character, $font-family: unquote('Georgia, Palatino, "Times New Roman", serif') ) {
+  &:after {
+    content: " " + $character;
+    font-family: $font-family;
+    font-size: 160%;
+    line-height: 1;
+    font-weight: normal;
+    position: relative;
+    top: 0.05em;
+  }
+}

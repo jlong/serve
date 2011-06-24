@@ -11,7 +11,12 @@ section[role=main] {
   
   a.button {
     @include button($color: $button-text-color, $bg-color: $button-color);
-    @include adjust-button-size($font-size: 1.3em);
+    
+    &.large { @include adjust-button-size($font-size: 1.3em); }
+    
+    &.arrow {
+      @include append-button-character("»");
+    }
   }
   
   ul.features {
@@ -32,17 +37,5 @@ section[role=main], body > footer {
     
     &:visited { color: $link-visited-color; }
     &:hover { color: $link-hover-color; text-decoration: none; }
-    
-    &.arrow {
-      &:after {
-        content: " »";
-        font-family: Georgia, Palatino, "Times New Roman", serif;
-        font-size: 160%;
-        line-height: 1;
-        font-weight: normal;
-        position: relative;
-        top: 0.05em;
-      }
-    }
   }
 }

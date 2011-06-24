@@ -56,7 +56,7 @@ $line-height: 1.4;
     margin: 0.5em 0 -0.5em;
   }
   
-  p, ul, ol, pre, table {
+  p, ul, ol, table {
     margin: 1em 0;
   }
   
@@ -75,6 +75,7 @@ $line-height: 1.4;
     color: invert($text-color);
     background: $text-color image-url('noise.png');
     padding: 1em;
+    margin: 1.5em 0;
     
     @include border-radius(8px);
   }

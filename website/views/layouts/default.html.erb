@@ -31,6 +31,7 @@
     </nav>
     <section role="main">
       <article>
+        <%= yield :before_content %>
         <header><h1><%= @page_title || @title %></h1></header>
         <%= yield %>
       </article>

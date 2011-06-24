@@ -8,6 +8,10 @@
   <li>Perfect for Websites or HTML mockups</li>
 </ul>
 
+<% content_for :before_content do %>
+  <div class="featured-video"><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="453" height="360" id="viddler_53bf6942"><param name="flashvars" value="disablebranding=t"><param name="movie" value="http://www.viddler.com/simple/53bf6942/"><param name="allowScriptAccess" value="always"><param name="allowFullScreen" value="true"><embed src="http://www.viddler.com/simple/53bf6942/" width="453" height="360" type="application/x-shockwave-flash" allowscriptaccess="always" flashvars="disablebranding=t" allowfullscreen="true" name="viddler_53bf6942"></object></div>
+<% end %>
+
 <div class="get-started"><a class="button large arrow" href="/get-started">Get Started</a></div>
 
 <section class="three-column-grid features">
@@ -54,6 +58,6 @@
     <p>Serve uses Rack and Tilt under the covers. Rack makes it possible to
       combine Serve with Rails or Sinatra. Tilt allows you to use Serve with
       almost any Ruby-based Template library. ERB, Haml, Slim, Liquid,
-      Markdown, or Textile. Take your pick.</p>
+      Markdown, or Textile.</p>
   </section>
 </section>

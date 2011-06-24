@@ -79,6 +79,7 @@ section[role=main] {
   margin: 0 auto;
 }
 section.three-column-grid {
+  clear: both;
   margin: 2em -10px;
   @include clearfix;
   
@@ -91,6 +92,11 @@ section.three-column-grid {
   &.features {
     font-size: 85%;
   }
+}
+
+div.featured-video {
+  margin-bottom: 4em;
+  object { float: right; margin: -2em 0 2em 10px; }
 }
 
 body > footer {
