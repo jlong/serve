@@ -103,12 +103,18 @@ div.featured-video {
 }
 
 body > footer {
+  background: rgba(#732626, 0.1);
+  border-top: 3px double #dad3c8;
   font-size: 85%;
-  margin: 2em 0;
+  margin: 2em 0 0;
+  padding: 1em;
   small {
     display: block;
     width: $page-width;
     margin: 0 auto;
+  }
+  p {
+    margin: 1em 0;
   }
   em {
     font-style: italic;

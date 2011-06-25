@@ -1,0 +1,38 @@
+@mixin lined-table($border-color: #ddd) {
+  
+  margin: 1.5em 0;
+  
+  td, th {
+    padding: 0.5em;
+    vertical-align: baseline;
+  }
+  
+  th {
+    border-bottom: 3px solid $border-color;
+  }
+  
+  td {
+    border-bottom: 1px solid $border-color;
+  }
+  
+  tr:first-child td {
+    border-top: 1px solid $border-color;
+  }
+  
+  tr td:first-child {
+    padding-left: 0;
+  }
+  
+  tr td:last-child {
+    padding-right: 0;
+  }
+  
+}
+
+@mixin lined-tables($border-color: #ddd) {
+  
+  table {
+    @include lined-table($border-color);
+  }
+  
+}

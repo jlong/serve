@@ -170,13 +170,19 @@ div.featured-video object {
 }
 
 body > footer {
+  background: rgba(115, 38, 38, 0.1);
+  border-top: 3px double #dad3c8;
   font-size: 85%;
-  margin: 2em 0;
+  margin: 2em 0 0;
+  padding: 1em;
 }
 body > footer small {
   display: block;
   width: 940px;
   margin: 0 auto;
+}
+body > footer p {
+  margin: 1em 0;
 }
 body > footer em {
   font-style: italic;
@@ -228,6 +234,7 @@ section[role=main] ol {
 }
 section[role=main] pre {
   font-family: Monaco, "Lucida Console", monospace;
+  font-size: 90%;
   color: #cccccc;
   background: #333333 url('../images/noise.png?1308891214');
   padding: 1em;
@@ -241,6 +248,7 @@ section[role=main] pre {
 }
 section[role=main] code, section[role=main] dfn, section[role=main] kbd, section[role=main] samp, section[role=main] tt {
   font-family: Monaco, "Lucida Console", monospace;
+  font-size: 90%;
   background: #e5e5e5 url('../images/noise.png?1308891214');
   padding: 2px;
   -moz-border-radius: 3px;
@@ -249,6 +257,28 @@ section[role=main] code, section[role=main] dfn, section[role=main] kbd, section
   -ms-border-radius: 3px;
   -khtml-border-radius: 3px;
   border-radius: 3px;
+}
+section[role=main] table {
+  margin: 1.5em 0;
+}
+section[role=main] table td, section[role=main] table th {
+  padding: 0.5em;
+  vertical-align: baseline;
+}
+section[role=main] table th {
+  border-bottom: 3px solid #dddddd;
+}
+section[role=main] table td {
+  border-bottom: 1px solid #dddddd;
+}
+section[role=main] table tr:first-child td {
+  border-top: 1px solid #dddddd;
+}
+section[role=main] table tr td:first-child {
+  padding-left: 0;
+}
+section[role=main] table tr td:last-child {
+  padding-right: 0;
 }
 section[role=main] a.button {
   color: #e2eada;

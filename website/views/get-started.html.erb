@@ -35,41 +35,23 @@ specific way. All ERB, Haml, and Sass files will be processed wherever they
 are found in the project root. But for more complex projects you may want to
 create a structured Serve project.</p>
 
-<p>To create a new Serve project in the &#8220;mockups&#8221; directory, type
-the following on the command line:</p>
+<p>Create a structured Serve project when you want to deploy it on a
+Rack-friendly web host or if you just want to organize your project a little
+better.</p>
 
-<pre>serve create mockups   # create a new project in the mockups directory</pre>
+<p>To create a structured Serve project, you will need to use the create command. The format for the command is simple:</p>
 
-<p>This will create a new project with the following directory structure:</p>
+<pre>serve create [project]</pre>
 
-<pre>mockups/
-  |
-  +-- config.ru              # Rack configuration file
-  |
-  +-- compass.config         # Compass configuration file
-  |
-  +-- public/                # Directories for static assets
-  |    |
-  |    +-- stylesheets/      # Compiled stylesheets
-  |    |
-  |    +-- images/
-  |    |
-  |    `-- javascripts/
-  |
-  +-- stylesheets/           # Sass and SCSS source files
-  |    |
-  |    `-- application.scss  # Example SCSS file for application
-  |
-  +-- tmp/                   # Needed for Passenger (mod_passenger)
-  |    |
-  |    `-- restart.txt
-  |
-  `-- views/                 # Store your ERB, Haml, etc. here
-       |
-       +-- _layout.html.erb  # Example layout
-       |
-       +-- hello.html.erb    # Example view
-       |
-       +-- index.redirect    # Example redirect
-       |
-       `-- view_helpers.rb   # Example view helpers</pre>
+<p>Where <code>[project]</code> is the name of the directory where you
+would like to create the new project.</p>
+
+<p>To create a project in the &#8220;mockups&#8221; directory, you would type:</p>
+
+<pre>serve create mockups</pre>
+
+<h3>Learning More</h3>
+
+<p>That&#8217;s a quick overview of how to get started, but if you are ready
+to learn more, it&#8217;s time to <a href="/documentation">dive into the
+documentation</a>.</p>

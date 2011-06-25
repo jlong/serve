@@ -9,6 +9,8 @@ section[role=main] {
   
   @include basic-typography;
   
+  @include lined-tables;
+  
   a.button {
     @include button($color: $button-text-color, $bg-color: $button-color);
     
