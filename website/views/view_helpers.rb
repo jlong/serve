@@ -5,11 +5,19 @@
 module ViewHelpers
   
   def absolute_url
-    request.request_uri
+    domain + path
   end
   
-  def selected?(path)
-    if (@selected == path) or (Regexp.new(path).match(request.request_uri))
+  def domain
+    "http://get-serve.com"
+  end
+  
+  def path
+    URI.parse(request.request_uri).path
+  end
+  
+  def selected?(part)
+    if (@selected == part) or Regexp.new(part).match(path)
       true
     else
       false
