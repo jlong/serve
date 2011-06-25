@@ -18,6 +18,7 @@ coverage
 rdoc
 pkg
 .sass-cache
+output
 
 ## PROJECT::SPECIFIC
 *.gem
