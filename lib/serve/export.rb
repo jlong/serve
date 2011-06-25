@@ -77,12 +77,12 @@ module Serve
         
         # request the path
         browser = Rack::Test::Session.new(Rack::MockSession.new(Serve::RackAdapter.new(@root)))
-        browser.get filename
+        browser.get filename, {}, {'REQUEST_URI' => "http://example.org/#{extract_request_path(filename)}"}
         response = browser.last_response
         
         # body and extension
         contents = response.body
-        ext = extract_ext(response.content_type)
+        ext = extract_ext(filename)
         
         # write contents
         to_path   = "#{@output}/#{remove_ext(filename)}#{ext}"
@@ -138,17 +138,21 @@ module Serve
         end
       end
       
-      def extract_ext(content_type)
-        case content_type
-        when %r{text/html}
-          ".html"
-        when %r{text/css}
-          ".css"
-        when %r{text/javascript}
-          ".js"
+      def extract_ext(path)
+        if path =~ /(\.[A-Za-z]+)\.[A-Za-z]+$/
+          $1
+        elsif path =~ /(\.[A-Za-z]+)$/
+          $1
         else
-          raise content_type.inspect
+          ''
         end
+      end
+      
+      def extract_request_path(filename)
+        result = remove_ext(filename)
+        result = result.sub(/index$/, '')
+        result = result.sub(/\/$/, '')
+        result
       end
       
       def rackified?
