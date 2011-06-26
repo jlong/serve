@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["John W. Long", "Adam I. Williams", "Robert Evans"]
-  s.date = %q{2011-06-22}
+  s.date = %q{2011-06-26}
   s.default_executable = %q{serve}
   s.description = %q{Serve is a small Rack-based web server that makes it easy to serve ERB or HAML from any directory. Serve is an ideal tool for building HTML prototypes of Rails applications. Serve can also handle SASS, Textile, and Markdown if the appropriate gems are installed.}
   s.email = %q{me@johnwlong.com}
@@ -54,7 +54,6 @@ Gem::Specification.new do |s|
      "lib/serve/templates/view_helpers.rb",
      "lib/serve/version.rb",
      "lib/serve/view_helpers.rb",
-     "rails/init.rb",
      "spec/application_spec.rb",
      "spec/fixtures/directory/index.html",
      "spec/fixtures/hello.html",
@@ -63,7 +62,15 @@ Gem::Specification.new do |s|
      "spec/router_spec.rb",
      "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/jlong/serve}
+  s.homepage = %q{http://get-serve.com}
+  s.licenses = ["MIT"]
+  s.post_install_message = %q{Thanks for installing Serve! If you plan to use Serve with another
+template language (apart from ERB), don't forget to install it.
+
+If you want use Sass or Compass remember to install them, too!
+
+Serve doesn't install these dependencies by default, so that you can
+make your own decisions about what you want to use.}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
