@@ -1,4 +1,4 @@
-= Serve - Easy ERB, Haml, and Sass
+= Serve - Delicious ERB, Haml, and Sass
 
 link:../../downloads/jlong/serve/logo-hifi-3.png
 
@@ -10,15 +10,7 @@ This makes Serve an ideal framework for prototyping Rails applications or
 creating simple websites. Serve has full support for Rails-style partials
 and layouts.
 
-If you use a "Design First" approach to Web application development, you may
-find Serve especially useful. Create a separate "prototype" project for your
-application (using Serve) and copy views over into actual application when
-they are ready to go. This workflow can allow the designer to focus on
-presentation and flow, while the developer can focus on implementation. One
-benefit to this approach is that the designer can identify and fix a large
-number of problems before a feature is ever touched by the developer. Once a
-feature has been completed in the prototype project it can also be estimated
-with a high degree of accuracy.
+Serve is made with Rack & Tilt.
 
 
 == Installation
@@ -36,11 +28,11 @@ If you are new to the command prompt and are a Mac user see:
 
 http://wiseheartdesign.com/articles/2010/11/12/the-designers-guide-to-the-osx-command-prompt/
 
-Google "command prompt windows" if you are on a PC to find a simple
+Search Google for "command prompt windows" if you are on a PC to find a simple
 tutorial.
 
 
-== Usage
+== Basic Usage
 
 Once the gem is installed the `serve` command will be available from the
 command prompt. To launch Serve, just type the command and press enter:
@@ -53,241 +45,85 @@ at the following address:
   http://localhost:4000
 
 Once the server is going it will output a running log of its activity. To
-stop the server at any time, type CTRL+C at the command prompt. By default the
-serve command serves up files from the current directory. To change this
-behavior, `cd` to the appropriate directory before starting serve or pass the
-directory as the final parameter to the command:
+stop the server at any time, type CTRL+C at the command prompt.
 
-  serve project_directory
-
-The `serve` command automatically binds to 0.0.0.0 (localhost) and uses port
-4000 by default. To serve files over a different IP (that is bound to your
-computer) or port specify those options on the command line:
-
-  serve 4000               # a custom port
-  
-  serve 192.168.1.6        # a custom IP
-  
-  serve 192.168.1.6:4000   # a custom IP and port
-
-For your convenience if the file "script/server" exists in the current
-directory the serve command will start that instead of launching a Ruby Web
-server. You can specify the environment that you want to start the server with
-as an option on the command line:
-
-  serve production         # start script/server in production mode
+Learn more: http://get-serve.com/documentation/usage
 
 
-== Creating a New Serve Project
+== Creating a Structured Serve Project
 
 For simple projects, you don't need to structure your files in a specific
 way. All ERB, Haml, and Sass files will be processed wherever they are found
-in the project root. But for more complex projects you may want to use Serve
-with a `config.ru` file so that you can take advantage of other Rack
-middleware and structure the project in a Rack compatible way.
+in the project root. But for more complex projects you may want add a bit of structure.
 
-To create a new Rack-based Serve project in the "mockups" directory, type the
+To create a structured Serve project in the "project" directory, type the
 following on the command line:
 
-  serve create mockups   # create a new project in the mockups directory
+  serve create project   # create a new project in the project directory
 
-This will create a new project with the following directory structure:
-
-  mockups/
-    |
-    +-- config.ru              # Rack configuration file
-    |
-    +-- compass.config         # Compass configuration file
-    |
-    +-- public/                # Directories for static assets
-    |    |
-    |    +-- stylesheets/      # Compiled stylesheets
-    |    |
-    |    +-- images/
-    |    |
-    |    `-- javascripts/
-    |
-    +-- stylesheets/           # Sass and SCSS source files
-    |    |
-    |    `-- application.scss  # Example SCSS file for application
-    |
-    +-- tmp/                   # Needed for Passenger (mod_passenger)
-    |    |
-    |    `-- restart.txt
-    |
-    `-- views/                 # Store your ERB, Haml, etc. here
-         |
-         +-- _layout.html.erb  # Example layout
-         |
-         +-- hello.html.erb    # Example view
-         |
-         +-- index.redirect    # Example redirect
-         |
-         `-- view_helpers.rb   # Example view helpers
-
-If you would like to generate the project with a specific JavaScript framework
-you can do so with the <tt>-j</tt> flag:
-
-  serve create mockups -j prototype
-
-Available frameworks are: <tt>jquery</tt>, <tt>jquery-ui</tt>,
-<tt>mootools</tt>, <tt>prototype</tt>, and <tt>scriptaculous</tt>.
-
-The `serve create` command can be executed multiple times or on an existing
-project without negative consequences.
+Lear more: http://get-serve.com/documentation/create
 
 
-== Upgrading a Compass Project to a Serve Project
+== Layouts & Partials
 
-If you are a Compass user you can convert an existing Compass project to a
-Serve project with the "convert" sub-command:
+Serve has full support for Rails-style layouts and partials.
 
-  serve convert mockups
+Serve layouts are stored in "_layout.erb" or "_layout.haml" files in the same directory as the page they are rendering.
 
-This will rename and move a number of files for you and will turn your Compass
-project into a Serve project.
+Lear more: http://get-serve.com/documentation/layouts
 
-Note that after upgrading a Compass project, you will no longer need to use
-the `compass watch` command to generate your stylesheets. Your stylesheets
-will be compiled on the fly with Serve.
-
-
-== Layouts
-
-In Serve layouts work a little differently than they do in Rails. Because there are no
-controllers to derive layout names from, Serve relies on the directory structure to
-determine the layout associated with a specific view. Serve layouts are stored in
-"_layout.erb" or "_layout.haml" files. Serve searches for a layout file in the same
-directory as the view. If it fails to find one there, it traverses up the directory
-tree searching each parent directory until it finds the "nearest" layout.
-
-For example, assuming following directory structure:
-
-        views/
-          |
-  A)      +-- _layout.erb
-          |
-          +-- index.erb
-          |
-          `-- about/
-                |
-  B)            +-- _layout.erb
-                |
-                `-- index.erb
-
-For "views/about/index.erb" Serve will use layout B. If layout B did not exist,
-Serve would go up the directory tree and discover layout A which it would use to
-render the view.
-
-For "views/index.erb" Serve would immediately discover and use layout A because it
-is in the same directory.
-
-So Serve searches up the directory tree for the nearest layout file, and uses that
-file to render the view. This is convenient because it allows you to structure your
-Serve project in a way that allows entire "branches" of to share the same layout
-and "branches" lower down can override the layout used.
-
-
-== Partials
-
-Partials in Serve work much like they do in Rails. Prefix your partials with an
-underscore ("_") and use the <tt>render</tt> helper method in your views to render
-the partial:
+Serve partials (much like PHP includes) are rendered using the familiar render syntax:
 
   <%= render "footer" %>
 
-Or,
-
-  <%= render "/shared/footer" %>
+Learn more: http://get-serve.com/documentation/partials
 
 
 == View Helpers
 
 If you drop a file called "view_helpers.rb" in your views directory, you can
 define custom helpers for your Haml and ERB views. Just create a ViewHelpers
-module and define your helper methods there:
+module and define your custom helper methods there:
 
   module ViewHelpers
-    def custom_method
-      "Request object: #{request.headers['user-agent']}"
+    
+    # Calculate the years for a copyright
+    def copyright_years(start_year)
+      end_year = Date.today.year
+      if start_year == end_year
+        start_year
+      else
+        start_year.to_s + "&#8211;" + end_year.to_s
+      end
     end
+    
   end
 
-Helpers have full access to the request and response objects so you can easily
-read and manipulate headers or do other fancy tricks.
+You can then use your custom helper methods inside a view or layout:
 
-Serve provides a number of stock helpers to make it easier for you to 
-prototype Rails applications:
+  <%= copyright_years(2010) %>
 
-  # Escape Helpers
-  html_escape(string)              # escape HTML in string
-  h(string)                        # alias for html_escape
-  json_escape(string)              # escape invalid JSON characters in string
-  j(string)                        # alias for json_escape
-  
-  # Content Helpers
-  capture(&block)                  # Capture a block inside of a view or layout
-  content_for(symbol, &block)      # Capture a block and store it by symbol
-  content_for?(symbol)             # Has content been captured for symbol?
-  get_content_for(symbol)          # Retrieve content for symbol (equivalent to `yield symbol`)
-  set_content_for(symbol, string)  # Set content for symbol to string
-  
-  # Flash Helpers
-  flash                            # fake flash for request
-  
-  # Param Helpers
-  params                           # access params for request
-  boolean_param(key)               # retrieve value of a boolean param (true/false)
-  
-  # Render Helpers
-  render(partial)                  # Render a partial
-  
-  # Tag Helpers
-  content_tag(name, content, ...)  # a double HTML tag
-  tag(name, ...)                   # a single HTML tag
-  image_tag(src, ...)              # an HTML image tag
-  image(name, ...)                 # shorthand for standard image tag
-  javascript_tag(...)              # a javascript tag
-  link_to(name, href, ...)         # a link to name at href
-  link_to_function(name, ...)      # a link to a function
-  mail_to(email_address, ...)      # a mailto link
+Serve also provides a number of stock helpers methods that are very similar to their Rails counter parts.
 
-For more information, see:
-
-https://github.com/jlong/serve/blob/master/lib/serve/view_helpers.rb
+Learn more: http://get-serve.com/documentation/view-helpers
 
 
-== File Types
+== "Design First" Prototyping
 
-Serve does special processing for files with following extensions:
-
-textile :: Evaluates the document as Textile (requires the Redcloth gem) 
-markdown :: Evaluates the document as Markdown (requires the Bluecloth gem)
-erb :: Evaluates the document as ERB
-haml :: Evaluates the document as Haml (requires the Haml gem)
-slim :: Evaluates the document using the Slim template language (requires the Slim gem)
-sass :: Evaluates the document as Sass (requires the Haml gem)
-scss :: Evaluates the document as SCSS (requires the Haml gem)
-email :: Evaluates the document as if it is an e-mail message; the format is identical to a plain/text e-mail message's source
-redirect :: Redirects to the URL contained on the last line of the file
+If you use a "Design First" methodology, you may find Serve especially useful
+for prototyping your applications. Create a separate "prototype" project for
+your application (using Serve) and copy views over into actual application
+when they are ready to go. This workflow allows the designer to focus on
+presentation and flow, while the developer can focuses on implementation. One
+benefit to this approach is that the designer can identify and fix a large
+number of design-related problems before a feature is ever touched by the
+developer. Once a feature has been completed in the prototype project it can
+also be estimated with a high degree of accuracy.
 
 
-== Exporting a Serve Project
+== Website & Documentation
 
-The edge version of Serve now has limited support for exporting your Serve 
-project to HTML. To get started with the prerelease version:
-
-  gem install --pre serve
-
-To export your project, use the new "export" command:
-
-  serve export project output
-
-Where "project" is the path to the project and "output" is the path to the
-directory where you would like your HTML and CSS generated.
-
-Please note! This feature is in beta. If you have issues with this approach,
-please post them to the GitHub issue tracker.
+Detailed documentation is available on the Serve website: http://get-serve.com
 
 
 == Mailing List
@@ -297,16 +133,8 @@ Have questions? Please don't be ashamed to ask. Post them on the mailing list:
 http://groups.google.com/group/serve-users
 
 
-== More Information
-
-You can find more information about Serve, including a detailed screencast, on
-the GitHub wiki:
-
-http://wiki.github.com/jlong/serve
-
-
 == License
 
-Serve is released under the MIT license and is copyright (c) 2007-2011
+Serve is released under a MIT-style license and is copyright (c) 2007-2011
 John W. Long and Adam I. Williams. Portions have been contributed by Robert
-Evans and others. A copy of the MIT license can be found in the LICENSE file.
+Evans and others. A copy of the license can be found in the LICENSE file.
