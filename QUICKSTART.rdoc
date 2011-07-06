@@ -12,11 +12,11 @@ Let's have a look at how it all works.
 
 To get started we need to download and install the Ruby gem for Serve:
 
- $ sudo gem install serve
+  $ sudo gem install serve
 
 After we've done that it's probably a good idea to install a couple of additional gems so that Serve will play nicely with HAML, Markdown, and Textile:
 
- $ sudo gem install haml BlueCloth RedCloth
+  $ sudo gem install haml BlueCloth RedCloth
 
 
 == Project Directory Structure
@@ -30,28 +30,28 @@ application  :: The actual Rails application is here
 
 Let's go ahead and setup the directory for the prototype. We'll use the `serve create` command to create the initial project directory and files:
 
- $ serve create prototype
+  $ serve create prototype
 
 This should output:
 
- create  prototype
- create  prototype/public
- create  prototype/tmp
- create  prototype/views
- create  prototype/config.ru
- create  prototype/LICENSE
- create  prototype/.gitignore
- create  prototype/compass.config
- create  prototype/README.markdown
- create  prototype/public/images
- create  prototype/public/javascripts
- create  prototype/public/stylesheets
- create  prototype/sass
- create  prototype/sass/application.sass
- create  prototype/views/_layout.html.erb
- create  prototype/views/hello.html.erb
- create  prototype/views/view_helpers.rb
- create  prototype/views/index.redirect
+  create  prototype
+  create  prototype/public
+  create  prototype/tmp
+  create  prototype/views
+  create  prototype/config.ru
+  create  prototype/LICENSE
+  create  prototype/.gitignore
+  create  prototype/compass.config
+  create  prototype/README.markdown
+  create  prototype/public/images
+  create  prototype/public/javascripts
+  create  prototype/public/stylesheets
+  create  prototype/sass
+  create  prototype/sass/application.sass
+  create  prototype/views/_layout.html.erb
+  create  prototype/views/hello.html.erb
+  create  prototype/views/view_helpers.rb
+  create  prototype/views/index.redirect
 
 You'll note that the `serve create` command creates a directory structure that is somewhat similar to a Rails project:
 
@@ -94,37 +94,37 @@ Now that we have the prototype directory set up, let's create our first page so 
 
 In the "views" directory, create a file named "login.html.erb" and insert the following source code:
 
- <form action="/dashboard/" method="put">
-   <p>
-     <label for="username">Username</label>
-     <input type="text" name="username" id="username" />
-   </p>
-   <p>
-     <label for="password">Password</label>
-     <input type="password" name="password" id="password" />
-   </p>
-   <p>
-     <input type="submit" value="Login" />
-   </p>
- </form>
+  <form action="/dashboard/" method="put">
+    <p>
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" />
+    </p>
+    <p>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" />
+    </p>
+    <p>
+      <input type="submit" value="Login" />
+    </p>
+  </form>
 
 
 == Starting Serve
 
 To view our login page in a Web browser, we need to start up Serve in the directory where we are building the prototype:
 
- % cd prototype
- % serve
- [2008-02-23 15:19:05] INFO  WEBrick 1.3.1
- [2008-02-23 15:19:05] INFO  ruby 1.8.6 (2007-09-24) [universal-darwin9.0]
- [2008-02-23 15:19:05] INFO  Serve::Server#start: pid=5087 port=4000
- ...
+  % cd prototype
+  % serve
+  [2008-02-23 15:19:05] INFO  WEBrick 1.3.1
+  [2008-02-23 15:19:05] INFO  ruby 1.8.6 (2007-09-24) [universal-darwin9.0]
+  [2008-02-23 15:19:05] INFO  Serve::Server#start: pid=5087 port=4000
+  ...
 
 Once you execute the `serve` command it will launch a mini Web server for the prototype and will output a noisy log of any activity. (To stop the command at any point simply switch back to the command line and press Ctrl+C.)
 
 By default the `serve` command automatically serves files from the directory that it is started in over port 4000 on your local machine. To access the the prototype in your Web browser go to:
 
- http://localhost:4000
+  http://localhost:4000
 
 Now navigate to the following URL:
 
@@ -139,15 +139,15 @@ One thing to note about the source that I gave you for the login page. I intenti
 
 Replace the contents of the file named "_layout.html.erb" in the "views" directory of your prototype with the following:
 
- <html>
-   <head>
-     <title><%= @title %></title>
-   </head>
-   <body>
-     <h1><%= @title %>/h1>
-     <%= yield %>
-   </body>
- </html>
+  <html>
+    <head>
+      <title><%= @title %></title>
+    </head>
+    <body>
+      <h1><%= @title %>/h1>
+      <%= yield %>
+    </body>
+  </html>
 
 This layout includes a small amount of ERB. ERB stands for Embedded Ruby. ERB allows you to embed Ruby code into a web page to dynamically render content. In our case, we are using it in the layout to indicate the title of the web page and to insert the content of the page at the appropriate point. You can use ERB in layout or view files.
 
@@ -155,11 +155,11 @@ Embedded Ruby is delineated with the opening and closing sequence <% and %> resp
 
 We need to make one small change to our login page before continuing. Insert the following line at the top of login.html.erb file:
 
- <% @title = "Login" %>
+  <% @title = "Login" %>
 
 This will set the @title variable for the login page. Now, switch back to your Web browser and navigate to:
 
- http://localhost:4000/login/
+  http://localhost:4000/login/
 
 The page should now have a title and heading that both read "Login".
 
@@ -169,59 +169,59 @@ Let's add a sidebar to the login page. To do this in a layout friendly way, we w
 
 Add the following code to the bottom of login.html.erb:
 
- <% content_for :sidebar do %>
-   <h3>New Around Here?</h3>
-   <p>No problem! Just <a href="/signup/">create an account</a>.</p>
- <% end %>
+  <% content_for :sidebar do %>
+    <h3>New Around Here?</h3>
+    <p>No problem! Just <a href="/signup/">create an account</a>.</p>
+  <% end %>
 
 This defines a new content region of the page that we can render wherever we want in the layout. The :sidebar symbol defines the name of the content region.
 
 Now to modify the layout to work with this new content region. In _layout.html.erb replace the code:
 
- <h1><%= @title %>/h1>
- <%= yield %>
+  <h1><%= @title %>/h1>
+  <%= yield %>
 
 With the following:
  
- <div id="content">
-   <h1><%= @title %>/h1>
-   <%= yield %>
- </div>
- <div id="sidebar">
-   <%= yield :sidebar %>
- </div>
+  <div id="content">
+    <h1><%= @title %>/h1>
+    <%= yield %>
+  </div>
+  <div id="sidebar">
+    <%= yield :sidebar %>
+  </div>
 
 This defines two new divs for the content and sidebar portions of the document. The first call to `yield` renders the content portion of a view (everything apart from regions defined by calls to `content_for`). The second call to `yield` passes the name of our content region as a symbol. When yield is called with a symbol, it renders the associated content region. In our case `yield :sidebar` causes Serve to render the content that we defined for the :sidebar region at that point in the layout.
 
 Now add a block for inline styles to the "head" of the layout:
 
- <styles>
-   #content { float: left;  width: 60%; }
-   #sidebar { float: right; width: 40%; }
- </styles>
+  <styles>
+    #content { float: left;  width: 60%; }
+    #sidebar { float: right; width: 40%; }
+  </styles>
 
 We could certainly put this in it's own file (in the public/stylesheets directory), but for the purposes of this demonstration, it works just as well in the head of the document.
 
 The full layout file should now look like this:
 
- <html>
-   <head>
-     <title><%= @title %></title>
-     <styles>
-        #content { float: left;  width: 60%; }
-        #sidebar { float: right; width: 40%; }
-      </styles>
-   </head>
-   <body>
-     <div id="content">
-       <h1><%= @title %>/h1>
-       <%= yield %>
-     </div>
-     <div id="sidebar">
-       <%= yield :sidebar %>
-     </div>
-   </body>
- </html>
+  <html>
+    <head>
+      <title><%= @title %></title>
+      <styles>
+         #content { float: left;  width: 60%; }
+         #sidebar { float: right; width: 40%; }
+       </styles>
+    </head>
+    <body>
+      <div id="content">
+        <h1><%= @title %>/h1>
+        <%= yield %>
+      </div>
+      <div id="sidebar">
+        <%= yield :sidebar %>
+      </div>
+    </body>
+  </html>
 
 Now switch back to your Web browser at:
 
@@ -232,7 +232,7 @@ And check out the new multi-column layout on the login page.
 
 == Partials
 
-<%= render 'footer' %>
+  <%= render 'footer' %>
 
 == View Helpers
 
