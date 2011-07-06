@@ -29,8 +29,8 @@ a[role=logo] {
 nav[role=navigation] {
   background: #973b12;
   @include background-image(
-    radial-gradient(25% 50px, $banner-background-color, darken($banner-background-color, 11) 400px),
-    linear-gradient(rgba(black, 0.1), rgba(black, 0.5))
+    linear-gradient(rgba(black, 0) 0%, rgba(black, 0) 80%, rgba(black, 0.15) 100%),
+    radial-gradient(25% 50px, $banner-background-color, darken($banner-background-color, 11) 400px)
   );
   text-align: center;
   
@@ -50,7 +50,7 @@ nav[role=navigation] {
     font-size: 18px;
     color: mix($banner-background-color, white, 40%);
     text-decoration: none;
-    padding: 20px;
+    padding: 1em;
     
     @include text-shadow(rgba(black, 0.5) 0 1px 0);
     
@@ -80,7 +80,7 @@ section[role=main] {
 }
 section.three-column-grid {
   clear: both;
-  margin: 2em -10px;
+  margin: 1em -10px;
   @include clearfix;
   
   > section {

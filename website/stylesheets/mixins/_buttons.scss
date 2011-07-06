@@ -1,8 +1,9 @@
-@mixin button($color: white, $bg-color: #666, $font-size: 1em, $padding-x: $font-size, $padding-y: $font-size / 1.5) {
+@mixin button($color: white, $bg-color: #666, $font-size: 1em, $padding-x: $font-size / 1.5, $padding-y: $font-size / 2) {
   
   color: mix($bg-color, $color, 15%);
   border: 1px solid darken($bg-color, 7);
   text-decoration: none;
+  cursor: pointer;
   
   @include adjust-button-size($font-size, $padding-x, $padding-y);
   

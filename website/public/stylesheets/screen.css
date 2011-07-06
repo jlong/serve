@@ -101,11 +101,11 @@ a[role=logo] {
 
 nav[role=navigation] {
   background: #973b12;
-  background-image: -webkit-gradient(radial, 25% 50px, 0, 25% 50px, 400, color-stop(0%, #973b12), color-stop(100%, #65270c)), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0.1)), color-stop(100%, rgba(0, 0, 0, 0.5)));
-  background-image: -webkit-radial-gradient(25% 50px, #973b12, #65270c 400px), -webkit-linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
-  background-image: -moz-radial-gradient(25% 50px, #973b12, #65270c 400px), -moz-linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
-  background-image: -o-radial-gradient(25% 50px, #973b12, #65270c 400px), -o-linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
-  background-image: radial-gradient(25% 50px, #973b12, #65270c 400px), linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.5));
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(80%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.15))), -webkit-gradient(radial, 25% 50px, 0, 25% 50px, 400, color-stop(0%, #973b12), color-stop(100%, #65270c));
+  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.15) 100%), -webkit-radial-gradient(25% 50px, #973b12, #65270c 400px);
+  background-image: -moz-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.15) 100%), -moz-radial-gradient(25% 50px, #973b12, #65270c 400px);
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.15) 100%), -o-radial-gradient(25% 50px, #973b12, #65270c 400px);
+  background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.15) 100%), radial-gradient(25% 50px, #973b12, #65270c 400px);
   text-align: center;
 }
 nav[role=navigation] ul {
@@ -122,7 +122,7 @@ nav[role=navigation] a {
   font-size: 18px;
   color: #d5b0a0;
   text-decoration: none;
-  padding: 20px;
+  padding: 1em;
   text-shadow: rgba(0, 0, 0, 0.5) 0 1px 0;
 }
 nav[role=navigation] a:hover {
@@ -145,7 +145,7 @@ section[role=main] {
 
 section.three-column-grid {
   clear: both;
-  margin: 2em -10px;
+  margin: 1em -10px;
   overflow: hidden;
   *zoom: 1;
 }
@@ -280,13 +280,17 @@ section[role=main] table tr td:first-child {
 section[role=main] table tr td:last-child {
   padding-right: 0;
 }
-section[role=main] a.button {
+section[role=main] input {
+  font-size: 100%;
+}
+section[role=main] a.button, section[role=main] button {
   color: #e2eada;
   border: 1px solid #2e5507;
   text-decoration: none;
+  cursor: pointer;
   font-size: 1em;
-  padding: 0 1em;
-  line-height: 2.333em;
+  padding: 0 0.667em;
+  line-height: 2em;
   background-color: #40760a;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4d8e0c), color-stop(100%, #2e5507));
   background-image: -webkit-linear-gradient(#4d8e0c, #2e5507);
@@ -316,13 +320,13 @@ section[role=main] a.button {
   vertical-align: middle;
   *vertical-align: auto;
 }
-section[role=main] a.button {
+section[role=main] a.button, section[role=main] button {
   *display: inline;
 }
-section[role=main] a.button:visited {
+section[role=main] a.button:visited, section[role=main] button:visited {
   color: #e2eada;
 }
-section[role=main] a.button:hover {
+section[role=main] a.button:hover, section[role=main] button:hover {
   color: white;
   border-color: #4d8e0c;
   background-color: #4d9208;
@@ -336,17 +340,19 @@ section[role=main] a.button:hover {
   -o-box-shadow: #c0e29d 0 1px 0 inset;
   box-shadow: #c0e29d 0 1px 0 inset;
 }
-section[role=main] a.button:active {
+section[role=main] a.button:active, section[role=main] button:active {
   background: #335f08;
   -moz-box-shadow: none;
   -webkit-box-shadow: none;
   -o-box-shadow: none;
   box-shadow: none;
 }
-section[role=main] a.button.large {
+section[role=main] a.button.large, section[role=main] button.large {
   font-size: 1.3em;
+  padding: 0 1.5em;
+  line-height: 2.8em;
 }
-section[role=main] a.button.arrow:after {
+section[role=main] a.button.arrow:after, section[role=main] button.arrow:after {
   content: " »";
   font-family: Georgia, Palatino, "Times New Roman", serif;
   font-size: 160%;
@@ -364,6 +370,21 @@ section[role=main] ul.features li {
 }
 section[role=main] div.get-started {
   margin-top: 2em;
+}
+section[role=main] .box {
+  background: #cce5ff url('../images/noise.png?1308891214');
+  padding: 0.1em 1em;
+  margin: 2em 0;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -o-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
+}
+section[role=main] .box.twitter {
+  font-size: 130%;
+  text-align: center;
 }
 
 section[role=main] a, body > footer a {

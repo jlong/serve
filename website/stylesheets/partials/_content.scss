@@ -11,10 +11,12 @@ section[role=main] {
   
   @include lined-tables;
   
-  a.button {
+  input { font-size: 100%; }
+  
+  a.button, button {
     @include button($color: $button-text-color, $bg-color: $button-color);
     
-    &.large { @include adjust-button-size($font-size: 1.3em); }
+    &.large { @include adjust-button-size($font-size: 1.3em, $padding-x: 1.5em, $padding-y: 0.75em); }
     
     &.arrow {
       @include append-button-character("»");
@@ -29,6 +31,14 @@ section[role=main] {
   
   div.get-started {
     margin-top: 2em;
+  }
+  
+  .box {
+    background: adjust-color(mix(blue, green), $lightness: 65) image-url('noise.png');
+    padding: 0.1em 1em;
+    margin: 2em 0;
+    @include border-radius(10px);
+    &.twitter { font-size: 130%; text-align: center; }
   }
   
 }
