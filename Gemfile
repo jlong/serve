@@ -1,12 +1,12 @@
 source "http://rubygems.org"
 
 gem 'rake',             '~> 0.9.0'
-gem 'rack',             '~> 1.3.0'
-gem 'rack-test',        '~> 0.6.0'
+gem 'rack',             '~> 1.2.1'
+gem 'rack-test',        '~> 0.5.7'
 gem 'tilt',             '~> 1.3.1'
 gem 'activesupport',    '~> 3.0.7'
-gem 'tzinfo',           '~> 0.3.27'
-gem 'i18n',             '~> 0.6.0'
+gem 'tzinfo',           '~> 0.3.23'
+gem 'i18n',             '~> 0.5.0'
 
 group :development do
   gem 'rspec',          '~> 2.6.0'
