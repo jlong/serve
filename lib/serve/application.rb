@@ -82,12 +82,12 @@ module Serve
         "  #{program} command [arguments] [options]",
         "  ",
         "Examples:",
-        "  #{program}                       # launch server in current directory",
-        "  #{program} 2100                  # launch server on port 2100",
-        "  #{program} mockups               # launch server for mockups directory",
-        "  #{program} create mockups        # create a new project in mockups dir",
-        "  #{program} convert mockups       # convert a Compass project in mockups",
-        "  #{program} export mockups:output # export mockups to output dir",
+        "  #{program}                        # launch server in current directory",
+        "  #{program} 2100                   # launch server on port 2100",
+        "  #{program} mockups                # launch server for mockups directory",
+        "  #{program} create project         # new structured project in project dir",
+        "  #{program} convert project        # convert a Compass project in directory",
+        "  #{program} export project output  # export project to output directory",
         "  ",
         "Description:",
         "  Starts a web server on the specified address and port with its document root ",
@@ -124,6 +124,9 @@ module Serve
         "  convert",
         "    Converts an existing Compass project into a Rack-based Serve project.",
         "   ",
+        "  export",
+        "    Exports a Serve project to regular HTML and CSS.",
+        "   ",
         "Options:",
         "  -j, --javascript  The name of the JavaScript Framework you'd like to use.",
         "                    (Only valid for create and convert commands.)",
@@ -131,7 +134,7 @@ module Serve
         "  -v, --version     Show the program version number and quit.",
         "  ",
         "Further information:",
-        "  http://github.com/jlong/serve/blob/master/README.rdoc"
+        "  http://get-serve.com/documentation"
       ].join("\n")
     end
     
