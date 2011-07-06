@@ -1,0 +1,36 @@
+<% @title = "Understanding Layouts" %>
+
+<p>In Serve layouts work a little differently than they do in Rails. Because
+there are no controllers to derive layout names from, Serve relies on the
+directory structure to determine the layout associated with a specific view.
+Serve layouts are stored in "_layout.erb" or "_layout.haml" files. Serve
+searches for a layout file in the same directory as the view. If it fails to
+find one there, it traverses up the directory tree searching each parent
+directory until it finds the "nearest" layout.</p>
+
+<p>For example, assuming following directory structure:</p>
+
+<pre>        views/
+          |
+  A)      +-- _layout.erb
+          |
+          +-- index.erb
+          |
+          `-- about/
+                |
+  B)            +-- _layout.erb
+                |
+                `-- index.erb</pre>
+
+<p>For "views/about/index.erb" Serve will use layout B. If layout B
+did not exist, Serve would go up the directory tree and discover layout A
+which it would use to render the view.</p>
+
+<p>For "views/index.erb" Serve would immediately discover and use
+layout "A" because it is in the same directory.</p>
+
+<p>So Serve searches up the directory tree for the nearest layout file, and
+uses that file to render the view. This is convenient because it allows you
+to structure your Serve project in a way that allows entire
+"branches" of to share the same layout and "branches"
+lower down can override the layout used.</p>

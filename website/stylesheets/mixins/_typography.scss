@@ -56,19 +56,19 @@ $line-height: 1.4;
     margin: 0.5em 0 -0.5em;
   }
   
-  p, ul, ol, table {
+  p, ul, ol, dl, table {
     margin: 1em 0;
   }
   
   ul, ol {
     padding-left: 2.25em;
+    ul, ol { margin: 0; }
   }
-  ul {
-    list-style: disc;
-  }
-  ol {
-    list-style: decimal;
-  }
+  ul { list-style: disc; }
+  ol { list-style: decimal; }
+  
+  dt { margin-top: 1em; }
+  dd { margin-top: 0.25em; margin-left: 1em; }
   
   pre {
     font-family: $system-font;

@@ -1,5 +1,8 @@
 <% @title = "Getting started" %>
 
+
+<h3 id="installation">Installation</h3>
+
 <p>Getting started with Serve is easy. Because Serve is built with Ruby, you
 will need to have Ruby installed on your system. Mac OSX ships with Ruby. If
 you are on Windows you can install Ruby with
@@ -10,11 +13,11 @@ you are on Windows you can install Ruby with
 <pre>gem install serve</pre>
 
 
-<h3>Using the serve command</h3>
+<h3 id="command">Using the serve command</h3>
 
-<p>Serve ships with an easy to use command that makes it easy to turn any directory into into a browseable set of web pages.</p>
-
-<p>To use it, simply change to the project directory, and type <kbd>serve</kbd>:</p>
+<p>Serve ships with an easy to use command that makes it easy to turn any
+directory into into a browseable set of web pages. To use it, simply change to
+the project directory, and type <kbd>serve</kbd>:</p>
 
 <pre>~$ cd my-project
 ~/my-project$ serve</pre>
@@ -24,34 +27,46 @@ Serve, navigate to <a href="http://localhost:4000">http://localhost:4000</a>
 in your web browser.</p>
 
 <p>As you navigate around in your browser, Serve will print out a log of
-it&#8217;s activity on the command prompt. When you are ready to stop Serve type:
-<kbd>Ctrl+C</kbd>, or close the command prompt window.</p>
+it&#8217;s activity on the command prompt. When you are ready to stop Serve
+type: <kbd>Ctrl+C</kbd>, or close the command prompt window.</p>
 
 
-<h3>Creating a new project</h3>
+<h3 id="sub-commands">Sub-commands</h3>
 
-<p>For simple projects, you don&#8217;t need to structure your files in a
-specific way. All ERB, Haml, and Sass files will be processed wherever they
-are found in the project root. But for more complex projects you may want to
-create a structured Serve project.</p>
+<p>Serve also includes a number of useful sub-commands:</p>
+<%= render "/documentation/sub-commands" %>
 
-<p>Create a structured Serve project when you want to deploy it on a
-Rack-friendly web host or if you just want to organize your project a little
-better.</p>
 
-<p>To create a structured Serve project, you will need to use the create command. The format for the command is simple:</p>
+<h3 id="example-projects">Example projects</h3>
 
-<pre>serve create [project]</pre>
+<p>Reading source code is a great way to improve your coding prowess. You may
+  want to study one or more of the following projects to get a better
+  idea of how to use Serve effectively.</p>
 
-<p>Where <code>[project]</code> is the name of the directory where you
-would like to create the new project.</p>
+<dl>
+  <dt><strong><a href="https://github.com/jlong/serve/tree/master/website">Serve Website Source</a></strong></dt>
+  <dd>Check out the code that is being used for the Serve website. It&#8217;s a
+    good example of using Serve to build a static site. We use
+    the Serve <a href="/documentation/export">export</a> command to generate
+    the site, and a handy
+    <a href="https://github.com/jlong/serve/blob/master/tasks/website.rake">rsync rake
+    task</a> to deploy.</dd>
+  
+  <dt><strong><a href="https://github.com/radiant/radiant-prototype">Radiant CMS Prototype</a></strong></dt>
+  <dd>The Radiant CMS prototype project is a superb example of using Serve to
+    prototype a Rails application. It&#8217;s a fully functional, clickable
+    prototype without the backend. HTML prototypes are a great way to work out
+    design issues before spending a lot of time on the programming.</dd>
+  
+  <dt><strong><a href="https://github.com/adamstac/serve-bootstrap">Adam Stacoviak&#8217;s Serve Bootstrap</a></strong></dt>
+  <dd><a href="http://thechangelog.com/post/3904430915/episode-0-5-2-serve-radiantcms-prototyping-and-design-wi">The Changelog&#8217;s</a>
+    very own Adam Stacoviak&#8217;s has put together a Serve bootstrap project
+    with some of his favorite defaults. It comes packed with Haml, Sass, Compass,
+    his own Grid Coordinates framework, jQuery and Modernizer. It also comes
+    ready to deploy on Heroku.</dd>
+</dl>
 
-<p>To create a project in the &#8220;mockups&#8221; directory, you would type:</p>
 
-<pre>serve create mockups</pre>
+<h3 id="documentation">Documentation</h3>
 
-<h3>Learning More</h3>
-
-<p>That&#8217;s a quick overview of how to get started, but if you are ready
-to learn more, it&#8217;s time to <a href="/documentation">dive into the
-documentation</a>.</p>
+<%= render "/documentation/tree" %>

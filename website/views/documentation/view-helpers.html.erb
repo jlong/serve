@@ -1,0 +1,55 @@
+<% @title = "View Helpers" %>
+
+<p>If you drop a file called "view_helpers.rb" in your views
+directory, you can define custom helpers for your Haml and ERB views. Just
+create a ViewHelpers module and define your helper methods there:</p>
+
+<pre>module ViewHelpers
+  def custom_method
+    "Request object: #{request.headers['user-agent']}"
+  end
+end</pre>
+
+<p>Helpers have full access to the request and response objects so you can
+easily read and manipulate headers or do other fancy tricks.</p>
+
+<p>Serve provides a number of stock helpers to make it easier for you to
+prototype Rails applications:</p>
+
+<pre># Escape Helpers
+html_escape(string)                  # escape HTML in string
+h(string)                            # alias for html_escape
+json_escape(string)                  # escape invalid JSON characters in string
+j(string)                            # alias for json_escape
+
+# Content Helpers
+capture(&amp;block)                      # Capture a block inside of a view or layout
+content_for(symbol, &amp;block)          # Capture a block and store it by symbol
+content_for?(symbol)                 # Has content been captured for symbol?
+get_content_for(symbol)              # Retrieve content for symbol (equivalent to `yield symbol`)
+set_content_for(symbol, string)      # Set content for symbol to string
+
+# Flash Helpers
+flash                                # fake flash for request
+
+# Param Helpers
+params                               # access params for request
+boolean_param(key)                   # retrieve value of a boolean param (true/false)
+
+# Render Helpers
+render(partial)                      # Render a partial
+
+# Tag Helpers
+content_tag(name, content, ...)      # a double HTML tag
+tag(name, ...)                       # a single HTML tag
+image_tag(src, ...)                  # an HTML image tag
+image(name, ...)                     # shorthand for standard image tag
+javascript_tag(...)                  # a javascript tag
+link_to(name, href, ...)             # a link to name at href
+link_to_function(name, ...)          # a link to a function
+mail_to(email_address, ...)          # a mailto link
+javascript_include_tag(*sources)     # Rails-style javascript tags for sources
+stylesheet_link_tag(*sources)        # Rails-style stylesheet tags for sources
+</pre>
+
+<p>For more information, see: <a href="https://github.com/jlong/serve/blob/master/lib/serve/view_helpers.rb">github.com/jlong/serve/blob/master/lib/serve/view_helpers.rb</a></p>

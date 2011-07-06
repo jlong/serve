@@ -1,0 +1,11 @@
+<% @title = "Understanding Partials" %>
+
+<p>Partials in Serve work much like they do in Rails. Prefix your partials
+with an underscore ("_") and use the <tt>render</tt> helper
+method in your views to render the partial:</p>
+
+<pre>&lt;%= render "footer" %&gt;</pre>
+
+<p>Or,</p>
+
+<pre>&lt;%= render "/shared/footer" %&gt;</pre>

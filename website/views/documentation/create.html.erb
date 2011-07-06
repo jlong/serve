@@ -1,0 +1,57 @@
+<% @title = "Creating a New Serve Project" %>
+
+<p>For simple projects, you don’t need to structure your files in a
+specific way. All ERB, Haml, and Sass files will be processed wherever they
+are found in the project root. But for more complex projects you may want
+to use Serve with a `config.ru` file so that you can take advantage of
+other Rack middleware and structure the project in a Rack compatible way.</p>
+
+<p>To create a new Rack-based Serve project in the "project" directory, type
+the following on the command line:</p>
+
+<pre>serve create project   # create a new project in the project directory</pre>
+
+<p>This will create a new project with the following directory structure:</p>
+
+<pre>project/
+  |
+  +-- config.ru              # Rack configuration file
+  |
+  +-- compass.config         # Compass configuration file
+  |
+  +-- public/                # Directories for static assets
+  |    |
+  |    +-- stylesheets/      # Compiled stylesheets
+  |    |
+  |    +-- images/
+  |    |
+  |    `-- javascripts/
+  |
+  +-- stylesheets/           # Sass and SCSS source files
+  |    |
+  |    `-- application.scss  # Example SCSS file for application
+  |
+  +-- tmp/                   # Needed for Passenger (mod_passenger)
+  |    |
+  |    `-- restart.txt
+  |
+  `-- views/                 # Store your ERB, Haml, etc. here
+       |
+       +-- _layout.html.erb  # Example layout
+       |
+       +-- hello.html.erb    # Example view
+       |
+       +-- index.redirect    # Example redirect
+       |
+       `-- view_helpers.rb   # Example view helpers</pre>
+
+<p>If you would like to generate the project with a specific JavaScript
+framework you can do so with the <kbd>-j</kbd> flag:</p>
+
+<pre>serve create mockups -j prototype</pre>
+
+<p>Available frameworks are: <kbd>jquery</kbd>, <kbd>jquery-ui</kbd>,
+<kbd>mootools</kbd>, <kbd>prototype</kbd>, and <kbd>scriptaculous</kbd>.</p>
+
+<p>The `serve create` command can be executed multiple times or on an existing
+project without negative consequences.</p>

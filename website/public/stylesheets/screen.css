@@ -220,17 +220,27 @@ section[role=main] h4 {
   font-size: 130%;
   margin: 0.5em 0 -0.5em;
 }
-section[role=main] p, section[role=main] ul, section[role=main] ol, section[role=main] table {
+section[role=main] p, section[role=main] ul, section[role=main] ol, section[role=main] dl, section[role=main] table {
   margin: 1em 0;
 }
 section[role=main] ul, section[role=main] ol {
   padding-left: 2.25em;
+}
+section[role=main] ul ul, section[role=main] ul ol, section[role=main] ol ul, section[role=main] ol ol {
+  margin: 0;
 }
 section[role=main] ul {
   list-style: disc;
 }
 section[role=main] ol {
   list-style: decimal;
+}
+section[role=main] dt {
+  margin-top: 1em;
+}
+section[role=main] dd {
+  margin-top: 0.25em;
+  margin-left: 1em;
 }
 section[role=main] pre {
   font-family: Monaco, "Lucida Console", monospace;

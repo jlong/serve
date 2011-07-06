@@ -1,0 +1,41 @@
+<% @title = "Command Line Usage" %>
+
+<p>Once the gem is installed the `serve` command will be available from the
+command prompt. To launch Serve, just type the command and press enter:</p>
+
+<pre>serve</pre>
+
+<p>This will launch a simple web server which you can access from any web
+browser at the following address:</p>
+
+<pre>http://localhost:4000</pre>
+
+<p>
+Once the server is going it will output a running log of its activity. To
+stop the server at any time, type CTRL+C at the command prompt. By default
+the serve command serves up files from the current directory. To change
+this behavior, `cd` to the appropriate directory before starting serve or
+pass the directory as the final parameter to the command:
+</p>
+
+<pre>serve project_directory</pre>
+
+<p>The `serve` command automatically binds to 0.0.0.0 (localhost) and uses
+port 4000 by default. To serve files over a different IP (that is bound to
+your computer) or port specify those options on the command line:</p>
+
+<pre>serve 4000               # a custom port
+serve 192.168.1.6        # a custom IP
+serve 192.168.1.6:4000   # a custom IP and port</pre>
+
+<p>For your convenience if the file "script/server" exists in the current
+directory the serve command will start that instead of launching a Ruby Web
+server. You can specify the environment that you want to start the server with
+as an option on the command line:</p>
+
+<pre>serve production         # start script/server in production mode</pre>
+
+
+<h3>Sub-Commands</h3>
+
+<%= render "sub-commands" %>
