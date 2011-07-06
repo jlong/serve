@@ -70,7 +70,7 @@ Serve has full support for Rails-style layouts and partials.
 
 Serve layouts are stored in "_layout.erb" or "_layout.haml" files in the same directory as the page they are rendering.
 
-Lear more: http://get-serve.com/documentation/layouts
+Learn more: http://get-serve.com/documentation/layouts
 
 Serve partials (much like PHP includes) are rendered using the familiar render syntax:
 
