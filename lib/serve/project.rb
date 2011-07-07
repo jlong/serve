@@ -72,6 +72,7 @@ module Serve #:nodoc:
           tmp
           views
         ).each { |path| make_path path }
+        create_file 'Gemfile',         read_template('Gemfile')
         create_file 'config.ru',       read_template('config.ru')
         create_file '.gitignore',      read_template('gitignore')
         create_file 'compass.config',  read_template('compass.config')

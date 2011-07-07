@@ -1,0 +1,26 @@
+source :rubygems
+
+gem 'serve', '#{Serve.version}'
+
+# Use edge instead:
+# gem 'serve', :get => 'git://github.com/jlong/serve.git'
+
+# Use Compass and Sass
+gem 'compass'
+
+# Markdown and Textile
+# gem 'rdiscount'
+# gem 'RedCloth'
+
+# Other templating languages
+# gem 'erubies'
+# gem 'haml'
+# gem 'slim'
+# gem 'radius'
+# gem 'less'
+
+# Coffee Script
+# gem 'coffee-script'
+
+# Use mongrel for the Web server
+# gem 'mongrel'
