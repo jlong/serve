@@ -13,7 +13,7 @@ gem 'compass'
 # gem 'RedCloth'
 
 # Other templating languages
-# gem 'erubies'
+# gem 'erubis'
 # gem 'haml'
 # gem 'slim'
 # gem 'radius'
