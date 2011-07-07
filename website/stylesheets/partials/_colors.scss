@@ -1,0 +1,10 @@
+$text-color: #333;
+$bold-color: #000;
+$light-color: #888;
+
+$link-color: #bb3a08;
+$link-visited-color: #a72;
+$link-hover-color: #f66933;
+
+$button-color: adjust-color(green, $saturation: -15, $hue: -30deg);
+$button-text-color: white;

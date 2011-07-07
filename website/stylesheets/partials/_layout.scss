@@ -74,10 +74,24 @@ nav[role=navigation] {
   }
 }
 
+nav[role=breadcrumbs] {
+  margin: 1em 0 -1.5em;
+  color: $light-color;
+  a {
+    color: $text-color !important;
+    text-decoration: none;
+    &:after {
+      color: $link-color;
+      content: " ⇢ ";
+    }
+  }
+}
+
 section[role=main] {
   width: $page-width;
   margin: 0 auto;
 }
+
 section.three-column-grid {
   clear: both;
   margin: 1em -10px;

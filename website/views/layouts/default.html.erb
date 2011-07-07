@@ -32,6 +32,12 @@
       </ul>
     </nav>
     <section role="main">
+      <% if selected? "documentation/" %>
+      <nav role="breadcrumbs">
+        <a href="/documentation">Documentation</a>
+        <% if selected? /create|export|convert/ %><a href="/documentation/usage">Usage</a><% end %>
+      </nav>
+      <% end %>
       <article>
         <%= yield :before_content %>
         <header><h1><%= @page_title || @title %></h1></header>
@@ -42,7 +48,9 @@
       <small>
         <p>
           &copy; <%= copyright_years 2011 %> <a href="http://johnwlong.com">John W. Long</a>.
-          Serve is open-source software. It is <em>completely free</em> for commercial and non-commercial use.</p>
+          Serve is open-source software. It is <em>completely free</em> for commercial and non-commercial use.
+          <a href="/contributing">Wanna help?</a>
+        </p>
       </small>
     </footer>
     <%= render "gauges" %>

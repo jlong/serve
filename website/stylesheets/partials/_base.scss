@@ -1,5 +1,6 @@
 @import "compass";
 @import "mixins/all";
+@import "partials/colors";
 
 @include global-reset;
 @include reset-html5;

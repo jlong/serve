@@ -138,6 +138,19 @@ nav[role=navigation] li.highlight a {
   color: #d59225;
 }
 
+nav[role=breadcrumbs] {
+  margin: 1em 0 -1.5em;
+  color: #888888;
+}
+nav[role=breadcrumbs] a {
+  color: #333333 !important;
+  text-decoration: none;
+}
+nav[role=breadcrumbs] a:after {
+  color: #bb3a08;
+  content: " ⇢ ";
+}
+
 section[role=main] {
   width: 940px;
   margin: 0 auto;
