@@ -14,7 +14,7 @@
     <![endif]-->
     <%= render "google-analytics" %>
   </head>
-  <body role="homepage">
+  <body<% if selected? "home" %> role="homepage"<% end %>>
     <header role="banner">
       <hgroup>
         <a role="logo" href="/">
