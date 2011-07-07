@@ -9,8 +9,9 @@ gem 'tzinfo',           '~> 0.3.23'
 gem 'i18n',             '~> 0.5.0'
 
 group :development do
+  gem 'rdoc',           '~> 3.8.0'
   gem 'rspec',          '~> 2.6.0'
-  gem 'jeweler',        '~> 1.4.0'
+  gem 'jeweler',        '~> 1.6.4'
   gem 'haml',           '~> 3.1.1'
   gem 'sass',           '~> 3.1.1'
   gem 'compass',        '~> 0.11.1'
