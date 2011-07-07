@@ -21,6 +21,7 @@ group :development do
   gem 'erubis',         '~> 2.7.0'
   gem 'less',           '~> 1.2.21'
   gem 'radius',         '~> 0.6.1'
+  gem 'coffee-script',  '~> 1.1.1'
 end
 
 group :website do
