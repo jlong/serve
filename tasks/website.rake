@@ -27,4 +27,10 @@ namespace :website do
     ok_failed system("rsync -avz --delete --rsync-path=/usr/local/bin/rsync website/output/ wiseheart@wiseheartdesign.com:~/domains/get-serve.com/web/public")
   end
 
+  desc "serve website using serve (how meta)"
+  task :serve do
+    puts "Serving website..."
+    system "serve website"
+  end
+
 end
