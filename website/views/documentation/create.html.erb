@@ -48,10 +48,19 @@ the following on the command line:</p>
 <p>If you would like to generate the project with a specific JavaScript
 framework you can do so with the <kbd>-j</kbd> flag:</p>
 
-<pre>serve create mockups -j prototype</pre>
+<pre>serve create my-project -j prototype</pre>
 
 <p>Available frameworks are: <kbd>jquery</kbd>, <kbd>jquery-ui</kbd>,
 <kbd>mootools</kbd>, <kbd>prototype</kbd>, and <kbd>scriptaculous</kbd>.</p>
 
-<p>The `serve create` command can be executed multiple times or on an existing
+<p>You can also specify a "template" to base your Serve project on with the
+<kbd>-t</kbd> flag.</p>
+
+<pre>serve create my-project -t blank</pre>
+
+<p>A template can be one of the built-in templates (blank or default), or a
+directory of your choosing. Files in the template directory will overwrite
+the base files needed for an install.</p>
+
+<p>The <kbd>serve create</kbd> command can be executed multiple times or on an existing
 project without negative consequences.</p>
