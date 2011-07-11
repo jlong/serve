@@ -1,14 +1,14 @@
 source :rubygems
 
-gem 'rake',             '~> 0.9.0'
-gem 'rack',             '~> 1.2.1'
-gem 'rack-test',        '~> 0.5.7'
-gem 'tilt',             '~> 1.3.1'
-gem 'activesupport',    '~> 3.0.7'
-gem 'tzinfo',           '~> 0.3.23'
-gem 'i18n',             '~> 0.5.0'
+gem 'rack',              '~> 1.2'
+gem 'rack-test',         '~> 0.5'
+gem 'tilt',              '~> 1.3'
+gem 'activesupport',     '~> 3.0'
+gem 'tzinfo'
+gem 'i18n'
 
 group :development do
+  gem 'rake',           '~> 0.9.0'
   gem 'rdoc',           '~> 3.8.0'
   gem 'rspec',          '~> 2.6.0'
   gem 'jeweler',        '~> 1.6.4'
@@ -21,7 +21,7 @@ group :development do
   gem 'erubis',         '~> 2.7.0'
   gem 'less',           '~> 1.2.21'
   gem 'radius',         '~> 0.6.1'
-  gem 'coffee-script',  '~> 1.1.1'
+  gem 'coffee-script',  '~> 2.2.0'
 end
 
 group :website do

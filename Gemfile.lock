@@ -4,6 +4,10 @@ GEM
     RedCloth (4.2.7)
     activesupport (3.0.9)
     chunky_png (1.2.0)
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.1.1)
     compass (0.11.4)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -11,6 +15,8 @@ GEM
     css_parser (1.1.9)
     diff-lcs (1.1.2)
     erubis (2.7.0)
+    execjs (1.2.0)
+      multi_json (~> 1.0)
     fssm (0.2.7)
     git (1.2.5)
     haml (3.1.2)
@@ -24,6 +30,7 @@ GEM
       treetop (>= 1.4.2)
     maruku (0.6.0)
       syntax (>= 1.0.0)
+    multi_json (1.0.3)
     mutter (0.5.3)
     polyglot (0.3.1)
     rack (1.2.3)
@@ -64,17 +71,18 @@ PLATFORMS
 
 DEPENDENCIES
   RedCloth (~> 4.2.7)
-  activesupport (~> 3.0.7)
+  activesupport (~> 3.0)
+  coffee-script (~> 2.2.0)
   compass (~> 0.11.1)
   css_parser (~> 1.1.9)
   erubis (~> 2.7.0)
   haml (~> 3.1.1)
-  i18n (~> 0.5.0)
+  i18n
   jeweler (~> 1.6.4)
   less (~> 1.2.21)
   maruku (~> 0.6.0)
-  rack (~> 1.2.1)
-  rack-test (~> 0.5.7)
+  rack (~> 1.2)
+  rack-test (~> 0.5)
   radius (~> 0.6.1)
   rake (~> 0.9.0)
   rdiscount (~> 1.6.8)
@@ -83,5 +91,5 @@ DEPENDENCIES
   sass (~> 3.1.1)
   serve (~> 1.5.0.pre4)
   slim (~> 0.9.4)
-  tilt (~> 1.3.1)
-  tzinfo (~> 0.3.23)
+  tilt (~> 1.3)
+  tzinfo
