@@ -1,7 +1,8 @@
 = Change Log
 
 == edge
-* Make Textile partials work. Closes #29. [rmetzler, jlong]
+* Added new --template option which allows you to specify a project template when creating a new project. [jlong]
+* Made Textile partials work. Closes #29. [rmetzler, jlong]
 * Fixed problem with export that caused filenames with underscore to be excluded. [bmaland]
 * Updated generated config.ru to require Sass. Closes #20. [jlong]
 * Updated project README and other files to be more friendly to new users [jlong]

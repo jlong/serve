@@ -1,0 +1,15 @@
+Serve has a special file type for mapping HTTP redirects. Redirects make nice
+end points for form posts or short URLs.
+
+Redirect URLs can be fully formed, like this:
+
+http://wiseheartdesign.com/
+
+Or, relative to the site root, like this:
+
+/action
+
+Extra lines at the beginning of a redirect file are ignored. By convention,
+the last line of a redirect file is the URL to redirect to:
+
+/hello

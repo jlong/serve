@@ -1,4 +1,4 @@
-#\\ -p 4000
+#\ -p 4000
 
 require 'rubygems'
 require 'bundler'
@@ -10,7 +10,6 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
-require 'serve'
 require 'serve/rack'
 
 # The project root directory

@@ -9,13 +9,12 @@ module Serve #:nodoc:
   # Serve::Project.new(options).convert
   #
   class Project #:nodoc:
-    attr_reader :name, :location, :framework
+    attr_reader :location, :framework, :template
     
     def initialize(options)
-      @name       = options[:name]
-      @location   = normalize_location(options[:directory], @name)
-      @full_name  = git_config('user.name') || 'Your Full Name'
+      @location   = normalize_path(options[:directory])
       @framework  = options[:framework]
+      @template   = options[:template] || 'default'
     end
     
     # Create a new Serve project
@@ -27,12 +26,9 @@ module Serve #:nodoc:
         public/stylesheets
         stylesheets
       ).each { |path| make_path path } 
-      create_file 'stylesheets/application.scss',  read_template('application.scss')
-      create_file 'views/_layout.html.erb',        read_template('_layout.html.erb')
-      create_file 'views/hello.html.erb',          read_template('hello.html.erb')
-      create_file 'views/view_helpers.rb',         read_template('view_helpers.rb')
-      create_file 'views/index.redirect',          read_template('index.redirect')
+      copy_project_template @template
       install_javascript_framework @framework
+      copy_readme
     end
     
     def self.create(options={})
@@ -51,6 +47,7 @@ module Serve #:nodoc:
       end
       move_file 'src', 'stylesheets'
       install_javascript_framework @framework
+      copy_readme
       note_old_compass_config
     end
     
@@ -66,25 +63,50 @@ module Serve #:nodoc:
       
       # Files required for both a new server project and for an existing compass project.
       def setup_base
+        make_path
         %w(
-          .
           public
           tmp
           views
         ).each { |path| make_path path }
-        create_file 'Gemfile',         read_template('Gemfile')
-        create_file 'config.ru',       read_template('config.ru')
-        create_file '.gitignore',      read_template('gitignore')
-        create_file 'compass.config',  read_template('compass.config')
-        create_file 'README.markdown', read_template('README.markdown')
+        create_file 'Gemfile',         read_bootstrap_file('Gemfile', true)
+        create_file 'config.ru',       read_bootstrap_file('config.ru')
+        create_file '.gitignore',      read_bootstrap_file('gitignore')
+        create_file 'compass.config',  read_bootstrap_file('compass.config')
         create_empty_file 'tmp/restart.txt'
+      end
+      
+      # Copy files from project template
+      def copy_project_template(name)
+        source = lookup_template_directory(name)
+        raise 'invalid template' unless source
+        
+        files = []
+        FileUtils.cd(source) { files = Dir.glob('**/*', File::FNM_DOTMATCH) }
+        files.reject! { |f| %r{^\.{1,2}$|/\.{1,2}$|\.empty$}.match(f) }
+        files.sort!
+        
+        files.each do |filename|
+          from_path = "#{source}/#{filename}"
+          to_path = "#{@location}/#{filename}"
+          if File.directory? from_path
+            make_path filename
+          else
+            if File.file? to_path
+              log_action "exists", filename
+            else
+              log_action "create", filename
+              FileUtils.cp from_path, to_path
+            end
+          end
+        end
       end
       
       # Install a JavaScript framework if one was specified
       def install_javascript_framework(framework)
         if framework
           if valid_javascript_framework?(framework)
-            path = normalize_path(@location, "public/javascripts")
+            path = "#{@location}/public/javascripts"
             filename = javascript_filename(framework, path)
             if File.exists? filename
               log_action 'exists', filename
@@ -99,9 +121,13 @@ module Serve #:nodoc:
         end
       end
       
+      def copy_readme
+        create_file 'README.md', read_bootstrap_file('README.md'), :silent
+      end
+      
       # Display note about old compass config if it exists
       def note_old_compass_config
-        old_config = normalize_path(@location, 'config.rb')
+        old_config = @location + '/config.rb'
         if File.exists? old_config
           puts ""
           puts "============================================================================"
@@ -112,40 +138,32 @@ module Serve #:nodoc:
         end
       end
       
-      # Read and eval a template by name
-      def read_template(name)
-        contents = IO.read(normalize_path(File.dirname(__FILE__), "templates", name))
-        instance_eval "%{#{contents}}"
-      end
-      
-      # Grab data by key from the git config file if it exists
-      def git_config(key)
-        value = `git config #{key}`.chomp
-        value.empty? ? nil : value
-      rescue
-        nil
+      # Read and optionally eval a bootstrap template by name
+      def read_bootstrap_file(name, eval = false)
+        contents = IO.read(normalize_path(File.dirname(__FILE__), "bootstrap", name))
+        eval ? instance_eval("%{#{contents}}") : contents
       end
       
       # Create a file with contents
-      def create_file(file, contents)
-        path = normalize_path(@location, file)
+      def create_file(file, contents, exists=:noisy)
+        path = "#{@location}/#{file}"
         unless File.exists? path
           log_action "create", path
           File.open(path, 'w+') { |f| f.puts contents }
         else
-          log_action "exists", path
+          log_action "exists", path if exists == :noisy
         end
       end
       
       # Create an empty file
       def create_empty_file(file)
-        path = normalize_path(@location, file)
+        path = "#{@location}/#{file}"
         FileUtils.touch(path)
       end
       
       # Make every directory in a given path
-      def make_path(path)
-        path = normalize_path(@location, path)
+      def make_path(path=nil)
+        path = File.join(*[@location, path].compact)
         unless File.exists? path
           log_action "create", path
           FileUtils.mkdir_p(path)
@@ -156,8 +174,8 @@ module Serve #:nodoc:
       
       # Move a file from => to (relative to the project location)
       def move_file(from, to)
-        from_path = normalize_path(@location, from)
-        to_path = normalize_path(@location, to)
+        from_path = "#{@location}/#{from}"
+        to_path = "#{@location}/#{to}"
         if File.exists? from_path
           to = to + from if to[-1..-1] == "/"
           log_action "move", "#{@location}/{#{from} => #{to}}"
@@ -165,17 +183,19 @@ module Serve #:nodoc:
         end
       end
       
-      # Normalize the path of the target directory
-      def normalize_location(path, name = nil)
-        path = File.join(path, underscore(name)) if name
-        path = normalize_path(path)
-        path
-      end
-      
       # Convert dashes and spaces to underscores
       def underscore(string)
         string.gsub(/-|\s+/, '_')
       end
       
+      def default_templates_directory
+        "#{File.dirname(__FILE__)}/templates"
+      end
+      
+      def lookup_template_directory(name)
+        path = "#{default_templates_directory}/#{name}"
+        path = normalize_path(name) unless File.directory?(path)
+        path if File.directory?(path)
+      end
   end
 end

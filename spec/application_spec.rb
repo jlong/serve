@@ -66,27 +66,29 @@ describe Serve::Application do
     
     describe "create" do
       it "with standard arguments" do
-        params = parse('create newapp /Users/user')[:create]
-        params[:name].should == 'newapp'
-        params[:directory].should == '/Users/user'
-        params[:framework].should be_nil
-      end
-      
-      it "without parent directory" do
         params = parse('create newapp')[:create]
-        params[:name].should == 'newapp'
-        params[:directory].should == Dir.pwd
+        params[:directory].should == 'newapp'
+        params[:framework].should be_nil
+        params[:template].should be_nil
       end
       
       it "with no arguments" do
-        lambda { parse('create') }.should raise_error(Serve::Application::InvalidArgumentsError)
+        params = parse('create')[:create]
+        params[:directory].should == Dir.pwd
+        params[:framework].should be_nil
+        params[:template].should be_nil
       end
       
       it "with a javascript framework" do
-        params = parse('create newapp /Users/user -j jquery')[:create]
-        params[:name].should == 'newapp'
-        params[:directory].should == '/Users/user'
+        params = parse('create newapp -j jquery')[:create]
+        params[:directory].should == 'newapp'
         params[:framework].should == 'jquery'
+      end
+      
+      it "with a template" do
+        params = parse('create newapp --template blank')[:create]
+        params[:directory].should == 'newapp'
+        params[:template].should == 'blank'
       end
     end
     
@@ -141,7 +143,7 @@ describe Serve::Application do
         args = args.split(' ')
         @app.parse(*args)
       end
-
+    
   end
   
   describe "running" do

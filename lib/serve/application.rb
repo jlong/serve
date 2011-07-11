@@ -84,7 +84,7 @@ module Serve
         "Examples:",
         "  #{program}                        # launch server in current directory",
         "  #{program} 2100                   # launch server on port 2100",
-        "  #{program} mockups                # launch server for mockups directory",
+        "  #{program} project                # launch server for project directory",
         "  #{program} create project         # new structured project in project dir",
         "  #{program} convert project        # convert a Compass project in directory",
         "  #{program} export project output  # export project to output directory",
@@ -129,7 +129,9 @@ module Serve
         "   ",
         "Options:",
         "  -j, --javascript  The name of the JavaScript Framework you'd like to use.",
-        "                    (Only valid for create and convert commands.)",
+        "                    (Only for create and convert.)",
+        "  -t, --template    The name of the template project to base the project on.",
+        "                    Builtins: blank, default. (Only for create.)",
         "  -h, --help        Show this message and quit.",
         "  -v, --version     Show the program version number and quit.",
         "  ",
@@ -172,36 +174,51 @@ module Serve
             return File.expand_path(dir)
           end
         end
-        Dir.pwd
+        '.'
       end
       
-      def extract_javascript_framework(args, *opts)
-        framework = nil
+      def extract_arg_and_value(args, opts)
         opts.each do |opt|
-          framework = args.pop if args.delete(opt)
+          index = args.index(opt)
+          next unless index
+          key = args.delete_at(index)
+          value = args[index]
+          if value !~ /^-/
+            args.delete_at(index)
+            return value 
+          end
         end
-        framework
+        nil
+      end
+      
+      def extract_javascript_framework(args)
+        extract_arg_and_value args, %w(-j --javascript)
+      end
+      
+      def extract_template(args)
+        extract_arg_and_value args, %w(-t --template)
       end
       
       def extract_create(args)
         if args.delete('create')
-          framework = extract_javascript_framework(args, '-j', '--javascript')
-          name = args.shift
-          raise InvalidArgumentsError unless name
+          framework = extract_javascript_framework(args)
+          template  = extract_template(args)
+          directory = args.pop || '.'
           {
-           :framework => framework,
-           :name      => name,
-           :directory => (args.last ? File.expand_path(args.shift) : Dir.pwd)
+            :directory => directory,
+            :framework => framework,
+            :template  => template
           }
         end
       end
       
       def extract_convert(args)
         if args.delete('convert')
-          framework = extract_javascript_framework(args, '-j', '--javascript')
+          framework = extract_javascript_framework(args)
+          directory = args.pop || '.'
           {
-           :directory => (args.first ? File.expand_path(args.pop) : Dir.pwd),
-           :framework => framework 
+            :directory => directory,
+            :framework => framework 
           }
         end
       end
@@ -209,7 +226,7 @@ module Serve
       def extract_export(args)
         if args.delete('export')
           input, output = args.shift, args.shift
-          input, output = Dir.pwd, input if output.nil?
+          input, output = '.', input if output.nil?
           output ||= 'html'
           {
             :input => input,

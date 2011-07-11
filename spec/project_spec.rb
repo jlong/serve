@@ -4,101 +4,101 @@ require 'fileutils'
 
 describe Serve::Project do
   
-  describe "Creating a new serve project" do
+  describe "Creating a new Serve project" do
     
     class SilentOut
       def puts(*args); end
       def print(*args); end
     end
     
+    include Serve::Path
+    
     before(:all) do
       @options = {
-        :port         => 4000,
-        :address      => '0.0.0.0',
-        
-        :name       => 'test_mockup',
-        :directory  => File.dirname(__FILE__),
+        :port       => 4000,
+        :address    => '0.0.0.0',
+        :directory  => 'serve_project_for_tests',
         :framework  => 'jquery'
       }
       
-      @mockup        = Serve::Project.new(@options)
-      @mockup.stdout = SilentOut.new
-      @mockup.stderr = SilentOut.new
+      @project        = Serve::Project.new(@options)
+      @project.stdout = SilentOut.new
+      @project.stderr = SilentOut.new
       
-      @mockup_file  = Pathname.new(File.expand_path(File.join(File.dirname(__FILE__), @options[:name]))).relative_path_from(Pathname.new(Dir.pwd)).to_s
+      @project_root  = normalize_path(@options[:directory])
     end
     
-    after(:all) do
-      FileUtils.rm_rf(@mockup_file)
-    end
-    
-    it "should have a project name" do
-      @mockup.name.should == 'test_mockup'
+    after :all do
+      FileUtils.rm_rf @project_root
     end
     
     it "should have a project directory" do
-      @mockup.location.should == @mockup_file
+      @project.location.should == 'test_project'
     end
     
     it "should have a framework" do
-      @mockup.framework.should == 'jquery'
+      @project.framework.should == 'jquery'
+    end
+    
+    it "should have a default template" do
+      @project.template.should == 'default'
     end
     
     describe "The created files" do
       before(:all) do
-        @mockup.create
+        @project.create
       end
       
       it "should create a directory" do
-        File.exists?(@mockup_file).should be_true
+        exists?('.').should be_true
       end
       
       it "should have a public directory" do
-        File.exists?(File.join(@mockup_file, 'public')).should be_true
+        exists?('public').should be_true
       end
       
       it "should have a javascript directory" do
-        File.exists?(File.join(@mockup_file, 'public/javascripts')).should be_true
+        exists?('public/javascripts').should be_true
       end
       
       it "should have a stylesheets directory" do
-        File.exists?(File.join(@mockup_file, 'public/stylesheets')).should be_true
+        exists?('public/stylesheets').should be_true
       end
       
       it "should have an images directory" do
-        File.exists?(File.join(@mockup_file, 'public/images')).should be_true
+        exists?('public/images').should be_true
       end
       
       it "should have a sass directory" do
-        File.exists?(File.join(@mockup_file, 'stylesheets')).should be_true
+        exists?('stylesheets').should be_true
       end
       
       it "should have a tmp directory" do
-        File.exists?(File.join(@mockup_file, 'tmp')).should be_true
+        exists?('tmp').should be_true
       end
       
       it "should have a views directory" do
-        File.exists?(File.join(@mockup_file, 'views')).should be_true
+        exists?('views').should be_true
       end
       
       it "should have config.ru file" do
-        File.exists?(File.join(@mockup_file, 'config.ru')).should be_true
+        exists?('config.ru').should be_true
       end
       
       it "should have a compass.config file" do
-        File.exists?(File.join(@mockup_file, 'compass.config')).should be_true
+        exists?('compass.config').should be_true
       end
       
       it "should have a dot gitignore file" do
-        File.exists?(File.join(@mockup_file, '.gitignore')).should be_true
-      end
-      
-      it "should have a README file" do
-        File.exists?(File.join(@mockup_file, 'README.markdown')).should be_true
+        exists?('.gitignore').should be_true
       end
       
       it "should have a restart file" do
-        File.exists?(File.join(@mockup_file, 'tmp/restart.txt')).should be_true
+        exists?('tmp/restart.txt').should be_true
+      end
+      
+      def exists?(filename)
+        File.exists?(File.join(@project_root, filename))
       end
     end
     
