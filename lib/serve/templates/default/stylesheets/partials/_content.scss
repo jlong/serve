@@ -5,7 +5,7 @@
 .links {
   a { @include basic-link($link-color, $link-visited-color, $link-hover-color); }
   a.more {
-    white-space:nowrap;
+    white-space: nowrap;
     &:after { content: " »"; }
   }
 }

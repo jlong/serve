@@ -35,6 +35,9 @@ $indented-paragraphs: false;
 // Layout
 $body-margin-x: 15%;
 
+// Border Radius
+$default-border-radius: 8px;
+
 @import "modules/all";
 
 @include global-reset;

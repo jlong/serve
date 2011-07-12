@@ -30,11 +30,13 @@ header[role=banner] {
 }
 
 section[role=main] {
-  padding: 20px $body-margin-x;
+  padding: 1px $body-margin-x;
 }
 
 body > footer {
   padding: 0 $body-margin-x 20px;
   font-size: 90%;
   color: $quiet-color;
+  a { @include basic-link($text-color); }
+  p { margin: 1em 0; }
 }
