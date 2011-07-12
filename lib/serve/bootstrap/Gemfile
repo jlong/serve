@@ -3,14 +3,14 @@ source :rubygems
 gem 'serve', '#{Serve.version}'
 
 # Use edge instead:
-# gem 'serve', :get => 'git://github.com/jlong/serve.git'
+# gem 'serve', :git => 'git://github.com/jlong/serve.git'
 
 # Use Compass and Sass
 gem 'compass'
 
 # Markdown and Textile
-# gem 'rdiscount'
-# gem 'RedCloth'
+# gem 'rdiscount' # Markdown
+# gem 'RedCloth'  # Textile
 
 # Other templating languages
 # gem 'erubis'

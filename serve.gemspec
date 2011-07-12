@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["John W. Long", "Adam I. Williams", "Robert Evans"]
-  s.date = %q{2011-07-11}
+  s.date = %q{2011-07-12}
   s.default_executable = %q{serve}
   s.description = %q{Serve is a small Rack-based web server that makes it easy to serve ERB or HAML from any directory. Serve is an ideal tool for building HTML prototypes of Rails applications. Serve can also handle SASS, Textile, and Markdown if the appropriate gems are installed.}
   s.email = %q{me@johnwlong.com}
@@ -29,6 +29,11 @@ Gem::Specification.new do |s|
     "bin/serve",
     "lib/serve.rb",
     "lib/serve/application.rb",
+    "lib/serve/bootstrap/Gemfile",
+    "lib/serve/bootstrap/README.md",
+    "lib/serve/bootstrap/compass.config",
+    "lib/serve/bootstrap/config.ru",
+    "lib/serve/bootstrap/gitignore",
     "lib/serve/export.rb",
     "lib/serve/handlers/dynamic_handler.rb",
     "lib/serve/handlers/email_handler.rb",
@@ -42,16 +47,20 @@ Gem::Specification.new do |s|
     "lib/serve/project.rb",
     "lib/serve/rack.rb",
     "lib/serve/router.rb",
-    "lib/serve/templates/Gemfile",
-    "lib/serve/templates/README.markdown",
-    "lib/serve/templates/_layout.html.erb",
-    "lib/serve/templates/application.scss",
-    "lib/serve/templates/compass.config",
-    "lib/serve/templates/config.ru",
-    "lib/serve/templates/gitignore",
-    "lib/serve/templates/hello.html.erb",
-    "lib/serve/templates/index.redirect",
-    "lib/serve/templates/view_helpers.rb",
+    "lib/serve/templates/default/public/images/serve-logo.png",
+    "lib/serve/templates/default/stylesheets/modules/_all.scss",
+    "lib/serve/templates/default/stylesheets/modules/_links.scss",
+    "lib/serve/templates/default/stylesheets/modules/_typography.scss",
+    "lib/serve/templates/default/stylesheets/modules/_utility.scss",
+    "lib/serve/templates/default/stylesheets/partials/_base.scss",
+    "lib/serve/templates/default/stylesheets/partials/_content.scss",
+    "lib/serve/templates/default/stylesheets/partials/_layout.scss",
+    "lib/serve/templates/default/stylesheets/screen.scss",
+    "lib/serve/templates/default/views/_layout.html.erb",
+    "lib/serve/templates/default/views/index.redirect",
+    "lib/serve/templates/default/views/layouts/default.html.erb",
+    "lib/serve/templates/default/views/view_helpers.rb",
+    "lib/serve/templates/default/views/welcome.html.erb",
     "lib/serve/version.rb",
     "lib/serve/view_helpers.rb",
     "spec/application_spec.rb",
@@ -60,7 +69,12 @@ Gem::Specification.new do |s|
     "spec/fixtures/stylesheets/application.sass",
     "spec/project_spec.rb",
     "spec/router_spec.rb",
-    "spec/spec_helper.rb"
+    "spec/spec_helper.rb",
+    "spec/stylesheets/application.scss",
+    "spec/views/_layout.html.erb",
+    "spec/views/hello.html.erb",
+    "spec/views/index.redirect",
+    "spec/views/view_helpers.rb"
   ]
   s.homepage = %q{http://get-serve.com}
   s.licenses = ["MIT"]
