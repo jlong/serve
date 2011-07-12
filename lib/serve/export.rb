@@ -29,13 +29,13 @@ module Serve
       def collect_files
         if rackified?
           @root = "#{@input}/views"
-          @views = files_from_path("#{@input}/views")
+          @views = glob_path("#{@input}/views")
           @redirects, @views = @views.partition { |fn| fn =~ %r{\.redirect$} }
           @views.reject! { |fn| fn =~ /view_helpers.rb$/} # remove view_helpers.rb
-          @public = files_from_path("#{@input}/public")
+          @public = glob_path("#{@input}/public")
         else
           @root = @input
-          files = files_from_path(@input)
+          files = glob_path(@input)
           extensions = Serve::DynamicHandler.extensions
           @views, files = files.partition { |fn| fn =~ %r{#{extensions.join('|')}$} }
           files.reject! { |fn| fn =~ /view_helpers.rb$/} # remove view_helpers.rb
@@ -61,15 +61,6 @@ module Serve
       
       def copy_remaining
         @public.each { |fn| copy_file(fn) }
-      end
-      
-      def files_from_path(path)
-        result = nil
-        FileUtils.cd(path) do
-          result = Dir["**/*"]
-          result.reject! { |fn| File.directory?(fn) }
-        end
-        result
       end
       
       def compile_view(filename)

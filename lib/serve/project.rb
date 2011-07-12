@@ -86,10 +86,7 @@ module Serve #:nodoc:
         source = lookup_template_directory(name)
         raise 'invalid template' unless source
         
-        files = []
-        FileUtils.cd(source) { files = Dir.glob('**/*', File::FNM_DOTMATCH) }
-        files.reject! { |f| %r{^\.{1,2}$|/\.{1,2}$|\.empty$}.match(f) }
-        files.sort!
+        files = glob_path(source)
         
         files.each do |filename|
           from_path = "#{source}/#{filename}"

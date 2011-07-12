@@ -18,7 +18,6 @@ namespace :website do
   task :generate => :clean do
     puts "Generating website..."
     system "bin/serve export website website/output"
-    cp "website/public/.htaccess", "website/output/"
   end
   
   desc "generate and deploy website"
