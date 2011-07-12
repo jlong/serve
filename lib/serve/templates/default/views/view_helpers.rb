@@ -1,13 +1,9 @@
 #
-# Place methods here that you want available to you in your views.
-# View helpers allow you keep templates clean.
+# Methods placed in this module can be used inside of any view.
+# View helpers allow you to encapsalate complex logic and keep your
+# views pristine.
 #
 module ViewHelpers
-  
-  # Example helper method
-  def hello(name)
-    "Hello \#{name}!"
-  end
   
   # Handy for hiding a block of unfinished code
   def hidden(&block)
