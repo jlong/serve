@@ -1,0 +1,37 @@
+//
+// Virtual Content Classes
+//
+
+.links {
+  a { @include basic-link($link-color, $link-visited-color, $link-hover-color); }
+  a.more {
+    white-space:nowrap;
+    &:after { content: " »"; }
+  }
+}
+
+.typography {
+  @include basic-typography;
+}
+
+.content {
+  @extend .links;
+  @extend .typography;
+  
+  .box {
+    background: #efeacf;
+    border: 1px solid darken(#efeacf, 10);
+    @include border-radius;
+    margin: 1.5em -1em;
+    padding: 1px 1em;
+  }
+}
+
+
+//
+// Applied to appropriate elements
+//
+
+section[role=main] > article {
+  @extend .content
+}

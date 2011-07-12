@@ -12,4 +12,4 @@ Or, relative to the site root, like this:
 Extra lines at the beginning of a redirect file are ignored. By convention,
 the last line of a redirect file is the URL to redirect to:
 
-/hello
+/welcome

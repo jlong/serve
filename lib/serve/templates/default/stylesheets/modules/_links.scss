@@ -1,0 +1,15 @@
+@mixin basic-link($color: $link-color, $visited: $color, $hover: $color, $decoration: "underline") {
+  &:link { 
+    color: $color;
+    @if $decoration == "underline" { text-decoration: underline; }
+    @if $decoration == "plain"     { text-decoration: none; }
+  }
+  &:visited {
+    color: $visited;
+  }
+  &:hover {
+    color: $hover;
+    @if $decoration == "underline" { text-decoration: none; }
+    @if $decoration == "plain"     { text-decoration: underline; }
+  }
+}

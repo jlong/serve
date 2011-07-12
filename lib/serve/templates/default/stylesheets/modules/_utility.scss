@@ -1,0 +1,15 @@
+@function strengthen($color, $multiplier: 1, $reversed: $reversed-text) {
+  @if $reversed {
+    @return lighten($color, 20% * $multiplier);
+  } @else {
+    @return darken($color, 20% * $multiplier);
+  }
+}
+
+@function soften($color, $multiplier: 1, $reversed: $reversed-text) {
+  @if $reversed {
+    @return darken($color, 20% * $multiplier);
+  } @else {
+    @return lighten($color, 20% * $multiplier);
+  }
+}

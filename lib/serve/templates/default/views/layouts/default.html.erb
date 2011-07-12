@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= @title %></title>
+    <link rel="stylesheet" href="/stylesheets/screen.css">
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <header role="banner">
+      <h1><a href="/"><img src="/images/serve-logo.png"></a></h1>
+      <div class="action-link"><a href="http://get-serve.com/documentation">Documentation</a></div>
+    </header>
+    <section role="main">
+      <article>
+        <header><h1><%= @title %></h1></header>
+        <%= yield %>
+      </article>
+    </section>
+    <footer>
+      <small>
+        <p>Serve is copyright © 2007-2011 John W. Long and Adam I. Williams. Portions have
+          been contributed by Robert Evans and others. Serve is distributed under a MIT-style
+          license and is open source software. Enjoy!</p>
+      </small>
+    </footer>
+  </body>
+</html>

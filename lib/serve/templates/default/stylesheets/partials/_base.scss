@@ -1,0 +1,44 @@
+@import "compass";
+
+// Reversed?
+$reversed-text: false;
+@import "modules/utility";
+
+// Base Font
+$base-font-family: "Helvetica Neue", Hevetica, Arial, sans-serif;
+$base-font-size: 110%;
+$base-line-height: 1.4;
+
+// Fixed Font
+$fixed-font-family: Monaco, "Andale Mono", "Lucida Console", monospace;
+$fixed-font-size: 85%;
+$fixed-line-height: $base-line-height;
+
+// Text Colors
+$text-color: #333333;
+$loud-color: strengthen($text-color);
+$quiet-color: soften($text-color, 1.5);
+$header-color: strengthen($text-color, 0.66);
+
+// Link Colors
+$link-color: #bb3a08;
+$link-visited-color: #a72;
+$link-hover-color: #f66933;
+
+// Theme Colors
+$background-color: white;
+$banner-color: #973b12;
+
+// Paragraphs
+$indented-paragraphs: false;
+
+// Layout
+$body-margin-x: 15%;
+
+@import "modules/all";
+
+@include global-reset;
+@include reset-html5;
+
+html, body { background: $background-color; }
+body { @include base-font; }
