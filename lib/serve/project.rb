@@ -93,9 +93,9 @@ module Serve #:nodoc:
             make_path filename
           else
             if File.file? to_path
-              log_action "exists", filename
+              log_action "exists", to_path
             else
-              log_action "create", filename
+              log_action "create", to_path
               FileUtils.cp from_path, to_path
             end
           end
