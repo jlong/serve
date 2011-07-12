@@ -69,12 +69,12 @@ body {
 }
 
 body, html {
-  background-image: url('../images/noise.png?1309992441'), -webkit-gradient(linear, 50% 0%, 50% 1000, color-stop(16.1%, #ffffff), color-stop(16.1%, #dfd6cf), color-stop(36%, #ffffff), color-stop(100%, #ffffff));
-  background-image: url('../images/noise.png?1309992441'), -webkit-linear-gradient(center top, #ffffff 161px, #dfd6cf 161px, #ffffff 360px, #ffffff 1000px);
-  background-image: url('../images/noise.png?1309992441'), -moz-linear-gradient(center top, #ffffff 161px, #dfd6cf 161px, #ffffff 360px, #ffffff 1000px);
-  background-image: url('../images/noise.png?1309992441'), -o-linear-gradient(center top, #ffffff 161px, #dfd6cf 161px, #ffffff 360px, #ffffff 1000px);
-  background-image: url('../images/noise.png?1309992441'), -ms-linear-gradient(center top, #ffffff 161px, #dfd6cf 161px, #ffffff 360px, #ffffff 1000px);
-  background-image: url('../images/noise.png?1309992441'), linear-gradient(center top, #ffffff 161px, #dfd6cf 161px, #ffffff 360px, #ffffff 1000px);
+  background-image: url('../images/noise.png?1310008081'), -webkit-gradient(linear, 50% 0%, 50% 1000, color-stop(16.1%, #ffffff), color-stop(16.1%, #dfd6cf), color-stop(36%, #ffffff), color-stop(100%, #ffffff));
+  background-image: url('../images/noise.png?1310008081'), -webkit-linear-gradient(center top, #ffffff 161px, #dfd6cf 161px, #ffffff 360px, #ffffff 1000px);
+  background-image: url('../images/noise.png?1310008081'), -moz-linear-gradient(center top, #ffffff 161px, #dfd6cf 161px, #ffffff 360px, #ffffff 1000px);
+  background-image: url('../images/noise.png?1310008081'), -o-linear-gradient(center top, #ffffff 161px, #dfd6cf 161px, #ffffff 360px, #ffffff 1000px);
+  background-image: url('../images/noise.png?1310008081'), -ms-linear-gradient(center top, #ffffff 161px, #dfd6cf 161px, #ffffff 360px, #ffffff 1000px);
+  background-image: url('../images/noise.png?1310008081'), linear-gradient(center top, #ffffff 161px, #dfd6cf 161px, #ffffff 360px, #ffffff 1000px);
 }
 
 header[role=banner] {
@@ -94,7 +94,7 @@ a[role=logo] {
   text-indent: -119988px;
   overflow: hidden;
   text-align: left;
-  background-image: url('../images/logo.png?1309992441');
+  background-image: url('../images/logo.png?1310008081');
   background-repeat: no-repeat;
   background-position: 50% 50%;
   width: 322px;
@@ -262,7 +262,7 @@ section[role=main] pre {
   font-family: Monaco, "Lucida Console", monospace;
   font-size: 90%;
   color: #cccccc;
-  background: #333333 url('../images/noise.png?1309992441');
+  background: #333333 url('../images/noise.png?1310008081');
   padding: 1em;
   margin: 1.5em 0;
   -moz-border-radius: 8px;
@@ -275,7 +275,7 @@ section[role=main] pre {
 section[role=main] code, section[role=main] dfn, section[role=main] kbd, section[role=main] samp, section[role=main] tt {
   font-family: Monaco, "Lucida Console", monospace;
   font-size: 90%;
-  background: #e5e5e5 url('../images/noise.png?1309992441');
+  background: #e5e5e5 url('../images/noise.png?1310008081');
   padding: 2px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -391,7 +391,7 @@ section[role=main] a.button.arrow:after, section[role=main] button.arrow:after {
 }
 section[role=main] ul.features {
   font-size: 110%;
-  list-style-image: url('../images/double-arrow-bullet.png?1309992441');
+  list-style-image: url('../images/double-arrow-bullet.png?1310008081');
 }
 section[role=main] ul.features li {
   margin: 0.5em 0;
@@ -400,7 +400,7 @@ section[role=main] div.get-started {
   margin-top: 2em;
 }
 section[role=main] .box {
-  background: #cce5ff url('../images/noise.png?1309992441');
+  background: #cce5ff url('../images/noise.png?1310008081');
   padding: 0.1em 1em;
   margin: 2em 0;
   -moz-border-radius: 10px;

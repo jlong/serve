@@ -78,13 +78,6 @@ Gem::Specification.new do |s|
   ]
   s.homepage = %q{http://get-serve.com}
   s.licenses = ["MIT"]
-  s.post_install_message = %q{Thanks for installing Serve! If you plan to use Serve with another
-template language (apart from ERB), don't forget to install it.
-
-If you want use Sass or Compass remember to install them, too!
-
-Serve doesn't install these dependencies by default, so that you can
-make your own decisions about what you want to use.}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.6.2}
   s.summary = %q{Serve is a small web server that makes it easy to serve ERB or HAML from any directory.}

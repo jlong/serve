@@ -1,6 +1,7 @@
 = Change Log
 
-== edge
+== 1.5.0 (July 12, 2011)
+* Integrated bundler into config.ru and added a default Gemfile. [jlong]
 * Added new --template option which allows you to specify a project template when creating a new project. [jlong]
 * Made Textile partials work. Closes #29. [rmetzler, jlong]
 * Fixed problem with export that caused filenames with underscore to be excluded. [bmaland]
