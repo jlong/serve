@@ -12,16 +12,6 @@ begin
     
     gem.license = 'MIT'
     
-    gem.post_install_message = [
-      "Thanks for installing Serve! If you plan to use Serve with another",
-      "template language (apart from ERB), don't forget to install it.",
-      "",
-      "If you want use Sass or Compass remember to install them, too!",
-      "",
-      "Serve doesn't install these dependencies by default, so that you can",
-      "make your own decisions about what you want to use."
-    ].join("\n")
-    
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new

@@ -29,6 +29,7 @@ module Serve #:nodoc:
       copy_project_template @template
       install_javascript_framework @framework
       copy_readme
+      post_create_message
     end
     
     def self.create(options={})
@@ -40,15 +41,19 @@ module Serve #:nodoc:
       setup_base
       move_file 'images', 'public/'
       move_file 'stylesheets', 'public/'
-      if File.directory? 'javascripts'
+      if File.directory? "#{@location}/javascripts"
         move_file 'javascripts', 'public/'
       else
         make_path 'public/javascripts'
       end
-      move_file 'src', 'stylesheets'
+      if File.directory? "#{@location}/src"
+        move_file 'src', 'stylesheets'
+      elsif File.directory? "#{@location}/sass"
+        move_file 'sass', 'styleheets'
+      end
       install_javascript_framework @framework
       copy_readme
-      note_old_compass_config
+      post_convert_message
     end
     
     def self.convert(options={})
@@ -121,18 +126,39 @@ module Serve #:nodoc:
         end
       end
       
+      # Copy readme file if not included in template
       def copy_readme
         create_file 'README.md', read_bootstrap_file('README.md'), :silent
       end
       
-      # Display note about old compass config if it exists
-      def note_old_compass_config
-        old_config = @location + '/config.rb'
-        if File.exists? old_config
-          puts ""
+      # Display post create message
+      def post_create_message(action_message = "You created a new Serve project.")
+        puts ""
+        puts "Woohoo! #{action_message}"
+        puts ""
+        puts "A couple of basic files are in place ready for you to edit."
+        puts "Remember to edit the project Gemfile and run:"
+        puts ""
+        puts "    bundle install"
+        puts ""
+        puts "To start serving your project, run:"
+        puts ""
+        puts "    cd \"#{@location}\""
+        puts "    serve"
+        puts ""
+        puts "Then go to http://localhost:4000 in your web browser."
+        puts ""
+        puts "Have fun!"
+        puts ""
+      end
+      
+      # Display post convert message
+      def post_convert_message
+        post_create_message "You converted your Compass project to a Serve project."
+        if File.exists? "#{@location}/config.rb"
           puts "============================================================================"
-          puts " Please Note: You still need to copy your unique settings from config.rb to "
-          puts " compass.config. Remove config.rb when you are finished."
+          puts "Please Note: You still need to copy your unique settings from config.rb to "
+          puts "compass.config. Remove config.rb when you are finished."
           puts "============================================================================"
           puts ""
         end
