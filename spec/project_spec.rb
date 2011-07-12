@@ -33,7 +33,7 @@ describe Serve::Project do
     end
     
     it "should have a project directory" do
-      @project.location.should == 'test_project'
+      @project.location.should == 'serve_project_for_tests'
     end
     
     it "should have a framework" do

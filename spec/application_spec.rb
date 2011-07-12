@@ -12,7 +12,7 @@ describe Serve::Application do
       
       :port         => 4000,
       :address      => '0.0.0.0',
-      :root         => Dir.pwd,
+      :root         => ".",
       
       :convert      => nil,
       :create       => nil,
@@ -59,7 +59,7 @@ describe Serve::Application do
     end
     
     it "working directory" do
-      parse('')[:root].should == Dir.pwd
+      parse('')[:root].should == '.'
       dir = File.dirname(__FILE__)
       parse(dir)[:root].should == File.expand_path(dir)
     end
@@ -74,7 +74,7 @@ describe Serve::Application do
       
       it "with no arguments" do
         params = parse('create')[:create]
-        params[:directory].should == Dir.pwd
+        params[:directory].should == '.'
         params[:framework].should be_nil
         params[:template].should be_nil
       end
@@ -101,7 +101,7 @@ describe Serve::Application do
       
       it "with no arguments" do
         params = parse('convert')[:convert]
-        params[:directory].should == Dir.pwd
+        params[:directory].should == '.'
         params[:framework].should be_nil
       end
       
@@ -121,13 +121,13 @@ describe Serve::Application do
       
       it "export with just an output directory" do
         params = parse('export output')[:export]
-        params[:input].should == Dir.pwd
+        params[:input].should == '.'
         params[:output].should == 'output'
       end
       
       it "export with no arguments" do
         params = parse('export')[:export]
-        params[:input].should == Dir.pwd
+        params[:input].should == '.'
         params[:output].should == 'html'
       end
     end

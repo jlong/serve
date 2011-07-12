@@ -86,7 +86,7 @@ module Serve #:nodoc:
         source = lookup_template_directory(name)
         raise 'invalid template' unless source
         
-        files = glob_path(source)
+        files = glob_path(source, true)
         
         files.each do |filename|
           from_path = "#{source}/#{filename}"
