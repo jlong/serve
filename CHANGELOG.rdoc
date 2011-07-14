@@ -1,5 +1,9 @@
 = Change Log
 
+== 1.5.1 (July 13, 2011)
+* Include .empty file in Gem for "blank" template. Closes #42. [jlong]
+* Include .htaccess file in Gem for "default" template. [jlong]
+
 == 1.5.0 (July 12, 2011)
 * Integrated bundler into config.ru and added a default Gemfile. [jlong]
 * Added new --template option which allows you to specify a project template when creating a new project. [jlong]

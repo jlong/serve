@@ -9,7 +9,9 @@ begin
     gem.authors = ["John W. Long", "Adam I. Williams", "Robert Evans"]
     
     gem.files = FileList["[A-Z]*", "{bin,lib,rails,spec}/**/*"].exclude("tmp")
-    
+    gem.files << 'lib/serve/templates/blank/.empty'
+    gem.files << 'lib/serve/templates/default/public/.htaccess'
+
     gem.license = 'MIT'
     
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings

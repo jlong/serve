@@ -206,11 +206,6 @@ module Serve #:nodoc:
         end
       end
       
-      # Convert dashes and spaces to underscores
-      def underscore(string)
-        string.gsub(/-|\s+/, '_')
-      end
-      
       def default_templates_directory
         "#{File.dirname(__FILE__)}/templates"
       end
