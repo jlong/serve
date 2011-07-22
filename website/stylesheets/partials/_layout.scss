@@ -30,7 +30,8 @@ nav[role=navigation] {
   background: #973b12;
   @include background-image(
     linear-gradient(rgba(black, 0) 0%, rgba(black, 0) 80%, rgba(black, 0.15) 100%),
-    radial-gradient(25% 50px, $banner-background-color, darken($banner-background-color, 11) 400px)
+    linear-gradient(left, rgba(black, 0.35) 0%, rgba(black, 0) 15%, rgba(black, 0.25) 60%, rgba(black, 0.35) 100%),
+    linear-gradient(darken($banner-background-color, 6), $banner-background-color, darken($banner-background-color, 11))
   );
   text-align: center;
   

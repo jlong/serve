@@ -103,12 +103,12 @@ a[role=logo] {
 
 nav[role=navigation] {
   background: #973b12;
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(80%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.15))), -webkit-gradient(radial, 25% 50px, 0, 25% 50px, 400, color-stop(0%, #973b12), color-stop(100%, #65270c));
-  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.15) 100%), -webkit-radial-gradient(25% 50px, #973b12, #65270c 400px);
-  background-image: -moz-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.15) 100%), -moz-radial-gradient(25% 50px, #973b12, #65270c 400px);
-  background-image: -o-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.15) 100%), -o-radial-gradient(25% 50px, #973b12, #65270c 400px);
-  background-image: -ms-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.15) 100%), -ms-radial-gradient(25% 50px, #973b12, #65270c 400px);
-  background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.15) 100%), radial-gradient(25% 50px, #973b12, #65270c 400px);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(80%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.15))), -webkit-gradient(linear, 0% 50%, 100% 50%, color-stop(0%, rgba(0, 0, 0, 0.35)), color-stop(15%, rgba(0, 0, 0, 0)), color-stop(60%, rgba(0, 0, 0, 0.25)), color-stop(100%, rgba(0, 0, 0, 0.35))), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #7c300f), color-stop(50%, #973b12), color-stop(100%, #65270c));
+  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.15) 100%), -webkit-linear-gradient(left, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.25) 60%, rgba(0, 0, 0, 0.35) 100%), -webkit-linear-gradient(#7c300f, #973b12, #65270c);
+  background-image: -moz-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.15) 100%), -moz-linear-gradient(left, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.25) 60%, rgba(0, 0, 0, 0.35) 100%), -moz-linear-gradient(#7c300f, #973b12, #65270c);
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.15) 100%), -o-linear-gradient(left, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.25) 60%, rgba(0, 0, 0, 0.35) 100%), -o-linear-gradient(#7c300f, #973b12, #65270c);
+  background-image: -ms-linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.15) 100%), -ms-linear-gradient(left, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.25) 60%, rgba(0, 0, 0, 0.35) 100%), -ms-linear-gradient(#7c300f, #973b12, #65270c);
+  background-image: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 80%, rgba(0, 0, 0, 0.15) 100%), linear-gradient(left, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 15%, rgba(0, 0, 0, 0.25) 60%, rgba(0, 0, 0, 0.35) 100%), linear-gradient(#7c300f, #973b12, #65270c);
   text-align: center;
 }
 nav[role=navigation] ul {
