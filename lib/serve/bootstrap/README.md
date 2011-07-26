@@ -66,14 +66,9 @@ information about using Serve and Passenger see:
 Exporting
 ---------
 
-To export this project to pure HTML and CSS you will need the prerelease
-version of Serve. To get started with the prerelease version:
-
-    gem install --pre serve
-
 To export your project, use the new "export" command:
 
-    serve export <project>:<output>
+    serve export project output
 
 Where "project" is the path to the project and "output" is the path to the
 directory where you would like your HTML and CSS generated.

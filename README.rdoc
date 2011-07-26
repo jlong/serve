@@ -108,6 +108,17 @@ Serve also provides a number of stock helpers methods that are very similar to t
 Learn more: http://get-serve.com/documentation/view-helpers
 
 
+== Exporting
+
+To export your project, use the new "export" command:
+
+  serve export project output
+
+Where "project" is the path to the project and "output" is the path to the
+directory where you would like your HTML and CSS generated.
+
+Learn more: http://get-serve.com/documentation/export
+
 == "Design First" Prototyping
 
 If you use a "Design First" methodology, you may find Serve especially useful
