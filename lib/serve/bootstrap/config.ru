@@ -36,7 +36,7 @@ use Rack::ShowExceptions  # Nice looking errors
 
 # Rack Application
 if ENV['SERVER_SOFTWARE'] =~ /passenger/i
-  # Passendger only needs the adapter
+  # Passenger only needs the adapter
   run Serve::RackAdapter.new(root + '/views')
 else
   # Use Rack::Cascade and Rack::Directory on other platforms for static assets
