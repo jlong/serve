@@ -35,8 +35,10 @@ module Serve #:nodoc:
   end
   
   module ContentHelpers
-    def content_for(symbol, &block)
-      set_content_for(symbol, capture(&block))
+    def content_for(symbol, content = nil, &block)
+      content = capture(&block) if block_given?
+      set_content_for(symbol, content) if content
+      get_content_for(symbol) unless content
     end
     
     def content_for?(symbol)
