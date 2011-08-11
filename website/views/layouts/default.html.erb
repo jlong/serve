@@ -7,6 +7,7 @@
     <% if @author %><meta name="author" content="<%= @author || "John W. Long" %>"><% end %>
     <% if @description %><meta name="description" content="<%= @description %>"><% end %>
     <% if @keywords %><meta name="keywords" content="<%= @keywords %>"><% end %>
+    <% if @selected == "home" %><%= render "/video_head" %><% end %>
     <link rel="canonical" href="<%= absolute_url %>">
     <link rel="shortcut icon" type="image/x-icon" href="<%= domain %>/favicon.ico">
     <!--[if IE]>
