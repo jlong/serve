@@ -175,12 +175,26 @@ section.three-column-grid.features {
   font-size: 85%;
 }
 
+body[role=homepage] h1 {
+  margin-top: 0.25em !important;
+  padding: 0;
+}
+
 div.featured-video {
   margin-bottom: 4em;
 }
 div.featured-video object, div.featured-video img {
   float: right;
   margin: -2em 0 2em 10px;
+}
+div.featured-video img {
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -o-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -khtml-border-radius: 8px;
+  border-radius: 8px;
 }
 
 body > footer {

@@ -112,9 +112,15 @@ section.three-column-grid {
   }
 }
 
+body[role=homepage] h1 {
+  margin-top: 0.25em !important;
+  padding: 0;
+}
+
 div.featured-video {
   margin-bottom: 4em;
   object,img { float: right; margin: -2em 0 2em 10px; }
+  img { border: 8px solid rgba(black, 0.1); @include border-radius(8px); }
 }
 
 body > footer {
