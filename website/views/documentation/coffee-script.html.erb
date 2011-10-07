@@ -1,0 +1,24 @@
+<% @title = "Using Coffee Script with Serve" %>
+
+<ol>
+  <li>
+    <p>Add the <a href="https://github.com/mattly/rack-coffee">"rack-coffee"</a>
+      gem to your Gemfile</p>
+  </li>
+  <li>
+    <p>Add these lines to your config.ru file:</p>
+    <pre>gem 'rack-coffee' 
+use Rack::Coffee, { 
+  :root => 'public', 
+  :urls => '/javascripts/' 
+}</pre>
+  </li>
+  <li>
+    <p>Run <kbd>bundle</kbd> in your project folder</p>
+  </li>
+</ol>
+
+<p>Now you can put your .coffee files in public/javascripts and link to 
+them as usual (replacing .coffee with .js). For example, the URL for
+<kbd>public/javascripts/test.coffee</kbd> is <kbd>/javascripts/test.js</kbd>.</p>
+
