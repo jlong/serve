@@ -132,6 +132,8 @@ module Serve
         "                    (Only for create and convert.)",
         "  -t, --template    The name of the template project to base the project on.",
         "                    Builtins: blank, default. (Only for create.)",
+        "  -w, --view        The type template engine to base the project on  ",
+        "                    Builtins:  (erb & haml).  erb is default",
         "  -h, --help        Show this message and quit.",
         "  -v, --version     Show the program version number and quit.",
         "  ",
@@ -198,16 +200,22 @@ module Serve
       def extract_template(args)
         extract_arg_and_value args, %w(-t --template)
       end
+
+      def extract_view(args)
+        extract_arg_and_value args, %w(-z --view)
+      end
       
       def extract_create(args)
         if args.delete('create')
           framework = extract_javascript_framework(args)
+          view = extract_view(args)
           template  = extract_template(args)
           directory = args.pop || '.'
           {
             :directory => directory,
             :framework => framework,
-            :template  => template
+            :template  => template,
+            :view      => view
           }
         end
       end
