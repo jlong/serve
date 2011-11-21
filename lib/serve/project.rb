@@ -119,6 +119,7 @@ module Serve #:nodoc:
         system(command)
         log_action "Removing", "old template files"
         FileUtils.rm files
+        add_view_to_gemfile view
       end
       
       # Install a JavaScript framework if one was specified
@@ -231,6 +232,12 @@ module Serve #:nodoc:
         path = "#{default_templates_directory}/#{name}"
         path = normalize_path(name) unless File.directory?(path)
         path if File.directory?(path)
+      end
+
+      def add_view_to_gemfile(view)
+        gem = "gem '#{view}'"
+        gemfile = File.read("#{@location}/Gemfile").gsub(/# #{gem}/,gem)
+        File.open("#{@location}/Gemfile", 'w'){|file| file.write(gemfile) }
       end
   end
 end
