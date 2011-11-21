@@ -110,9 +110,34 @@ describe Serve::Project do
         exists?('tmp/restart.txt').should be_true
       end
       
-      def exists?(filename)
-        File.exists?(File.join(@project_root, filename))
+    end
+
+    describe "creating the skel template" do
+      before(:all) do
+        FileUtils.rm_rf @project_root
+        @options = @options.merge(:template => 'skel', :view => 'erb')
+        @project        = Serve::Project.new(@options)
+        @project.stdout = SilentOut.new
+        @project.stderr = SilentOut.new
+        @project_root  = normalize_path(@options[:directory])
+        @project.create
       end
+
+      it "should have a views directory" do
+        exists?('views').should be_true
+      end
+
+      it 'should create a layout file' do
+        exists?('views/_layout.html.erb').should be_true
+      end
+
+      it 'should not create a welcome file' do
+        exists?('views/welcome.html.erb').should be_false
+      end
+    end
+
+    def exists?(filename)
+      File.exists?(File.join(@project_root, filename))
     end
     
   end
