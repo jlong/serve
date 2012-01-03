@@ -10,7 +10,6 @@ module Serve #:nodoc:
     def parse(string)
       require 'sass'
       engine = Sass::Engine.new(string,
-        :load_paths => [@root_path],
         :style => :expanded,
         :filename => @script_filename,
         :syntax => syntax(@script_filename)
