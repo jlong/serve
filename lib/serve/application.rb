@@ -33,7 +33,14 @@ module Serve
         puts help
       else
         Dir.chdir(options[:root])
-        rack_app? ? run_rack_app : run_server
+        case
+        when rails_app?
+          run_rails_app
+        when rack_app?
+          run_rack_app
+        else
+          run_server
+        end
       end
     rescue InvalidArgumentsError
       puts "invalid arguments"
@@ -226,6 +233,18 @@ module Serve
             :output => output
           }
         end
+      end
+
+      def rails_script_server
+        @rails_server_script ||= options[:root] + '/script/server'
+      end
+
+      def rails_app?
+        File.file?(rails_script_server) and File.executable?(rails_script_server)
+      end
+
+      def run_rails_app
+        system "#{rails_script_server} -p #{options[:port]} -b #{options[:address]} -e #{options[:environment]}"
       end
       
       def rack_config
