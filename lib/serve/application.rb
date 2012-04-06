@@ -160,7 +160,7 @@ module Serve
       end
       
       def extract_port(args)
-        (args.delete(args.find {|a| /^\d\d\d*$/.match(a) }) || ((rails_app? or rack_app?) ? 3000 : 4000)).to_i
+        (args.delete(args.find {|a| /^\d\d\d*$/.match(a) }) || ENV['PORT'] || 4000).to_i
       end
       
       def extract_address(args)
@@ -234,15 +234,15 @@ module Serve
           }
         end
       end
-      
+
       def rails_script_server
         @rails_server_script ||= options[:root] + '/script/server'
       end
-      
+
       def rails_app?
         File.file?(rails_script_server) and File.executable?(rails_script_server)
       end
-      
+
       def run_rails_app
         system "#{rails_script_server} -p #{options[:port]} -b #{options[:address]} -e #{options[:environment]}"
       end
