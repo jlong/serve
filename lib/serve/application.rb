@@ -160,7 +160,8 @@ module Serve
       end
       
       def extract_port(args)
-        (args.delete(args.find {|a| /^\d\d\d*$/.match(a) }) || ((rails_app? or rack_app?) ? 3000 : 4000)).to_i
+        default_port = rails_app? ? 3000 : 4000
+        (args.delete(args.find {|a| /^\d\d\d*$/.match(a) }) || ENV['PORT'] || default_port).to_i
       end
       
       def extract_address(args)
