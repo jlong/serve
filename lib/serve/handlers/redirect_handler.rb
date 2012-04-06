@@ -2,13 +2,17 @@ module Serve #:nodoc:
   class RedirectHandler < FileTypeHandler  #:nodoc:
     extension 'redirect'
     
-    def process(request, response)
-      lines = super.strip.split("\n")
+    def process(input, context)
+      lines = input.strip.split("\n")
       url = lines.last.strip
-      unless url =~ %r{^\w[\w\d+.-]*:.*}
-        url = request.protocol + request.host_with_port + url
+      unless url =~ %r{^\w[\w+.-]*:.*}
+        url = context.request.protocol + context.request.host_with_port + url
       end
-      response.redirect(url, '302')
+      context.response.redirect(url, '302')
+    end
+
+    def layout?
+      false
     end
   end
 end

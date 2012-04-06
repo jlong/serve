@@ -17,10 +17,10 @@ group :development do
   gem 'compass',        '~> 0.11.1'
   gem 'slim',           '~> 0.9.4'
   gem 'rdiscount',      '~> 1.6.8'
-  gem 'RedCloth',       '~> 4.2.7'
+  gem 'RedCloth',       '~> 4.2.9'
   gem 'erubis',         '~> 2.7.0'
   gem 'less',           '~> 1.2.21'
-  gem 'radius',         '~> 0.6.1'
+  gem 'radius',         '~> 0.7.3'
   gem 'coffee-script',  '~> 2.2.0'
 end
 

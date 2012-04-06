@@ -9,6 +9,7 @@ end
 
 require 'serve/version'
 require 'serve/router'
+require 'serve/pipeline'
 require 'serve/handlers/file_type_handler'
 require 'serve/handlers/dynamic_handler'
 require 'serve/handlers/sass_handler'
