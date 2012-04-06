@@ -38,6 +38,11 @@ describe Serve::Application do
     it "with the port, address, and protocol" do
       parse('http://1.1.1.1:2000').should == @options.update(:address => "1.1.1.1", :port=>2000)
     end
+
+    it "with port set in ENV" do
+      ENV["PORT"] = "4321"
+      parse[:port].should == 4321
+    end
     
     it "help" do
       parse('')[:help].should be_false
