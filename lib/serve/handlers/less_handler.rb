@@ -7,7 +7,7 @@ module Serve #:nodoc:
   class LessHandler < FileTypeHandler #:nodoc:
     extension 'less'
     
-    def parse(string)
+    def parse(string, context)
       require 'less'
       Less.parse(string)
     end
