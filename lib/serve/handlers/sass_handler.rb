@@ -7,20 +7,18 @@ module Serve #:nodoc:
   class SassHandler < FileTypeHandler #:nodoc:
     extension 'sass', 'scss'
     
-    def parse(string)
+    def parse(string, context)
       require 'sass'
       engine = Sass::Engine.new(string,
         :load_paths => [@root_path],
         :style => :expanded,
-        :filename => @script_filename,
-        :syntax => syntax(@script_filename)
+        :syntax => syntax
       )
       engine.render
     end
     
-    def syntax(filename)
-      ext = File.extname(@script_filename)
-      if ext == '.scss'
+    def syntax
+      if extension == 'scss'
         :scss
       else
         :sass
