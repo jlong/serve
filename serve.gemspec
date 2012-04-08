@@ -4,15 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{serve}
+  s.name = "serve"
   s.version = "1.5.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["John W. Long", "Adam I. Williams", "Robert Evans"]
-  s.date = %q{2011-08-10}
-  s.default_executable = %q{serve}
-  s.description = %q{Serve is a small Rack-based web server that makes it easy to serve ERB or HAML from any directory. Serve is an ideal tool for building HTML prototypes of Rails applications. Serve can also handle SASS, Textile, and Markdown if the appropriate gems are installed.}
-  s.email = %q{me@johnwlong.com}
+  s.date = "2011-11-21"
+  s.description = "Serve is a small Rack-based web server that makes it easy to serve ERB or HAML from any directory. Serve is an ideal tool for building HTML prototypes of Rails applications. Serve can also handle SASS, Textile, and Markdown if the appropriate gems are installed."
+  s.email = "me@johnwlong.com"
   s.executables = ["serve"]
   s.extra_rdoc_files = [
     "LICENSE",
@@ -63,6 +62,11 @@ Gem::Specification.new do |s|
     "lib/serve/templates/default/views/layouts/default.html.erb",
     "lib/serve/templates/default/views/view_helpers.rb",
     "lib/serve/templates/default/views/welcome.html.erb",
+    "lib/serve/templates/skel/stylesheets/partials/_base.scss",
+    "lib/serve/templates/skel/stylesheets/screen.scss",
+    "lib/serve/templates/skel/views/_layout.html.erb",
+    "lib/serve/templates/skel/views/index.html.erb",
+    "lib/serve/templates/skel/views/view_helpers.rb",
     "lib/serve/version.rb",
     "lib/serve/view_helpers.rb",
     "spec/application_spec.rb",
@@ -78,11 +82,11 @@ Gem::Specification.new do |s|
     "spec/views/index.redirect",
     "spec/views/view_helpers.rb"
   ]
-  s.homepage = %q{http://get-serve.com}
+  s.homepage = "http://get-serve.com"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{Serve is a small web server that makes it easy to serve ERB or HAML from any directory.}
+  s.rubygems_version = "1.8.11"
+  s.summary = "Serve is a small web server that makes it easy to serve ERB or HAML from any directory."
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
@@ -108,6 +112,8 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<less>, ["~> 1.2.21"])
       s.add_development_dependency(%q<radius>, ["~> 0.6.1"])
       s.add_development_dependency(%q<coffee-script>, ["~> 2.2.0"])
+      s.add_development_dependency(%q<hpricot>, ["~> 0.8.4"])
+      s.add_development_dependency(%q<ruby_parser>, ["~> 2.3.1"])
     else
       s.add_dependency(%q<rack>, ["~> 1.2"])
       s.add_dependency(%q<rack-test>, ["~> 0.5"])
@@ -129,6 +135,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<less>, ["~> 1.2.21"])
       s.add_dependency(%q<radius>, ["~> 0.6.1"])
       s.add_dependency(%q<coffee-script>, ["~> 2.2.0"])
+      s.add_dependency(%q<hpricot>, ["~> 0.8.4"])
+      s.add_dependency(%q<ruby_parser>, ["~> 2.3.1"])
     end
   else
     s.add_dependency(%q<rack>, ["~> 1.2"])
@@ -151,6 +159,8 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<less>, ["~> 1.2.21"])
     s.add_dependency(%q<radius>, ["~> 0.6.1"])
     s.add_dependency(%q<coffee-script>, ["~> 2.2.0"])
+    s.add_dependency(%q<hpricot>, ["~> 0.8.4"])
+    s.add_dependency(%q<ruby_parser>, ["~> 2.3.1"])
   end
 end
 

@@ -9,12 +9,13 @@ module Serve #:nodoc:
   # Serve::Project.new(options).convert
   #
   class Project #:nodoc:
-    attr_reader :location, :framework, :template
+    attr_reader :location, :framework, :template, :view
     
     def initialize(options)
       @location   = normalize_path(options[:directory])
       @framework  = options[:framework]
       @template   = options[:template] || 'default'
+      @view       = options[:view] || 'erb'
     end
     
     # Create a new Serve project
@@ -27,6 +28,7 @@ module Serve #:nodoc:
         stylesheets
       ).each { |path| make_path path } 
       copy_project_template @template
+      convert_view @view
       install_javascript_framework @framework
       copy_readme
       post_create_message
@@ -102,6 +104,22 @@ module Serve #:nodoc:
             end
           end
         end
+      end
+
+      # Convert to the correct view if one specified
+      def convert_view(view)
+        return if view == 'erb'
+        command = ""
+        files = Dir.glob("#{@location}/views/**/*.erb")
+        raise 'no files to convert in views directory' unless files
+        files.each do |file|
+          log_action "Converting", file
+          command << "html2haml -e #{file} #{file.chomp(File.extname(file))}.#{view}; "
+        end
+        system(command)
+        log_action "Removing", "old template files"
+        FileUtils.rm files
+        add_view_to_gemfile view
       end
       
       # Install a JavaScript framework if one was specified
@@ -214,6 +232,12 @@ module Serve #:nodoc:
         path = "#{default_templates_directory}/#{name}"
         path = normalize_path(name) unless File.directory?(path)
         path if File.directory?(path)
+      end
+
+      def add_view_to_gemfile(view)
+        gem = "gem '#{view}'"
+        gemfile = File.read("#{@location}/Gemfile").gsub(/# #{gem}/,gem)
+        File.open("#{@location}/Gemfile", 'w'){|file| file.write(gemfile) }
       end
   end
 end

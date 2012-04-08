@@ -22,6 +22,8 @@ group :development do
   gem 'less',           '~> 1.2.21'
   gem 'radius',         '~> 0.7.3'
   gem 'coffee-script',  '~> 2.2.0'
+  gem 'hpricot',        '~> 0.8.4'
+  gem 'ruby_parser',    '~> 2.3.1'
 end
 
 group :website do
