@@ -55,5 +55,13 @@ describe Serve::Pipeline do
       pipeline = Serve::Pipeline.new(@root, "file.erb")
       pipeline.layout.should be_passthrough
     end
+
+    it "should search up the directory tree for layouts" do
+      root = File.join(@root, "directory")
+      pipeline = Serve::Pipeline.new(root, "subdirectory/test.erb")
+      pipeline.layout.should_not be_passthrough
+      pipeline.layout.path.should == root
+      pipeline.layout.file.should == "_layout.erb"
+    end
   end
 end

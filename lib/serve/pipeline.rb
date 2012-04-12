@@ -23,7 +23,7 @@ module Serve
       root = @root_path
       path = template_path[root.size..-1]
       layout = nil
-      until(layout || ["/", ""].include?(path))
+      until(layout || path == "")
         possible_layouts = FileTypeHandler.extensions.map do |ext|
           l = "_layout.#{ext}"
           possible_layout = File.join(root, path, l)
@@ -48,8 +48,9 @@ module Serve
     end
 
     class Template
-      attr_reader :path, :handlers
+      attr_reader :file, :path, :handlers
       def initialize(file)
+        @file = File.basename(file)
         @path = File.dirname(file)
         @raw = File.read(file)
         @handlers = FileTypeHandler.handlers_for(file).collect{|h, extension| h.new(@root_path, @path, extension)}
