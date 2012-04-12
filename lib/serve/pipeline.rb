@@ -11,7 +11,7 @@ module Serve
       Pipeline.new(root, path, extensions_for(path))
     end
     
-    attr_reader :template
+    attr_reader :template, :layout
     def initialize(root_path, path)
       @root_path = root_path
       @template = Template.new(File.join(@root_path, path))
@@ -23,7 +23,7 @@ module Serve
       root = @root_path
       path = template_path[root.size..-1]
       layout = nil
-      until layout or path == "/"
+      until(layout || ["/", ""].include?(path))
         possible_layouts = FileTypeHandler.extensions.map do |ext|
           l = "_layout.#{ext}"
           possible_layout = File.join(root, path, l)
@@ -69,6 +69,10 @@ module Serve
         @handlers.first.layout?
       end
 
+      def passthrough?
+        false
+      end
+
       class Passthrough
         def initialize(template)
           @template = template
@@ -83,6 +87,10 @@ module Serve
 
         def content_type
           @template.content_type
+        end
+
+        def passthrough?
+          true
         end
       end
     end

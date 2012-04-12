@@ -49,4 +49,11 @@ describe Serve::Pipeline do
       pipeline.template.handlers.collect{|h| h.extension}.should == %w(markdown erb)
     end
   end
+
+  describe "layout search" do
+    it "should return no layout for a file at the root" do
+      pipeline = Serve::Pipeline.new(@root, "file.erb")
+      pipeline.layout.should be_passthrough
+    end
+  end
 end
