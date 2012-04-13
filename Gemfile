@@ -1,6 +1,7 @@
 source :rubygems
 
 gem 'rack',              '~> 1.2'
+gem 'rack-contrib'
 gem 'rack-test',         '~> 0.5'
 gem 'tilt',              '~> 1.3'
 gem 'activesupport',     '~> 3.0'

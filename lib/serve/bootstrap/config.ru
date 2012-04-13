@@ -12,6 +12,7 @@ end
 
 require 'serve'
 require 'serve/rack'
+require 'rack/contrib/try_static'
 
 # The project root directory
 root = ::File.dirname(__FILE__)
@@ -24,7 +25,8 @@ if ENV['RACK_ENV'] != 'production'
   require 'sass/plugin/rack'
   require 'compass'
   
-  Compass.add_project_configuration(root + '/compass.config')
+  config_file = root + '/compass.config'
+  Compass.add_project_configuration(config_file) if File.exist?(config_file)
   Compass.configure_sass_plugin!
   
   use Sass::Plugin::Rack  # Sass Middleware
@@ -39,9 +41,11 @@ if ENV['SERVER_SOFTWARE'] =~ /passenger/i
   # Passenger only needs the adapter
   run Serve::RackAdapter.new(root + '/views')
 else
+  # Use Rack::TryStatic to attempt to load files from public first
+  use Rack::TryStatic, :root => (root + '/public'), :urls => %w(/), :try => %w(.html index.html /index.html)
   # Use Rack::Cascade and Rack::Directory on other platforms for static assets
   run Rack::Cascade.new([
     Serve::RackAdapter.new(root + '/views'),
-    Rack::Directory.new(root + '/public')
+    Rack::Directory.new(root + '/public'),
   ])
 end

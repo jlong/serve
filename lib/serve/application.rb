@@ -267,7 +267,7 @@ module Serve
           use Rack::ShowExceptions
           run Rack::Cascade.new([
             Serve::RackAdapter.new(root),
-            Rack::Directory.new(root)
+            Rack::Directory.new(root),
           ])
         end
         begin
