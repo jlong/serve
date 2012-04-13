@@ -21,16 +21,16 @@ module Serve
     def find_layout_for(template_path)
       return Template::Passthrough.new(@template) unless @template.layout?
       root = @root_path
-      path = template_path[root.size..-1]
       layout = nil
-      until(layout || path == "")
+      search = File.split(template_path[root.size..-1])
+      until(layout || search.empty?)
         possible_layouts = FileTypeHandler.extensions.map do |ext|
           l = "_layout.#{ext}"
-          possible_layout = File.join(root, path, l)
+          possible_layout = File.join(File.join(root, *search), l)
           File.file?(possible_layout) ? possible_layout : false
         end
         layout = possible_layouts.detect { |o| o }
-        path = File.dirname(path)
+        search.pop
       end
       if layout
         Template.new(layout)

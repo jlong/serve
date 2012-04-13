@@ -143,7 +143,7 @@ module Serve #:nodoc:
         path = @root_path
       end
       filename = template_filename(path, template, :partial => options[:partial])
-      if File.file?(filename)
+      if filename && File.file?(filename)
         parser.parse(File.read(filename), File.extname(filename).split(".").last, options[:locals])
       else
         raise "File does not exist #{filename.inspect}"
@@ -156,7 +156,8 @@ module Serve #:nodoc:
         template_path = File.dirname(template)
         template_file = File.basename(template)
         template_file = "_" + template_file if options[:partial]
-        File.join(path, Serve::Router.resolve(path, File.join(template_path, template_file)))
+        route = Serve::Router.resolve(path, File.join(template_path, template_file))
+        (route && File.join(path, route))
       end
       
       def extname(filename)
