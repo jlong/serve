@@ -41,7 +41,7 @@ module Serve #:nodoc:
         
         @script_extension = ext
         
-        @engine = Tilt[ext].new(nil, nil, :outvar => '@_out_buf'){input}
+        @engine = Tilt[ext].new(nil, nil, {:outvar => '@_out_buf'}.merge(FileTypeHandler.options_for(ext))){input}
         
         raise "#{ext} extension not supported" if @engine.nil?
         

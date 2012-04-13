@@ -19,6 +19,18 @@ module Serve #:nodoc:
       extensions.collect{|e| [handlers[e], e] if handlers[e]}.compact
     end
 
+    def self.configure(extension, options)
+      extension_options[extension.to_sym].merge!(options)
+    end
+
+    def self.extension_options
+      @extension_options ||= Hash.new{|h,k| h[k] = {}}
+    end
+
+    def self.options_for(extension)
+      extension_options[extension.to_sym]
+    end
+
     attr_reader :extension
     def initialize(root_path, template_path, extension)
       @root_path = root_path
