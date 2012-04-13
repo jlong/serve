@@ -61,8 +61,6 @@ module Serve
   # A specialized hash for the environment variables on a request.
   # Borrowed from ActionDispatch in Rails.
   class Headers < Hash
-    extend ActiveSupport::Memoizable
-    
     def initialize(*args)
       if args.size == 1 && args[0].is_a?(Hash)
         super()
@@ -83,9 +81,8 @@ module Serve
     private
       # Converts a HTTP header name to an environment variable name.
       def env_name(header_name)
-        "HTTP_#{header_name.upcase.gsub(/-/, '_')}"
+        @env_name ||= "HTTP_#{header_name.upcase.gsub(/-/, '_')}"
       end
-      memoize :env_name
   end
   
   class RackAdapter
