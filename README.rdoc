@@ -61,7 +61,7 @@ following on the command line:
 
   serve create project   # create a new project in the project directory
 
-Lear more: http://get-serve.com/documentation/create
+Learn more: http://get-serve.com/documentation/create
 
 
 == Layouts & Partials
