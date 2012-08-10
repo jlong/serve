@@ -137,14 +137,14 @@ module Serve #:nodoc:
     end
     
     def render_template(template, options={})
-      path = File.dirname(parser.script_filename)
+      path = parser.template_path
       if template =~ %r{^/}
         template = template[1..-1]
         path = @root_path
       end
-      filename = template_filename(File.join(path, template), :partial => options[:partial])
-      if File.file?(filename)
-        parser.parse_file(filename, options[:locals])
+      filename = template_filename(path, template, :partial => options[:partial])
+      if filename && File.file?(filename)
+        parser.parse(File.read(filename), File.extname(filename).split(".").last, options[:locals])
       else
         raise "File does not exist #{filename.inspect}"
       end
@@ -152,12 +152,12 @@ module Serve #:nodoc:
     
     private
       
-      def template_filename(name, options)
-        path = File.dirname(name)
-        template = File.basename(name)
-        template = "_" + template if options[:partial]
-        template += extname(parser.script_filename) unless name =~ /\.[a-z]+$/
-        File.join(path, template)
+      def template_filename(path, template, options)
+        template_path = File.dirname(template)
+        template_file = File.basename(template)
+        template_file = "_" + template_file if options[:partial]
+        route = Serve::Router.resolve(path, File.join(template_path, template_file))
+        (route && File.join(path, route))
       end
       
       def extname(filename)

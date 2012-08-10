@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title><%= @title %></title>
+    <link href="/styles.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+      #content {
+        float: left;
+        width: 70%;
+      }
+      #sidebar {
+        float: right;
+        width: 28%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <h1><%= @title %></h1>
+      <%= yield %>
+    </div>
+    <% if content_for?(:sidebar) %>
+      <div id="sidebar">
+        <%= yield :sidebar %>
+      </div>
+    <% end %>
+    <%= render :partial => "footer" %>
+  </body>
+</html>

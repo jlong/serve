@@ -11,23 +11,23 @@ module Serve
       full_path = File.join(root, path)
       
       case
-      when File.file?(full_path)
+      when File.file?(best_match(full_path))
         # A file exists! Return the matching path.
         path
-      when File.directory?(full_path) 
+      when File.directory?(best_match(full_path))
         # It's a directory? Try a directory index.
         resolve(root, File.join(path, 'index'))
-      when path.ends_with?('.css')
+      when path =~ /\.css\Z/i
         # CSS not found? Try SCSS or Sass.
         alternates = %w{.scss .sass}.map { |ext| path.sub(/\.css\Z/, ext) }
-        sass_path = alternates.find do |p|
-          File.file?(File.join(root, p))
-        end      
+        alternates.find do |p|
+          File.file?(best_match(File.join(root, p)))
+        end
       else
         # Still no luck? Check to see if a file with an extension exists by that name.
         # TODO: Return a path with an extension based on priority, not just the first found.
-        result = Dir.glob(full_path + ".*", File::FNM_CASEFOLD).first
-        result.sub(/^#{root}/, '').sub(/^\//, '') if result && File.file?(result)
+        result = best_match(full_path + ".*")
+        result.sub(/^#{root}/i, '').sub(/^\//, '') if result && File.file?(result)
       end
     end
     
@@ -37,6 +37,10 @@ module Serve
         path = File.join(path)       # path may be array
         path = path.sub(%r{/\Z}, '') # remove trailing slash
         path unless path =~ /\.\./   # guard against evil paths
+      end
+
+      def self.best_match(path)
+        (Dir.glob(path, File::FNM_CASEFOLD).first || path)
       end
       
   end

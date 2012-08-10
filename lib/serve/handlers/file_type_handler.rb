@@ -9,29 +9,49 @@ module Serve #:nodoc:
         FileTypeHandler.handlers[ext] = self
       end
     end
-    
-    def self.find(path)
-      if ext = File.extname(path)
-        handlers[ext.sub(/\A\./, '')]
-      end
+
+    def self.extensions
+      handlers.keys
     end
-    
-    def initialize(root_path, path)
+
+    def self.handlers_for(path)
+      extensions = File.basename(path).split(".")[1..-1]
+      extensions.collect{|e| [handlers[e], e] if handlers[e]}.compact
+    end
+
+    def self.configure(extension, options)
+      extension_options[extension.to_sym].merge!(options)
+    end
+
+    def self.extension_options
+      @extension_options ||= Hash.new{|h,k| h[k] = {}}
+    end
+
+    def self.options_for(extension)
+      extension_options[extension.to_sym]
+    end
+
+    attr_reader :extension
+    def initialize(root_path, template_path, extension)
       @root_path = root_path
-      @script_filename = File.join(@root_path, path)
+      @template_path = template_path
+      @extension = extension
     end
     
-    def process(request, response)
-      response.headers['content-type'] = content_type
-      response.body = parse(open(@script_filename){|io| io.read })
+    def process(input, context)
+      parse(input, context)
     end
     
     def content_type
       'text/html'
     end
+
+    def layout?
+      true
+    end
     
-    def parse(string)
-      string.dup
+    def parse(input, context)
+      input.dup
     end
   end
 end

@@ -36,13 +36,15 @@ describe Serve::Router do
   
   it 'should resolve files with various extensions' do
     @root = File.dirname(__FILE__) + '/../tmp/'
+    Dir[File.join(@root, "test.*")].each do |f|
+      FileUtils.rm(f)
+    end
     random_extension = %w(a b c d e f g).shuffle[1..4].join
     path = "test" 
     full_path = path + "." + random_extension
     FileUtils.touch(@root + full_path)
     resolve(path).should == full_path
     resolve(path + "/").should == full_path
-    FileUtils.rm(@root + full_path)
   end
   
   it 'should resolve files without case sensitivity' do

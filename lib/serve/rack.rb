@@ -61,8 +61,6 @@ module Serve
   # A specialized hash for the environment variables on a request.
   # Borrowed from ActionDispatch in Rails.
   class Headers < Hash
-    extend ActiveSupport::Memoizable
-    
     def initialize(*args)
       if args.size == 1 && args[0].is_a?(Hash)
         super()
@@ -83,9 +81,8 @@ module Serve
     private
       # Converts a HTTP header name to an environment variable name.
       def env_name(header_name)
-        "HTTP_#{header_name.upcase.gsub(/-/, '_')}"
+        @env_name ||= "HTTP_#{header_name.upcase.gsub(/-/, '_')}"
       end
-      memoize :env_name
   end
   
   class RackAdapter
@@ -111,11 +108,9 @@ module Serve
         path = Serve::Router.resolve(@root, request.path_info)
         if path
           # Fetch the file handler for a file with a given extension/
-          ext = File.extname(path)[1..-1]
-          handler = Serve::FileTypeHandler.handlers[ext]
-          if handler
+          if Serve::Pipeline.handles?(path)
             # Handler exists? Process the request and response.
-            handler.new(@root, path).process(request, response)
+            Serve::Pipeline.new(@root, path).process(request, response)
             response
           else
             # Handler doesn't exist? Rewrite the request to use the new path.

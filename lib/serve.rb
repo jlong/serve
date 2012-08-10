@@ -9,10 +9,12 @@ end
 
 require 'serve/version'
 require 'serve/router'
+require 'serve/pipeline'
 require 'serve/handlers/file_type_handler'
 require 'serve/handlers/dynamic_handler'
 require 'serve/handlers/sass_handler'
 require 'serve/handlers/less_handler'
 require 'serve/handlers/email_handler'
 require 'serve/handlers/redirect_handler'
+require 'serve/handlers/coffee_handler'
 require 'serve/rack'

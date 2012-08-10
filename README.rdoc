@@ -135,6 +135,7 @@ also be estimated with a high degree of accuracy.
 == Website & Documentation
 
 Detailed documentation is available on the Serve website: http://get-serve.com
+Build status: {<img src="https://secure.travis-ci.org/jlong/serve.png?branch=master" />}[http://travis-ci.org/jlong/serve]
 
 
 == Mailing List
