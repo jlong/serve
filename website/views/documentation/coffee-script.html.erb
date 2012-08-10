@@ -7,18 +7,18 @@
   </li>
   <li>
     <p>Add these lines to your config.ru file:</p>
-    <pre>gem 'rack-coffee' 
+    <pre>require 'rack/coffee' 
 use Rack::Coffee, { 
-  :root => 'public', 
-  :urls => '/javascripts/' 
+  :urls => '/javascripts/', 
+  :output_path => '/public/javascripts' 
 }</pre>
   </li>
   <li>
-    <p>Run <kbd>bundle</kbd> in your project folder</p>
+    <p>Run <kbd>bundle</kbd> in your project folder.</p>
   </li>
 </ol>
 
-<p>Now you can put your .coffee files in public/javascripts and link to 
+<p>Now you can put your .coffee files in /javascripts and link to 
 them as usual (replacing .coffee with .js). For example, the URL for
-<kbd>public/javascripts/test.coffee</kbd> is <kbd>/javascripts/test.js</kbd>.</p>
+<kbd>/javascripts/test.coffee</kbd> is <kbd>/javascripts/test.js</kbd>.</p>
 
