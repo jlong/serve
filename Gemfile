@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 gem 'rack',              '~> 1.2'
 gem 'rack-test',         '~> 0.5'
