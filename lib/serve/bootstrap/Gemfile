@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 gem 'serve', '#{Serve.version}'
 
+# TryStatic
+gem 'rack-contrib'
+
 # Use edge instead:
 # gem 'serve', :git => 'git://github.com/jlong/serve.git'
 
