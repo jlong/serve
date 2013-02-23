@@ -1,1 +1,1 @@
-rvm ruby-1.9.2@serve --create
+rvm ruby-1.9.3-p286-perf@serve --create
