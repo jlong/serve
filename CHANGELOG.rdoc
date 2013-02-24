@@ -1,5 +1,13 @@
 = Change Log
 
+== 1.5.2 (Feb 23, 2013)
+* Use TryStatic in config.ru to serve HTML from public directory of structured projects. [ntalbott] 
+* Respect default Sass load paths [ntalbott]
+* Upgrade gems to use the latest versions [revans]
+* Remove deprecated memoize usage [ntalbott]
+* Add experimental support for handler pipelining. This makes it possible to chain handlers with file extensions like index.markdown.erb. [ntalbott]
+* Miscellaneous fixes.
+
 == 1.5.1 (July 13, 2011)
 * Include .empty file in Gem for "blank" template. Closes #42. [jlong]
 * Include .htaccess file in Gem for "default" template. [jlong]
