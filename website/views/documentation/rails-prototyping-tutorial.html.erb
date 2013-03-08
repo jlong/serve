@@ -185,7 +185,7 @@ and define that layout now.</p>
     &lt;title&gt;&lt;%= @title %&gt;&lt;/title&gt;
   &lt;/head&gt;
   &lt;body&gt;
-    &lt;h1&gt;&lt;%= @title %&gt;/h1&gt;
+    &lt;h1&gt;&lt;%= @title %&gt;&lt;/h1&gt;
     &lt;%= yield %&gt;
   &lt;/body&gt;
 &lt;/html&gt;</pre>
@@ -234,13 +234,13 @@ content region.</p>
 <p>Now to modify the layout to work with this new content region. In
 “_layout.html.erb” replace the code:</p>
 
-<pre>&lt;h1&gt;&lt;%= @title %&gt;/h1&gt;
+<pre>&lt;h1&gt;&lt;%= @title %&gt;&lt;/h1&gt;
 &lt;%= yield %&gt;</pre>
 
 <p>With the following:</p>
 
 <pre>&lt;div id="content"&gt;
-  &lt;h1&gt;&lt;%= @title %&gt;/h1&gt;
+  &lt;h1&gt;&lt;%= @title %&gt;&lt;/h1&gt;
   &lt;%= yield %&gt;
 &lt;/div&gt;
 &lt;div id="sidebar"&gt;
@@ -278,7 +278,7 @@ well in the head of the document.</p>
   &lt;/head&gt;
   &lt;body&gt;
     &lt;div id="content"&gt;
-      &lt;h1&gt;&lt;%= @title %&gt;/h1&gt;
+      &lt;h1&gt;&lt;%= @title %&gt;&lt;/h1&gt;
       &lt;%= yield %&gt;
     &lt;/div&gt;
     &lt;div id="sidebar"&gt;
@@ -299,14 +299,14 @@ well in the head of the document.</p>
 self-contained, we can define the header and footer in separate files and
 include them into the main layout.</p>
 
-<p>Create a file in the root of the project called "_header.html.erb" and
+<p>Create a file in the views directory called "_header.html.erb" and
 insert the following code:</p>
 
 <pre>&lt;div id="header"&gt;
   My Web App
 &lt;/div&gt;</pre>
 
-<p>Create another file in the root of the project called "_footer.html.erb" and
+<p>Create another file in the views directory called "_footer.html.erb" and
 insert the following code:</p>
 
 <pre>&lt;div id="footer"&gt;
@@ -351,7 +351,7 @@ head portion of the layout. Insert the following code inside the twin &lt;style&
   &lt;body&gt;
     &lt;%= render 'header' %&gt;
     &lt;div id="content"&gt;
-      &lt;h1&gt;&lt;%= @title %&gt;/h1&gt;
+      &lt;h1&gt;&lt;%= @title %&gt;&lt;/h1&gt;
       &lt;%= yield %&gt;
     &lt;/div&gt;
     &lt;div id="sidebar"&gt;
