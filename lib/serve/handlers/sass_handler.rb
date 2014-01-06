@@ -28,5 +28,9 @@ module Serve #:nodoc:
     def content_type
       'text/css'
     end
+
+    def layout?
+      false
+    end
   end
 end
