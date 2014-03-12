@@ -1,6 +1,6 @@
 = Serve - Delicious ERB, Haml, and Sass
 
-link:../../downloads/jlong/serve/logo-hifi-3.png
+http://raw.github.com/jlong/serve/master/artwork/logo-hifi-3.png
 
 Serve is a small Rack-based web server that makes it easy to serve HTML, ERB,
 Haml, or a variety of template languages from any directory.
