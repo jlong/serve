@@ -1,6 +1,7 @@
+require 'serve'
+
 describe 'compiling jsx data' do
   subject do
-    require 'react/jsx'
     jsx = <<-EOF
 /** @jsx React.DOM */
 React.renderComponent(
@@ -8,7 +9,7 @@ React.renderComponent(
   document.getElementById('example')
 );
     EOF
-    React::JSX.compile(jsx)
+    Serve::JsxHandler.new('.', './fixtures', 'jsx').parse jsx, ''
   end
 
   it 'should write a nice string' do
