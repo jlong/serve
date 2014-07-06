@@ -26,6 +26,10 @@ describe Serve::Pipeline do
     it "should handle .markdown.erb" do
       Serve::Pipeline.handles?("dir/file.markdown.erb").should be_true
     end
+
+    it "should handle .jsx" do
+      Serve::Pipeline.handles?('dir/file.jsx').should be_true
+    end
   end
 
   describe "initialize" do

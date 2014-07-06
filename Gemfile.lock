@@ -57,6 +57,10 @@ GEM
     rdiscount (2.0.7)
     rdoc (3.12.1)
       json (~> 1.4)
+    react-jsx (0.5.0)
+      execjs
+      react-source
+    react-source (0.10.0)
     rspec (2.12.0)
       rspec-core (~> 2.12.0)
       rspec-expectations (~> 2.12.0)
@@ -95,6 +99,7 @@ DEPENDENCIES
   rake (~> 10.0.3)
   rdiscount (~> 2.0.7)
   rdoc (~> 3.12.1)
+  react-jsx
   rspec (~> 2.12.0)
   sass (~> 3.2.5)
   serve!
