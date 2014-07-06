@@ -10,5 +10,9 @@ module Serve #:nodoc:
     def content_type
       'text/javascript'
     end
+
+    def layout?
+      false
+    end
   end
 end
