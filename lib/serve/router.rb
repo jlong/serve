@@ -16,7 +16,7 @@ module Serve
         path
       when File.directory?(best_match(full_path))
         # It's a directory? Try a directory index.
-        resolve(root, File.join(path, 'index'))
+        resolve(root, File.join(path, 'index.')) || resolve(root, File.join(path, 'index'))
       when path =~ /\.css\Z/i
         # CSS not found? Try SCSS or Sass.
         alternates = %w{.scss .sass}.map { |ext| path.sub(/\.css\Z/, ext) }
