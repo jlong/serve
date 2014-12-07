@@ -14,7 +14,7 @@ module Serve
     attr_reader :template, :layout
     def initialize(root_path, path)
       @root_path = root_path
-      @template = Template.new(File.join(@root_path, path))
+      @template = Template.new(File.join(@root_path, path), @root_path)
       @layout = find_layout_for(@template.path)
     end
 
@@ -33,7 +33,7 @@ module Serve
         search.pop
       end
       if layout
-        Template.new(layout)
+        Template.new(layout, @root_path)
       else
         Template::Passthrough.new(@template)
       end
@@ -49,11 +49,11 @@ module Serve
 
     class Template
       attr_reader :file, :path, :handlers
-      def initialize(file)
+      def initialize(file, root_path)
         @file = File.basename(file)
         @path = File.dirname(file)
         @raw = File.read(file)
-        @handlers = FileTypeHandler.handlers_for(file).collect{|h, extension| h.new(@root_path, @path, extension)}
+        @handlers = FileTypeHandler.handlers_for(file).collect{|h, extension| h.new(root_path, @path, extension)}
       end
 
       def content_type
