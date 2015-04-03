@@ -1,5 +1,6 @@
 require 'active_support/all'
 require 'serve/rack'
+require 'webrick/version'
 
 module Serve
   class Application
@@ -288,6 +289,7 @@ module Serve
             puts "Install Mongrel or Thin for better performance."
             webrick = Rack::Handler.get('webrick')
             webrick.run app, :Port => options[:port], :Host => options[:address] do |server|
+              puts "WEBrick #{WEBrick::VERSION} available at http://#{options[:address]}:#{options[:port]}"
               trap("INT") { server.shutdown }
             end
           end
