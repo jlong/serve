@@ -22,6 +22,7 @@ group :development do
   gem 'less',           '~> 2.2.2'
   gem 'radius',         '~> 0.7.3'
   gem 'coffee-script',  '~> 2.2.0'
+  gem 'react-jsx',      '~> 0.8.0'
 end
 
 group :website do
