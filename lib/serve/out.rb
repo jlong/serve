@@ -38,6 +38,7 @@ module Serve #:nodoc:
       stderr.print(*args)
     end
     
+    # Outputs an action to the terminal
     def log_action(name, message)
       print " " * (COLUMN_WIDTH - name.length)
       print color_msg(:green, name)
@@ -45,6 +46,7 @@ module Serve #:nodoc:
       puts message
     end
     
+    # Outputs an error to the terminal
     def log_error(name, message)
       print " " * (COLUMN_WIDTH - name.length)
       print color_msg(:red, name)
@@ -52,6 +54,7 @@ module Serve #:nodoc:
       puts message
     end
     
+    # Append a color to the message
     def color_msg(pigment, *args)
       msg =  ''
       msg << color(pigment)
@@ -60,6 +63,7 @@ module Serve #:nodoc:
       msg
     end
     
+    # Format a picked color
     def color(pigment)
       "\e[#{COLORS[pigment.to_sym]}m"
     end
