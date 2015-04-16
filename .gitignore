@@ -12,5 +12,5 @@ pkg
 .sass-cache/**/*
 test_project/.sass-cache/**/*
 junk/*
-!bin/serve
-bin/*
+!exe/serve
+exe/*

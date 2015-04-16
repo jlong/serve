@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
-    "bin/serve",
+    "exe/serve",
     "lib/serve.rb",
     "lib/serve/application.rb",
     "lib/serve/bootstrap/Gemfile",
@@ -162,4 +162,3 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<coffee-script>, ["~> 2.2.0"])
   end
 end
-
