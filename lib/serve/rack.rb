@@ -107,7 +107,7 @@ module Serve
       def process(request, response)
         path = Serve::Router.resolve(@root, request.path_info)
         if path
-          # Fetch the file handler for a file with a given extension/
+          # Fetch the file handler for a file with a given extension.
           if Serve::Pipeline.handles?(path)
             # Handler exists? Process the request and response.
             Serve::Pipeline.new(@root, path).process(request, response)
