@@ -18,11 +18,11 @@ Serve is made with Rack & Tilt.
 Serve is distributed as a Ruby gem and can be installed from the command
 prompt. Just type:
 
-  gem install serve
+  gem install serve -v 1.5.2
 
 Some systems, like the Mac, may require that you type:
 
-  sudo gem install serve
+  sudo gem install serve -v 1.5.2
 
 If you are new to the command prompt and are a Mac user see:
 
