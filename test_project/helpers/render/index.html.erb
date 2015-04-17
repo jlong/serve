@@ -1,25 +1,25 @@
-<% @title = "Render Tests" %>
+<% @title = 'Render Tests' %>
 
 <p>Can we render a partial?</p>
-<%= render "partial.html.erb" %>
+<%= render 'partial.html.erb' %>
 
 <p>Can we render a partial with locals?</p>
-<%= render "locals.html.erb", :locals => { :local_variable => "Yes" } %>
+<%= render 'locals.html.erb', locals: { local_variable: 'Yes' } %>
 
 <p>Can we render another template?</p>
-<%= render :template => "template.html.erb" %>
+<%= render template: 'template.html.erb' %>
 
 <p>Can we render Haml inside of ERB?</p>
-<%= render "partial.html.haml" %>
+<%= render 'partial.html.haml' %>
 
 <p>Can we render Slim inside of ERB?</p>
-<%= render "partial.html.slim" %>
+<%= render 'partial.html.slim' %>
 
 <p>Can we render Textile inside of ERB?</p>
-<%= render "partial.html.textile" %>
+<%= render 'partial.html.textile' %>
 
 <p>Can we render Markdown inside of ERB?</p>
-<%= render "partial.html.markdown" %>
+<%= render 'partial.html.markdown' %>
 
 <p>Can we render Coffeescript inside of ERB?</p>
-<pre><%= render "partial.html.coffee" %></pre>
+<pre><%= render 'partial.html.coffee' %></pre>

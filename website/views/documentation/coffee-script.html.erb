@@ -7,10 +7,10 @@
   </li>
   <li>
     <p>Add these lines to your config.ru file:</p>
-    <pre>require 'rack/coffee' 
-use Rack::Coffee, { 
-  :urls => '/javascripts/', 
-  :output_path => '/public/javascripts' 
+    <pre>require 'rack/coffee'
+use Rack::Coffee, {
+  urls: '/javascripts/',
+  output_path: '/public/javascripts' 
 }</pre>
   </li>
   <li>
@@ -21,4 +21,3 @@ use Rack::Coffee, {
 <p>Now you can put your .coffee files in <kbd>/javascripts</kbd> and link to
 them as usual (replacing .coffee with .js). For example, the URL for
 <kbd>/javascripts/test.coffee</kbd> is <kbd>/javascripts/test.js</kbd>.</p>
-

@@ -1,11 +1,12 @@
 rvm:
-  - 1.8.7
   - 1.9.3
+  - 2.2.2
   - ree
 
-script: "bundle exec rake"
+script: 'bundle exec rake'
 
 notifications:
   email:
     - nathaniel@talbott.ws
     - me@johnwlong.com
+    - wazery@ubuntu.com

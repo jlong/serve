@@ -6,7 +6,7 @@ gem 'serve', '#{Serve.version}'
 gem 'rack-contrib'
 
 # Use edge instead:
-# gem 'serve', :git => 'git://github.com/jlong/serve.git'
+# gem 'serve', github: 'jlong/serve'
 
 # Use Compass and Sass
 gem 'compass'

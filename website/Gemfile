@@ -3,7 +3,7 @@ source :rubygems
 gem 'serve', '1.5.1'
 
 # Use edge instead:
-# gem 'serve', :git => 'git://github.com/jlong/serve.git'
+# gem 'serve', github: 'jlong/serve'
 
 # Use Compass and Sass
 gem 'compass'

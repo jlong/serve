@@ -17,8 +17,8 @@ module ViewHelpers
   # Shorthand for referencing images in the images folder
   def image(name, options = {})
     path = "/images/\#{name}"
-    path += ".png" unless path.match(/\.[A-za-z]{3,4}$/)
-    image_tag(name, {:alt => ""}.update(options))
+    path += '.png' unless path.match(/\.[A-za-z]{3,4}$/)
+    image_tag(name, {alt: ''}.update(options))
   end
 
   # Calculate the years for a copyright

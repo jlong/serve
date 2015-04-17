@@ -5,17 +5,17 @@ require 'webrick/version'
 module Serve
   class Application
     class InvalidArgumentsError < StandardError; end
-    
+
     attr_accessor :options
-    
+
     def self.run(args = ARGV)
       new.run(args)
     end
-    
+
     def initialize
       self.options = {}
     end
-    
+
     def run(args = ARGV)
       @options = parse(args)
       case
@@ -48,7 +48,7 @@ module Serve
       puts
       puts help
     end
-    
+
     def parse(args)
       args = normalize_args(args)
       options[:help]        = extract_boolean(args, '-h', '--help')
@@ -63,11 +63,11 @@ module Serve
       raise InvalidArgumentsError if args.size > 0
       options
     end
-    
+
     def version
       "Serve #{Serve.version}"
     end
-    
+
     def help
       program = File.basename($0)
       [
@@ -140,34 +140,34 @@ module Serve
         "  http://get-serve.com/documentation"
       ].join("\n")
     end
-    
+
     private
-      
+
       def normalize_args(args)
         args = args.join(' ')
         args.gsub!(%r{http://}, '')
         args.split(/[ :]/).compact
       end
-      
+
       def extract_boolean(args, *opts)
         opts.each do |opt|
           return true if args.delete(opt)
         end
         false
       end
-      
+
       def extract_environment(args)
         args.delete('production') || args.delete('test') || args.delete('development') || 'development'
       end
-      
+
       def extract_port(args)
         (args.delete(args.find {|a| /^\d\d\d*$/.match(a) }) || ENV['PORT'] || ((rails_app? or rack_app?) ? 3000 : 4000)).to_i
       end
-      
+
       def extract_address(args)
         args.delete(args.find {|a| /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.match(a) }) || '0.0.0.0'
       end
-      
+
       def extract_root(args)
         args.reverse.each do |dir|
           if File.directory?(dir)
@@ -177,7 +177,7 @@ module Serve
         end
         '.'
       end
-      
+
       def extract_arg_and_value(args, opts)
         opts.each do |opt|
           index = args.index(opt)
@@ -186,80 +186,80 @@ module Serve
           value = args[index]
           if value !~ /^-/
             args.delete_at(index)
-            return value 
+            return value
           end
         end
         nil
       end
-      
+
       def extract_javascript_framework(args)
         extract_arg_and_value args, %w(-j --javascript)
       end
-      
+
       def extract_template(args)
         extract_arg_and_value args, %w(-t --template)
       end
-      
+
       def extract_create(args)
         if args.delete('create')
           framework = extract_javascript_framework(args)
           template  = extract_template(args)
           directory = args.pop || '.'
           {
-            :directory => directory,
-            :framework => framework,
-            :template  => template
+            directory: directory,
+            framework: framework,
+            template: template
           }
         end
       end
-      
+
       def extract_convert(args)
         if args.delete('convert')
           framework = extract_javascript_framework(args)
           directory = args.pop || '.'
           {
-            :directory => directory,
-            :framework => framework 
+            directory: directory,
+            framework: framework
           }
         end
       end
-      
+
       def extract_export(args)
         if args.delete('export')
           input, output = args.shift, args.shift
           input, output = '.', input if output.nil?
           output ||= 'html'
           {
-            :input => input,
-            :output => output
+            input: input,
+            output: output
           }
         end
       end
-      
+
       def rails_script_server
         @rails_server_script ||= options[:root] + '/script/server'
       end
-      
+
       def rails_app?
         File.file?(rails_script_server) and File.executable?(rails_script_server)
       end
-      
+
       def run_rails_app
         system "#{rails_script_server} -p #{options[:port]} -b #{options[:address]} -e #{options[:environment]}"
       end
-      
+
       def rack_config
         @rack_config ||= options[:root] + '/config.ru'
       end
-      
+
       def rack_app?
         File.file?(rack_config)
       end
-      
+
       def run_rack_app
         system "rackup -p #{options[:port]} -o #{options[:address]} -E #{options[:environment]} '#{rack_config}'"
       end
-      
+
       def run_server
         root = options[:root]
         app = Rack::Builder.new do
@@ -274,21 +274,21 @@ module Serve
         begin
           # Try Thin
           thin = Rack::Handler.get('thin')
-          thin.run app, :Port => options[:port], :Host => options[:address] do |server|
+          thin.run app, Port: options[:port], Host: options[:address] do |server|
             puts "Thin #{Thin::VERSION::STRING} available at http://#{options[:address]}:#{options[:port]}"
           end
         rescue LoadError
           begin
             # Then Mongrel
             mongrel = Rack::Handler.get('mongrel')
-            mongrel.run app, :Port => options[:port], :Host => options[:address] do |server|
+            mongrel.run app, Port: options[:port], Host: options[:address] do |server|
               puts "Mongrel #{Mongrel::Const::MONGREL_VERSION} available at http://#{options[:address]}:#{options[:port]}"
             end
           rescue LoadError
             # Then WEBrick
             puts "Install Mongrel or Thin for better performance."
             webrick = Rack::Handler.get('webrick')
-            webrick.run app, :Port => options[:port], :Host => options[:address] do |server|
+            webrick.run app, Port: options[:port], Host: options[:address] do |server|
               puts "WEBrick #{WEBrick::VERSION} available at http://#{options[:address]}:#{options[:port]}"
               trap("INT") { server.shutdown }
             end
