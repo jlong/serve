@@ -1,5 +1,16 @@
 = Change Log
 
+== 2.0.0 (April 17, 2015)
+* Fix typos and root references. [hursmanA]
+* Add rendering partials in haml. [chrisjlee]
+* Spelling complement and made designer non gender specific. [growdigital]
+* Fix routing priority on directory index. [HondaDai]
+* Add url= to work better across browsers. Closes #102. [wazery]
+* Add printing WEBrick info on server start. Closes #107. [wazery]
+* Fix a simple typo 'styleheets' to 'stylesheets'. Closes #108. [wazery]
+* Drop support for Ruby 1.8.7. [wazery]
+* Add support for Ruby 2.2.2. [wazery]
+
 == 1.5.2 (Feb 23, 2013)
 * Use TryStatic in config.ru to serve HTML from public directory of structured projects. [ntalbott] 
 * Respect default Sass load paths [ntalbott]
