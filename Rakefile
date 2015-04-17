@@ -15,4 +15,4 @@ load 'tasks/rspec.rake'
 load 'tasks/website.rake'
 load 'tasks/undefine.rake'
 
-task :default => :spec
+task default: :spec

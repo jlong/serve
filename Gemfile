@@ -25,7 +25,7 @@ group :development do
 end
 
 group :website do
-  gem 'serve',          github: 'jlong/serve'
+  # gem 'serve',          github: 'jlong/serve'
   gem 'css_parser',     '~> 1.3.6'
   gem 'maruku',         '~> 0.7.2'
 end
