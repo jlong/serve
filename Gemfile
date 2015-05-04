@@ -2,14 +2,14 @@ source 'https://rubygems.org'
 
 gemspec
 
-# gem 'rack',              '~> 1.6.0'
-# gem 'rack-test',         '~> 0.6.3'
-# gem 'tilt',              '~> 1.4.1'
-# gem 'activesupport',     '~> 4.2.1'
-# gem 'tzinfo'
-# gem 'i18n'
+gem 'rack',              '~> 1.6.0'
+gem 'rack-test',         '~> 0.6.3'
+gem 'tilt',              '~> 1.4.1'
+gem 'activesupport',     '~> 4.2.1'
+gem 'tzinfo'
+gem 'i18n'
 
-group :development do
+# group :development do
   # gem 'rake',           '~> 10.4.2'
   # gem 'rdoc',           '~> 4.2.0'
   # gem 'rspec',          '~> 2.12.0'
@@ -24,10 +24,10 @@ group :development do
   # gem 'less',           '~> 2.6.0'
   # gem 'radius',         '~> 0.7.4'
   # gem 'coffee-script',  '~> 2.4.1'
-end
+# end
 
-group :website do
+# group :website do
   # gem 'serve',          '~> 2.0.0'
-  gem 'css_parser',     '~> 1.3.6'
-  gem 'maruku',         '~> 0.7.2'
-end
+  # gem 'css_parser',     '~> 1.3.6'
+  # gem 'maruku',         '~> 0.7.2'
+# end
