@@ -125,6 +125,7 @@ Gem::Specification.new do |s|
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<serve>, [">= 0"])
       s.add_runtime_dependency(%q<rack>, ["~> 1.6.0"])
       s.add_runtime_dependency(%q<rack-test>, ["~> 0.6.3"])
       s.add_runtime_dependency(%q<tilt>, ["~> 1.4.1"])
@@ -146,6 +147,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<radius>, ["~> 0.7.4"])
       s.add_development_dependency(%q<coffee-script>, ["~> 2.4.1"])
     else
+      s.add_dependency(%q<serve>, [">= 0"])
       s.add_dependency(%q<rack>, ["~> 1.6.0"])
       s.add_dependency(%q<rack-test>, ["~> 0.6.3"])
       s.add_dependency(%q<tilt>, ["~> 1.4.1"])
@@ -168,6 +170,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<coffee-script>, ["~> 2.4.1"])
     end
   else
+    s.add_dependency(%q<serve>, [">= 0"])
     s.add_dependency(%q<rack>, ["~> 1.6.0"])
     s.add_dependency(%q<rack-test>, ["~> 0.6.3"])
     s.add_dependency(%q<tilt>, ["~> 1.4.1"])
