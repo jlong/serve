@@ -144,6 +144,9 @@ Have questions? Please don't be ashamed to ask. Post them on the mailing list:
 
 http://groups.google.com/group/serve-users
 
+== Coming up
+
+- We are working on a new website for serve, with a new minimal design, estimated to be released in late Augest 2015.
 
 == License
 
