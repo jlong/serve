@@ -1,7 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    activesupport (3.2.17)
+    activesupport (3.2.22.5)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
     atomic (1.1.16)
@@ -10,9 +10,11 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.2.17)
+    concurrent-ruby (1.1.5)
     fssm (0.2.10)
-    i18n (0.6.9)
-    multi_json (1.9.2)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
+    multi_json (1.13.1)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
